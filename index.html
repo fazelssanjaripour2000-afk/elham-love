@@ -442,9 +442,85 @@ body:after{
 @keyframes orbB{50%{transform:translate(-160px,120px) scale(1.6)}}
 @keyframes orbC{50%{transform:translate(90px,-140px) scale(1.4)}}
 
+
+/* ===== RELATIONSHIP CHAOS WIDGET ===== */
+.relationship-widget{
+  position:fixed;left:22px;top:145px;width:270px;z-index:900;
+  padding:18px 18px 16px;border:1px solid rgba(255,255,255,.14);
+  border-radius:24px;background:linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,70,130,.07));
+  backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+  box-shadow:0 20px 55px rgba(0,0,0,.35),0 0 35px rgba(255,60,140,.10);
+  overflow:hidden;animation:widgetFloat 5s ease-in-out infinite;
+}
+.relationship-widget:before{
+  content:"";position:absolute;inset:-2px;
+  background:linear-gradient(120deg,transparent 15%,rgba(255,255,255,.16),transparent 45%);
+  transform:translateX(-120%);animation:widgetShine 6s ease-in-out infinite;
+  pointer-events:none;
+}
+.relationship-widget .rw-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.relationship-widget .rw-icon{
+  width:38px;height:38px;border-radius:13px;display:grid;place-items:center;
+  background:linear-gradient(145deg,#ff4f8b,#9b3cff);font-size:20px;
+  box-shadow:0 8px 25px rgba(255,65,140,.28)
+}
+.relationship-widget h4{margin:0;font-size:15px;color:#fff}
+.relationship-widget .rw-status{font-size:10px;color:#ff9fc3;margin-top:2px}
+.relationship-widget .rw-text{
+  min-height:62px;display:flex;align-items:center;justify-content:center;text-align:center;
+  color:rgba(255,255,255,.93);font-size:13px;line-height:1.9;
+  transition:opacity .35s,transform .35s;
+}
+.relationship-widget .rw-dots{display:flex;justify-content:center;gap:5px;margin-top:8px}
+.relationship-widget .rw-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.22)}
+.relationship-widget .rw-dot.active{background:#ff77a9;box-shadow:0 0 9px #ff77a9}
+@keyframes widgetFloat{50%{transform:translateY(-6px)}}
+@keyframes widgetShine{0%,55%{transform:translateX(-120%)}75%,100%{transform:translateX(120%)}}
+@media(max-width:900px){
+ .relationship-widget{left:10px;top:auto;bottom:88px;width:230px;padding:13px;border-radius:19px}
+ .relationship-widget .rw-text{font-size:11px;min-height:50px}
+ .relationship-widget .rw-icon{width:32px;height:32px;font-size:17px}
+}
+
+/* ===== PREMIUM RELATIONSHIP EXTRAS ===== */
+.premium-extras{position:relative;z-index:2;margin-top:34px}
+.extra-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.extra-card{
+  position:relative;min-height:180px;padding:24px;border-radius:28px;
+  border:1px solid rgba(255,255,255,.12);
+  background:linear-gradient(145deg,rgba(255,255,255,.10),rgba(255,80,150,.045));
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  box-shadow:0 18px 50px rgba(0,0,0,.22);overflow:hidden;
+  transition:.45s cubic-bezier(.2,.8,.2,1)
+}
+.extra-card:hover{transform:translateY(-8px) scale(1.015);border-color:rgba(255,130,180,.32);box-shadow:0 28px 70px rgba(0,0,0,.3),0 0 35px rgba(255,70,150,.12)}
+.extra-icon{font-size:34px;filter:drop-shadow(0 8px 18px rgba(255,70,140,.25));margin-bottom:12px}
+.extra-card h3{font-size:17px;margin-bottom:8px}
+.extra-card p{font-size:12px;line-height:2;color:rgba(255,255,255,.72)}
+.extra-action{
+  margin-top:14px;border:1px solid rgba(255,255,255,.13);border-radius:13px;
+  background:rgba(255,255,255,.07);color:#fff;padding:9px 14px;cursor:pointer
+}
+#chaosResult,#loveAIResult{margin-top:12px;line-height:1.9;color:#ffd2e3;font-size:12px}
+.pulse-heart{display:inline-block;animation:pulseHeart 1.2s infinite}
+@keyframes pulseHeart{50%{transform:scale(1.18)}}
+@media(max-width:800px){.extra-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
+<!-- Relationship Chaos floating widget -->
+<aside class="relationship-widget" id="relationshipWidget" aria-label="وضعیت رابطه ما">
+  <div class="rw-head">
+    <div class="rw-icon">😂</div>
+    <div>
+      <h4>وضعیت رابطه ما</h4>
+      <div class="rw-status">سیستم کل‌کل و قهر فعال است 😌</div>
+    </div>
+  </div>
+  <div class="rw-text" id="relationshipJoke">رابطه ما: ۵٪ عاشقانه، ۹۵٪ کل‌کل 😂❤️</div>
+  <div class="rw-dots" id="relationshipDots"></div>
+</aside>
+
 <div id="stars"></div><div class="ambient-orb orb-a"></div><div class="ambient-orb orb-b"></div><div class="ambient-orb orb-c"></div><div id="particles"></div><div id="petals"></div><div class="glow g1"></div><div class="glow g2"></div>
 
 <div class="intro" id="intro">
@@ -681,6 +757,130 @@ function unlockNook(){
 $('nookPass').addEventListener('keydown',e=>{if(e.key==='Enter')unlockNook()});
 
 function toast(t){let x=$('toast');x.textContent=t;x.classList.add('show');clearTimeout(window.tt);window.tt=setTimeout(()=>x.classList.remove('show'),2600)}
+
+/* ===== RELATIONSHIP CHAOS + PREMIUM EXTRAS ===== */
+const relationshipJokes = [
+ "رابطه ما: ۵٪ عاشقانه، ۹۵٪ کل‌کل 😂❤️",
+ "قهر کردیم... ولی کی قراره آشتی کنه؟ 🤨❤️",
+ "بحث شروع شد؛ هیچ‌کس نمی‌دونه سر چی بود 😂",
+ "الهام: دیگه باهات حرف نمی‌زنم! / فاضل: باشه 😐 / پنج دقیقه بعد: 😂❤️",
+ "ما دعوا نمی‌کنیم؛ فقط با صدای بلند همدیگه رو دوست داریم 😌",
+ "امروز چندمین قسمت کل‌کل‌های فاضل و الهامه؟ 😂",
+ "قهر رسمی؛ دلتنگی غیررسمی ❤️",
+ "آخر هر بحث: یکی قهر، یکی لوس‌بازی، آخرش جفتشون عاشق 😭😂",
+ "رابطه‌مون بدون کل‌کل؟ مشکوکه! 🤨",
+ "سیستم اعلام کرد: میزان دوست داشتن از ظرفیت دستگاه بیشتر است ♾️❤️",
+ "آشتی نزدیک است... لطفاً خونسردی خود را حفظ کنید 😂"
+];
+let jokeIndex = 0;
+function setupRelationshipWidget(){
+  const text = document.getElementById("relationshipJoke");
+  const dots = document.getElementById("relationshipDots");
+  if(!text || !dots) return;
+  dots.innerHTML = relationshipJokes.map((_,i)=>`<span class="rw-dot ${i===0?'active':''}"></span>`).join("");
+  setInterval(()=>{
+    text.style.opacity="0"; text.style.transform="translateY(5px)";
+    setTimeout(()=>{
+      jokeIndex=(jokeIndex+1)%relationshipJokes.length;
+      text.textContent=relationshipJokes[jokeIndex];
+      [...dots.children].forEach((d,i)=>d.classList.toggle("active",i===jokeIndex));
+      text.style.opacity="1"; text.style.transform="translateY(0)";
+    },300);
+  },4500);
+}
+function showLoveFortune(){
+ const fortunes=[
+ "امروز احتمال یک کل‌کل کوچک و یک آشتی خیلی شیرین بالاست 😂❤️",
+ "ستاره‌ها می‌گویند یکی باید کوتاه بیاید... ولی معلوم نیست کی! 😌",
+ "پیش‌بینی امروز: دلتنگی بیشتر از قهر دوام می‌آورد 🥹",
+ "آینده روشن است؛ مخصوصاً وقتی یک نفر ناز دیگری را می‌کشد ❤️",
+ "هشدار: احتمال لوس‌بازی ناگهانی ۹۹٪ 😂"
+ ];
+ const el=document.getElementById("fortuneText");
+ if(el) el.textContent=fortunes[Math.floor(Math.random()*fortunes.length)];
+}
+function survivalGuide(){
+ showToast && showToast("مرحله ۱: بحث نکن 😐 | مرحله ۲: نگو «ولی من...» | مرحله ۳: نازشو بکش ❤️ | مرحله ۴: بغل 🫂 | موفق شدی 😂");
+}
+function sendKiss(){
+ for(let i=0;i<18;i++){
+   const h=document.createElement("div"); h.textContent="💋";
+   h.style.cssText=`position:fixed;z-index:9999;left:${35+Math.random()*30}%;bottom:90px;font-size:${18+Math.random()*18}px;pointer-events:none;animation:kissFly ${1.8+Math.random()*1.2}s ease-out forwards`;
+   document.body.appendChild(h); setTimeout(()=>h.remove(),3200);
+ }
+ showToast && showToast("بوسه با موفقیت ارسال شد 💋❤️");
+}
+function missingYou(){
+ document.body.classList.add("missing-mode");
+ showToast && showToast("دلم برات تنگ شده... حتی بیشتر از چیزی که بشه گفت 🥹❤️");
+ setTimeout(()=>document.body.classList.remove("missing-mode"),2600);
+}
+function relationshipAI(){
+ const el=document.getElementById("loveAIResult");
+ if(!el) return;
+ el.innerHTML=`کل‌کل: 🔥🔥🔥🔥🔥<br>لوس‌بازی: 💗💗💗💗<br>آشتی: ⚡⚡⚡<br>دلتنگی: 🥹🥹🥹🥹🥹<br>عاشقی: <span class="pulse-heart">♾️❤️</span><br><br>نتیجه: این دو نفر ظاهراً بدون کل‌کل نمی‌تونن زندگی کنن 😂`;
+}
+if(!document.getElementById("premium-extra-keyframes")){
+ const st=document.createElement("style"); st.id="premium-extra-keyframes";
+ st.textContent=`@keyframes kissFly{0%{transform:translateY(0) scale(.6) rotate(0);opacity:0}15%{opacity:1}100%{transform:translateY(-80vh) translateX(${Math.random()*180-90}px) scale(1.25) rotate(20deg);opacity:0}}.missing-mode:after{content:"🥹❤️";position:fixed;inset:0;z-index:9998;display:grid;place-items:center;font-size:90px;background:rgba(15,2,15,.38);backdrop-filter:blur(5px);animation:missingFade 2.6s ease forwards;pointer-events:none}@keyframes missingFade{0%{opacity:0}20%{opacity:1}75%{opacity:1}100%{opacity:0}}`;
+ document.head.appendChild(st);
+}
+if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",setupRelationshipWidget);
+else setupRelationshipWidget();
+
 </script>
+
+<section class="premium-extras section" id="premiumExtras">
+  <div class="section-head">
+    <span>OUR CHAOTIC LITTLE UNIVERSE</span>
+    <h2>یه عالمه چیزِ مخصوصِ <b>ما ❤️</b></h2>
+    <p>چون رابطه ما فقط عشق نیست؛ یه مقدار کل‌کل، قهر، آشتی و شیطنت هم لازمه 😂</p>
+  </div>
+
+  <div class="extra-grid">
+    <article class="extra-card">
+      <div class="extra-icon">📊</div>
+      <h3>آمار عجیب رابطه</h3>
+      <p>کل‌کل‌ها: ∞<br>قهرها: قابل شمارش نیست<br>آشتی‌ها: همیشه بیشتر از چیزی که فکر می‌کردیم ❤️</p>
+    </article>
+
+    <article class="extra-card">
+      <div class="extra-icon">🔮</div>
+      <h3>فال رابطه</h3>
+      <p id="fortuneText">امروز ستاره‌ها می‌گن یک آشتی شیرین در راهه... 😂</p>
+      <button class="extra-action" onclick="showLoveFortune()">آینده رو ببین ✨</button>
+    </article>
+
+    <article class="extra-card">
+      <div class="extra-icon">😈</div>
+      <h3>الهام قهر کرده؟</h3>
+      <p>راهنمای بقا برای فاضل؛ استفاده در شرایط بحرانی توصیه می‌شود 😂</p>
+      <button class="extra-action" onclick="survivalGuide()">راهنمای بقا 😭</button>
+    </article>
+
+    <article class="extra-card">
+      <div class="extra-icon">💋</div>
+      <h3>بوسه مجازی</h3>
+      <p>یک بوسه بفرست و ببین صفحه چطور پر از عشق می‌شود.</p>
+      <button class="extra-action" onclick="sendKiss()">ارسال بوسه 💋</button>
+    </article>
+
+    <article class="extra-card">
+      <div class="extra-icon">🥹</div>
+      <h3>دلم برات تنگ شده</h3>
+      <p>برای وقت‌هایی که حتی کل‌کل هم دلتنگی را کم نمی‌کند.</p>
+      <button class="extra-action" onclick="missingYou()">دلم تنگته 🥹</button>
+    </article>
+
+    <article class="extra-card">
+      <div class="extra-icon">🧠</div>
+      <h3>هوش رابطه ما</h3>
+      <p>یک تحلیل کاملاً غیرعلمی اما کاملاً واقعی از میزان لوس‌بازی، کل‌کل و عاشقی 😂</p>
+      <button class="extra-action" onclick="relationshipAI()">تحلیل کن ❤️</button>
+      <div id="loveAIResult"></div>
+    </article>
+  </div>
+</section>
+
 </body>
 </html>
