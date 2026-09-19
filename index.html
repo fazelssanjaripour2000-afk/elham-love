@@ -164,34 +164,243 @@ body:after{
 .card:hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 35px 90px rgba(0,0,0,.48),0 0 45px rgba(255,78,158,.06)}
 .topbar{overflow:hidden}
 
-/* ===== PREMIUM HEART ===== */
+/* =========================================================
+   💎 ULTRA PREMIUM 3D HEART
+   ========================================================= */
+
 .hero-heart{
-  width:190px;height:175px;margin:30px auto;position:relative;
-  filter:drop-shadow(0 18px 25px rgba(0,0,0,.35)) drop-shadow(0 0 35px rgba(255,55,145,.55));
-  animation:heroHeartFloat 3.8s ease-in-out infinite;
+  width:220px;
+  height:205px;
+  margin:38px auto 34px;
+  position:relative;
+  cursor:pointer;
+  transform-style:preserve-3d;
+  perspective:900px;
+  filter:
+    drop-shadow(0 18px 18px rgba(0,0,0,.42))
+    drop-shadow(0 0 18px rgba(255,45,135,.65))
+    drop-shadow(0 0 55px rgba(255,55,155,.28));
+  animation:
+    premiumHeartFloat 4.5s ease-in-out infinite,
+    premiumHeartGlow 2.8s ease-in-out infinite;
 }
-.hero-heart:before,.hero-heart:after{
-  content:"";position:absolute;top:0;width:108px;height:155px;
-  border-radius:70px 70px 25px 25px;
+
+/* نور بزرگ پشت قلب */
+.hero-heart::before{
+  content:"";
+  position:absolute;
+  width:190px;
+  height:190px;
+  left:15px;
+  top:8px;
+  border-radius:50%;
   background:
-    radial-gradient(circle at 30% 18%,rgba(255,255,255,.75) 0 4%,transparent 11%),
-    linear-gradient(145deg,#ffd1e3 0%,#ff76ad 18%,#ff3f8b 53%,#c51159 82%,#7b093c 100%);
+    radial-gradient(
+      circle,
+      rgba(255,110,180,.38) 0%,
+      rgba(255,65,150,.20) 30%,
+      rgba(160,40,120,.08) 52%,
+      transparent 72%
+    );
+  filter:blur(20px);
+  z-index:-5;
+  animation:heartAura 3s ease-in-out infinite;
+}
+
+/* قلب اصلی با چند لایه نور */
+.hero-heart::after{
+  content:"";
+  position:absolute;
+  left:21px;
+  top:5px;
+  width:178px;
+  height:178px;
+  background:
+    radial-gradient(
+      circle at 32% 20%,
+      rgba(255,255,255,.95) 0%,
+      rgba(255,255,255,.40) 4%,
+      transparent 12%
+    ),
+    radial-gradient(
+      circle at 68% 72%,
+      rgba(102,0,40,.48),
+      transparent 46%
+    ),
+    linear-gradient(
+      145deg,
+      #ffd8e8 0%,
+      #ff9cc5 13%,
+      #ff4b95 35%,
+      #ec216f 58%,
+      #a80c4f 78%,
+      #65062f 100%
+    );
+  clip-path:polygon(
+    50% 96%,
+    42% 87%,
+    31% 77%,
+    20% 66%,
+    10% 53%,
+    5% 42%,
+    6% 30%,
+    12% 20%,
+    21% 13%,
+    31% 10%,
+    40% 13%,
+    47% 20%,
+    50% 27%,
+    53% 20%,
+    60% 13%,
+    69% 10%,
+    79% 13%,
+    88% 20%,
+    94% 30%,
+    95% 42%,
+    90% 53%,
+    80% 66%,
+    69% 77%,
+    58% 87%
+  );
   box-shadow:
-    inset 10px 7px 18px rgba(255,255,255,.24),
-    inset -18px -25px 30px rgba(71,0,34,.28),
-    0 0 22px rgba(255,72,155,.25);
+    inset 15px 10px 22px rgba(255,255,255,.38),
+    inset -18px -25px 35px rgba(67,0,31,.48),
+    inset 0 -5px 12px rgba(255,255,255,.08),
+    0 8px 18px rgba(0,0,0,.28);
+  transform:
+    translateZ(18px)
+    rotateX(3deg)
+    rotateY(-3deg);
+  z-index:1;
 }
-.hero-heart:before{left:51px;transform:rotate(-45deg);transform-origin:0 100%}
-.hero-heart:after{left:-7px;transform:rotate(45deg);transform-origin:100% 100%}
+
+/* نور شیشه‌ای */
 .hero-heart .heart-shine{
-  top:29px;left:42px;width:39px;height:17px;z-index:5;
-  background:linear-gradient(90deg,rgba(255,255,255,.85),rgba(255,255,255,.12));
-  border-radius:100%;filter:blur(.6px);transform:rotate(-38deg);
+  position:absolute;
+  z-index:8;
+  top:30px;
+  left:54px;
+  width:62px;
+  height:28px;
+  border-radius:100%;
+  background:
+    linear-gradient(
+      105deg,
+      rgba(255,255,255,.95),
+      rgba(255,255,255,.42) 38%,
+      rgba(255,255,255,0) 78%
+    );
+  filter:
+    blur(.7px)
+    drop-shadow(0 0 8px rgba(255,255,255,.5));
+  transform:
+    rotate(-35deg)
+    skewX(-12deg);
+  opacity:.9;
+  animation:shineMove 3.8s ease-in-out infinite;
 }
-.hero-heart:global{}
-@keyframes heroHeartFloat{
-  0%,100%{transform:translateY(0) rotate(-1deg) scale(1)}
-  50%{transform:translateY(-10px) rotate(1deg) scale(1.035)}
+
+.hero-heart .heart-shine::after{
+  content:"";
+  position:absolute;
+  width:18px;
+  height:9px;
+  right:-35px;
+  bottom:-30px;
+  border-radius:50%;
+  background:rgba(255,255,255,.45);
+  filter:blur(2px);
+  transform:rotate(25deg);
+}
+
+.hero-heart .heart-shine::before{
+  content:"";
+  position:absolute;
+  width:105px;
+  height:105px;
+  left:-25px;
+  top:18px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.13),transparent 65%);
+  filter:blur(8px);
+  pointer-events:none;
+}
+
+@keyframes premiumHeartGlow{
+  0%,100%{
+    filter:
+      drop-shadow(0 18px 18px rgba(0,0,0,.42))
+      drop-shadow(0 0 20px rgba(255,45,135,.62))
+      drop-shadow(0 0 50px rgba(255,55,155,.25));
+  }
+  50%{
+    filter:
+      drop-shadow(0 20px 22px rgba(0,0,0,.48))
+      drop-shadow(0 0 32px rgba(255,45,135,.82))
+      drop-shadow(0 0 75px rgba(255,55,155,.38));
+  }
+}
+
+@keyframes premiumHeartFloat{
+  0%,100%{
+    transform:translateY(0) rotateX(0deg) rotateZ(-1deg) scale(1);
+  }
+  50%{
+    transform:translateY(-13px) rotateX(3deg) rotateZ(1deg) scale(1.035);
+  }
+}
+
+@keyframes heartAura{
+  0%,100%{transform:scale(.88);opacity:.55}
+  50%{transform:scale(1.12);opacity:1}
+}
+
+@keyframes shineMove{
+  0%,100%{
+    transform:translateX(-4px) rotate(-35deg) skewX(-12deg);
+    opacity:.72;
+  }
+  45%{
+    transform:translateX(15px) translateY(5px) rotate(-28deg) skewX(-12deg);
+    opacity:1;
+  }
+  70%{
+    transform:translateX(4px) rotate(-35deg) skewX(-12deg);
+    opacity:.65;
+  }
+}
+
+.hero-heart:active{
+  animation:none;
+  transform:scale(.88) rotateZ(-3deg);
+  filter:
+    drop-shadow(0 8px 12px rgba(0,0,0,.45))
+    drop-shadow(0 0 65px rgba(255,60,160,.95));
+}
+
+@media(max-width:600px){
+  .hero-heart{
+    width:185px;
+    height:175px;
+    margin:30px auto;
+  }
+  .hero-heart::after{
+    left:17px;
+    top:5px;
+    width:151px;
+    height:151px;
+  }
+  .hero-heart::before{
+    width:165px;
+    height:165px;
+    left:10px;
+  }
+  .hero-heart .heart-shine{
+    top:27px;
+    left:44px;
+    width:52px;
+    height:23px;
+  }
 }
 
 /* Make floating hearts look like polished luminous icons */
@@ -422,6 +631,10 @@ function showEvent(key){
 }
 function closeModal(){$('modal').classList.remove('show')}
 
+$('mainHeart').addEventListener('pointerdown',e=>{
+ $('mainHeart').classList.add('heart-pressed');
+ setTimeout(()=>$('mainHeart').classList.remove('heart-pressed'),180);
+});
 $('mainHeart').onclick=e=>{
  burst(e.clientX,e.clientY,24);toast('الهام جان، این قلب برای توئه ❤️');
 }
