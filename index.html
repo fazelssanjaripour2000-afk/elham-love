@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -21,67 +22,94 @@ html{
 
 body{
     font-family:'Vazirmatn',sans-serif;
+    color:#fff;
     background:
-        radial-gradient(circle at 20% 20%,rgba(255,90,150,.20),transparent 30%),
-        radial-gradient(circle at 80% 70%,rgba(170,80,255,.18),transparent 30%),
-        linear-gradient(135deg,#160817,#2b0923,#100513);
-    color:white;
+        radial-gradient(circle at 15% 20%,#5b123d55,transparent 28%),
+        radial-gradient(circle at 85% 70%,#6d1d6555,transparent 30%),
+        linear-gradient(145deg,#10040f,#260819,#0d0612);
     min-height:100vh;
     overflow-x:hidden;
+    transition:1s;
 }
 
-/* ---------- BACKGROUND ---------- */
-
-.bg-heart{
-    position:fixed;
-    pointer-events:none;
-    opacity:.35;
-    animation:floatHeart linear infinite;
-    z-index:0;
+body.light{
+    background:
+        radial-gradient(circle at 20% 20%,#ffd1e855,transparent 30%),
+        linear-gradient(145deg,#321525,#5a2042);
 }
 
-@keyframes floatHeart{
-    0%{
-        transform:translateY(110vh) rotate(0deg) scale(.5);
-        opacity:0;
-    }
-    10%{opacity:.5}
-    90%{opacity:.5}
-    100%{
-        transform:translateY(-15vh) rotate(360deg) scale(1.2);
-        opacity:0;
-    }
+button{
+    font-family:inherit;
 }
 
-.stars{
+/* BACKGROUND */
+
+#particles,
+#hearts{
     position:fixed;
     inset:0;
     pointer-events:none;
+    overflow:hidden;
     z-index:0;
 }
 
-.star{
+.particle{
     position:absolute;
     width:3px;
     height:3px;
-    background:white;
     border-radius:50%;
+    background:#fff;
+    opacity:.5;
     animation:twinkle 2s infinite alternate;
 }
 
 @keyframes twinkle{
-    from{opacity:.15;transform:scale(.7)}
+    from{opacity:.1;transform:scale(.5)}
     to{opacity:1;transform:scale(1.5)}
 }
 
-/* ---------- MAIN ---------- */
+.float-heart{
+    position:absolute;
+    bottom:-50px;
+    animation:rise linear forwards;
+    opacity:.5;
+}
+
+@keyframes rise{
+    0%{
+        transform:translateY(0) rotate(0) scale(.5);
+        opacity:0;
+    }
+    15%{opacity:.65}
+    85%{opacity:.5}
+    100%{
+        transform:translateY(-115vh) rotate(360deg) scale(1.2);
+        opacity:0;
+    }
+}
+
+/* MAIN */
 
 .container{
-    width:min(1100px,92%);
+    width:min(1080px,92%);
     margin:auto;
     position:relative;
     z-index:2;
 }
+
+section{
+    padding:90px 0;
+    opacity:0;
+    transform:translateY(45px);
+    transition:1s ease;
+}
+
+section.visible{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* HERO */
 
 .hero{
     min-height:100vh;
@@ -89,172 +117,168 @@ body{
     align-items:center;
     justify-content:center;
     text-align:center;
-    padding:50px 0;
 }
 
-.hero-box{
+.hero-content{
     width:100%;
-    padding:35px 20px;
 }
 
-.small-top{
-    font-size:15px;
-    color:#ffb8d7;
-    margin-bottom:15px;
-    letter-spacing:1px;
+.badge{
+    display:inline-block;
+    padding:9px 18px;
+    border-radius:50px;
+    background:#ffffff0d;
+    border:1px solid #ffffff20;
+    color:#ffc4dc;
+    margin-bottom:20px;
+    backdrop-filter:blur(10px);
 }
 
-.title{
-    font-size:clamp(30px,7vw,65px);
-    font-weight:800;
-    text-shadow:
-        0 5px 15px rgba(255,50,130,.5),
-        0 0 35px rgba(255,70,150,.35);
-    margin-bottom:12px;
+h1{
+    font-size:clamp(35px,8vw,75px);
+    line-height:1.25;
+    text-shadow:0 10px 40px #ff287955;
 }
 
-.title span{
-    color:#ff5c9d;
+h1 span{
+    color:#ff589b;
 }
 
-.fade-message{
+.subtitle{
+    margin:18px 0 28px;
+    color:#ffd6e6;
     font-size:18px;
-    color:#ffd5e6;
-    animation:fadeText 2.8s infinite;
-    margin-bottom:30px;
+    animation:fadeText 3s infinite;
 }
 
 @keyframes fadeText{
-    0%,100%{opacity:.15;transform:translateY(5px)}
-    50%{opacity:1;transform:translateY(0)}
+    0%,100%{opacity:.25}
+    50%{opacity:1}
 }
 
-/* ---------- HEART ---------- */
+/* HEART */
 
-.big-heart{
-    width:190px;
-    height:170px;
+.heart-wrap{
+    width:220px;
+    height:210px;
     margin:30px auto;
     position:relative;
     cursor:pointer;
-    filter:drop-shadow(0 15px 30px rgba(255,0,100,.45));
-    transition:.3s;
 }
 
-.big-heart:hover{
-    transform:scale(1.08);
+.heart{
+    position:absolute;
+    width:145px;
+    height:145px;
+    background:linear-gradient(145deg,#ff9ac3,#ff2676 55%,#99003e);
+    transform:rotate(-45deg);
+    left:38px;
+    top:30px;
+    border-radius:22px;
+    box-shadow:
+        15px 20px 35px #0008,
+        inset 12px 8px 15px #ffffff44,
+        inset -15px -15px 20px #5d002c66;
+    animation:heartbeat 1.5s infinite;
 }
 
-.big-heart:active{
-    transform:scale(.9);
-}
-
-.big-heart::before,
-.big-heart::after{
+.heart:before,
+.heart:after{
     content:"";
     position:absolute;
-    width:100px;
-    height:155px;
-    top:0;
-    border-radius:100px 100px 0 0;
-    background:linear-gradient(135deg,#ff7caf,#ff176d,#b90048);
-    box-shadow:
-        inset 10px 5px 15px rgba(255,255,255,.25),
-        inset -12px -15px 20px rgba(80,0,30,.35);
+    width:145px;
+    height:145px;
+    border-radius:50%;
+    background:inherit;
 }
 
-.big-heart::before{
-    left:90px;
-    transform:rotate(45deg);
-    transform-origin:0 100%;
-}
-
-.big-heart::after{
+.heart:before{
+    top:-72px;
     left:0;
-    transform:rotate(-45deg);
-    transform-origin:100% 100%;
+}
+
+.heart:after{
+    top:0;
+    left:72px;
+}
+
+@keyframes heartbeat{
+    0%,100%{transform:rotate(-45deg) scale(1)}
+    15%{transform:rotate(-45deg) scale(1.08)}
+    30%{transform:rotate(-45deg) scale(1)}
+    45%{transform:rotate(-45deg) scale(1.06)}
 }
 
 .heart-shine{
     position:absolute;
-    width:35px;
-    height:15px;
-    background:rgba(255,255,255,.65);
+    width:42px;
+    height:16px;
+    background:#fff9;
     border-radius:50%;
-    transform:rotate(-35deg);
-    top:28px;
-    left:47px;
-    z-index:4;
+    transform:rotate(-30deg);
+    top:50px;
+    left:65px;
+    z-index:5;
     filter:blur(2px);
 }
 
-.click-count{
-    margin-top:10px;
-    color:#ffc5dc;
+.click-hint{
+    color:#ffd1e2;
     font-size:14px;
 }
 
-/* ---------- BUTTONS ---------- */
+.counter-click{
+    margin-top:8px;
+    color:#ff94bd;
+}
+
+/* BUTTON */
 
 .btn{
-    border:1px solid rgba(255,255,255,.15);
-    background:rgba(255,255,255,.08);
+    border:1px solid #ffffff22;
+    background:#ffffff0c;
     color:white;
-    padding:13px 22px;
+    padding:13px 21px;
     border-radius:50px;
     cursor:pointer;
-    font-family:inherit;
     transition:.3s;
-    backdrop-filter:blur(10px);
+    backdrop-filter:blur(12px);
 }
 
 .btn:hover{
     transform:translateY(-3px);
-    background:rgba(255,70,140,.2);
-    box-shadow:0 10px 25px rgba(255,50,130,.2);
+    background:#ff3e8825;
+    box-shadow:0 10px 30px #ff318822;
 }
 
-.music-btn{
-    display:inline-flex;
-    align-items:center;
-    gap:9px;
+.music{
+    margin-top:20px;
 }
 
-.music-heart{
-    font-size:22px;
-    animation:pulse 1.5s infinite;
-}
+/* SECTION TITLE */
 
-@keyframes pulse{
-    50%{transform:scale(1.2)}
-}
-
-/* ---------- SECTIONS ---------- */
-
-section{
-    padding:80px 0;
-}
-
-.section-title{
+.title{
     text-align:center;
-    font-size:30px;
     margin-bottom:35px;
+    font-size:clamp(27px,5vw,40px);
 }
 
-.section-title span{
-    color:#ff5c9d;
+.title span{
+    color:#ff5b9d;
 }
+
+/* GLASS CARD */
 
 .card{
-    background:rgba(255,255,255,.07);
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:25px;
-    padding:25px;
-    backdrop-filter:blur(15px);
-    box-shadow:0 15px 40px rgba(0,0,0,.25);
+    background:#ffffff09;
+    border:1px solid #ffffff16;
+    border-radius:28px;
+    padding:28px;
+    box-shadow:0 25px 60px #0004;
+    backdrop-filter:blur(18px);
 }
 
-/* ---------- COUNTER ---------- */
+/* COUNTER */
 
 .counter-grid{
     display:grid;
@@ -264,50 +288,90 @@ section{
 
 .counter{
     text-align:center;
-    padding:25px 10px;
+    padding:20px;
 }
 
-.counter-number{
-    font-size:clamp(35px,7vw,65px);
+.number{
+    font-size:clamp(40px,8vw,72px);
     font-weight:800;
-    color:#ff75ad;
+    color:#ff70aa;
     text-shadow:
-        0 4px 0 #8c174b,
-        0 8px 15px rgba(0,0,0,.5),
-        0 0 25px rgba(255,70,150,.5);
+        0 5px 0 #8c174b,
+        0 12px 25px #0008;
 }
 
-.counter-label{
-    color:#ffd1e2;
-    margin-top:5px;
+.label{
+    color:#ffd2e3;
 }
 
-/* ---------- SURPRISE ---------- */
+/* SURPRISE */
 
-.surprise-box{
+.gift-area{
     text-align:center;
 }
 
 .gift{
-    font-size:100px;
-    cursor:pointer;
+    font-size:105px;
     display:inline-block;
+    cursor:pointer;
     transition:.4s;
-    filter:drop-shadow(0 15px 20px rgba(255,50,130,.25));
+    filter:drop-shadow(0 20px 25px #0006);
 }
 
 .gift:hover{
-    transform:rotate(-8deg) scale(1.1);
+    transform:scale(1.12) rotate(-6deg);
 }
 
-.surprise-text{
+.gift-text{
+    margin-top:15px;
     min-height:55px;
-    margin-top:20px;
-    color:#ffd5e5;
-    font-size:18px;
+    color:#ffd7e7;
+    line-height:2;
 }
 
-/* ---------- MEMORIES ---------- */
+/* TIMELINE */
+
+.timeline{
+    position:relative;
+    margin:auto;
+}
+
+.timeline:before{
+    content:"";
+    position:absolute;
+    right:20px;
+    top:0;
+    bottom:0;
+    width:2px;
+    background:#ff5b9d66;
+}
+
+.timeline-item{
+    position:relative;
+    padding:0 60px 35px 0;
+}
+
+.timeline-dot{
+    position:absolute;
+    right:10px;
+    top:5px;
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    background:#ff579b;
+    box-shadow:0 0 20px #ff579b;
+}
+
+.timeline-item h3{
+    color:#ff91b9;
+    margin-bottom:7px;
+}
+
+.timeline-item p{
+    color:#e9c4d4;
+}
+
+/* MEMORIES */
 
 .gallery{
     display:grid;
@@ -316,137 +380,136 @@ section{
 }
 
 .memory{
-    min-height:200px;
-    border-radius:22px;
-    background:linear-gradient(145deg,rgba(255,90,150,.18),rgba(120,40,150,.15));
-    border:1px solid rgba(255,255,255,.1);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
+    min-height:220px;
+    border-radius:25px;
+    padding:25px;
     text-align:center;
-    padding:20px;
-    transition:.4s;
+    background:
+        linear-gradient(145deg,#ff4f961b,#8b37a51b);
+    border:1px solid #ffffff15;
+    transition:.5s;
 }
 
 .memory:hover{
-    transform:translateY(-8px) rotate(1deg);
+    transform:translateY(-10px) rotateY(7deg);
 }
 
 .memory-icon{
-    font-size:55px;
+    font-size:60px;
     margin-bottom:15px;
 }
 
-.memory h3{
-    margin-bottom:8px;
-}
-
 .memory p{
-    color:#e8bfd0;
+    margin-top:10px;
+    color:#dfb7ca;
     font-size:14px;
 }
 
-/* ---------- LETTER ---------- */
-
-.letter-area{
-    text-align:center;
-}
+/* LETTER */
 
 .envelope{
+    text-align:center;
     font-size:100px;
     cursor:pointer;
-    transition:.4s;
+    transition:.5s;
 }
 
 .envelope:hover{
-    transform:scale(1.1) rotate(-3deg);
+    transform:scale(1.1) rotate(-5deg);
 }
 
 .letter{
     max-height:0;
     overflow:hidden;
-    transition:max-height 1s ease;
+    transition:1s;
 }
 
 .letter.open{
-    max-height:500px;
+    max-height:600px;
     margin-top:20px;
 }
 
 .letter-content{
+    line-height:2.3;
+    color:#ffe1ec;
+    text-align:center;
     padding:25px;
-    line-height:2.2;
-    color:#ffe0eb;
 }
 
-/* ---------- GAME ---------- */
+/* GAME */
 
-.game-question{
-    font-size:22px;
-    margin-bottom:25px;
+.question{
     text-align:center;
+    font-size:21px;
+    margin-bottom:25px;
 }
 
 .answers{
     display:grid;
+    grid-template-columns:1fr 1fr;
     gap:12px;
-}
-
-.answer{
-    width:100%;
 }
 
 .game-result{
     text-align:center;
-    font-size:22px;
     margin-top:25px;
-    color:#ff9bc2;
+    color:#ff9fc3;
+    min-height:35px;
+    font-size:19px;
 }
 
-/* ---------- EVENTS ---------- */
+/* EVENTS */
 
 .events{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:1fr 1fr;
     gap:15px;
 }
 
 .event{
-    padding:20px;
-    border-radius:20px;
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.1);
+    padding:23px;
+    border-radius:22px;
+    background:#ffffff08;
+    border:1px solid #ffffff12;
 }
 
 .event-icon{
-    font-size:35px;
-    margin-bottom:10px;
+    font-size:38px;
+    margin-bottom:8px;
 }
 
-/* ---------- FOOTER ---------- */
-
-footer{
-    text-align:center;
-    padding:50px 20px;
-    color:#d9a7bd;
+.event p{
+    color:#e1bacb;
+    margin-top:5px;
 }
 
-.footer-heart{
-    color:#ff4f98;
-    font-size:25px;
+/* NIGHT BUTTON */
+
+.night{
+    position:fixed;
+    left:18px;
+    top:18px;
+    z-index:20;
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    border:1px solid #ffffff22;
+    background:#ffffff12;
+    color:white;
+    cursor:pointer;
+    backdrop-filter:blur(10px);
+    font-size:20px;
 }
 
-/* ---------- POPUP ---------- */
+/* POPUP */
 
 .popup{
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.65);
-    backdrop-filter:blur(8px);
+    background:#000b;
     display:none;
-    align-items:center;
     justify-content:center;
+    align-items:center;
     z-index:100;
     padding:20px;
 }
@@ -456,19 +519,19 @@ footer{
 }
 
 .popup-card{
-    width:min(450px,100%);
-    background:linear-gradient(145deg,#32102b,#180b1b);
-    border:1px solid rgba(255,120,180,.25);
-    border-radius:28px;
-    padding:30px;
+    width:min(440px,100%);
+    padding:35px;
     text-align:center;
-    box-shadow:0 25px 80px rgba(0,0,0,.6);
+    border-radius:30px;
+    background:linear-gradient(145deg,#381329,#160914);
+    border:1px solid #ff72aa44;
+    box-shadow:0 30px 100px #000;
     animation:popup .4s;
 }
 
 @keyframes popup{
     from{
-        transform:scale(.7);
+        transform:scale(.6);
         opacity:0;
     }
     to{
@@ -477,16 +540,56 @@ footer{
     }
 }
 
+.popup-icon{
+    font-size:60px;
+}
+
 .popup-message{
-    font-size:22px;
+    font-size:20px;
     line-height:2;
-    color:#ffe2ed;
+    color:#ffe0eb;
     margin:20px 0;
 }
 
-/* ---------- RESPONSIVE ---------- */
+/* BURST */
+
+.burst{
+    position:fixed;
+    pointer-events:none;
+    z-index:90;
+    animation:burst 1s forwards;
+}
+
+@keyframes burst{
+    from{
+        transform:translate(0,0) scale(.5);
+        opacity:1;
+    }
+    to{
+        transform:translate(var(--x),var(--y)) scale(1.3) rotate(360deg);
+        opacity:0;
+    }
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:70px 20px;
+    color:#cda9bb;
+}
+
+footer strong{
+    color:#ff619f;
+}
+
+/* MOBILE */
 
 @media(max-width:700px){
+
+    section{
+        padding:65px 0;
+    }
 
     .counter-grid{
         grid-template-columns:1fr;
@@ -500,67 +603,77 @@ footer{
         grid-template-columns:1fr;
     }
 
-    .big-heart{
-        transform:scale(.85);
+    .answers{
+        grid-template-columns:1fr;
     }
 
-    .big-heart:hover{
-        transform:scale(.9);
+    .heart-wrap{
+        transform:scale(.88);
     }
 
-    section{
-        padding:60px 0;
+    .card{
+        padding:20px;
     }
+
 }
 </style>
 </head>
 
 <body>
 
-<div class="stars" id="stars"></div>
+<button class="night" onclick="toggleNight()">🌙</button>
+
+<div id="particles"></div>
+<div id="hearts"></div>
 
 <div class="container">
 
 <!-- HERO -->
 <section class="hero">
 
-<div class="hero-box">
+<div class="hero-content">
 
-<div class="small-top">یه گوشه کوچیک از قلب فاضل ❤️</div>
+<div class="badge">
+برای خاص‌ترین دختر دنیا ❤️
+</div>
 
-<h1 class="title">
-دردونه کوشولوی فاضل <span>❤️</span>
+<h1>
+دردونه کوشولوی <span>فاضل</span> ❤️
 </h1>
 
-<div class="fade-message">
+<div class="subtitle">
 روی قلب کلیک کن دخمل من 🥹
 </div>
 
-<div class="big-heart" onclick="heartClick()">
+<div class="heart-wrap" onclick="heartClick(event)">
+<div class="heart"></div>
 <div class="heart-shine"></div>
 </div>
 
-<div class="click-count" id="clickCount">
-قلب تا الان ۰ بار بوسیده شده ❤️
+<div class="click-hint">
+این قلب فقط برای تو ساخته شده
+</div>
+
+<div class="counter-click" id="clickCount">
+۰ بار قلب رو لمس کردی ❤️
 </div>
 
 <br>
 
-<button class="btn music-btn" onclick="toggleMusic()">
-<span class="music-heart">❤️</span>
-<span>music for you</span>
-<span id="musicIcon">♪</span>
+<button class="btn music" onclick="toggleMusic()">
+❤️ &nbsp; music for you &nbsp; <span id="musicIcon">♪</span>
 </button>
 
 </div>
+
 </section>
 
 
 <!-- COUNTER -->
 <section>
 
-<h2 class="section-title">
-⏳ چند وقته کنار همیم؟
+<h2 class="title">
+⏳ <span>زمانی که باهمیم</span>
 </h2>
 
 <div class="card">
@@ -568,41 +681,88 @@ footer{
 <div class="counter-grid">
 
 <div class="counter">
-<div class="counter-number" id="days">0</div>
-<div class="counter-label">روز</div>
+<div class="number" id="days">0</div>
+<div class="label">روز</div>
 </div>
 
 <div class="counter">
-<div class="counter-number" id="hours">0</div>
-<div class="counter-label">ساعت</div>
+<div class="number" id="hours">0</div>
+<div class="label">ساعت</div>
 </div>
 
 <div class="counter">
-<div class="counter-number" id="minutes">0</div>
-<div class="counter-label">دقیقه</div>
+<div class="number" id="minutes">0</div>
+<div class="label">دقیقه</div>
 </div>
 
 </div>
 
 </div>
+
 </section>
 
 
 <!-- SURPRISE -->
 <section>
 
-<h2 class="section-title">
-🎁 جعبه <span>سورپرایز</span>
+<h2 class="title">
+🎁 <span>یه سورپرایز برای تو</span>
 </h2>
 
-<div class="card surprise-box">
+<div class="card gift-area">
 
 <div class="gift" onclick="surprise()">
 🎁
 </div>
 
-<div class="surprise-text" id="surpriseText">
-روی جعبه بزن ببین فاضل برات چی قایم کرده 😌❤️
+<div class="gift-text" id="surpriseText">
+جعبه رو باز کن ببین فاضل چی برات قایم کرده 😏❤️
+</div>
+
+</div>
+
+</section>
+
+
+<!-- TIMELINE -->
+<section>
+
+<h2 class="title">
+🕰️ <span>داستان کوچولوی ما</span>
+</h2>
+
+<div class="card timeline">
+
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<h3>۱۰ اسفند ۱۴۰۳ ❤️</h3>
+<p>
+روزی که داستان ما شروع شد...
+</p>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<h3>روزهای بعد 💕</h3>
+<p>
+کم‌کم پیام‌ها، خنده‌ها و خاطره‌های کوچیک شروع شدن.
+</p>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<h3>امروز 🥹</h3>
+<p>
+هنوز هم فاضل همون آدمیه که دلش برای الهام می‌تپه.
+</p>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<h3>ادامه دارد... ♾️</h3>
+<p>
+قشنگ‌ترین قسمت داستانمون هنوز نوشته نشده.
+</p>
 </div>
 
 </div>
@@ -613,28 +773,34 @@ footer{
 <!-- MEMORIES -->
 <section>
 
-<h2 class="section-title">
-📸 گوشه‌ای از <span>خاطراتمون</span>
+<h2 class="title">
+📸 <span>گوشه‌ای از خاطراتمون</span>
 </h2>
 
 <div class="gallery">
 
 <div class="memory">
 <div class="memory-icon">🥰</div>
-<h3>اولین روزها</h3>
-<p>از همون روزایی که کم‌کم همه چیز قشنگ شد...</p>
+<h3>خنده‌هامون</h3>
+<p>
+یکی از قشنگ‌ترین صداهای دنیا، خنده‌های توئه.
+</p>
 </div>
 
 <div class="memory">
 <div class="memory-icon">💞</div>
-<h3>خنده‌هامون</h3>
-<p>یکی از قشنگ‌ترین چیزهای دنیا، خنده‌های توئه.</p>
+<h3>لحظه‌های دوتایی</h3>
+<p>
+حتی لحظه‌های ساده کنار تو خاص میشن.
+</p>
 </div>
 
 <div class="memory">
 <div class="memory-icon">🌙</div>
-<h3>شب‌های دوتایی</h3>
-<p>حتی معمولی‌ترین شب‌ها با تو خاص میشن.</p>
+<h3>شب‌های ما</h3>
+<p>
+بعضی شب‌ها فقط با حرف زدن با تو قشنگ میشن.
+</p>
 </div>
 
 </div>
@@ -645,11 +811,11 @@ footer{
 <!-- LETTER -->
 <section>
 
-<h2 class="section-title">
-💌 یه نامه برای <span>الهام</span>
+<h2 class="title">
+💌 <span>یه نامه برای الهام</span>
 </h2>
 
-<div class="card letter-area">
+<div class="card">
 
 <div class="envelope" onclick="openLetter()">
 💌
@@ -659,30 +825,33 @@ footer{
 
 <div class="letter-content">
 
-الهام جان... ❤️
+الهام جان ❤️
+
+<br><br>
+
+گاهی آدم نمی‌تونه با چند تا کلمه توضیح بده
+که یه نفر چقدر براش مهمه...
 
 <br>
 
-شاید نتونم همیشه با کلمات بگم چقدر برام مهمی،
-ولی یه چیزی رو مطمئن باش...
+اما اگه بخوام ساده بگم:
 
-<br>
+<br><br>
 
-بودنت باعث شده خیلی از روزهای معمولی زندگی من،
-تبدیل به خاطره‌های قشنگ بشن.
+<strong>
+تو یکی از قشنگ‌ترین اتفاق‌های زندگی فاضلی.
+</strong>
 
-<br>
+<br><br>
 
 دردونه کوشولوی فاضل،
-امیدوارم همیشه کنار هم کلی خاطره بسازیم. 🥹❤️
+امیدوارم این داستان کوچولوی ما
+خیلی خیلی ادامه داشته باشه. 🥹❤️
 
-<br>
+<br><br>
 
-فقط خواستم بدونی...
-
-<br>
-
-<strong>خیلی دوستت دارم. ❤️</strong>
+دوستت دارم...
+بیشتر از چیزی که این صفحه بتونه نشون بده. ❤️
 
 </div>
 
@@ -696,31 +865,31 @@ footer{
 <!-- GAME -->
 <section>
 
-<h2 class="section-title">
-🎮 بازی <span>عاشقانه</span>
+<h2 class="title">
+🎮 <span>فاضل رو چقدر می‌شناسی؟</span>
 </h2>
 
 <div class="card">
 
-<div class="game-question" id="question">
-الهام، به نظرت فاضل بیشتر عاشق کدومه؟ 😏
+<div class="question" id="question">
+سؤال اول: اگه فاضل مجبور باشه یکی رو انتخاب کنه، کدومه؟ 😏
 </div>
 
-<div class="answers">
+<div class="answers" id="answers">
 
-<button class="btn answer" onclick="answer(0)">
+<button class="btn" onclick="gameAnswer(0)">
 🍕 پیتزا
 </button>
 
-<button class="btn answer" onclick="answer(1)">
+<button class="btn" onclick="gameAnswer(1)">
 🎮 بازی
 </button>
 
-<button class="btn answer" onclick="answer(2)">
+<button class="btn" onclick="gameAnswer(2)">
 ❤️ الهام
 </button>
 
-<button class="btn answer" onclick="answer(3)">
+<button class="btn" onclick="gameAnswer(3)">
 😴 خواب
 </button>
 
@@ -736,8 +905,8 @@ footer{
 <!-- EVENTS -->
 <section>
 
-<h2 class="section-title">
-🎂 روزهای <span>خاصمون</span>
+<h2 class="title">
+🎂 <span>روزهای خاصمون</span>
 </h2>
 
 <div class="events">
@@ -763,7 +932,7 @@ footer{
 <div class="event">
 <div class="event-icon">🌹</div>
 <h3>ولنتاین</h3>
-<p>یه بهونه دیگه برای دوست داشتن همدیگه</p>
+<p>یک بهونه دیگه برای دوست داشتن همدیگه</p>
 </div>
 
 </div>
@@ -773,14 +942,16 @@ footer{
 
 <footer>
 
-<div class="footer-heart">❤️</div>
+<div style="font-size:35px">
+❤️
+</div>
 
 <p>
-ساخته شده با کلی عشق توسط فاضل
+ساخته شده با عشق توسط <strong>فاضل</strong>
 </p>
 
-<p style="margin-top:8px">
-برای الهام، دردونه‌ی کوشولوی فاضل 🥹
+<p style="margin-top:10px">
+برای دردونه کوشولوی فاضل، الهام 🥹
 </p>
 
 </footer>
@@ -789,18 +960,19 @@ footer{
 
 
 <!-- POPUP -->
+
 <div class="popup" id="popup">
 
 <div class="popup-card">
 
-<div style="font-size:55px">
+<div class="popup-icon">
 ❤️
 </div>
 
 <div class="popup-message" id="popupMessage"></div>
 
 <button class="btn" onclick="closePopup()">
-باشه دردونه 😭❤️
+باشه 😭❤️
 </button>
 
 </div>
@@ -810,87 +982,120 @@ footer{
 
 <script>
 
-/* ---------- STARS ---------- */
+/* PARTICLES */
 
-const stars=document.getElementById("stars");
+const particles=document.getElementById("particles");
 
-for(let i=0;i<70;i++){
+for(let i=0;i<90;i++){
 
-    const star=document.createElement("div");
+    const p=document.createElement("div");
 
-    star.className="star";
+    p.className="particle";
 
-    star.style.left=Math.random()*100+"%";
-    star.style.top=Math.random()*100+"%";
-    star.style.animationDelay=Math.random()*3+"s";
+    p.style.left=Math.random()*100+"%";
+    p.style.top=Math.random()*100+"%";
+    p.style.animationDelay=Math.random()*3+"s";
 
-    stars.appendChild(star);
+    particles.appendChild(p);
 }
 
 
-/* ---------- FLOATING HEARTS ---------- */
+/* FLOATING HEARTS */
 
-function createHeart(){
+function floatingHeart(){
 
-    const heart=document.createElement("div");
+    const h=document.createElement("div");
 
-    heart.className="bg-heart";
+    h.className="float-heart";
 
-    const hearts=["❤️","💗","💖","💘","💕","💞"];
+    const list=["❤️","💗","💖","💕","💞","✨"];
 
-    heart.innerText=hearts[Math.floor(Math.random()*hearts.length)];
+    h.innerText=list[Math.floor(Math.random()*list.length)];
 
-    heart.style.left=Math.random()*100+"%";
-    heart.style.fontSize=(15+Math.random()*25)+"px";
-    heart.style.animationDuration=(7+Math.random()*8)+"s";
+    h.style.left=Math.random()*100+"%";
+    h.style.fontSize=(15+Math.random()*25)+"px";
+    h.style.animationDuration=(7+Math.random()*8)+"s";
 
-    document.body.appendChild(heart);
+    document.getElementById("hearts").appendChild(h);
 
     setTimeout(()=>{
-        heart.remove();
+        h.remove();
     },15000);
 }
 
-setInterval(createHeart,500);
+setInterval(floatingHeart,450);
 
 
-/* ---------- HEART CLICK ---------- */
+/* HEART CLICK */
 
 let clicks=0;
 
-const heartMessages=[
+const messages=[
 "الهام جان، این قلب برای توئه ❤️",
-"دردونه کوشولوی فاضل 😭❤️",
-"هر بار که می‌زنی، یه بار بیشتر عاشقت میشم 🥹",
+"دردونه کوشولوی فاضل 🥹❤️",
+"هر بار می‌زنی، قلبم یه تپش بیشتر می‌زنه.",
 "این قلب فقط صاحبش رو می‌شناسه... تو ❤️",
-"الهام، تو قشنگ‌ترین قسمت زندگی فاضلی ❤️",
-"خب دیگه... قلبم رو ترکوندی 😂❤️",
-"فاضل رسماً گرفتار شده 😭💕"
+"فاضل رسماً گرفتار شده 😭💕",
+"تو قشنگ‌ترین قسمت این سایتی ❤️",
+"حالا یه لبخند بزن خانوم کوچولو 😌❤️"
 ];
 
-function heartClick(){
+function heartClick(e){
 
     clicks++;
 
     document.getElementById("clickCount").innerText=
-    "قلب تا الان "+clicks+" بار بوسیده شده ❤️";
+    clicks+" بار قلب رو لمس کردی ❤️";
 
-    const message=
-    heartMessages[Math.floor(Math.random()*heartMessages.length)];
+    const msg=
+    messages[Math.floor(Math.random()*messages.length)];
 
-    showPopup(message);
+    showPopup(msg);
 
-    for(let i=0;i<8;i++){
-        createHeart();
+    burst(e.clientX,e.clientY);
+}
+
+
+/* HEART BURST */
+
+function burst(x,y){
+
+    const icons=["❤️","💗","💖","💕","✨"];
+
+    for(let i=0;i<16;i++){
+
+        const b=document.createElement("div");
+
+        b.className="burst";
+
+        b.innerText=
+        icons[Math.floor(Math.random()*icons.length)];
+
+        b.style.left=x+"px";
+        b.style.top=y+"px";
+
+        b.style.setProperty(
+            "--x",
+            (Math.random()*300-150)+"px"
+        );
+
+        b.style.setProperty(
+            "--y",
+            (Math.random()*300-150)+"px"
+        );
+
+        document.body.appendChild(b);
+
+        setTimeout(()=>b.remove(),1000);
     }
 }
 
 
-/* ---------- POPUP ---------- */
+/* POPUP */
 
-function showPopup(message){
+function showPopup(text){
 
-    document.getElementById("popupMessage").innerText=message;
+    document.getElementById("popupMessage").innerText=text;
 
     document.getElementById("popup").classList.add("show");
 }
@@ -901,7 +1106,7 @@ function closePopup(){
 }
 
 
-/* ---------- COUNTER ---------- */
+/* COUNTER */
 
 const startDate=new Date("2025-02-28T00:00:00");
 
@@ -911,19 +1116,14 @@ function updateCounter(){
 
     const diff=now-startDate;
 
-    const days=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("days").innerText=
+    Math.floor(diff/(1000*60*60*24));
 
-    const hours=Math.floor(
-        diff/(1000*60*60)%24
-    );
+    document.getElementById("hours").innerText=
+    Math.floor(diff/(1000*60*60)%24);
 
-    const minutes=Math.floor(
-        diff/(1000*60)%60
-    );
-
-    document.getElementById("days").innerText=days;
-    document.getElementById("hours").innerText=hours;
-    document.getElementById("minutes").innerText=minutes;
+    document.getElementById("minutes").innerText=
+    Math.floor(diff/(1000*60)%60);
 }
 
 updateCounter();
@@ -931,21 +1131,23 @@ updateCounter();
 setInterval(updateCounter,60000);
 
 
-/* ---------- SURPRISE ---------- */
+/* SURPRISE */
 
 const surprises=[
 
-"الهام جان، اگه اینو دیدی بدون یه نفر اینجا خیلی دوستت داره ❤️",
+"الهام جان، یه نفر اینجا خیلی دوستت داره ❤️",
 
-"تو یکی از قشنگ‌ترین اتفاق‌های زندگی فاضلی 🥹",
+"اگه الان کنارم بودی، یه بغل محکم طلبت بود 🥹",
 
-"سورپرایز اصلی هنوز مونده... 😏🎁",
+"سورپرایز بعدی شاید از اینم قشنگ‌تر باشه 😏🎁",
 
-"اگه الان کنارم بودی، یه بغل محکم طلبت بود ❤️",
+"لبخند بزن... دقیقاً همینو می‌خواستم ❤️",
 
-"دردونه کوشولوی فاضل، لبخندت رو هیچ‌وقت از دست نده 💕",
+"دردونه کوشولوی فاضل، هیچ‌وقت لبخندت رو از دست نده 💕",
 
-"فقط خواستم یادآوری کنم که خیلی خیلی دوستت دارم ❤️"
+"فقط یه یادآوری کوچولو: خیلی دوستت دارم ❤️",
+
+"خب... جعبه رو دوباره بزن شاید چیز جدیدی پیدا کردی 😂❤️"
 
 ];
 
@@ -956,18 +1158,14 @@ function surprise(){
 
     document.getElementById("surpriseText").innerText=text;
 
-    document.querySelector(".gift").style.transform=
-    "rotate(-10deg) scale(1.15)";
-
-    setTimeout(()=>{
-
-        document.querySelector(".gift").style.transform="";
-
-    },500);
+    burst(
+        window.innerWidth/2,
+        window.innerHeight/2
+    );
 }
 
 
-/* ---------- LETTER ---------- */
+/* LETTER */
 
 function openLetter(){
 
@@ -976,66 +1174,174 @@ function openLetter(){
 }
 
 
-/* ---------- GAME ---------- */
+/* GAME */
 
-function answer(choice){
+const questions=[
+
+{
+q:"سؤال دوم: فاضل وقتی دلش برای الهام تنگ میشه چی کار می‌کنه؟ 😏",
+a:["می‌خوابه 😴","پیام میده ❤️","پیتزا می‌خوره 🍕","بازی می‌کنه 🎮"],
+correct:1
+},
+
+{
+q:"سؤال سوم: کدوم یکی برای فاضل قشنگ‌تره؟",
+a:["پول 💰","ماشین 🚗","لبخند الهام ❤️","خواب 😴"],
+correct:2
+},
+
+{
+q:"سؤال آخر: صاحب این قلب کیه؟ ❤️",
+a:["هیچ‌کس 😐","الهام 🥹","پیتزا 🍕","فقط فاضل 😎"],
+correct:1
+}
+
+];
+
+let currentQuestion=0;
+
+function gameAnswer(index){
 
     const result=document.getElementById("gameResult");
 
-    if(choice===2){
+    if(index===2 && currentQuestion===0){
 
-        result.innerText=
-        "آفرین 😭❤️ جواب درست! معلومه منو می‌شناسی.";
+        result.innerText="آفرین! جواب درست بود 😭❤️";
+
+        setTimeout(nextQuestion,900);
+
+    }else if(index===questions[currentQuestion]?.correct){
+
+        result.innerText="آفرین! درست گفتی 🥹❤️";
+
+        setTimeout(nextQuestion,900);
 
     }else{
 
-        result.innerText=
-        "نههههه 😂 جواب اشتباهه! دوباره فکر کن 😏❤️";
+        result.innerText="نههههه 😂 دوباره فکر کن!";
+    }
+}
 
+function nextQuestion(){
+
+    if(currentQuestion>=questions.length){
+
+        document.getElementById("question").innerText=
+        "تموم شد! 🥹❤️";
+
+        document.getElementById("answers").innerHTML=
+        '<button class="btn" onclick="location.reload()">دوباره بازی کنیم 🔄</button>';
+
+        document.getElementById("gameResult").innerText=
+        "الهام، تو برنده قلب فاضلی ❤️";
+
+        return;
     }
 
+    const q=questions[currentQuestion];
+
+    document.getElementById("question").innerText=q.q;
+
+    const answers=document.getElementById("answers");
+
+    answers.innerHTML="";
+
+    q.a.forEach((answer,index)=>{
+
+        const button=document.createElement("button");
+
+        button.className="btn";
+
+        button.innerText=answer;
+
+        button.onclick=()=>gameAnswer(index);
+
+        answers.appendChild(button);
+
+    });
+
+    currentQuestion++;
 }
 
 
-/* ---------- MUSIC ---------- */
+/* MUSIC */
 
-/*
-برای موزیک:
-بعداً می‌تونیم فایل آهنگ خودت رو
-داخل GitHub بگذاری و اسمش را اینجا قرار بدهی.
-*/
-
-let musicPlaying=false;
+let audio=null;
+let playing=false;
 
 function toggleMusic(){
 
-    if(!window.audio){
+    if(!audio){
 
-        window.audio=new Audio("music.mp3");
-
-        window.audio.loop=true;
+        audio=new Audio("music.mp3");
+        audio.loop=true;
     }
 
-    if(musicPlaying){
+    if(!playing){
 
-        window.audio.pause();
+        audio.play().then(()=>{
 
-        musicPlaying=false;
+            playing=true;
 
-        document.getElementById("musicIcon").innerText="♪";
+            document.getElementById("musicIcon").innerText="♫";
+
+        }).catch(()=>{
+
+            showPopup(
+                "اول فایل آهنگت رو با اسم music.mp3 داخل GitHub کنار index.html بذار 🎵❤️"
+            );
+
+        });
 
     }else{
 
-        window.audio.play();
+        audio.pause();
 
-        musicPlaying=true;
+        playing=false;
 
-        document.getElementById("musicIcon").innerText="♫";
-
+        document.getElementById("musicIcon").innerText="♪";
     }
 }
+
+
+/* NIGHT MODE */
+
+function toggleNight(){
+
+    document.body.classList.toggle("light");
+
+}
+
+
+/* SCROLL ANIMATION */
+
+const observer=new IntersectionObserver(
+
+entries=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("visible");
+
+        }
+
+    });
+
+},
+
+{
+    threshold:.12
+}
+);
+
+document.querySelectorAll("section").forEach(section=>{
+    observer.observe(section);
+});
 
 </script>
 
 </body>
 </html>
+```
