@@ -140,36 +140,10 @@ text-align:center;overflow:hidden
  *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
  body:before,body:after,.glow,.ambient-orb{display:none}
 }
-.gooshe{
-    margin:40px auto;
-    padding:25px;
-    width:85%;
-    max-width:500px;
-    background:rgba(255,255,255,0.12);
-    border-radius:25px;
-    text-align:center;
-    color:white;
-    backdrop-filter:blur(10px);
-    box-shadow:0 0 25px rgba(255,0,100,0.4);
-}
-
-.gooshe h2{
-    font-size:30px;
-}
-
-.gooshe p{
-    font-size:20px;
-    line-height:2;
-}</style>
+</style>
 </head>
 
-<body> <section class="gooshe">
-    <h2>گوشه دنج ما ❤️</h2>
-    <p>
-        اینجا یه جای کوچیک برای حرفای قشنگ ماست...
-        فقط من و تو و کلی خاطره 🥹❤️
-    </p>
-</section>
+<body>
 
 <aside class="relationship-widget" id="relationshipWidget" aria-label="وضعیت رابطه ما">
 <div class="rw-head"><div class="rw-icon">😂</div><div><h4>وضعیت رابطه ما</h4><div class="rw-status">سیستم کل‌کل و قهر فعال است 😌</div></div></div>
@@ -369,17 +343,7 @@ text-align:center;overflow:hidden
 <div class="wrong" id="nookWrong"></div>
 </div>
 <div id="nookSecret" class="secret-content">
-<div class="secret-blank"><div class="love-quiz">
-
-<h2>🌙 آزمون مخفی فاضل و الهام ❤️</h2>
-
-<h3 id="question"></h3>
-
-<div id="answers"></div>
-
-<p id="quizMessage"></p>
-
-</div>. ❤️</div>
+<div class="secret-blank">این فضا عمداً خالیه... برای چیزهایی که بعداً فقط خودمون می‌دونیم. ❤️</div>
 </div>
 </div>
 </section>
@@ -628,8 +592,7 @@ $('gameHeart').addEventListener('click',()=>{
 function unlockNook(){
  if($('nookPass').value==='2323'){
   $('nookLock').style.display='none';
-  $('nookSecret').classList.add('show');>
-  startQuiz();
+  $('nookSecret').classList.add('show');
   toast('به گوشه دنج خودمون خوش اومدی 🌙❤️')
  }else{
   $('nookWrong').textContent='رمز درست نیست 🥹'
@@ -987,84 +950,7 @@ document.addEventListener('click',e=>{
 
  setTimeout(()=>r.remove(),700)
 });
-const quiz=[
-{
-q:"الان فاضل دلش چی میخواد؟ ❤️",
-a:["💋 بوس","🤗 بغل","😤 قهر","🍼 ممه"],
-c:[3]
-},
-{
-q:"اگه کنار فاضل بودی چکار میکردی؟ ❤️",
-a:["🍽️ الهام میخورد","🥰 الهام ناز میکرد","😂 الهام میزد","💋 الهام بوس میکرد"],
-c:[2]
-},
-{
-q:"فاضل چیو بیشتر دوست داره؟ ❤️",
-a:["🍼 ممه های الهام","😤 قهر های الهام","🍲 غذاهای الهام","❤️ عشق الهام"],
-c:[0]
-},
-{
-q:"اگه به این مرحله رسیدی باید یکی از گزینه ها رو به فاضل بدی ❤️",
-a:["🍼 ممه","🔥 نرمالو","🍼 ممه نرمالو","❤️ عشق و بوس"],
-c:[0,1,2]
-}
-];
 
-let qIndex=0;
-
-function startQuiz(){
-showQuiz();
-}
-
-function showQuiz(){
-
-let q=quiz[qIndex];
-
-document.getElementById("question").innerHTML=q.q;
-
-let box=document.getElementById("answers");
-
-box.innerHTML="";
-
-q.a.forEach((x,i)=>{
-
-let b=document.createElement("button");
-
-b.className="btn";
-
-b.innerHTML=x;
-
-b.onclick=()=>{
-
-if(q.c.includes(i)){
-
-qIndex++;
-
-if(qIndex==quiz.length){
-
-document.querySelector(".love-quiz").innerHTML=
-"<h1>❤️🎆❤️</h1><h2>تو خود خود عشق فاضلی ❤️</h2>";
-
-}else{
-
-showQuiz();
-
-}
-
-}else{
-
-document.getElementById("quizMessage").innerHTML=
-"تاسف... جواب غلط بود 😏";
-
-}
-
-};
-
-box.appendChild(b);
-
-});
-
-}
 </script>
 </body>
 </html>
