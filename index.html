@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fazel @ Elham ❤️</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+    font-family:Tahoma,Arial,sans-serif;
+    background:#080812;color:white;overflow-x:hidden;
+}
+
+/* ===== BACKGROUNDS ===== */
+.scene-container{position:fixed;inset:0;z-index:-5;overflow:hidden;perspective:1000px}
+.scene{position:absolute;inset:0;opacity:0;transform:scale(1.08) translateZ(-80px);transition:opacity 2s ease,transform 8s ease}
+.scene.active{opacity:1;transform:scale(1) translateZ(0)}
+
+.beach{
+    background:radial-gradient(circle at 50% 42%,#ffd98a 0%,rgba(255,185,80,.8) 8%,transparent 25%),
+    linear-gradient(to bottom,#30124d 0%,#8d315f 30%,#e87d61 52%,#f3b36d 60%,#182447 61%,#07101d 100%);
+}
+.beach:before{
+    content:"";position:absolute;width:180px;height:180px;border-radius:50%;
+    left:50%;top:39%;transform:translate(-50%,-50%);background:#ffd27c;
+    box-shadow:0 0 80px 30px rgba(255,190,100,.25)
+}
+.beach:after{
+    content:"";position:absolute;left:-10%;right:-10%;bottom:0;height:40%;
+    background:repeating-linear-gradient(170deg,rgba(255,255,255,.08) 0 2px,transparent 2px 15px);
+    transform:perspective(500px) rotateX(55deg);transform-origin:bottom
+}
+
+.rain{background:radial-gradient(circle at 50% 25%,rgba(110,130,255,.2),transparent 25%),linear-gradient(#050817,#10172e 55%,#05060d)}
+.rain:before{
+    content:"";position:absolute;inset:-100px;
+    background:repeating-linear-gradient(105deg,transparent 0 14px,rgba(150,190,255,.12) 15px,transparent 17px);
+    animation:rainfall .45s linear infinite
+}
+.rain:after{content:"";position:absolute;bottom:0;left:0;right:0;height:30%;background:linear-gradient(transparent,rgba(0,0,0,.6))}
+@keyframes rainfall{from{transform:translateY(-40px)}to{transform:translateY(40px)}}
+
+.stars{background:radial-gradient(circle at 50% 40%,rgba(95,85,190,.25),transparent 30%),linear-gradient(#02020d,#07132c 60%,#02040b)}
+.stars:before{
+    content:"";position:absolute;inset:0;
+    background-image:radial-gradient(circle,white 1px,transparent 1.5px),radial-gradient(circle,rgba(255,255,255,.7) 1px,transparent 1.5px);
+    background-size:80px 80px,130px 130px;background-position:20px 30px,70px 20px;
+    animation:starsMove 20s linear infinite
+}
+.stars:after{
+    content:"";position:absolute;width:350px;height:350px;left:50%;top:45%;
+    transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(130,100,255,.18),transparent 65%)
+}
+@keyframes starsMove{from{transform:translateY(0)}to{transform:translateY(80px)}}
+
+.cafe{background:radial-gradient(circle at 50% 35%,rgba(255,180,90,.35),transparent 25%),linear-gradient(#24120d,#4b2115 50%,#120806)}
+.cafe:before{
+    content:"";position:absolute;width:500px;height:500px;left:50%;top:35%;
+    transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(255,190,100,.3),transparent 65%)
+}
+.cafe:after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:35%;
+    background:linear-gradient(90deg,rgba(255,255,255,.02) 50%,transparent 50%);
+    background-size:100px 100px;transform:perspective(500px) rotateX(55deg);transform-origin:bottom
+}
+.dark-overlay{position:fixed;inset:0;z-index:-4;background:rgba(0,0,0,.35)}
+
+/* ===== LOVING BIRDS ===== */
+.birds{position:fixed;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+.bird-pair{
+    position:absolute;top:17%;left:-180px;font-size:30px;
+    white-space:nowrap;animation:flyTogether 22s linear infinite;
+    filter:drop-shadow(0 5px 12px rgba(0,0,0,.35));
+}
+.bird-pair span{display:inline-block;animation:wing 1s ease-in-out infinite}
+.bird-pair span+span{margin-right:8px;animation-delay:.12s}
+.bird-heart{font-size:13px;position:absolute;top:-13px;left:48%;animation:tinyHeart 2s ease-in-out infinite}
+@keyframes flyTogether{
+    0%{left:-180px;top:18%;transform:scale(.75) rotate(2deg)}
+    25%{top:12%;transform:scale(.9) rotate(-3deg)}
+    50%{top:19%;transform:scale(1) rotate(2deg)}
+    75%{top:11%;transform:scale(.9) rotate(-2deg)}
+    100%{left:110%;top:17%;transform:scale(.75) rotate(2deg)}
+}
+@keyframes wing{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-5px) rotate(-8deg)}}
+@keyframes tinyHeart{0%,100%{opacity:0;transform:scale(.6)}50%{opacity:1;transform:scale(1)}}
+
+/* ===== FLOATING HEARTS ===== */
+.hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:1}
+.floating-heart{position:absolute;bottom:-70px;font-size:30px;animation:floatHeart linear infinite;filter:drop-shadow(0 0 10px rgba(255,100,180,.6))}
+.floating-heart:nth-child(1){left:10%;animation-duration:12s}
+.floating-heart:nth-child(2){left:25%;animation-duration:16s;animation-delay:3s}
+.floating-heart:nth-child(3){left:42%;animation-duration:13s;animation-delay:1s}
+.floating-heart:nth-child(4){left:60%;animation-duration:18s;animation-delay:4s}
+.floating-heart:nth-child(5){left:75%;animation-duration:14s;animation-delay:2s}
+.floating-heart:nth-child(6){left:88%;animation-duration:17s;animation-delay:5s}
+@keyframes floatHeart{
+    0%{transform:translateY(0) scale(.5) rotate(0);opacity:0}
+    15%{opacity:1}85%{opacity:1}
+    100%{transform:translateY(-110vh) scale(1.4) rotate(25deg);opacity:0}
+}
+
+/* ===== NAV ===== */
+nav{
+    position:fixed;top:18px;left:50%;transform:translateX(-50%);
+    width:min(92%,850px);padding:13px 20px;border:1px solid rgba(255,255,255,.15);
+    background:rgba(255,255,255,.08);backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);border-radius:25px;
+    display:flex;justify-content:center;gap:30px;z-index:10;
+    box-shadow:0 15px 40px rgba(0,0,0,.25)
+}
+nav a{color:white;text-decoration:none;font-size:14px;transition:.3s}
+nav a:hover{color:#ffb5d9;transform:translateY(-2px)}
+
+/* ===== SECTIONS ===== */
+section{min-height:100vh;padding:120px 20px 80px;display:flex;justify-content:center;align-items:center}
+.content{width:min(1050px,95%)}
+.hero-card{
+    text-align:center;padding:55px 25px;border-radius:35px;background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);box-shadow:0 25px 80px rgba(0,0,0,.3)
+}
+.main-heart{font-size:100px;display:inline-block;cursor:pointer;animation:heartbeat 1.5s infinite;filter:drop-shadow(0 0 30px rgba(255,80,150,.8));transition:.3s}
+.main-heart:hover{transform:scale(1.15)}
+@keyframes heartbeat{0%,100%{transform:scale(1)}15%{transform:scale(1.12)}30%{transform:scale(1)}45%{transform:scale(1.08)}}
+h1{font-size:clamp(35px,7vw,75px);margin-top:15px;text-shadow:0 8px 35px rgba(255,100,180,.35)}
+.subtitle{margin-top:15px;font-size:18px;color:#eee}
+.enter{
+    display:inline-block;margin-top:35px;padding:14px 30px;border-radius:30px;
+    background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);
+    color:white;text-decoration:none;transition:.3s
+}
+.enter:hover{background:rgba(255,255,255,.22);transform:translateY(-4px)}
+.glass{
+    padding:45px;border-radius:30px;background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);box-shadow:0 25px 70px rgba(0,0,0,.3)
+}
+h2{font-size:32px;margin-bottom:25px}
+.story{line-height:2.3;color:#eee;font-size:17px}
+
+/* ===== COUNTER ===== */
+.counter{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-top:30px}
+.number{padding:25px 10px;text-align:center;border-radius:25px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12)}
+.number strong{
+    display:block;font-size:48px;font-weight:900;color:white;
+    text-shadow:0 2px 0 #888,0 5px 0 #555,0 10px 20px rgba(0,0,0,.7)
+}
+.number span{color:#ddd;font-size:14px}
+.start-date{margin-top:25px;color:#ddd}
+
+/* ===== LOVE ===== */
+.big-heart{text-align:center;font-size:120px;cursor:pointer;animation:heartbeat 1.5s infinite;filter:drop-shadow(0 0 40px rgba(255,50,130,.8))}
+#loveMessage{text-align:center;margin-top:25px;font-size:20px;min-height:35px;transition:.5s}
+
+/* ===== RELATIONSHIP BOX ===== */
+.relationship-box{
+    position:fixed;right:25px;top:105px;width:245px;padding:18px;border-radius:24px;
+    background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);
+    backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    box-shadow:0 20px 50px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.1);
+    z-index:8;text-align:center;transform:perspective(700px) rotateY(-5deg);transition:.4s
+}
+.relationship-box:hover{transform:perspective(700px) rotateY(0) translateY(-4px)}
+.relationship-emoji{font-size:32px;margin-bottom:8px}
+.relationship-title{font-size:13px;color:#ffb9d8;margin-bottom:10px}
+.relationship-text{font-size:14px;line-height:1.8;color:white;min-height:50px;transition:.5s}
+
+/* ===== ANGRY ELHAM ===== */
+.angry-section{padding-top:60px}
+.angry-card{text-align:center;position:relative;overflow:hidden}
+.angry-girl{
+    width:145px;height:180px;margin:10px auto 20px;position:relative;
+    cursor:pointer;transition:.3s;filter:drop-shadow(0 15px 20px rgba(0,0,0,.3))
+}
+.angry-girl:hover{transform:translateY(-7px) scale(1.04)}
+.hair{
+    position:absolute;width:110px;height:125px;left:17px;top:4px;
+    background:#342047;border-radius:55% 55% 42% 42%;z-index:1
+}
+.head{
+    position:absolute;width:92px;height:98px;left:27px;top:25px;
+    background:#ffd5bd;border-radius:48% 48% 45% 45%;z-index:2;
+    box-shadow:inset -6px -5px 0 rgba(220,130,120,.12)
+}
+.fringe{
+    position:absolute;left:24px;top:20px;width:100px;height:40px;
+    background:#342047;border-radius:50%;z-index:3;transform:rotate(-4deg)
+}
+.eye{position:absolute;top:59px;width:8px;height:10px;background:#2b1b29;border-radius:50%;z-index:4}
+.eye.left{left:48px}.eye.right{left:78px}
+.brow{position:absolute;top:48px;width:25px;height:6px;background:#342047;border-radius:10px;z-index:4}
+.brow.left{left:40px;transform:rotate(15deg)}.brow.right{left:70px;transform:rotate(-15deg)}
+.mouth{position:absolute;left:57px;top:78px;width:28px;height:12px;border-top:4px solid #7b3341;border-radius:50%;z-index:4}
+.body{
+    position:absolute;left:37px;top:116px;width:72px;height:58px;
+    background:#d95c8a;border-radius:35px 35px 15px 15px;z-index:1
+}
+.arm{
+    position:absolute;width:50px;height:14px;background:#ffd5bd;border-radius:20px;
+    top:128px;z-index:5
+}
+.arm.left{left:5px;transform:rotate(24deg)}.arm.right{right:5px;transform:rotate(-24deg)}
+.foot{position:absolute;width:42px;height:13px;background:#342047;border-radius:15px;top:168px;z-index:0}
+.foot.left{left:28px}.foot.right{right:28px}
+.angry-bubble{
+    display:inline-block;padding:9px 15px;border-radius:18px;background:rgba(255,255,255,.12);
+    font-size:14px;min-width:150px;animation:bubble 2s ease-in-out infinite
+}
+@keyframes bubble{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.angry-girl.shake{animation:angryShake .55s ease}
+@keyframes angryShake{
+    0%,100%{transform:translateX(0) rotate(0)}
+    20%{transform:translateX(-8px) rotate(-5deg)}
+    40%{transform:translateX(8px) rotate(5deg)}
+    60%{transform:translateX(-6px) rotate(-4deg)}
+    80%{transform:translateX(6px) rotate(4deg)}
+}
+
+/* ===== RANDOM LOVE STORIES ===== */
+.story-random-card{text-align:center}
+.random-story{
+    margin:20px auto;padding:24px;max-width:800px;line-height:2.2;
+    background:rgba(255,255,255,.07);border-radius:22px;border:1px solid rgba(255,255,255,.12);
+    transition:.5s;min-height:130px
+}
+.story-title{font-size:24px;color:#ffc2df;margin-bottom:12px}
+.random-button,.make-up-button{
+    border:0;color:white;cursor:pointer;border-radius:28px;padding:14px 25px;
+    background:linear-gradient(135deg,rgba(255,80,150,.8),rgba(130,70,210,.8));
+    box-shadow:0 10px 30px rgba(0,0,0,.25);font-size:15px;transition:.3s
+}
+.random-button:hover,.make-up-button:hover{transform:translateY(-4px) scale(1.03)}
+
+/* ===== MAKE UP BOX ===== */
+.makeup-card{text-align:center}
+.makeup-message{
+    font-size:23px;line-height:2;margin:20px 0;min-height:75px;
+    transition:.5s;color:#fff
+}
+.makeup-button{font-size:16px}
+.heart-burst{position:fixed;pointer-events:none;z-index:30;font-size:24px;animation:burst 1.3s forwards}
+@keyframes burst{
+    0%{transform:translate(0,0) scale(.5);opacity:1}
+    100%{transform:translate(var(--x),var(--y)) scale(1.5);opacity:0}
+}
+
+/* ===== SCENE NAME ===== */
+#sceneName{
+    position:fixed;bottom:22px;left:50%;transform:translateX(-50%);
+    padding:9px 20px;border-radius:20px;background:rgba(0,0,0,.35);
+    border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(10px);z-index:5;
+    font-size:13px;transition:.5s
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:700px){
+    nav{gap:12px;padding:11px 10px}
+    nav a{font-size:11px}
+    section{padding-top:110px}
+    .hero-card{padding:40px 18px}
+    .main-heart{font-size:75px}
+    h1{font-size:38px}
+    .subtitle{font-size:15px}
+    .glass{padding:25px 18px}
+    h2{font-size:25px}
+    .story{font-size:15px}
+    .counter{grid-template-columns:repeat(2,1fr)}
+    .number strong{font-size:38px}
+    .big-heart{font-size:90px}
+    .relationship-box{
+        top:auto;bottom:65px;right:50%;transform:translateX(50%);
+        width:235px;padding:13px
+    }
+    .relationship-box:hover{transform:translateX(50%)}
+    #sceneName{bottom:15px;font-size:11px}
+    .bird-pair{top:22%;font-size:24px}
+    .angry-girl{transform:scale(.9)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="scene-container">
+    <div class="scene beach active"></div>
+    <div class="scene rain"></div>
+    <div class="scene stars"></div>
+    <div class="scene cafe"></div>
+</div>
+<div class="dark-overlay"></div>
+
+<!-- دو پرنده عاشق -->
+<div class="birds">
+    <div class="bird-pair">
+        <span>🕊️</span><span>🕊️</span>
+        <div class="bird-heart">❤️</div>
+    </div>
+</div>
+
+<div class="hearts">
+    <div class="floating-heart">❤️</div>
+    <div class="floating-heart">💗</div>
+    <div class="floating-heart">💕</div>
+    <div class="floating-heart">💖</div>
+    <div class="floating-heart">❤️</div>
+    <div class="floating-heart">💗</div>
+</div>
+
+<nav>
+    <a href="#home">خانه</a>
+    <a href="#story">داستان ما</a>
+    <a href="#days">روزها</a>
+    <a href="#random">رمان ❤️</a>
+    <a href="#love">❤️</a>
+</nav>
+
+<!-- وضعیت رابطه -->
+<div class="relationship-box">
+    <div class="relationship-emoji" id="relationshipEmoji">😂</div>
+    <div class="relationship-title">وضعیت رابطه ما:</div>
+    <div class="relationship-text" id="relationshipText">دعوا 😤 → قهر 🥺 → آشتی ❤️</div>
+</div>
+
+<section id="home">
+    <div class="content">
+        <div class="hero-card">
+            <div class="main-heart" onclick="heartClick()">❤️</div>
+            <h1>Fazel @ Elham ❤️</h1>
+            <div class="subtitle">یه گوشه کوچیک از دنیای دوتایی ما...</div>
+            <a class="enter" href="#story" onclick="goToStory(event)">بیا بریم داخل دنیامون ✨</a>
+        </div>
+    </div>
+</section>
+
+<section id="story">
+    <div class="content">
+        <div class="glass">
+            <h2>داستان ما ❤️</h2>
+            <div class="story">
+                بعضی آدم‌ها وارد زندگی آدم میشن و همه چیز رو آروم آروم قشنگ‌تر می‌کنن...
+                <br><br>
+                از یه روز معمولی شروع شد، اما کم‌کم تبدیل شد به یکی از خاص‌ترین قسمت‌های زندگی من.
+                <br><br>
+                بین ما دعوا هست، قهر هست، کل‌کل هست، خنده هست...
+                <br><br>
+                ولی چیزی که همیشه هست، دوست داشتنم برای توئه. ❤️
+                <br><br>
+                الهام جان، این سایت فقط یه صفحه توی اینترنت نیست؛ یه یادگاری کوچیک از حس بزرگیه که توی قلب فاضل جا داره. 🥹❤️
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- الهام کوچولوی عصبانی -->
+<section class="angry-section" id="angry">
+    <div class="content">
+        <div class="glass angry-card">
+            <h2>الهام کوچولوی عصبانی 😤</h2>
+
+            <div class="angry-girl" id="angryGirl" onclick="angryClick()">
+                <div class="hair"></div>
+                <div class="head"></div>
+                <div class="fringe"></div>
+                <div class="eye left"></div>
+                <div class="eye right"></div>
+                <div class="brow left"></div>
+                <div class="brow right"></div>
+                <div class="mouth"></div>
+                <div class="body"></div>
+                <div class="arm left"></div>
+                <div class="arm right"></div>
+                <div class="foot left"></div>
+                <div class="foot right"></div>
+            </div>
+
+            <div class="angry-bubble" id="angryBubble">فاضل! 😤</div>
+            <p style="margin-top:15px;color:#ddd;font-size:13px">روش کلیک کن ببین چی میگه 😂</p>
+        </div>
+    </div>
+</section>
+
+<section id="days">
+    <div class="content">
+        <div class="glass">
+            <h2>چقدر از باهم بودنمون گذشته؟ ⏳❤️</h2>
+            <div class="counter">
+                <div class="number"><strong id="daysNumber">0</strong><span>روز</span></div>
+                <div class="number"><strong id="hoursNumber">0</strong><span>ساعت</span></div>
+                <div class="number"><strong id="minutesNumber">0</strong><span>دقیقه</span></div>
+                <div class="number"><strong id="secondsNumber">0</strong><span>ثانیه</span></div>
+            </div>
+            <div class="start-date">شروع داستان ما: ۱۰ اسفند ۱۴۰۳ ❤️</div>
+        </div>
+    </div>
+</section>
+
+<!-- داستان تصادفی -->
+<section id="random">
+    <div class="content">
+        <div class="glass story-random-card">
+            <h2>حوصله‌ت سر رفته الهام؟ 📖❤️</h2>
+            <p style="color:#ddd">هر بار بزن، یه داستان عاشقانه کوتاه و تصادفی برات میارم 🥹</p>
+
+            <div class="random-story" id="randomStory">
+                <div class="story-title">یه داستان برای تو ❤️</div>
+                <div id="randomStoryText">
+                    شاید امشب، درست وقتی حوصله‌ات سر رفته، یک داستان کوچیک منتظرته...
+                </div>
+            </div>
+
+            <button class="random-button" onclick="showRandomStory()">
+                یه داستان دیگه بیار 📖✨
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- آشتی -->
+<section id="makeup">
+    <div class="content">
+        <div class="glass makeup-card">
+            <h2>اگه الان عصبی و قهری... 😤🥺</h2>
+
+            <div class="makeup-message" id="makeupMessage">
+                اگه الان عصبی و قهری، اینجا کلیک کن... 👇❤️
+            </div>
+
+            <button class="make-up-button" onclick="makeUp()">
+                بیا آشتی کنیم ❤️
+            </button>
+        </div>
+    </div>
+</section>
+
+<section id="love">
+    <div class="content">
+        <div class="glass">
+            <div class="big-heart" onclick="showLove()">❤️</div>
+            <div id="loveMessage">روی قلب بزن... 🥹❤️</div>
+        </div>
+    </div>
+</section>
+
+<div id="sceneName">غروب قشنگ ما 🌅</div>
+
+<script>
+/* ===== HEART ===== */
+function heartClick(){
+    alert("فاضل ❤️ الهام");
+}
+
+/* ===== STORY ===== */
+function goToStory(event){
+    event.preventDefault();
+    document.getElementById("story").scrollIntoView({behavior:"smooth"});
+}
+
+/* ===== LOVE ===== */
+function showLove(){
+    const message=document.getElementById("loveMessage");
+    message.style.opacity="0";
+    setTimeout(()=>{
+        message.innerHTML="تو یکی از قشنگ‌ترین اتفاق‌های زندگی منی 🥹❤️";
+        message.style.opacity="1";
+    },300);
+}
+
+/* ===== COUNTER ===== */
+const startDate=new Date("2025-02-28T00:00:00");
+
+function calculateTime(){
+    const now=new Date();
+    let difference=now-startDate;
+    if(difference<0) difference=0;
+
+    const second=1000;
+    const minute=second*60;
+    const hour=minute*60;
+    const day=hour*24;
+
+    document.getElementById("daysNumber").innerText=Math.floor(difference/day);
+    document.getElementById("hoursNumber").innerText=Math.floor((difference%day)/hour);
+    document.getElementById("minutesNumber").innerText=Math.floor((difference%hour)/minute);
+    document.getElementById("secondsNumber").innerText=Math.floor((difference%minute)/second);
+}
+calculateTime();
+setInterval(calculateTime,1000);
+
+/* ===== SCENES ===== */
+const scenes=document.querySelectorAll(".scene");
+const sceneName=document.getElementById("sceneName");
+const names=["غروب قشنگ ما 🌅","یه شب بارونی 🌧️","زیر آسمون پرستاره 🌌","یه کافه دنج و گرم ☕"];
+let currentScene=0;
+
+function changeScene(){
+    scenes[currentScene].classList.remove("active");
+    currentScene=(currentScene+1)%scenes.length;
+    scenes[currentScene].classList.add("active");
+
+    sceneName.style.opacity="0";
+    setTimeout(()=>{
+        sceneName.innerText=names[currentScene];
+        sceneName.style.opacity="1";
+    },700);
+}
+setInterval(changeScene,8000);
+
+/* ===== RELATIONSHIP ===== */
+const relationshipMessages=[
+    {emoji:"😂",text:"دعوا 😤 → قهر 🥺 → آشتی ❤️"},
+    {emoji:"😤",text:"امروز کی مقصره؟ معلومه... اون یکی 😂"},
+    {emoji:"🥺",text:"قهر کردیم... ولی دلمون نیومد زیاد طولش بدیم ❤️"},
+    {emoji:"😂",text:"رابطه ما: ۱۰٪ عشق، ۹۰٪ کل‌کل 😂❤️"},
+    {emoji:"❤️",text:"دعوا هرچقدر زیاد... آشتی همیشه واجبه 😌"},
+    {emoji:"🤦‍♂️",text:"دوباره دعوا؟! خب این قسمت قبلاً هم دیده بودیم 😂"},
+    {emoji:"🥰",text:"قهر می‌کنیم که آشتی‌مون قشنگ‌تر بشه ❤️"},
+    {emoji:"🤣",text:"ما باهمیم چون هنوز کسی بهتر از خودمون پیدا نکرده 😂❤️"}
+];
+let relationshipIndex=0;
+
+function changeRelationshipMessage(){
+    const textElement=document.getElementById("relationshipText");
+    const emojiElement=document.getElementById("relationshipEmoji");
+    textElement.style.opacity="0";
+    emojiElement.style.opacity="0";
+
+    setTimeout(()=>{
+        relationshipIndex=(relationshipIndex+1)%relationshipMessages.length;
+        const item=relationshipMessages[relationshipIndex];
+        emojiElement.innerText=item.emoji;
+        textElement.innerText=item.text;
+        emojiElement.style.opacity="1";
+        textElement.style.opacity="1";
+    },500);
+}
+setInterval(changeRelationshipMessage,5000);
+
+/* ===== ANGRY ELHAM ===== */
+const angryTexts=[
+    "فاضل! 😤",
+    "من دیگه قهرم! 😑",
+    "اصلاً باهات حرف نمی‌زنم! 🥺",
+    "خودت می‌دونی چرا عصبانی‌ام! 😤",
+    "بیا ببینم چی میگی حالا 😂",
+    "من کوچولو نیستم! 😤😂",
+    "خب... شاید یه ذره دلم آشتی بخواد 🥹"
+];
+let angryIndex=0;
+
+function angryClick(){
+    const girl=document.getElementById("angryGirl");
+    const bubble=document.getElementById("angryBubble");
+    girl.classList.remove("shake");
+    void girl.offsetWidth;
+    girl.classList.add("shake");
+    angryIndex=(angryIndex+1)%angryTexts.length;
+    bubble.innerText=angryTexts[angryIndex];
+}
+
+/* ===== RANDOM LOVE STORIES ===== */
+const stories=[
+    {
+        title:"باران ❤️",
+        text:"باران می‌بارید و شهر خلوت بود. پسر کنار پنجره ایستاده بود و به خیابان نگاه می‌کرد. گوشی‌اش لرزید؛ فقط یک پیام کوتاه بود: «رسیدی؟» لبخند زد و جواب داد: «وقتی تو منتظرم باشی، همیشه می‌رسم.»"
+    },
+    {
+        title:"کافه دنج ☕",
+        text:"دختر هر بار که به همان کافه می‌رفت، یک میز را انتخاب می‌کرد. روزی پسر پرسید چرا همیشه همین‌جا می‌نشینی. گفت: «چون اولین بار که دیدمت، از همین‌جا فهمیدم بعضی آدم‌ها شبیه خانه‌اند.»"
+    },
+    {
+        title:"نامه‌ای برای فردا 💌",
+        text:"پسر نامه‌ای نوشت و روی آن فقط یک جمله گذاشت: «اگر فردا هم دوستت داشتم، تعجب نکن.» سال‌ها گذشت. هر روز نامه‌ای تازه نوشت، چون جوابش همیشه همان بود: «من هم.»"
+    },
+    {
+        title:"یک دقیقه بیشتر 🥹",
+        text:"قرارشان تمام شده بود و هر دو می‌دانستند باید بروند. دختر گفت: «فقط یک دقیقه دیگه بمون.» یک دقیقه شد ده دقیقه، ده دقیقه شد یک ساعت؛ بعضی وقت‌ها خوشبختی دقیقاً همین یک دقیقه‌های اضافه است."
+    },
+    {
+        title:"زیر آسمان پرستاره 🌌",
+        text:"روی چمن‌ها دراز کشیده بودند و ستاره‌ها را می‌شمردند. دختر گفت: «کاش می‌شد این لحظه هیچ‌وقت تمام نشه.» پسر آرام گفت: «لازم نیست لحظه رو نگه داریم؛ فقط هر وقت دلت تنگ شد، دوباره با هم می‌سازیمش.»"
+    },
+    {
+        title:"دعوا و آشتی 😂❤️",
+        text:"آن روز سر یک چیز خیلی کوچک دعوا کردند. هر دو قهر بودند و هیچ‌کدام کوتاه نمی‌آمد. چند دقیقه بعد، دختر یک پیام فرستاد: «هنوز قهرم... ولی شام خوردی؟» پسر خندید. بعضی عشق‌ها حتی وسط قهر هم حواسشان به آدم هست."
+    }
+];
+
+let storyIndex=-1;
+
+function showRandomStory(){
+    const box=document.getElementById("randomStory");
+    const text=document.getElementById("randomStoryText");
+    const title=box.querySelector(".story-title");
+
+    box.style.opacity="0";
+    setTimeout(()=>{
+        let next;
+        do{
+            next=Math.floor(Math.random()*stories.length);
+        }while(stories.length>1 && next===storyIndex);
+
+        storyIndex=next;
+        title.innerText=stories[next].title;
+        text.innerText=stories[next].text;
+        box.style.opacity="1";
+    },350);
+}
+
+/* ===== MAKE UP ===== */
+let madeUp=false;
+
+function makeUp(){
+    const message=document.getElementById("makeupMessage");
+    const button=document.querySelector(".make-up-button");
+
+    if(!madeUp){
+        message.style.opacity="0";
+        setTimeout(()=>{
+            message.innerHTML="بیا آشتی کنیم دخمل من 🥹❤️<br><small style='font-size:15px;color:#ddd'>دیگه دعوا بسه... بیا بغلم 🫂</small>";
+            message.style.opacity="1";
+            button.innerText="آشتی کردیم ❤️🥰";
+            madeUp=true;
+            createHeartBurst();
+        },350);
+    }else{
+        message.style.opacity="0";
+        setTimeout(()=>{
+            message.innerHTML="دیدی؟ گفتم آخرش آشتی می‌کنیم 😂❤️";
+            message.style.opacity="1";
+            createHeartBurst();
+        },250);
+    }
+}
+
+function createHeartBurst(){
+    for(let i=0;i<18;i++){
+        const heart=document.createElement("div");
+        heart.className="heart-burst";
+        heart.innerText=["❤️","💗","💕","💖","🥰"][Math.floor(Math.random()*5)];
+        heart.style.left="50%";
+        heart.style.top="50%";
+        heart.style.setProperty("--x",(Math.random()*500-250)+"px");
+        heart.style.setProperty("--y",(Math.random()*450-225)+"px");
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),1400);
+    }
+}
+</script>
+
+</body>
+</html>
