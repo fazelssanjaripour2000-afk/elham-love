@@ -760,7 +760,7 @@ body.messenger-fullscreen .chat-compose textarea,body.messenger-fullscreen .chat
 <div class="nook-panel active chat-panel" data-panel="notes"><div aria-hidden="true" class="chat-toys"><span class="chat-toy toy-a">🧸</span><span class="chat-toy toy-b">🐰</span><span class="chat-toy toy-c">🐱</span><span class="chat-toy toy-d">🐥</span></div>
 <div class="chat-head">
 <div class="chat-avatar-wrap"><div class="chat-avatar">❤️</div><span class="chat-online"></span></div>
-<div class="chat-head-copy"><h3>دفتر دوتایی ما</h3><p>فاضل ❤️ الهام · <span class="chat-live-status">● آنلاینِ دلبرونه</span></p></div>
+<div class="chat-head-copy"><h3>دفتر دوتایی ما</h3><div class="header-presence-stack" aria-label="وضعیت حضور"><span class="header-presence-row"><i class="header-presence-dot" data-header-presence="فاضل"></i><b>فاضل</b><em data-header-presence-label="فاضل">آفلاین</em></span><span class="header-presence-row"><i class="header-presence-dot" data-header-presence="الهام"></i><b>الهام</b><em data-header-presence-label="الهام">آفلاین</em></span></div></div>
 <div class="chat-head-actions"><button class="mobile-chat-back" id="mobileChatBack" title="بازگشت" type="button">‹</button><span class="chat-lock"><span aria-hidden="true" class="app-icon app-icon-lock"></span> خصوصی</span><button class="chat-mini-btn app-icon-btn" id="chatScrollBottom" title="آخرین پیام" type="button"><span aria-hidden="true" class="app-icon app-icon-down"></span></button><button class="chat-mini-btn chat-menu-btn" id="chatMenuBtn" title="بیشتر" type="button">⋮</button></div>
 </div>
 <div class="shared-author chat-author"><span>الان کیه؟</span><button class="author-btn" data-author="فاضل" type="button"><span class="presence-dot" data-presence="فاضل"></span><span class="author-avatar-mini">F</span><span>فاضل</span><span class="presence-label" data-presence-label="فاضل">آفلاین</span></button><button class="author-btn" data-author="الهام" type="button"><span class="presence-dot" data-presence="الهام"></span><span class="author-avatar-mini elham">E</span><span>الهام</span><span class="presence-label" data-presence-label="الهام">آفلاین</span></button></div>
@@ -1545,7 +1545,7 @@ body.messenger-fullscreen .chat-panel .chat-toy{z-index:2!important;opacity:.42!
   const status=document.getElementById('cloudStatus'), notesBox=document.getElementById('sharedNotes'), note=document.getElementById('nookNote'), saved=document.getElementById('noteSaved');
   const esc=v=>String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
   function setStatus(t,off=false){return;}
-  function setPresence(name,online){document.querySelectorAll('[data-presence="'+name+'"]').forEach(d=>d.classList.toggle('online',!!online));document.querySelectorAll('[data-presence-label="'+name+'"]').forEach(l=>l.textContent=online?'آنلاین':'آفلاین')}
+  function setPresence(name,online){document.querySelectorAll('[data-presence="'+name+'"]').forEach(d=>d.classList.toggle('online',!!online));document.querySelectorAll('[data-presence-label="'+name+'"]').forEach(l=>l.textContent=online?'آنلاین':'آفلاین');document.querySelectorAll('[data-header-presence="'+name+'"]').forEach(d=>d.classList.toggle('online',!!online));document.querySelectorAll('[data-header-presence-label="'+name+'"]').forEach(l=>l.textContent=online?'آنلاین':'آفلاین')}
   function renderPresence(state){const seen={فاضل:false,الهام:false};Object.values(state||{}).forEach(list=>{(list||[]).forEach(p=>{if(p?.author_name==='فاضل')seen.فاضل=true;if(p?.author_name==='الهام')seen.الهام=true})});setPresence('فاضل',seen.فاضل);setPresence('الهام',seen.الهام);const me=seen[author]?'آنلاین':'آفلاین';document.querySelectorAll('.author-btn').forEach(b=>b.classList.toggle('is-self',b.dataset.author===author));return me}
   function setAuthor(v){author=v;localStorage.setItem('fazelElhamAuthor',v);document.querySelectorAll('.author-btn').forEach(b=>b.classList.toggle('active',b.dataset.author===v));}
   document.querySelectorAll('.author-btn').forEach(b=>b.addEventListener('click',()=>setAuthor(b.dataset.author)));
@@ -2215,6 +2215,86 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
 
 </body>
 </html>
+<style id="v16-clean-galaxy-glass">
+/* V16 — no separate presence box; compact presence lives inside the main chat header. */
+#messengerOverlay .chat-author{display:none!important}
+#messengerOverlay .chat-head{
+  background:linear-gradient(135deg,rgba(24,8,45,.80),rgba(49,15,78,.62))!important;
+  border-bottom:1px solid rgba(225,183,255,.18)!important;
+  box-shadow:0 8px 34px rgba(0,0,0,.32),inset 0 1px rgba(255,255,255,.08)!important;
+  backdrop-filter:blur(22px) saturate(135%)!important;-webkit-backdrop-filter:blur(22px) saturate(135%)!important;
+}
+#messengerOverlay .chat-head-copy p{margin-top:3px!important;color:#d9c8e9!important;display:block!important;height:auto!important;white-space:normal!important;overflow:visible!important}
+#messengerOverlay .header-presence-stack{display:flex!important;flex-direction:column!important;gap:1px!important;line-height:1.15!important}
+#messengerOverlay .header-presence-row{display:flex!important;align-items:center!important;gap:5px!important;font-size:8px!important;min-height:11px!important}
+#messengerOverlay .header-presence-row b{font-size:8px!important;font-weight:700!important;color:#f8edfF!important}
+#messengerOverlay .header-presence-row em{font-style:normal!important;font-size:7px!important;color:#aa9bb7!important}
+#messengerOverlay .header-presence-dot{width:6px!important;height:6px!important;border-radius:50%!important;display:inline-block!important;background:#ff6575!important;box-shadow:0 0 0 2px rgba(255,101,117,.10)!important;flex:0 0 6px!important}
+#messengerOverlay .header-presence-dot.online{background:#5dffad!important;box-shadow:0 0 0 2px rgba(93,255,173,.12),0 0 9px rgba(93,255,173,.72)!important;animation:headerOnlinePulse 1.8s ease-in-out infinite}
+@keyframes headerOnlinePulse{50%{transform:scale(1.18);box-shadow:0 0 0 2px rgba(93,255,173,.16),0 0 13px rgba(93,255,173,.9)}}
+
+/* One continuous, premium purple galaxy behind the entire chat. */
+#messengerOverlay .chat-panel{
+  background:
+    radial-gradient(900px 520px at 8% 8%,rgba(255,83,192,.24),transparent 58%),
+    radial-gradient(800px 560px at 92% 16%,rgba(113,75,255,.30),transparent 60%),
+    radial-gradient(700px 600px at 72% 72%,rgba(178,65,255,.18),transparent 62%),
+    radial-gradient(700px 500px at 15% 92%,rgba(77,74,225,.22),transparent 62%),
+    linear-gradient(135deg,#080313 0%,#16062d 32%,#24104b 60%,#0c041c 100%)!important;
+  overflow:hidden!important;
+}
+#messengerOverlay .chat-panel:before{
+  opacity:1!important;
+  background-image:
+    radial-gradient(circle at 7% 14%,rgba(255,255,255,.95) 0 1px,transparent 1.8px),
+    radial-gradient(circle at 17% 43%,rgba(255,197,239,.9) 0 1px,transparent 1.8px),
+    radial-gradient(circle at 29% 20%,rgba(205,191,255,.85) 0 1.2px,transparent 2px),
+    radial-gradient(circle at 42% 67%,rgba(255,255,255,.75) 0 1px,transparent 1.8px),
+    radial-gradient(circle at 57% 31%,rgba(240,211,255,.9) 0 1.3px,transparent 2px),
+    radial-gradient(circle at 69% 78%,rgba(255,185,235,.78) 0 1px,transparent 1.8px),
+    radial-gradient(circle at 82% 28%,rgba(255,255,255,.9) 0 1px,transparent 1.8px),
+    radial-gradient(circle at 94% 58%,rgba(209,192,255,.85) 0 1.2px,transparent 2px),
+    radial-gradient(circle at 33% 91%,rgba(255,170,228,.7) 0 1px,transparent 1.8px),
+    radial-gradient(circle at 76% 9%,rgba(255,255,255,.8) 0 1px,transparent 1.8px);
+  background-size:180px 160px,230px 190px,270px 220px,210px 190px,250px 210px,290px 230px,190px 170px,260px 210px,230px 190px,200px 180px!important;
+  animation:galaxyDrift 28s linear infinite!important;
+}
+#messengerOverlay .chat-panel:after{content:"✦   ♡   ✧      ✦   ♡   ✧"!important;color:rgba(255,194,238,.09)!important;font-size:13px!important;letter-spacing:12px!important;right:4px!important;top:20%!important;pointer-events:none!important}
+@keyframes galaxyDrift{from{transform:translate3d(0,0,0)}50%{transform:translate3d(-8px,5px,0)}to{transform:translate3d(0,0,0)}}
+#messengerOverlay .chat-messages{background:transparent!important}
+
+/* True glass message bubbles. */
+#messengerOverlay .chat-bubble{
+  background:linear-gradient(145deg,rgba(255,255,255,.145),rgba(255,255,255,.055))!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 10px 30px rgba(0,0,0,.20),0 0 22px rgba(166,93,255,.07)!important;
+  backdrop-filter:blur(18px) saturate(145%)!important;-webkit-backdrop-filter:blur(18px) saturate(145%)!important;
+  color:#fff!important;
+}
+#messengerOverlay .chat-bubble-row.mine .chat-bubble{
+  background:linear-gradient(145deg,rgba(222,111,255,.34),rgba(255,80,170,.20))!important;
+  border-color:rgba(245,199,255,.25)!important;
+}
+#messengerOverlay .chat-bubble-row.theirs .chat-bubble{
+  background:linear-gradient(145deg,rgba(255,255,255,.12),rgba(139,103,214,.09))!important;
+  border-color:rgba(255,255,255,.16)!important;
+}
+#messengerOverlay .chat-bubble-text{color:#fff!important;text-shadow:0 1px 8px rgba(0,0,0,.18)!important}
+#messengerOverlay .chat-bubble-meta{color:rgba(255,255,255,.62)!important}
+#messengerOverlay .chat-compose{background:rgba(10,4,22,.60)!important;border-top:1px solid rgba(225,183,255,.14)!important;backdrop-filter:blur(20px)!important;-webkit-backdrop-filter:blur(20px)!important}
+#messengerOverlay .chat-input-wrap{background:rgba(255,255,255,.085)!important;border:1px solid rgba(255,255,255,.17)!important;box-shadow:inset 0 1px rgba(255,255,255,.10),0 8px 24px rgba(0,0,0,.14)!important;backdrop-filter:blur(16px)!important;-webkit-backdrop-filter:blur(16px)!important}
+#messengerOverlay .chat-input-wrap textarea{color:#fff!important}
+#messengerOverlay .chat-input-wrap textarea::placeholder{color:#c8b7d7!important}
+@media(max-width:600px){
+ #messengerOverlay .chat-head{height:64px!important;min-height:64px!important}
+ #messengerOverlay .chat-head-copy p{font-size:inherit!important}
+ #messengerOverlay .header-presence-row{font-size:7.5px!important}
+ #messengerOverlay .header-presence-row b{font-size:7.5px!important}
+ #messengerOverlay .header-presence-row em{font-size:6.5px!important}
+ #messengerOverlay .chat-bubble{backdrop-filter:blur(14px) saturate(135%)!important;-webkit-backdrop-filter:blur(14px) saturate(135%)!important}
+}
+</style>
+
 <style id="v14-galaxy-presence">
 /* V14 — deep purple galaxy + elegant stacked presence card */
 #messengerOverlay .chat-panel{
@@ -2292,3 +2372,21 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
   #messengerOverlay .presence-label{display:block!important}
 }
 </style>
+
+<style id="v17-final-presence-cleanup">
+/* V17 FINAL: remove the legacy standalone presence card completely. */
+#messengerOverlay .chat-author,
+#messengerOverlay .shared-author.chat-author{display:none!important!important;height:0!important;min-height:0!important;max-height:0!important;margin:0!important;padding:0!important;border:0!important;overflow:hidden!important;visibility:hidden!important;pointer-events:none!important}
+/* Keep presence compact inside the real main header. */
+#messengerOverlay .chat-head .header-presence-stack{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:1px!important;margin-top:2px!important}
+#messengerOverlay .chat-head .header-presence-row{display:flex!important;align-items:center!important;gap:5px!important;min-height:10px!important}
+</style>
+<script id="v17-remove-legacy-presence">
+(()=>{
+ const clean=()=>document.querySelectorAll('#messengerOverlay .chat-author').forEach(el=>el.remove());
+ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',clean,{once:true}); else clean();
+ const mo=new MutationObserver(()=>clean());
+ const root=document.getElementById('messengerOverlay');
+ if(root) mo.observe(root,{childList:true,subtree:true});
+})();
+</script>
