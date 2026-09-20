@@ -97,7 +97,7 @@ footer{text-align:center;padding:50px 20px;color:#b89baa;font-size:13px}.ripple{
  .music-box{padding:18px}.music-heart{width:70px}.gift{font-size:80px}.surprise-msg{font-size:16px}
  .game-heart{font-size:62px}.timeline:before{right:12px}.time-item{width:calc(100% - 30px);margin-right:30px!important;margin-left:0!important;margin-bottom:12px}.time-item:nth-child(even){margin-right:30px}
  .nook{min-height:auto}.secret-blank{height:250px}.modal{padding:10px}.modal-card{padding:22px;border-radius:22px}.modal-card h3{font-size:23px}
- .relationship-widget{bottom:12px;left:8px;width:205px;opacity:.96}
+ .relationship-widget{top:178px;bottom:auto;left:50%;transform:translateX(-50%);width:205px;opacity:.96}
  .extra-card{padding:20px;border-radius:22px}.extra-grid{gap:12px}
 }
 @media(prefers-reduced-motion:reduce){
@@ -106,7 +106,7 @@ footer{text-align:center;padding:50px 20px;color:#b89baa;font-size:13px}.ripple{
 }
 
 .love-bot{position:fixed;top:95px;right:20px;width:280px;z-index:950;padding:15px;border-radius:22px;background:linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,80,150,.08));border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(15px);box-shadow:0 20px 50px rgba(0,0,0,.4);animation:botFloat 4s infinite ease-in-out}
-.bot-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}.bot-icon{width:42px;height:42px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,#ff4f98,#9347ff);font-size:24px}.bot-head b{display:block;font-size:15px}.bot-head small{color:#ffb3d0;font-size:11px}.bot-message{min-height:60px;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.8;font-size:13px;color:#ffe1ec;transition:.4s}@keyframes botFloat{50%{transform:translateY(-8px)}}@media(max-width:600px){.love-bot{top:auto;right:10px;bottom:15px;width:220px}}
+.bot-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}.bot-icon{width:42px;height:42px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,#ff4f98,#9347ff);font-size:24px}.bot-head b{display:block;font-size:15px}.bot-head small{color:#ffb3d0;font-size:11px}.bot-message{min-height:60px;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.8;font-size:13px;color:#ffe1ec;transition:.4s}@keyframes botFloat{50%{transform:translateY(-8px)}}@media(max-width:600px){.love-bot{top:76px;right:10px;bottom:auto;width:220px}}
 
 </style>
 </head>
@@ -470,6 +470,11 @@ setInterval(changeBotMessage,5000);
     right:52px;
     width:220px;
   }
+  #loveBot{
+    top:76px !important;
+    right:10px !important;
+    bottom:auto !important;
+  }
 }
 </style>
 
@@ -592,36 +597,6 @@ setInterval(changeBotMessage,5000);
   setInterval(showNotification, 10000);
 })();
 </script>
-
-
-<style id="bot-mobile-top-style">
-@media (max-width: 600px){
-  /* Bot: top-right on phones */
-  #loveBot{
-    top:18px !important;
-    right:14px !important;
-    bottom:auto !important;
-    z-index:9999 !important;
-  }
-
-  /* Message card: stays beside the bot, also at the top */
-  #loveBot .bot-message{
-    top:0 !important;
-    right:52px !important;
-    bottom:auto !important;
-    width:min(220px, calc(100vw - 80px)) !important;
-  }
-
-  /* Relationship/humor widget: move it to the top-left on phones */
-  #relationshipWidget{
-    top:18px !important;
-    left:14px !important;
-    right:auto !important;
-    bottom:auto !important;
-    z-index:9998 !important;
-  }
-}
-</style>
 
 </body>
 </html>
