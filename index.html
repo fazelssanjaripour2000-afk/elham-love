@@ -593,5 +593,35 @@ setInterval(changeBotMessage,5000);
 })();
 </script>
 
+
+<style id="bot-mobile-top-style">
+@media (max-width: 600px){
+  /* Bot: top-right on phones */
+  #loveBot{
+    top:18px !important;
+    right:14px !important;
+    bottom:auto !important;
+    z-index:9999 !important;
+  }
+
+  /* Message card: stays beside the bot, also at the top */
+  #loveBot .bot-message{
+    top:0 !important;
+    right:52px !important;
+    bottom:auto !important;
+    width:min(220px, calc(100vw - 80px)) !important;
+  }
+
+  /* Relationship/humor widget: move it to the top-left on phones */
+  #relationshipWidget{
+    top:18px !important;
+    left:14px !important;
+    right:auto !important;
+    bottom:auto !important;
+    z-index:9998 !important;
+  }
+}
+</style>
+
 </body>
 </html>
