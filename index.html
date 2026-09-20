@@ -97,7 +97,7 @@ footer{text-align:center;padding:50px 20px;color:#b89baa;font-size:13px}.ripple{
  .music-box{padding:18px}.music-heart{width:70px}.gift{font-size:80px}.surprise-msg{font-size:16px}
  .game-heart{font-size:62px}.timeline:before{right:12px}.time-item{width:calc(100% - 30px);margin-right:30px!important;margin-left:0!important;margin-bottom:12px}.time-item:nth-child(even){margin-right:30px}
  .nook{min-height:auto}.secret-blank{height:250px}.modal{padding:10px}.modal-card{padding:22px;border-radius:22px}.modal-card h3{font-size:23px}
- .relationship-widget{top:105px;bottom:auto;left:10px;right:auto;transform:none;width:220px;opacity:.96;z-index:900}
+ .relationship-widget{bottom:12px;left:8px;width:205px;opacity:.96}
  .extra-card{padding:20px;border-radius:22px}.extra-grid{gap:12px}
 }
 @media(prefers-reduced-motion:reduce){
@@ -106,9 +106,36 @@ footer{text-align:center;padding:50px 20px;color:#b89baa;font-size:13px}.ripple{
 }
 
 .love-bot{position:fixed;top:95px;right:20px;width:280px;z-index:950;padding:15px;border-radius:22px;background:linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,80,150,.08));border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(15px);box-shadow:0 20px 50px rgba(0,0,0,.4);animation:botFloat 4s infinite ease-in-out}
-.bot-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}.bot-icon{width:42px;height:42px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,#ff4f98,#9347ff);font-size:24px}.bot-head b{display:block;font-size:15px}.bot-head small{color:#ffb3d0;font-size:11px}.bot-message{min-height:60px;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.8;font-size:13px;color:#ffe1ec;transition:.4s}@keyframes botFloat{50%{transform:translateY(-8px)}}@media(max-width:600px){.love-bot{top:205px;right:10px;bottom:auto;width:220px}}
+.bot-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}.bot-icon{width:42px;height:42px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,#ff4f98,#9347ff);font-size:24px}.bot-head b{display:block;font-size:15px}.bot-head small{color:#ffb3d0;font-size:11px}.bot-message{min-height:60px;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.8;font-size:13px;color:#ffe1ec;transition:.4s}@keyframes botFloat{50%{transform:translateY(-8px)}}@media(max-width:600px){.love-bot{top:auto;right:10px;bottom:15px;width:220px}}
 
 </style>
+
+<style id="timed-letters-style">
+.timed-letters-section{padding-top:55px}
+.timed-letter-box{position:relative;padding:22px;border:1px solid rgba(255,143,186,.2);border-radius:32px;background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,71,145,.045));box-shadow:0 25px 70px rgba(0,0,0,.32);overflow:hidden}
+.timed-letter-box:before{content:"";position:absolute;width:260px;height:260px;right:-100px;top:-120px;border-radius:50%;background:rgba(255,73,151,.13);filter:blur(35px);pointer-events:none}
+.timed-box-head{position:relative;display:flex;align-items:center;justify-content:center;gap:14px;text-align:center;margin-bottom:22px;color:#ffd5e6;font-size:22px}
+.timed-box-head div{display:flex;flex-direction:column;gap:4px}.timed-box-head small{font-size:12px;color:var(--muted);font-weight:400}
+.timed-letter-grid{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.timed-letter-card{position:relative;min-width:0;padding:18px 12px 15px;text-align:center;border:1px solid rgba(255,255,255,.12);border-radius:23px;background:rgba(10,5,15,.55);overflow:hidden;transition:.35s}
+.timed-letter-card.unlocked{border-color:rgba(255,143,186,.38);background:linear-gradient(160deg,rgba(255,105,166,.12),rgba(255,255,255,.06))}
+.timed-envelope{height:74px;width:82px;margin:0 auto 10px;border-radius:14px;display:grid;place-items:center;position:relative;background:linear-gradient(145deg,#321426,#170a19);border:1px solid rgba(255,143,186,.25);box-shadow:inset 0 0 20px rgba(255,80,150,.08)}
+.timed-heart{font-size:27px;filter:drop-shadow(0 4px 10px rgba(255,60,145,.35))}.timed-lock{position:absolute;right:5px;bottom:4px;font-size:16px}
+.timed-letter-card.unlocked .timed-envelope{background:linear-gradient(145deg,#7b2854,#32142c);animation:timedPulse 2.2s ease-in-out infinite}
+.timed-letter-card.unlocked .timed-lock{display:none}
+@keyframes timedPulse{50%{transform:translateY(-3px);box-shadow:0 0 28px rgba(255,73,151,.18)}}
+.timed-number{font-size:11px;color:var(--rose);margin-bottom:5px}.timed-letter-card h3{font-size:14px;line-height:1.7;margin-bottom:4px}.timed-sub{font-size:11px;color:var(--muted);line-height:1.7;min-height:38px}
+.timed-countdown{margin:12px 0 9px;min-height:24px;display:flex;align-items:center;justify-content:center;padding:6px 5px;border-radius:12px;background:rgba(255,255,255,.055);color:#ffd2e3;font-size:11px;line-height:1.5}
+.timed-open{width:100%;border:1px solid rgba(255,143,186,.2);background:rgba(255,255,255,.06);color:#fff;padding:9px 7px;border-radius:12px;font-size:11px;opacity:.45;cursor:not-allowed}
+.timed-letter-card.unlocked .timed-open{opacity:1;cursor:pointer;background:linear-gradient(135deg,rgba(255,93,158,.22),rgba(255,143,186,.1));border-color:rgba(255,143,186,.38)}
+.timed-content{display:none;margin-top:12px}.timed-letter-card.open .timed-content{display:block;animation:letterReveal .55s ease both}
+@keyframes letterReveal{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.timed-paper{padding:15px;border-radius:16px;text-align:right;background:linear-gradient(145deg,#fff7fb,#ffe8f1);color:#5a1938;box-shadow:0 12px 25px rgba(0,0,0,.22)}
+.timed-paper h4{margin-bottom:8px;font-size:13px}.timed-paper p{font-size:11px;line-height:2.1}
+@media(max-width:900px){.timed-letter-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:600px){.timed-letter-box{padding:14px;border-radius:25px}.timed-box-head{font-size:18px}.timed-letter-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.timed-letter-card{padding:14px 9px}.timed-envelope{width:72px;height:65px}.timed-sub{min-height:44px}.timed-letter-card h3{font-size:12px}.timed-countdown{font-size:10px}}
+</style>
+
 </head>
 <body>
 <aside class="relationship-widget" id="relationshipWidget" aria-label="وضعیت رابطه ما"><div class="rw-head"><div class="rw-icon">😂</div><div><h4>وضعیت رابطه ما</h4><div class="rw-status">سیستم کل‌کل و قهر فعال است 😌</div></div></div><div class="rw-text" id="relationshipJoke">رابطه ما: ۵٪ عاشقانه، ۹۵٪ کل‌کل 😂❤️</div><div class="rw-dots" id="relationshipDots"></div></aside>
@@ -116,7 +143,7 @@ footer{text-align:center;padding:50px 20px;color:#b89baa;font-size:13px}.ripple{
 
 <div class="intro" id="intro"><div class="intro-box"><div class="intro-line">یه نفر هست...</div><div class="intro-line">که برای فاضل...</div><span class="intro-heart">❤️</span><div class="intro-line">از همه مهم‌تره...</div><div class="intro-line">دردونه کوشولوی فاضل ❤️</div></div></div>
 
-<header class="topbar" id="topbar"><nav class="nav"><div class="logo">Fazel <span>♥</span> Elham</div><button class="menuBtn" id="menuBtn" aria-label="منو">☰</button><div class="navlinks"><a href="#home">خانه</a><a href="#story">داستان ما</a><a href="#calendar">تقویم عشق</a><a href="#memories">خاطرات</a><a href="#letter">نامه</a><a href="#surprise">سورپرایز</a><a href="#music">موزیک</a><a href="#nook">گوشه دنج ما</a></div></nav></header>
+<header class="topbar" id="topbar"><nav class="nav"><div class="logo">Fazel <span>♥</span> Elham</div><button class="menuBtn" id="menuBtn" aria-label="منو">☰</button><div class="navlinks"><a href="#home">خانه</a><a href="#story">داستان ما</a><a href="#calendar">تقویم عشق</a><a href="#memories">خاطرات</a><a href="#letter">نامه</a><a href="#timedLetters">نامه‌های زمان‌دار 💌</a><a href="#surprise">سورپرایز</a><a href="#music">موزیک</a><a href="#nook">گوشه دنج ما</a></div></nav></header>
 
 
 <div class="love-bot" id="loveBot">
@@ -137,6 +164,75 @@ footer{text-align:center;padding:50px 20px;color:#b89baa;font-size:13px}.ripple{
 <section id="memories"><div class="section-title"><h2>اتاق خاطره‌ها 📸</h2><p>اینجا جای عکس‌ها و لحظه‌هایی است که دلمون نمی‌خواد فراموش بشن.</p></div><div class="memory-grid"><div class="memory-card"><span>اولین خاطره‌ای که دلم می‌خواد همیشه بمونه ❤️</span></div><div class="memory-card"><span>یه لبخند از تو = یه دنیا برای من ✨</span></div><div class="memory-card"><span>این قسمت بعداً با عکس‌های خودمون کامل میشه 📷</span></div><div class="memory-card"><span>لحظه‌های کوچیک، خاطره‌های بزرگ 💗</span></div><div class="memory-card"><span>کنار تو حتی روز معمولی هم خاصه 🌸</span></div><div class="memory-card"><span>ادامه‌ی داستان هنوز نوشته نشده...</span></div></div></section>
 
 <section id="letter"><div class="section-title"><h2>یه نامه برای تو 💌</h2><p>روی پاکت بزن.</p></div><div class="letter"><div class="envelope" id="envelope"><div class="paper"><h3 style="margin-bottom:12px">الهام جان ❤️</h3><p style="line-height:2">شاید نتونم همیشه همه‌ی چیزایی که توی دلم هست رو با کلمه بگم؛ ولی یه چیز رو مطمئنم: بودن تو برای من یه اتفاق معمولی نیست. تو شدی یکی از قشنگ‌ترین قسمت‌های زندگی من. این نامه هم فقط یه یادآوری کوچیکه که بدونی... دوستت دارم. 🥹❤️</p></div><div class="flap"></div><div class="seal">❤️</div></div></div></section>
+
+
+<section id="timedLetters" class="timed-letters-section">
+  <div class="section-title"><h2>نامه‌های زمان‌دار 💌</h2><p>ده نامه برای ده لحظه؛ از چند ساعت آینده تا روز بیستم. هر نامه وقتی زمانش برسد خودش باز می‌شود. ❤️</p></div>
+  <div class="timed-letter-box">
+    <div class="timed-box-head"><span>🔐</span><div><b>ده نامه برای دردونه‌ی فاضل</b><small>هر قفل، یک حرفِ نگفته دارد...</small></div><span>💗</span></div>
+    <div class="timed-letter-grid"><article class="timed-letter-card" data-delay="21600000">
+      <div class="timed-envelope"><span class="timed-heart">❤️</span><span class="timed-lock">🔒</span></div>
+      <div class="timed-number">نامه 1</div><h3>نامه اول</h3><p class="timed-sub">برای وقتی که دلت یه ذره محبت می‌خواد ❤️</p>
+      <div class="timed-countdown" aria-live="polite">در حال محاسبه...</div>
+      <button class="timed-open" type="button">باز کردن نامه 💌</button>
+      <div class="timed-content"><div class="timed-paper"><h4>نامه اول</h4><p>الهام جان، اگر این نامه رو باز کردی یعنی چند ساعت از شروع سفر کوچولومون گذشته. فقط اومدم یادت بندازم که حتی توی ساده‌ترین لحظه‌های روز هم یه نفر هست که با فکر کردن به تو لبخند می‌زنه. دوست داشتنت برای من یه کارِ مناسبتی نیست؛ یه حسِ همیشگیه. پس امروز فقط یه کار کن: لبخند بزن و بدون که یه دل، خیلی قشنگ، هواتو داره. ❤️</p></div></div>
+    </article><article class="timed-letter-card" data-delay="172800000">
+      <div class="timed-envelope"><span class="timed-heart">❤️</span><span class="timed-lock">🔒</span></div>
+      <div class="timed-number">نامه 2</div><h3>نامه دوم</h3><p class="timed-sub">برای وقتی که دلت برام تنگ شده 🥹</p>
+      <div class="timed-countdown" aria-live="polite">در حال محاسبه...</div>
+      <button class="timed-open" type="button">باز کردن نامه 💌</button>
+      <div class="timed-content"><div class="timed-paper"><h4>نامه دوم</h4><p>دخمل من، اگر دلت برام تنگ شده، بدون که این حس فقط مال تو نیست. بعضی وقت‌ها وسط شلوغی روز، بی‌هوا دلم می‌خواد فقط کنارت باشم و هیچ کاری نکنیم؛ فقط تو باشی و من و یه عالمه آرامش. فاصله هرچقدر هم باشه، نمی‌تونه از قشنگیِ بودن تو توی دل من کم کنه. 🤍</p></div></div>
+    </article><article class="timed-letter-card" data-delay="345600000">
+      <div class="timed-envelope"><span class="timed-heart">❤️</span><span class="timed-lock">🔒</span></div>
+      <div class="timed-number">نامه 3</div><h3>نامه سوم</h3><p class="timed-sub">برای لبخند قشنگت 🌸</p>
+      <div class="timed-countdown" aria-live="polite">در حال محاسبه...</div>
+      <button class="timed-open" type="button">باز کردن نامه 💌</button>
+      <div class="timed-content"><div class="timed-paper"><h4>نامه سوم</h4><p>می‌دونی یکی از چیزهایی که خیلی دوست دارم چیه؟ لبخندت. همون لبخندی که شاید برای خودت یه چیز ساده باشه، ولی برای من می‌تونه کل حال یه روز رو عوض کنه. پس این نامه یه مأموریت داره: همین الان یه لبخند کوچولو بزن. آره، همون که من دوستش دارم. ❤️</p></div></div>
+    </article><article class="timed-letter-card" data-delay="518400000">
+      <div class="timed-envelope"><span class="timed-heart">❤️</span><span class="timed-lock">🔒</span></div>
+      <div class="timed-number">نامه 4</div><h3>نامه چهارم</h3><p class="timed-sub">برای تمام شیطنت‌هات 😏</p>
+      <div class="timed-countdown" aria-live="polite">در حال محاسبه...</div>
+      <button class="timed-open" type="button">باز کردن نامه 💌</button>
+      <div class="timed-content"><div class="timed-paper"><h4>نامه چهارم</h4><p>خانوم کوچولوی من، اعتراف می‌کنم همه‌چی توی تو آروم و معصوم نیست! 😂 شیطنت‌هات، لجبازی‌هات، اون اخم‌های الکی و حتی کل‌کل‌هات هم جزو چیزهایی شدن که نمی‌تونم ازشون دل بکنم. خلاصه اینکه من کل پکیج الهام رو دوست دارم؛ نسخه‌ی شیطونش رو هم با افتخار قبول دارم. 😌❤️</p></div></div>
+    </article><article class="timed-letter-card" data-delay="691200000">
+      <div class="timed-envelope"><span class="timed-heart">❤️</span><span class="timed-lock">🔒</span></div>
+      <div class="timed-number">نامه 5</div><h3>نامه پنجم</h3><p class="timed-sub">برای روزی که خسته‌ای 🌙</p>
+      <div class="timed-countdown" aria-live="polite">در حال محاسبه...</div>
+      <button class="timed-open" type="button">باز کردن نامه 💌</button>
+      <div class="timed-content"><div class="timed-paper"><h4>نامه پنجم</h4><p>اگر امروز خسته‌ای، لازم نیست همیشه قوی باشی. لازم نیست همه‌چیز رو درست کنی و لازم نیست برای همه لبخند بزنی. فقط یه کم نفس بکش و استراحت کن. کاش می‌شد همین الان کنارت بشینم، سرت رو بذاری کنارم و چند دقیقه همه‌چیز رو فراموش کنی. تا وقتی من هستم، قرار نیست همیشه تنهایی همه‌چیز رو تحمل کنی. 🤍</p></div></div>
+    </article><article class="timed-letter-card" data-delay="864000000">
+      <div class="timed-envelope"><span class="timed-heart">❤️</span><span class="timed-lock">🔒</span></div>
+      <div class="timed-number">نامه 6</div><h3>نامه ششم</h3><p class="timed-sub">برای خاطره‌هایی که ساختیم 📸</p>
+      <div class="timed-countdown" aria-live="polite">در حال محاسبه...</div>
+      <button class="timed-open" type="button">باز کردن نامه 💌</button>
+      <div class="timed-content"><div class="timed-paper"><h4>نامه ششم</h4><p>هرچی بیشتر از کنار هم بودنمون می‌گذره، بیشتر می‌فهمم که قشنگ‌ترین چیزها همیشه اتفاق‌های بزرگ نیستن. بعضی وقت‌ها یه حرف ساده، یه خنده بی‌دلیل، یه نگاه یا یه لحظه معمولی، تبدیل می‌شه به خاطره‌ای که دلمون نمی‌خواد فراموشش کنیم. من دلم می‌خواد از ما هزاران خاطره‌ی کوچیک بسازم؛ چون کنار تو حتی معمولی‌ترین روزها هم ارزش نگه داشتن دارن. 💕</p></div></div>
+    </article><article class="timed-letter-card" data-delay="1036800000">
+      <div class="timed-envelope"><span class="timed-heart">❤️</span><span class="timed-lock">🔒</span></div>
+      <div class="timed-number">نامه 7</div><h3>نامه هفتم</h3><p class="timed-sub">برای وقتی که ازم ناراحتی 🥺</p>
+      <div class="timed-countdown" aria-live="polite">در حال محاسبه...</div>
+      <button class="timed-open" type="button">باز کردن نامه 💌</button>
+      <div class="timed-content"><div class="timed-paper"><h4>نامه هفتم</h4><p>اگر یه روز ازم ناراحت شدی، قبل از هر چیزی بدون که ناراحتی تو برای من بی‌اهمیت نیست. شاید همیشه بلد نباشم درست رفتار کنم یا درست حرف بزنم، اما احساسم نسبت به تو چیزی نیست که با یک دلخوری عوض بشه. بیا هرچی هست بگیم، غر بزنیم، حتی کمی لجبازی کنیم، ولی آخرش دوباره برگردیم سمت هم. چون من تو رو برای روزهای راحت نمی‌خوام؛ برای همه‌ی روزهات می‌خوام. ❤️</p></div></div>
+    </article><article class="timed-letter-card" data-delay="1209600000">
+      <div class="timed-envelope"><span class="timed-heart">❤️</span><span class="timed-lock">🔒</span></div>
+      <div class="timed-number">نامه 8</div><h3>نامه هشتم</h3><p class="timed-sub">برای شب‌هایی که دلت آرامش می‌خواهد 🌙</p>
+      <div class="timed-countdown" aria-live="polite">در حال محاسبه...</div>
+      <button class="timed-open" type="button">باز کردن نامه 💌</button>
+      <div class="timed-content"><div class="timed-paper"><h4>نامه هشتم</h4><p>شب بخیر، دخترِ دوست‌داشتنی من. اگر امشب ذهنت شلوغه، همه‌ی فکرها رو بذار برای فردا. امشب فقط به این فکر کن که یه نفر هست که از ته دل خوشحاله که تو توی زندگیشه. چشمهات رو ببند، یه نفس عمیق بکش و بذار دلت آروم بشه. امیدوارم خواب‌هات به اندازه‌ی خودت قشنگ باشن. 🌙💗</p></div></div>
+    </article><article class="timed-letter-card" data-delay="1468800000">
+      <div class="timed-envelope"><span class="timed-heart">❤️</span><span class="timed-lock">🔒</span></div>
+      <div class="timed-number">نامه 9</div><h3>نامه نهم</h3><p class="timed-sub">برای اینکه یادت نره چقدر عزیزی 💖</p>
+      <div class="timed-countdown" aria-live="polite">در حال محاسبه...</div>
+      <button class="timed-open" type="button">باز کردن نامه 💌</button>
+      <div class="timed-content"><div class="timed-paper"><h4>نامه نهم</h4><p>الهام جان، شاید بعضی وقت‌ها گفتنِ «دوستت دارم» دیگه نتونه اندازه‌ی حس من رو توضیح بده. چون تو برای من فقط یک اسم یا یک آدم دوست‌داشتنی نیستی؛ تو بخشی از خاطره‌ها، لبخندها و فکرهای قشنگ روزهامی. اگر یه روز شک کردی که چقدر برام مهمی، همین نامه رو یادت بیار: تو خیلی بیشتر از چیزی که فکر می‌کنی برای من عزیزی. ❤️</p></div></div>
+    </article><article class="timed-letter-card" data-delay="1728000000">
+      <div class="timed-envelope"><span class="timed-heart">❤️</span><span class="timed-lock">🔒</span></div>
+      <div class="timed-number">نامه 10</div><h3>نامه دهم</h3><p class="timed-sub">برای بیستمین روز؛ از طرف کسی که هنوز انتخابت می‌کند ♾️</p>
+      <div class="timed-countdown" aria-live="polite">در حال محاسبه...</div>
+      <button class="timed-open" type="button">باز کردن نامه 💌</button>
+      <div class="timed-content"><div class="timed-paper"><h4>نامه دهم</h4><p>رسیدیم به نامه‌ی آخر، ولی نه به آخر داستان. بیست روز گذشت و اگر قرار بود هر روز فقط یک دلیل برای دوست داشتنت پیدا کنم، باز هم برای روزهای بعد دلیل کم نمی‌آوردم. من نمی‌خوام این نامه پایان چیزی باشه؛ می‌خوام یه شروع کوچیک برای تمام نامه‌هایی باشه که شاید هیچ‌وقت روی کاغذ نیان، ولی توی دلم نوشته می‌شن. ممنون که توی داستان منی. اگر دوباره از اول شروع می‌کردم، باز هم دلم می‌خواست به تو برسم. دوستت دارم، دردونه‌ی کوچولوی فاضل. ❤️♾️</p></div></div>
+    </article></div>
+  </div>
+</section>
 
 <section id="music"><div class="section-title"><h2>Music for you 🎵</h2><p>موزیکی که با تو قشنگ‌تر میشه.</p></div><div class="card music-box"><button class="music-heart" id="musicPlay"><span>♪</span></button><div><div class="music-title">music for you</div><small style="color:var(--muted)">فایل music.mp3 را کنار index.html قرار بده.</small></div><audio id="audio" loop src="music.mp3"></audio></div></section>
 
@@ -470,11 +566,6 @@ setInterval(changeBotMessage,5000);
     right:52px;
     width:220px;
   }
-  #loveBot{
-    top:205px !important;
-    right:10px !important;
-    bottom:auto !important;
-  }
 }
 </style>
 
@@ -595,6 +686,57 @@ setInterval(changeBotMessage,5000);
 
   // Every 10 seconds, with all previous timers safely cancelled.
   setInterval(showNotification, 10000);
+})();
+</script>
+
+
+<script id="timed-letters-script">
+(function(){
+  const root=document.getElementById("timedLetters");
+  if(!root)return;
+  const cards=[...root.querySelectorAll(".timed-letter-card")];
+  const key="fazel_elham_timed_letters_start_v1";
+  let start=Number(localStorage.getItem(key));
+  if(!Number.isFinite(start)||start<=0){start=Date.now();localStorage.setItem(key,String(start));}
+  const fa=n=>new Intl.NumberFormat("fa-IR").format(n);
+  function remain(ms){
+    if(ms<=0)return "نامه آماده‌ست! ❤️";
+    let s=Math.floor(ms/1000),d=Math.floor(s/86400);s%=86400;
+    let h=Math.floor(s/3600);s%=3600;let m=Math.floor(s/60);s%=60;
+    const parts=[];
+    if(d)parts.push(fa(d)+" روز");
+    if(h||d)parts.push(fa(h)+" ساعت");
+    if(m||h||d)parts.push(fa(m)+" دقیقه");
+    parts.push(fa(s)+" ثانیه");
+    return parts.join(" و ");
+  }
+  function update(){
+    const now=Date.now();
+    cards.forEach(card=>{
+      const delay=Number(card.dataset.delay)||0;
+      const left=start+delay-now;
+      const count=card.querySelector(".timed-countdown");
+      const button=card.querySelector(".timed-open");
+      if(left<=0){
+        card.classList.add("unlocked");
+        count.textContent="🔓 نامه باز شده؛ وقت خوندنه ❤️";
+        button.disabled=false;
+        button.textContent="باز کردن نامه 💌";
+      }else{
+        card.classList.remove("unlocked","open");
+        button.disabled=true;
+        count.textContent="🔒 "+remain(left);
+      }
+    });
+  }
+  cards.forEach(card=>{
+    card.querySelector(".timed-open").addEventListener("click",()=>{
+      if(!card.classList.contains("unlocked"))return;
+      card.classList.toggle("open");
+      if(card.classList.contains("open")) card.scrollIntoView({behavior:"smooth",block:"center"});
+    });
+  });
+  update();setInterval(update,1000);
 })();
 </script>
 
