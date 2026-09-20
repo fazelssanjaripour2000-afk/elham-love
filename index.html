@@ -272,16 +272,6 @@ main>section.hero.active-section{display:grid!important;align-content:center;jus
 .ai-chat{display:flex;flex-direction:column;gap:12px}.ai-messages{min-height:300px;max-height:52vh;overflow:auto;padding:14px;border-radius:20px;background:rgba(0,0,0,.16);border:1px solid rgba(255,255,255,.08)}.ai-msg{max-width:88%;padding:12px 14px;border-radius:18px;margin:8px 0;line-height:2;font-size:13px;white-space:pre-wrap}.ai-msg.user{margin-right:auto;background:rgba(255,95,165,.13);border:1px solid rgba(255,95,165,.18)}.ai-msg.bot{margin-left:auto;background:rgba(125,90,180,.12);border:1px solid rgba(255,255,255,.1)}.ai-msg .ai-label{display:block;font-size:10px;color:#a98d9d;margin-bottom:4px}.ai-compose{display:flex;gap:10px;align-items:flex-end}.ai-compose textarea{flex:1;min-height:74px;resize:vertical}.ai-compose button{white-space:nowrap}.ai-status{font-size:10px;color:#a98d9d}.ai-status.error{color:#ff9aaa}.ai-quick{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px}.ai-quick button{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.045);color:#fff;border-radius:14px;padding:8px 11px;cursor:pointer;font-family:inherit;font-size:11px}.ai-quick button:hover{background:rgba(255,80,150,.12);transform:translateY(-1px)}.ai-note{font-size:10px;color:#8f7786;line-height:1.8;margin:0}
 @media(max-width:700px){.ai-messages{min-height:260px;max-height:48vh}.ai-compose{flex-direction:column}.ai-compose button{width:100%}.ai-msg{max-width:94%}}
 </style>
-
-<style id="chat-premium-v3">
-.chat-head{position:relative}.chat-people{display:flex;align-items:center;gap:7px;margin-top:4px;flex-wrap:wrap}.chat-person{display:inline-flex;align-items:center;gap:5px;font-size:9px;color:#d8bfcc;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);padding:3px 7px;border-radius:999px}.presence-dot{width:7px;height:7px;border-radius:50%;background:#ff496c;box-shadow:0 0 8px rgba(255,73,108,.35);transition:.25s}.presence-dot.online{background:#5eea98;box-shadow:0 0 10px rgba(94,234,152,.65)}
-.chat-typing{min-height:0;height:0;opacity:0;overflow:hidden;display:flex!important;align-items:center;gap:6px;margin:0 13px!important;padding:0!important;color:#ffb9d5!important;transition:.25s}.chat-typing.show{height:28px;opacity:1}.chat-typing b{font-size:10px;font-weight:600}.chat-typing span{width:4px;height:4px;border-radius:50%;background:#ff83b4;animation:chatDots 1s infinite}.chat-typing span:nth-child(2){animation-delay:.15s}.chat-typing span:nth-child(3){animation-delay:.3s}
-.chat-bubble-row.mine{justify-content:flex-start!important}.chat-bubble-row.theirs{justify-content:flex-end!important}.chat-bubble-row.mine .chat-bubble{border-radius:18px 18px 18px 5px}.chat-bubble-row.theirs .chat-bubble{border-radius:18px 18px 5px 18px}
-.chat-bubble{position:relative;cursor:pointer}.chat-bubble:hover{transform:translateY(-1px);filter:brightness(1.06)}
-.chat-msg-menu{position:fixed;z-index:3000;display:flex;gap:5px;padding:7px;border:1px solid rgba(255,255,255,.13);border-radius:15px;background:rgba(19,8,23,.96);backdrop-filter:blur(18px);box-shadow:0 18px 55px rgba(0,0,0,.4)}.chat-msg-menu button{border:0;background:rgba(255,255,255,.06);color:#ffeaf2;border-radius:10px;padding:8px 10px;font-family:inherit;font-size:11px;cursor:pointer}.chat-msg-menu button:hover{background:rgba(255,80,150,.16)}
-.chat-media-btn{display:inline-flex!important;align-items:center;gap:6px;padding:7px 10px!important;border:1px solid rgba(255,255,255,.08)!important;border-radius:12px!important;background:rgba(255,255,255,.035)!important;color:#dcb7ca!important;cursor:pointer}.chat-media-btn:hover{background:rgba(255,80,150,.10)!important}.chat-media-drawer{display:none;margin:8px 12px 0;padding:12px;border:1px solid rgba(255,255,255,.08);border-radius:18px;background:rgba(255,255,255,.025)}.chat-media-drawer.open{display:block}.chat-media-title{font-size:11px;color:#ffd5e4;margin-bottom:8px}.chat-media-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.chat-media-item{min-height:58px;border-radius:12px;padding:8px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07);font-size:10px;color:#d9c2cc;overflow:hidden}.chat-media-item b{display:block;color:#fff;margin-bottom:3px}.chat-media-empty{font-size:10px;color:#806777;padding:7px}
-.chat-persons-bar{display:flex;justify-content:center;gap:8px;padding:7px 10px 2px}.chat-persons-bar .chat-person{font-size:9px}.chat-persons-bar .presence-dot{width:6px;height:6px}
-</style>
 </head>
 <body>
 <aside class="relationship-widget" id="relationshipWidget" aria-label="وضعیت رابطه ما"><div class="rw-head"><div class="rw-icon">😂</div><div><h4>وضعیت رابطه ما</h4><div class="rw-status">سیستم کل‌کل و قهر فعال است 😌</div></div></div><div class="rw-text" id="relationshipJoke">رابطه ما: ۵٪ عاشقانه، ۹۵٪ کل‌کل 😂❤️</div><div class="rw-dots" id="relationshipDots"></div></aside>
@@ -400,16 +390,14 @@ main>section.hero.active-section{display:grid!important;align-content:center;jus
   <div class="nook-panels">
     <div class="nook-panel active chat-panel" data-panel="notes">
   <div class="chat-head">
-    <div class="chat-avatar-wrap"><div class="chat-avatar">❤️</div><span class="chat-online" id="chatMainOnline"></span></div>
-    <div class="chat-head-copy"><h3>دفتر دوتایی ما</h3><div class="chat-people"><span class="chat-person"><i class="presence-dot" id="presenceFazel"></i>فاضل</span><span class="chat-person"><i class="presence-dot" id="presenceElham"></i>الهام</span></div></div>
-    <div class="chat-head-actions"><button type="button" class="chat-media-btn" id="chatMediaBtn" title="رسانه‌های ما">❤️ رسانه‌ها</button><span class="chat-lock"><span class="app-icon app-icon-lock" aria-hidden="true"></span> خصوصی</span><button type="button" class="chat-mini-btn app-icon-btn" id="chatScrollBottom" title="رفتن به آخرین پیام"><span class="app-icon app-icon-down" aria-hidden="true"></span></button></div>
+    <div class="chat-avatar-wrap"><div class="chat-avatar">❤️</div><span class="chat-online"></span></div>
+    <div class="chat-head-copy"><h3>دفتر دوتایی ما</h3><p>فاضل ❤️ الهام · فقط برای خودمون</p></div>
+    <div class="chat-head-actions"><span class="chat-lock"><span class="app-icon app-icon-lock" aria-hidden="true"></span> خصوصی</span><button type="button" class="chat-mini-btn app-icon-btn" id="chatScrollBottom" title="رفتن به آخرین پیام"><span class="app-icon app-icon-down" aria-hidden="true"></span></button></div>
   </div>
-  <div class="chat-persons-bar"><span class="chat-person"><i class="presence-dot" id="presenceFazel2"></i> فاضل · <b id="fazelStatusText">آفلاین</b></span><span class="chat-person"><i class="presence-dot" id="presenceElham2"></i> الهام · <b id="elhamStatusText">آفلاین</b></span></div>
   <div class="shared-author chat-author"><span>الان کیه؟</span><button type="button" class="author-btn" data-author="فاضل">👨🏻 فاضل</button><button type="button" class="author-btn" data-author="الهام">👩🏻 الهام</button><span id="cloudStatus" class="cloud-status">☁️ در حال اتصال...</span></div>
   <div class="chat-day">امروز ❤️</div>
   <div id="chatTyping" class="chat-typing" aria-live="polite"><span></span><span></span><span></span><b>در حال نوشتن...</b></div>
   <div id="sharedNotes" class="shared-notes chat-messages"><div class="empty-notes">هنوز پیامی نیست... اولین پیام رو تو بفرست 💌</div></div>
-  <div id="chatMediaDrawer" class="chat-media-drawer"><div class="chat-media-title">❤️ رسانه‌های ارسال‌شده‌ی فاضل و الهام</div><div id="chatMediaGrid" class="chat-media-grid"><div class="chat-media-empty">هنوز رسانه‌ای نداریم.</div></div></div>
   <div class="chat-reactions" id="chatReactions"><button type="button" data-emoji="❤️">❤️</button><button type="button" data-emoji="😘">😘</button><button type="button" data-emoji="😂">😂</button><button type="button" data-emoji="🥹">🥹</button><button type="button" data-emoji="🔥">🔥</button><button type="button" data-emoji="💋">💋</button></div>
   <div class="chat-compose">
     <button type="button" class="chat-icon-btn" id="chatEmojiBtn" title="ایموجی"><span class="app-icon app-icon-smile" aria-hidden="true"></span></button>
@@ -1027,99 +1015,59 @@ setInterval(changeBotMessage,5000);
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script id="chat-sync-v2">
+<script>
 (function(){
   const SUPABASE_URL='https://evdkszuroxabkbedqkvs.supabase.co';
-  const SUPABASE_KEY='sb_publishable_tFJD3yr__Ju7ZitA0u4kBQ_f9PkaVGW';
+  const SUPABASE_KEY='sb_publishable_tFJD3yr__Ju7ZitA0u4kBQ_f9PkaVGw';
+  if(!window.supabase?.createClient) return;
+  const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
   const ROOM='11111111-1111-1111-1111-111111111111';
-  const CACHE_KEY='fazel_elham_chat_cache_v4';
-  const db=window.supabase?.createClient ? window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}}) : null;
+  let currentUser=null;
+  let author=localStorage.getItem('fazelElhamAuthor')||'فاضل';
   const status=document.getElementById('cloudStatus'), notesBox=document.getElementById('sharedNotes'), note=document.getElementById('nookNote'), saved=document.getElementById('noteSaved');
-  let currentUser=null, author=localStorage.getItem('fazelElhamAuthor')||'فاضل', liveChannel=null, messagesChannel=null, typingTimer=null, rowsCache=[];
   const esc=v=>String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
-  const chatTime=v=>{try{return new Date(v).toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'})}catch{return ''}};
-  function setStatus(t,offline=false){if(status){status.textContent=t;status.classList.toggle('offline',offline)}}
-  function setPresence(name,on){['presence'+name,'presence'+name+'2'].forEach(id=>document.getElementById(id)?.classList.toggle('online',!!on));const el=document.getElementById(name==='Fazel'?'fazelStatusText':'elhamStatusText');if(el)el.textContent=on?'آنلاین':'آفلاین'}
-  // Your own status is local and immediate. The other person's status is only green when Realtime actually reports them online.
-  function setOwnOnline(){setPresence(author==='فاضل'?'Fazel':'Elham',true)}
-  function setOtherOffline(){setPresence(author==='فاضل'?'Elham':'Fazel',false)}
-  function cacheRows(rows){try{localStorage.setItem(CACHE_KEY,JSON.stringify((rows||[]).slice(-500)))}catch{}}
-  function getCache(){try{const x=JSON.parse(localStorage.getItem(CACHE_KEY)||'[]');return Array.isArray(x)?x:[]}catch{return[]}}
-  function renderMedia(rows){const grid=document.getElementById('chatMediaGrid');if(!grid)return;const media=(rows||[]).filter(r=>/^(📎|🎙️)/.test(String(r.content||'')));grid.innerHTML=media.length?media.slice(-50).reverse().map(r=>`<div class="chat-media-item"><b>${esc(r.author_name)}</b><span>${esc(r.content)}</span><small> · ${esc(chatTime(r.created_at))}</small></div>`).join(''):'<div class="chat-media-empty">هنوز رسانه‌ای ارسال نشده ❤️</div>'}
+  function setStatus(t,off=false){if(!status)return;status.textContent=t;status.classList.toggle('offline',off)}
+  function setAuthor(v){author=v;localStorage.setItem('fazelElhamAuthor',v);document.querySelectorAll('.author-btn').forEach(b=>b.classList.toggle('active',b.dataset.author===v));}
+  document.querySelectorAll('.author-btn').forEach(b=>b.addEventListener('click',()=>setAuthor(b.dataset.author)));
+  setAuthor(author);
+  const reactionKey='fazelElhamChatReactions_v1';
+  let reactions={}; try{reactions=JSON.parse(localStorage.getItem(reactionKey)||'{}')||{}}catch(e){}
+  const saveReactions=()=>localStorage.setItem(reactionKey,JSON.stringify(reactions));
+  const chatTime=v=>new Date(v).toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'});
   function renderNotes(rows){
-    rowsCache=(rows||[]).sort((a,b)=>new Date(a.created_at)-new Date(b.created_at));
     if(!notesBox)return;
-    if(!rowsCache.length){notesBox.innerHTML='<div class="empty-notes">هنوز پیامی نیست... اولین پیام رو تو بفرست 💌</div>';renderMedia([]);return;}
-    notesBox.innerHTML=rowsCache.map(r=>{
-      const mine=String(r.author_name||'')===author;
-      return `<div class="chat-bubble-row ${mine?'mine':'theirs'}" data-id="${esc(r.id||'')}"><article class="chat-bubble" data-owner="${esc(r.author_name)}"><div class="chat-bubble-name">${esc(r.author_name)}</div><div class="chat-bubble-text">${esc(r.content)}</div><div class="chat-bubble-meta"><span>${esc(chatTime(r.created_at))}</span><span class="chat-ticks">✓✓</span></div></article></div>`
+    if(!rows.length){notesBox.innerHTML='<div class="empty-notes">هنوز پیامی نیست... اولین پیام رو تو بفرست 💌</div>';return;}
+    notesBox.innerHTML=rows.map(r=>{
+      const mine=!String(r.author_name||'').includes('الهام');
+      const reaction=reactions[r.id]||'';
+      const cls=mine?'mine':'theirs';
+      return `<div class="chat-bubble-row ${cls}" data-id="${esc(r.id)}"><article class="chat-bubble">
+        <div class="chat-bubble-name">${esc(r.author_name)}</div>
+        <div class="chat-bubble-text">${esc(r.content)}</div>
+        <div class="chat-bubble-meta"><span>${esc(chatTime(r.created_at))}</span><span class="chat-ticks">✓✓</span><button class="chat-delete" data-id="${esc(r.id)}">${mine?'حذف':''}</button></div>
+        ${reaction?`<div class="chat-reaction-row"><button class="chat-react" data-react-id="${esc(r.id)}">${esc(reaction)} 1</button></div>`:''}
+      </article></div>`;
     }).join('');
-    notesBox.scrollTop=notesBox.scrollHeight; renderMedia(rowsCache); cacheRows(rowsCache);
-    notesBox.querySelectorAll('.chat-bubble').forEach(article=>article.addEventListener('click',()=>{
-      const row=rowsCache.find(x=>String(x.id)===article.closest('.chat-bubble-row')?.dataset.id); if(!row||String(row.author_name)!==author)return;
-      const choice=prompt('برای پیام چه کاری می‌خوای؟\n1 = ویرایش\n2 = حذف','1');
-      if(choice==='1') editMessage(row); else if(choice==='2') deleteMessage(row);
-    }));
+    notesBox.querySelectorAll('.chat-delete').forEach(b=>b.addEventListener('click',async()=>{if(!b.dataset.id)return;const {error}=await db.from('love_notes').delete().eq('id',b.dataset.id);if(error)toast('حذف نشد؛ دوباره امتحان کن 🥹')}));
+    notesBox.querySelectorAll('.chat-react').forEach(b=>b.addEventListener('click',()=>{delete reactions[b.dataset.reactId];saveReactions();renderNotes(rows)}));
+    notesBox.querySelectorAll('.chat-bubble').forEach(b=>b.addEventListener('dblclick',()=>{const id=b.closest('.chat-bubble-row')?.dataset.id;if(!id)return;reactions[id]=reactions[id]?'': '❤️';saveReactions();renderNotes(rows)}));
+    notesBox.scrollTop=notesBox.scrollHeight;
   }
-  async function editMessage(row){if(!db||!currentUser)return;const next=prompt('متن جدید پیام:',String(row.content||''));if(next===null)return;const value=next.trim();if(!value)return;const {error}=await db.from('love_notes').update({content:value}).eq('id',row.id).eq('author_id',currentUser.id);if(error){toast('ویرایش نشد؛ اتصال سرور در دسترس نیست ❤️')}else loadNotes()}
-  async function deleteMessage(row){if(!db||!currentUser||!confirm('این پیام حذف شود؟'))return;const {error}=await db.from('love_notes').delete().eq('id',row.id).eq('author_id',currentUser.id);if(error){toast('حذف نشد؛ اتصال سرور در دسترس نیست ❤️')}else loadNotes()}
-  async function loadNotes(){
-    if(!db){const c=getCache();if(c.length)renderNotes(c);setStatus('📦 حالت آفلاین؛ پیام‌های ذخیره‌شده حفظ شده‌اند',true);return false}
-    try{
-      const {data,error}=await db.from('love_notes').select('*').eq('room_id',ROOM).order('created_at',{ascending:true}).limit(500);
-      if(error)throw error;
-      renderNotes(data||[]); setStatus('☁️ دفتر آنلاین است'); return true;
-    }catch(error){
-      console.error('chat load error:',error);
-      const c=getCache(); if(c.length)renderNotes(c);
-      setStatus(c.length?'📦 اتصال سرور موقتاً در دسترس نیست؛ پیام‌های قبلی حفظ شده‌اند':'⚠️ اتصال سرور برقرار نشد؛ پیام‌ها پاک نشده‌اند',true);
-      return false;
-    }
-  }
-  async function init(){
-    setOwnOnline(); setOtherOffline();
-    if(!db){setStatus('📦 حالت آفلاین؛ پیام‌های ذخیره‌شده حفظ شده‌اند',true);const c=getCache();if(c.length)renderNotes(c);return}
-    try{
-      let {data:{session}}=await db.auth.getSession();
-      if(!session){const r=await db.auth.signInAnonymously();if(r.error)throw r.error;session=r.data.session}
-      currentUser=session?.user||null; if(!currentUser)throw new Error('anonymous session unavailable');
-      setOwnOnline();
-      await loadNotes();
-      // Presence is optional. If it fails, chat still works and your own status stays green.
-      liveChannel=db.channel('love-room-presence-v3',{config:{presence:{key:currentUser.id}}});
-      liveChannel.on('presence',{event:'sync'},()=>{
-        const state=liveChannel.presenceState()||{}; let f=false,e=false;
-        Object.values(state).flat().forEach(x=>{if(x?.author_name==='فاضل')f=true;if(x?.author_name==='الهام')e=true});
-        setPresence('Fazel',author==='فاضل'?true:f); setPresence('Elham',author==='الهام'?true:e);
-      }).on('presence',{event:'join'},()=>liveChannel.presenceState()&&null).on('presence',{event:'leave'},()=>{
-        const state=liveChannel.presenceState()||{}; let f=false,e=false; Object.values(state).flat().forEach(x=>{if(x?.author_name==='فاضل')f=true;if(x?.author_name==='الهام')e=true});
-        setPresence('Fazel',author==='فاضل'?true:f); setPresence('Elham',author==='الهام'?true:e);
-      }).on('broadcast',{event:'typing'},p=>{if(p?.payload?.user_id!==currentUser.id&&p?.payload?.author_name){const box=document.getElementById('chatTyping');const b=box?.querySelector('b');if(b)b.textContent=p.payload.author_name+' داره برات مینویسه';box?.classList.add('show');clearTimeout(window.__typing);window.__typing=setTimeout(()=>box?.classList.remove('show'),1800)}});
-      liveChannel.subscribe(async st=>{if(st==='SUBSCRIBED'){try{await liveChannel.track({user_id:currentUser.id,author_name:author,online_at:new Date().toISOString()})}catch{};setOwnOnline()}});
-      messagesChannel=db.channel('love-notes-live-v3').on('postgres_changes',{event:'*',schema:'public',table:'love_notes',filter:`room_id=eq.${ROOM}`},()=>loadNotes());
-      messagesChannel.subscribe();
-    }catch(error){
-      console.error('chat init error:',error); setOwnOnline(); setOtherOffline(); const c=getCache(); if(c.length)renderNotes(c); setStatus(c.length?'📦 سرور موقتاً در دسترس نیست؛ پیام‌های قبلی حفظ شده‌اند':'⚠️ اتصال سرور برقرار نشد؛ هیچ پیامی پاک نشده',true);
-    }
-  }
-  async function sendChat(content){
-    content=(content||'').trim(); if(!content)return;
-    if(!db||!currentUser){toast('اتصال سرور برقرار نیست؛ پیام پاک نمی‌شود ❤️');return}
-    const optimistic={id:'local-'+Date.now(),room_id:ROOM,author_id:currentUser.id,author_name:author,content,created_at:new Date().toISOString()};
-    const old=rowsCache.slice(); renderNotes(old.concat(optimistic));
-    const {data,error}=await db.from('love_notes').insert({room_id:ROOM,author_id:currentUser.id,author_name:author,content}).select().single();
-    if(error){renderNotes(old);toast('ارسال نشد؛ اتصال سرور را بررسی کن ❤️');return}
-    if(note){note.value='';note.style.height='42px'} if(saved)saved.textContent='✓✓ ارسال شد'; loadNotes();
-  }
-  function setAuthor(v){author=v;localStorage.setItem('fazelElhamAuthor',v);document.querySelectorAll('.author-btn').forEach(b=>b.classList.toggle('active',b.dataset.author===v));setOwnOnline();setOtherOffline();if(liveChannel&&currentUser)liveChannel.track({user_id:currentUser.id,author_name:author,online_at:new Date().toISOString()}).catch(()=>{})}
-  document.querySelectorAll('.author-btn').forEach(b=>b.addEventListener('click',()=>setAuthor(b.dataset.author)));setAuthor(author);
+  async function loadNotes(){const {data,error}=await db.from('love_notes').select('*').eq('room_id',ROOM).order('created_at',{ascending:true}).limit(100);if(error){setStatus('⚠️ اتصال دفتر برقرار نشد',true);console.error(error);return}renderNotes(data||[]);setStatus('☁️ دفتر آنلاین است')}
+  async function init(){setStatus('☁️ در حال ورود...');let {data:{session}}=await db.auth.getSession();if(!session){const r=await db.auth.signInAnonymously();if(r.error){setStatus('⚠️ ورود آنلاین فعال نیست: '+(r.error?.message||'خطا'),true);console.error(r.error);return}session=r.data.session}currentUser=session?.user||null;await loadNotes();db.channel('love-notes-live').on('postgres_changes',{event:'*',schema:'public',table:'love_notes',filter:`room_id=eq.${ROOM}`},()=>loadNotes()).subscribe(st=>{if(st==='SUBSCRIBED')setStatus('☁️ همگام‌سازی لحظه‌ای فعال است')})}
+  async function sendChat(content){content=(content||'').trim();if(!content)return;if(!author){toast('اول مشخص کن فاضلی یا الهام 🌸');return}if(!currentUser){toast('دفتر هنوز آنلاین نشده؛ چند لحظه صبر کن');return}const {error}=await db.from('love_notes').insert({room_id:ROOM,author_id:currentUser.id,author_name:author,content});if(error){console.error('love_notes insert error:',error);saved.textContent='خطا: '+(error.message||'ارسال نشد');toast('ارسال نشد: '+(error.message||'خطای ناشناخته'));return}note.value='';note.style.height='42px';saved.textContent='✓✓ ارسال شد';loadNotes()}
   document.getElementById('saveNookNote')?.addEventListener('click',()=>sendChat(note?.value||''));
   note?.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat(note.value)}});
-  note?.addEventListener('input',()=>{note.style.height='42px';note.style.height=Math.min(note.scrollHeight,120)+'px';if(liveChannel&&currentUser){liveChannel.send({type:'broadcast',event:'typing',payload:{user_id:currentUser.id,author_name:author}}).catch(()=>{})}});
-  document.getElementById('chatScrollBottom')?.addEventListener('click',()=>{if(notesBox)notesBox.scrollTop=notesBox.scrollHeight});
-  document.getElementById('chatMediaBtn')?.addEventListener('click',()=>document.getElementById('chatMediaDrawer')?.classList.toggle('open'));
+  note?.addEventListener('input',()=>{note.style.height='42px';note.style.height=Math.min(note.scrollHeight,120)+'px';const typing=document.getElementById('chatTyping');if(typing){typing.classList.add('show');clearTimeout(window.__chatTypingTimer);window.__chatTypingTimer=setTimeout(()=>typing.classList.remove('show'),900)}});
+  document.querySelectorAll('#chatReactions button').forEach(b=>b.addEventListener('click',()=>{if(!note)return;note.value+=(note.value?' ':'')+b.dataset.emoji;note.focus();note.dispatchEvent(new Event('input'))}));
+  document.getElementById('chatEmojiBtn')?.addEventListener('click',()=>{const emojis=['😊','❤️','😂','😘','🥹','😍','🔥','💋','🫶','🌙'];const e=emojis[Math.floor(Math.random()*emojis.length)];if(note){note.value+=(note.value?' ':'')+e;note.focus();note.dispatchEvent(new Event('input'))}});
   document.getElementById('chatLoveBtn')?.addEventListener('click',()=>sendChat('❤️ دوستت دارم، دردونه‌ی من ❤️'));
-  window.addEventListener('beforeunload',()=>{try{liveChannel?.untrack()}catch{}});
+  document.getElementById('chatScrollBottom')?.addEventListener('click',()=>{if(notesBox)notesBox.scrollTop=notesBox.scrollHeight});
+  document.getElementById('chatFile')?.addEventListener('change',e=>{const f=e.target.files?.[0];const name=document.getElementById('chatFileName');if(name)name.textContent=f?'📎 '+f.name:'';if(f&&note){note.value+=(note.value?'\n':'')+'📎 فایل: '+f.name;note.dispatchEvent(new Event('input'))}});
+  let recorder=null,voiceChunks=[],voiceStarted=0;
+  document.getElementById('chatMic')?.addEventListener('click',async()=>{const mic=document.getElementById('chatMic');const preview=document.getElementById('chatVoicePreview');if(recorder&&recorder.state==='recording'){recorder.stop();mic.classList.remove('recording');return}if(!navigator.mediaDevices?.getUserMedia||!window.MediaRecorder){toast('ضبط صدا روی این مرورگر فعال نیست 🎙️');return}try{const stream=await navigator.mediaDevices.getUserMedia({audio:true});voiceChunks=[];voiceStarted=Date.now();recorder=new MediaRecorder(stream);recorder.ondataavailable=e=>{if(e.data.size)voiceChunks.push(e.data)};recorder.onstop=()=>{stream.getTracks().forEach(t=>t.stop());const blob=new Blob(voiceChunks,{type:'audio/webm'});const url=URL.createObjectURL(blob);const sec=Math.max(1,Math.round((Date.now()-voiceStarted)/1000));if(preview){preview.hidden=false;preview.innerHTML='🎙️ پیام صوتی آماده شد · '+sec+' ثانیه<audio controls src="'+url+'"></audio><button type="button" class="ghost-btn" id="sendVoiceAsChat">ارسال پیام صوتی</button>';document.getElementById('sendVoiceAsChat')?.addEventListener('click',()=>{sendChat('🎙️ پیام صوتی · '+sec+' ثانیه');preview.hidden=true;URL.revokeObjectURL(url)})}toast('ویس آماده شد؛ اگر خواستی بفرست 🎙️')};recorder.start();mic.classList.add('recording');toast('دارم گوش می‌دم... دوباره بزن تا تموم بشه 🎙️')}catch(e){toast('اجازه‌ی میکروفون داده نشد 🎙️')}});
+
+  document.getElementById('clearNookNote')?.addEventListener('click',()=>{if(note)note.value='';if(saved)saved.textContent='متن پاک شد'});
   init();
 })();
 </script>
