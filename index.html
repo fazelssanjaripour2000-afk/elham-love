@@ -300,6 +300,31 @@ html.chat-overlay-open,body.chat-overlay-open{overflow:hidden!important;height:1
   #messengerOverlay .chat-compose{padding:5px 7px calc(5px + env(safe-area-inset-bottom))!important;}
   #messengerOverlay .chat-compose-tools{padding:0 9px 7px!important;}
 }
+
+/* Dollhouse / Toy Fantasy Background */
+.dollhouse-bg, .doll-bg, .toy-bg { display:none!important; }
+body.chat-mode::before {
+ content:""; position:fixed; inset:0; z-index:-2; pointer-events:none;
+ background:
+ radial-gradient(circle at 12% 18%, rgba(255,182,220,.48) 0 5%, transparent 22%),
+ radial-gradient(circle at 86% 14%, rgba(190,205,255,.45) 0 6%, transparent 23%),
+ radial-gradient(circle at 75% 82%, rgba(255,222,174,.42) 0 7%, transparent 25%),
+ linear-gradient(135deg,#fff0f8 0%,#f5efff 45%,#fff8ed 100%);
+ animation:dollGlow 10s ease-in-out infinite alternate;
+}
+body.chat-mode::after {
+ content:"🧸   🎀   🧸   ✨   🧸   🎀   ✨   🧸   🎀";
+ position:fixed; inset:0; z-index:-1; pointer-events:none;
+ display:flex; align-items:flex-start; justify-content:space-around;
+ padding-top:9vh; font-size:clamp(20px,6vw,42px); letter-spacing:1.2rem;
+ opacity:.16; filter:blur(.15px);
+ transform:rotate(-4deg);
+ animation:dollFloat 14s ease-in-out infinite alternate;
+ white-space:nowrap; overflow:hidden;
+}
+@keyframes dollGlow { from{filter:saturate(.95) brightness(.98); transform:scale(1)} to{filter:saturate(1.12) brightness(1.05); transform:scale(1.025)} }
+@keyframes dollFloat { from{transform:translate3d(-1%,0,0) rotate(-4deg)} to{transform:translate3d(1%,18px,0) rotate(-2deg)} }
+@media (prefers-reduced-motion:reduce){body.chat-mode::before,body.chat-mode::after{animation:none!important}}
 </style>
 <style id="timed-letters-style">
 .timed-letters-section{padding-top:55px}
@@ -591,6 +616,43 @@ body.messenger-fullscreen .chat-compose textarea,body.messenger-fullscreen .chat
 .chat-live-status{color:#9ff0c0;font-size:10px;white-space:nowrap}.chat-new-messages{position:absolute;z-index:20;left:50%;bottom:92px;transform:translate(-50%,12px);opacity:0;pointer-events:none;border:1px solid rgba(255,255,255,.16);background:rgba(20,12,24,.88);backdrop-filter:blur(10px);color:#fff;border-radius:999px;padding:8px 14px;box-shadow:0 8px 25px rgba(0,0,0,.28);font:700 11px inherit;transition:opacity .18s,transform .18s}.chat-new-messages.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}.chat-new-messages b{margin-right:5px;color:#ffb5d5}.chat-messages{overscroll-behavior-y:contain;overflow-anchor:auto;-webkit-overflow-scrolling:touch;contain:layout paint;scrollbar-width:thin}.chat-bubble-row{contain:layout paint}.chat-bubble{will-change:auto}.chat-compose{position:relative;z-index:25}.chat-head{position:relative;z-index:30}.chat-head-copy p{display:flex;align-items:center;gap:4px}.chat-new-messages{font-family:inherit}
 @media(max-width:700px){.chat-live-status{font-size:9px}.chat-new-messages{bottom:86px}.chat-head{backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}.chat-messages{scrollbar-width:none}.chat-messages::-webkit-scrollbar{display:none}}
 </style>
+
+<style id="cute-unified-bg-v12">
+/* V12: cute unified background + plain Today label */
+.chat-date-separator,
+.date-separator,
+.message-date,
+.today-separator{background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important;padding:4px 0!important;color:rgba(255,240,250,.86)!important;font-weight:700!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;}
+.chat-date-separator::before,.chat-date-separator::after,
+.date-separator::before,.date-separator::after{display:none!important;content:none!important;}
+/* unified doll-girl background behind the conversation */
+.chat-stage,.chat-shell,.chat-window,.chat-main,.messages-wrap,.messages-container{background:transparent!important;}
+.chat-main,.messages-wrap,.messages-container{position:relative;}
+.chat-main::before,.messages-wrap::before,.messages-container::before{
+ content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+ background:
+ radial-gradient(circle at 12% 18%,rgba(255,213,235,.26) 0 2px,transparent 3px),
+ radial-gradient(circle at 84% 28%,rgba(255,238,247,.20) 0 2px,transparent 3px),
+ radial-gradient(circle at 24% 74%,rgba(214,190,255,.20) 0 2px,transparent 3px),
+ radial-gradient(circle at 78% 82%,rgba(255,220,239,.22) 0 2px,transparent 3px),
+ linear-gradient(180deg,#f7dff0 0%,#eadcf5 46%,#f6e5ef 100%);
+ opacity:.98;
+}
+.chat-main::after,.messages-wrap::after,.messages-container::after{
+ content:"♡   🎀   🧸   ✦   🩷   🧸   🎀   ♡";
+ position:absolute;inset:0;z-index:0;pointer-events:none;
+ display:flex;align-items:center;justify-content:center;text-align:center;
+ font-size:clamp(24px,7vw,48px);line-height:2.8;letter-spacing:16px;
+ color:rgba(255,255,255,.16);font-family:system-ui,sans-serif;
+ transform:rotate(-8deg);overflow:hidden;
+}
+.chat-main > *, .messages-wrap > *, .messages-container > *{position:relative;z-index:1;}
+/* hold-to-keep date label: JS below controls visibility */
+.v12-scroll-date{position:fixed;left:50%;top:76px;transform:translateX(-50%);z-index:9999;display:none;
+ padding:5px 11px;color:#fff;background:rgba(105,67,102,.72);border:1px solid rgba(255,255,255,.25);border-radius:999px;
+ font-size:12px;font-weight:700;pointer-events:none;box-shadow:0 6px 18px rgba(68,38,67,.18);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
+</style>
+
 </head>
 <body>
 <div aria-hidden="true" aria-label="دفتر دوتایی ما" id="messengerOverlay" role="dialog"><div class="messenger-shell" id="messengerShell"></div></div>
@@ -1787,5 +1849,446 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
 </script>
 
 <script id="bonk-final-js">(()=>{const $=id=>document.getElementById(id),stage=$("bonkStage"),layer=$("bonkMessageLayer");if(!stage||!layer)return;let weapon="hand",count=0,bag=[],lastText="";const msgs=["وای بسه دیگه 😭", "الهامممممم 😭", "اووووف", "نه باباااا", "صبر کن خب 😂", "چراااااا", "من چه گناهی کردم آخه", "دمپایی رو بذار زمین 😭", "الهام جان من دوستت دارم خب", "وایساااا", "اوخ", "آخ آخ آخ 😭", "این دیگه نامردیه", "بالش چراااا 😂", "نه اون یکیو برندار", "من تسلیممم", "باشه باشه غلط کردم", "الهام تو خیلی بدی 😂", "آخه چرا میزنی خب", "وای صورتم 😭", "یکی بیاد منو نجات بده", "من دیگه بازی نمی‌کنم", "خب من بی‌تقصیرم 😭", "تو رو خداااا", "آخ گفتمااا", "باز شروع کرد 😐", "ای بابااا", "نهههههه", "من رفتم", "خدافظ", "اصلاً قهرم", "اوکی من مردم", "این بالش خیلی سنگینه 😂", "الهام آروممم", "یه دقیقه مهلت بده خب", "چرا با ذوق میزنی 😭", "تو خوشحالی من دارم له میشم", "این چه وضعشه آخه", "من شکایت دارم", "اعتراض دارم آقا", "نه نه نه اون دمپایی نه", "وای مردم از دستت", "خب بسه دیگه دختر 😭", "تو اصلاً رحم نداری", "من فقط داشتم نگاه می‌کردم", "تقصیر من نبوددد", "قسم می‌خورم تقصیر من نبود", "الهاممممممم", "آخخخخخ", "اوه اوه", "وای وای وای", "نه دیگه 😭", "خب چراااا", "من بیچاره‌م", "یکی جلوشو بگیره 😂", "من غلط کردم", "باشه تو بردی", "من تسلیم شدم دیگه", "آشتی؟ 🥺", "بیا بغلم دیگه", "ولی هنوز زدیما 😭", "این آخری بود؟؟", "جدی آخریه؟؟", "تو گفتی آخریه ها", "دروغ گفتی 😐", "باز برداشتش 😭", "نهههه دوباره نه", "من دیدم چی برداشتی", "اون عروسکو نزن تو سرم 😂", "بالشو آروم‌تررر", "آخ مردم", "من دیگه توان ندارم", "نفسم بند اومد 😭", "یه لیوان آب بدین", "من استعفا میدم", "از این رابطه شکایت دارم 😂", "اصلاً من نبودم", "من شاهد دارم", "دوربین هستااا", "الهام دوربین داره می‌بینه 😭", "این رفتار قابل قبول نیست", "من فردا میرم پیش مامانم 😂", "دیگه باهات حرف نمی‌زنم", "پنج دقیقه بعد: الهام بیا بغلم", "چرا انقدر خوشحالی 😭", "تو از این کار لذت می‌بری نه؟", "معلومه داری کیف می‌کنی", "لبخندتو دیدم 😐", "دیدم خندیدی نامرد", "وای چه آدمی", "منو ببین حداقل 😭", "خب نگاه کن صورتمو", "قیافمو داغون کردی", "موهامو ول کن 😂", "نه صورتممم", "ابروهام چی شدن", "من هنوز زنده‌ام؟", "کسی هست؟", "سلام؟؟", "کمک؟", "خدافظ دنیا", "این آخری رو حساب نکن", "آخ این یکی جدی بود 😭", "اوففف", "اووووففف", "ایییی", "وااای", "وااااای", "نه بابا", "اه اه", "ای خدااا", "یا خدا", "من چرا اینجام اصلاً", "کی گفت بیام اینجا", "اشتباه کردم", "بزرگ‌ترین اشتباه زندگیم", "دیگه تکرار نمی‌کنم", "قول میدم 😂", "قول الکی نده خودت می‌دونی", "خب آخه من دوستت دارم 😭", "سوءاستفاده نکن دیگه", "من مظلومم", "خیلی مظلومم", "اصلاً منو کتک نزنید", "بسه خانوم محترم", "خانوم لطفاً", "خواهشاً", "خواهش می‌کنم 😭", "به خدا درد داشت", "این یکی درد داشتا", "این یکی رو حس کردم", "اوخخخ", "وای دلم", "وای سرم", "وای پشتم", "دمپایی رو چرا انقدر جدی گرفتی 😂", "الهام جان یه ثانیه وایسا", "نه این وسیله دیگه چرا", "من اصلاً آماده نبودم", "ای بابا باز تو", "من داشتم باهات خوب بودم", "این چه مدل محبتیه 😂", "باورم نمیشه باز شروع شد", "من فقط یه آدم بی‌گناهم", "خب بخند ولی نزن 😭", "این دیگه خیلی بود", "آروم خانوم آروم", "بیا منطقی حرف بزنیم 😂", "من با مذاکره موافقم", "من درخواست آتش‌بس دارم", "این ضربه رو ثبت نکن", "این یکی تقلب بود", "تو دستت رو کنترل کن", "من شکایت کتبی دارم", "وکیل می‌گیرم ها", "مامانم می‌گم الهام زد منو", "من می‌دونستم آخرش این میشه", "اصلاً چرا انتخابت کردم 😂", "شوخی کردم بیا بغلم", "نه خب دلم برات می‌سوزه", "دلم نمیاد باهات دعوا کنم", "ولی این یکی رو یادت می‌مونه", "من هنوز بهت وفادارم 😭", "تو خیلی پررویی", "این خنده‌ت یعنی چی دقیقاً", "من صدای خنده‌تو شنیدم", "نامرد نباش دیگه", "یکم رحم داشته باش", "من آدم حساسی‌ام خب", "صورتمو نگاه کن 😂", "من به چشمات اعتماد کردم", "اعتمادم رو پس بده", "این چه کاری بود آخه", "من اصلاً خبر نداشتم", "چرا از پشت زدی 😂", "من برگشتم ببینم چی شد", "نه من نبودم", "قسم به جان خودم نبودم", "تو خودت دیدی من کاری نکردم", "یه لحظه صبر کن", "حرفمو گوش کن خب", "فقط یه لحظه", "بذار توضیح بدم", "توضیح دارم به خدا", "اول گوش کن بعد بزن", "من هنوز حرف دارم", "تو اصلاً نمی‌ذاری حرف بزنم", "من قربانی این ماجرام", "من بی‌گناهم قسم", "این انصاف نیست", "این خیلی یک‌طرفه‌ست", "تو ابزار داری من چی دارم", "من فقط دست خالی‌ام", "این دیگه مسابقه نیست", "تو داری خوش می‌گذره بهت", "از خنده‌ت معلومه", "تو رو خدا نخند 😂", "من جدی می‌گم", "من واقعاً دارم می‌رم", "باشه من می‌رم دیگه", "نه خب دلم نمیاد برم", "بیا آشتی کنیم", "من هنوز دوستت دارم", "حتی الانم دوستت دارم", "اینم مدرک عاشق بودنمه 😭", "من بدبختم ولی عاشقم", "الهام تو چرا اینجوری‌ای", "چرا انقدر شیرینی آخه", "من چجوری ازت ناراحت بمونم", "اصلاً نمی‌تونم قهر کنم", "قهرم... نه بیخیال", "دو دقیقه قهر کردم کافیه", "بیا بغلم خانوم", "من کوتاه اومدم", "تو برنده‌ای خوشحال شدی؟", "آره دیدم ذوق کردی", "این ذوقتو دوست ندارم 😂", "ولی خنده‌تو چرا دوست دارم", "تو با من چه کار کردی", "منو عوض کردی دختر", "دیگه خودمم خودمو نمی‌شناسم", "هرچی می‌زنیم آخرش دوستت دارم", "این رابطه خیلی مشکوکه", "عشق همینه دیگه؟", "این چه عشقیه آخه 😂", "من به عشق اعتراض دارم", "ولی به تو نه", "به تو که نمی‌تونم اعتراض کنم", "تو زیادی مهمی", "زیادی دوستت دارم خب", "این انصاف نیست که اینقدر نازی", "یه کم معمولی باش دیگه", "نه صبر کن معمولی نشو", "همینجوری بمون", "من به همینت عادت کردم", "دلم برات می‌سوزه ولی خب 😂", "منم آدمم خانوم", "یه ذره مراعات کن", "من دیگه کشش ندارم", "ولی بازم بیا", "این آخری جدی بود", "نه این یکی آخر نبود", "تو خودت گفتی آخری", "من دیگه بهت اعتماد ندارم", "ولی باز اعتماد می‌کنم", "این چه وضع تناقضیه", "من رسماً گیج شدم", "تو منو گیج کردی", "یه بغل بده تمومش کنیم", "باشه من آرومم", "نه نیستم 😂", "الان دوباره زدی؟", "من حواسم نبود", "تو از فرصت استفاده کردی", "خیلی نامردی", "خیلی هم دوست‌داشتنی‌ای", "این ترکیب خطرناکه", "من باختم قبول", "ولی خوشحالم", "فقط چون تویی", "آخ ولی درد داشت", "این یکی رو جدی گرفتم", "یه کم یواش‌تر خب", "دستت درد نکنه... نه واقعاً 😭", "باشه دیگه کافی شد", "بسه من پیاممو گرفتم", "من پیامو فهمیدم", "لازم نبود اینقدر تأکید کنی", "چقدر اصرار داری 😂", "تو خیلی بااعتمادی به خودت", "اعتماد به نفست منو کشته", "من به این اعتماد غبطه می‌خورم", "الهام تو خطرناکی", "من باید ازت فاصله بگیرم", "ولی دلم نمیاد", "خب لعنتی دوستت دارم", "همین شد دیگه", "آخرش باز دلم نرم شد", "تو بلدی منو نرم کنی", "یه نگاه کنی تمومه", "دیگه نمی‌تونم جدی باشم", "من تسلیم جذابیتت شدم", "اینم از مظلومیت من", "مظلوم‌ترین آدم این اتاقم", "هیچکس حرف منو نمی‌شنوه", "من اعتراض دارم واقعاً", "این اتاق شاهد داره", "ستاره‌ها شاهدن 😂", "اون قلبه شاهد بود", "من گزارش می‌کنم", "گزارشم علیه توئه", "ولی اسممو نبر 😂", "آبرو برام نذاشتی", "صورتم دیگه صورتم نیست", "موهام رفت", "قیافه‌م رفت", "اعتماد به نفسم رفت", "ولی عشق هنوز هست ❤️", "همین مهمه دیگه", "من باختم به تو"];function refill(){bag=msgs.slice();for(let i=bag.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[bag[i],bag[j]]=[bag[j],bag[i]]}if(bag.length>1&&bag[0]===lastText)[bag.push(bag.shift())]}function setW(w){weapon=w;document.querySelectorAll("[data-bonk]").forEach(x=>x.classList.toggle("active",x.dataset.bonk===w));document.querySelectorAll(".bonk-item").forEach(x=>x.classList.toggle("active",x.dataset.weapon===w))}function say(t){if(!layer)return;layer.replaceChildren();const m=document.createElement("div");m.className="bonk-float-msg";m.setAttribute("role","status");m.textContent=String(t);layer.appendChild(m);requestAnimationFrame(()=>{m.style.display="block";m.style.visibility="visible"});window.clearTimeout(window.__bonkMsgTimer);window.__bonkMsgTimer=window.setTimeout(()=>{if(m.isConnected)m.remove()},5000)}function hit(){count++;$("bonkCount").textContent=count.toLocaleString("fa-IR")+" ضربه";if(!bag.length)refill();let text=bag.pop();if(text===lastText&&bag.length)text=bag.pop();lastText=text;stage.classList.remove("bonk-shake","bonk-mega");void stage.offsetWidth;stage.classList.add(count%7===0?"bonk-mega":"bonk-shake");const ch=$("bonkCharacter");ch.classList.remove("hit-left","hit-right","hurt","hurt2");void ch.offsetWidth;ch.classList.add(Math.random()>.5?"hit-left":"hit-right",count%5===0?"hurt2":"hurt");setTimeout(()=>ch.classList.remove("hurt","hurt2","hit-left","hit-right"),700);const impact=$("bonkImpact"),texts={hand:"تق! 😂",slipper:"تَقَق! 😭",pillow:"پَخخخ! 😂",doll:"پوف! 🧸",sock:"پَت! 🧦",scarf:"ووش! 🧣",cap:"تپ! 🧢",cushion:"پوفف! 🛋️",heart:"پوف قلبی! 💗"};impact.textContent=texts[weapon]||texts.hand;impact.classList.remove("show");void impact.offsetWidth;impact.classList.add("show");const item=document.querySelector('.bonk-item[data-weapon="'+weapon+'"]');if(item){item.classList.remove("throwing");void item.offsetWidth;item.classList.add("throwing");setTimeout(()=>item.classList.remove("throwing"),500)}say(text)}refill();document.querySelectorAll("[data-bonk]").forEach(x=>x.addEventListener("click",()=>setW(x.dataset.bonk)));document.querySelectorAll(".bonk-item").forEach(x=>x.addEventListener("click",()=>{setW(x.dataset.weapon);hit()}));$("bonkHit")?.addEventListener("click",hit);$("bonkHug")?.addEventListener("click",()=>say("باشه دیگه… بیا بغلم 🫂❤️"));$("bonkReset")?.addEventListener("click",()=>{count=0;lastText="";refill();$("bonkCount").textContent="۰ ضربه";layer.innerHTML=""});setW("hand")})();</script><script id="bonk-mobile-fallback">document.addEventListener("DOMContentLoaded",()=>{const stage=document.getElementById("bonkStage"),layer=document.getElementById("bonkMessageLayer");if(!stage||!layer)return;document.querySelectorAll("[data-bonk]").forEach(b=>{b.addEventListener("click",()=>{const hit=document.querySelector("[data-bonk-hit],.bonk-hit,#bonkHit");if(hit)hit.click()})});if(!window.__bonkFallbackGlow){window.__bonkFallbackGlow=1;stage.style.willChange="transform";}});</script>\n<style id="mobile-chat-stability-v7">\n/* Mobile stability pass: one real scroll container, no competing touch locks. */\nhtml,body{overscroll-behavior-x:none;}\n#messengerOverlay{height:100svh!important;min-height:100svh!important;max-height:100svh!important;overflow:hidden!important;overscroll-behavior:none!important;}\n#messengerOverlay.is-open{display:block!important;}\n#messengerOverlay .messenger-shell{height:100%!important;min-height:0!important;overflow:hidden!important;}\n#messengerOverlay .chat-panel{height:100%!important;min-height:0!important;max-height:none!important;display:flex!important;flex-direction:column!important;overflow:hidden!important;}\n#messengerOverlay .chat-messages{flex:1 1 0!important;min-height:0!important;height:0!important;max-height:none!important;overflow-y:scroll!important;overflow-x:hidden!important;touch-action:pan-y!important;overscroll-behavior-y:contain!important;scroll-behavior:auto!important;-webkit-overflow-scrolling:touch!important;contain:layout paint!important;}\n#messengerOverlay .chat-head,#messengerOverlay .chat-author,#messengerOverlay .chat-day,#messengerOverlay .chat-typing,#messengerOverlay .chat-reactions,#messengerOverlay .chat-compose,#messengerOverlay .chat-compose-tools{flex-shrink:0!important;}\n#messengerOverlay .chat-bubble{animation:none!important;}\n@media(max-width:600px){\n  #messengerOverlay .messenger-shell{height:100%!important;}\n  #messengerOverlay .chat-panel{height:100%!important;}\n  #messengerOverlay .chat-messages{height:0!important;padding-bottom:calc(16px + env(safe-area-inset-bottom))!important;}\n}\n</style>\n
+
+<style id="chat-storm-v9-css">
+/* V9: convenience-first messenger shell. Keep the proven V8 scroll architecture intact. */
+#messengerOverlay .chat-storm-bar{display:flex;align-items:center;gap:7px;padding:6px 10px 7px;background:linear-gradient(180deg,rgba(11,5,18,.18),rgba(11,5,18,.52));border-bottom:1px solid rgba(255,255,255,.05);overflow-x:auto;scrollbar-width:none;flex-shrink:0}
+#messengerOverlay .chat-storm-bar::-webkit-scrollbar{display:none}
+#messengerOverlay .chat-storm-chip{border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.055);color:#f7eaf3;border-radius:999px;padding:7px 11px;font:600 11px/1 Vazirmatn, sans-serif;white-space:nowrap;box-shadow:0 5px 16px rgba(0,0,0,.12);cursor:pointer}
+#messengerOverlay .chat-storm-chip:active{transform:scale(.97)}
+#messengerOverlay .chat-storm-search{display:none;position:absolute;top:10px;left:12px;right:12px;z-index:30;padding:8px;background:rgba(17,7,24,.96);border:1px solid rgba(255,255,255,.1);border-radius:17px;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+#messengerOverlay .chat-storm-search.open{display:flex;gap:7px}
+#messengerOverlay .chat-storm-search input{flex:1;min-width:0;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.07);color:#fff;border-radius:13px;padding:10px 12px;outline:none}
+#messengerOverlay .chat-storm-search button{border:0;background:rgba(255,255,255,.08);color:#fff;border-radius:12px;padding:0 12px}
+#messengerOverlay .chat-storm-search-result{position:absolute;top:58px;left:12px;right:12px;max-height:38vh;overflow:auto;background:rgba(17,7,24,.97);border:1px solid rgba(255,255,255,.09);border-radius:15px;padding:6px;display:none}
+#messengerOverlay .chat-storm-search-result.show{display:block}
+#messengerOverlay .chat-storm-result{padding:9px 10px;border-radius:11px;color:#eee;cursor:pointer;font-size:11px;line-height:1.8}
+#messengerOverlay .chat-storm-result:hover{background:rgba(255,255,255,.06)}
+#messengerOverlay .chat-storm-fab{position:absolute;left:14px;bottom:88px;z-index:12;display:none;border:1px solid rgba(255,255,255,.12);background:rgba(20,8,28,.9);color:#fff;border-radius:999px;padding:8px 12px;box-shadow:0 10px 28px rgba(0,0,0,.28);backdrop-filter:blur(12px);font:700 10px Vazirmatn,sans-serif}
+#messengerOverlay .chat-storm-fab.show{display:block}
+#messengerOverlay .chat-storm-action{position:fixed;z-index:100010;display:none;min-width:220px;max-width:calc(100vw - 24px);padding:6px;border:1px solid rgba(255,255,255,.11);background:rgba(18,7,25,.97);border-radius:17px;box-shadow:0 24px 70px rgba(0,0,0,.48);backdrop-filter:blur(20px)}
+#messengerOverlay .chat-storm-action.open{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+#messengerOverlay .chat-storm-action button{border:0;background:rgba(255,255,255,.055);color:#fff;border-radius:12px;padding:9px 5px;font:600 10px Vazirmatn,sans-serif}
+#messengerOverlay .chat-storm-action button:active{background:rgba(255,92,168,.16)}
+#messengerOverlay .chat-bubble.storm-target{outline:2px solid rgba(255,117,185,.5);outline-offset:3px}
+#messengerOverlay .chat-bubble.storm-found{animation:stormFound .8s ease}
+@keyframes stormFound{0%,100%{transform:none}35%{transform:scale(1.025)}65%{transform:scale(.99)}}
+@media(max-width:600px){
+ #messengerOverlay .chat-storm-bar{padding-bottom:6px}
+ #messengerOverlay .chat-storm-chip{font-size:10px;padding:7px 10px}
+ #messengerOverlay .chat-storm-action{position:fixed;left:10px!important;right:10px!important;bottom:calc(76px + env(safe-area-inset-bottom))!important;top:auto!important;width:auto;max-width:none}
+ #messengerOverlay .chat-storm-action.open{grid-template-columns:repeat(4,1fr)}
+ #messengerOverlay .chat-storm-fab{bottom:calc(88px + env(safe-area-inset-bottom))}
+}
+@media(prefers-reduced-motion:reduce){#messengerOverlay .chat-bubble.storm-found{animation:none!important}}
+</style>
+
+<script id="chat-storm-v9-html">
+(function(){
+ const panel=document.querySelector('#messengerOverlay .chat-panel');
+ const head=panel?.querySelector('.chat-head'); const msgs=document.getElementById('sharedNotes'); const compose=panel?.querySelector('.chat-compose');
+ if(!panel||!head||!msgs||!compose||document.getElementById('chatStormBar'))return;
+ const bar=document.createElement('div');bar.id='chatStormBar';bar.className='chat-storm-bar';
+ bar.innerHTML='<button class="chat-storm-chip" data-quick="دلم برات تنگ شده 🥹">🥹 دلم تنگته</button><button class="chat-storm-chip" data-quick="بیا بغلم دیگه 🫂❤️">🫂 بیا بغلم</button><button class="chat-storm-chip" data-quick="الهامممممم ❤️">❤️ الهاممم</button><button class="chat-storm-chip" data-quick="😂">😂</button><button class="chat-storm-chip" data-quick="❤️">❤️</button><button class="chat-storm-chip" id="chatStormSearchBtn">🔎 جستجو</button>';
+ head.insertAdjacentElement('afterend',bar);
+ const search=document.createElement('div');search.className='chat-storm-search';search.innerHTML='<input id="chatStormSearchInput" autocomplete="off" placeholder="توی چت چی می‌گردی؟"><button id="chatStormSearchClose">×</button><div id="chatStormSearchResult" class="chat-storm-search-result"></div>';
+ panel.appendChild(search);
+ const fab=document.createElement('button');fab.className='chat-storm-fab';fab.id='chatStormFab';fab.textContent='↓ پیام‌های جدید';panel.appendChild(fab);
+ const action=document.createElement('div');action.className='chat-storm-action';action.id='chatStormAction';action.innerHTML='<button data-act="reply">↩️<br>پاسخ</button><button data-act="copy">📋<br>کپی</button><button data-act="star">⭐<br>مهم</button><button data-act="pin">📌<br>سنجاق</button>';document.body.appendChild(action);
+ let activeRow=null,longTimer=0,startX=0,startY=0,moved=false;
+ const note=document.getElementById('nookNote');
+ function closeAction(){action.classList.remove('open');if(activeRow)activeRow.querySelector('.chat-bubble')?.classList.remove('storm-target');activeRow=null}
+ function openAction(row,x,y){closeAction();activeRow=row;row.querySelector('.chat-bubble')?.classList.add('storm-target');action.classList.add('open');if(innerWidth>600){action.style.left=Math.max(8,Math.min(innerWidth-235,x-115))+'px';action.style.top=Math.max(72,Math.min(innerHeight-90,y-72))+'px'}}
+ function rowText(row){return row?.querySelector('.chat-bubble-text')?.innerText?.trim()||''}
+ function doReply(){if(!activeRow)return;const b=activeRow.querySelector('[data-reply-id]');b?.click();closeAction();note?.focus()}
+ function doCopy(){const t=rowText(activeRow);if(t&&navigator.clipboard?.writeText)navigator.clipboard.writeText(t).then(()=>toast('متن کپی شد 📋')).catch(()=>toast('کپی نشد؛ دوباره امتحان کن'));else toast('کپی در این مرورگر در دسترس نیست') ;closeAction()}
+ function doFlag(type){if(!activeRow)return;activeRow.querySelector(type==='star'?'[data-star-id]':'[data-pin-id]')?.click();closeAction()}
+ action.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b)return;({reply:doReply,copy:doCopy,star:()=>doFlag('star'),pin:()=>doFlag('pin')})[b.dataset.act]?.()});
+ msgs.addEventListener('pointerdown',e=>{const row=e.target.closest('.chat-bubble-row');if(!row)return;startX=e.clientX;startY=e.clientY;moved=false;clearTimeout(longTimer);longTimer=setTimeout(()=>{if(!moved)openAction(row,e.clientX,e.clientY)},480)},{passive:true});
+ msgs.addEventListener('pointermove',e=>{if(Math.abs(e.clientX-startX)>10||Math.abs(e.clientY-startY)>10){moved=true;clearTimeout(longTimer)}},{passive:true});
+ msgs.addEventListener('pointerup',e=>{clearTimeout(longTimer);const row=e.target.closest('.chat-bubble-row');if(!row)return;const dx=e.clientX-startX;if(Math.abs(dx)>62&&Math.abs(dx)>Math.abs(e.clientY-startY)){row.querySelector('[data-reply-id]')?.click();navigator.vibrate?.(8);}} ,{passive:true});
+ document.addEventListener('pointerdown',e=>{if(!action.contains(e.target)&&!e.target.closest('.chat-bubble-row'))closeAction()},{passive:true});
+ bar.querySelectorAll('[data-quick]').forEach(b=>b.addEventListener('click',()=>{if(!note)return;note.value=(note.value?note.value+' ':'')+b.dataset.quick;note.dispatchEvent(new Event('input',{bubbles:true}));note.focus();requestAnimationFrame(()=>note.setSelectionRange(note.value.length,note.value.length))}));
+ const sBtn=bar.querySelector('#chatStormSearchBtn'),sInput=search.querySelector('#chatStormSearchInput'),sClose=search.querySelector('#chatStormSearchClose'),sResult=search.querySelector('#chatStormSearchResult');
+ function doSearch(){const q=sInput.value.trim().toLowerCase();sResult.innerHTML='';if(!q){sResult.classList.remove('show');return}const rows=[...msgs.querySelectorAll('.chat-bubble-row')].filter(r=>rowText(r).toLowerCase().includes(q));if(!rows.length){sResult.innerHTML='<div class="chat-storm-result">چیزی پیدا نشد 🥹</div>'}else rows.slice(0,30).forEach(r=>{const d=document.createElement('div');d.className='chat-storm-result';d.textContent=rowText(r).slice(0,120);d.onclick=()=>{msgs.scrollTo({top:r.offsetTop-20,behavior:'auto'});r.querySelector('.chat-bubble')?.classList.add('storm-found');setTimeout(()=>r.querySelector('.chat-bubble')?.classList.remove('storm-found'),900);search.classList.remove('open');sResult.classList.remove('show')};sResult.appendChild(d)});sResult.classList.add('show')}
+ sBtn.addEventListener('click',()=>{search.classList.add('open');sInput.focus()});sClose.addEventListener('click',()=>{search.classList.remove('open');sResult.classList.remove('show');sInput.value=''});sInput.addEventListener('input',doSearch);sInput.addEventListener('keydown',e=>{if(e.key==='Escape')sClose.click()});
+ const updateFab=()=>{const gap=msgs.scrollHeight-(msgs.scrollTop+msgs.clientHeight);fab.classList.toggle('show',gap>220)};msgs.addEventListener('scroll',updateFab,{passive:true});fab.addEventListener('click',()=>{msgs.scrollTop=msgs.scrollHeight;fab.classList.remove('show');document.getElementById('chatNewMessages')?.classList.remove('show')});
+ // Keep the mobile keyboard from resizing the whole app: only the viewport-facing messenger gets a safe bottom padding.
+ if(window.visualViewport){let raf=0;const sync=()=>{cancelAnimationFrame(raf);raf=requestAnimationFrame(()=>{if(!document.body.classList.contains('messenger-fullscreen'))return;panel.style.setProperty('--vvh',visualViewport.height+'px');});};visualViewport.addEventListener('resize',sync,{passive:true});visualViewport.addEventListener('scroll',sync,{passive:true});sync()}
+ // Add a compact unread-aware title without touching the existing Supabase rendering loop.
+ const originalTitle=head.querySelector('.chat-head-copy p'); if(originalTitle){const badge=document.createElement('span');badge.className='chat-storm-live';badge.textContent=' · دنج و خصوصی';originalTitle.appendChild(badge)}
+})();
+</script>
+<style id="chat-storm-v9-vvh">
+#messengerOverlay .chat-panel{min-height:0}
+@supports(height:100dvh){@media(max-width:600px){#messengerOverlay .chat-panel{height:min(100dvh,var(--vvh,100dvh))!important}}}
+.chat-storm-live{opacity:.72;font-size:.9em}
+</style>
+
+
+<style id="instagram-dm-v10">
+/* ===== V10 — Instagram-like DM shell, keeping the existing chat engine ===== */
+#messengerOverlay .chat-panel{
+  border-radius:0!important;
+  background:rgba(5,5,8,.98)!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+#messengerOverlay .chat-head{
+  height:64px!important;min-height:64px!important;
+  padding:calc(env(safe-area-inset-top) + 7px) 10px 7px!important;
+  gap:9px!important;
+  background:rgba(7,7,10,.94)!important;
+  border-bottom:1px solid rgba(255,255,255,.10)!important;
+  backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important;
+  box-shadow:0 3px 18px rgba(0,0,0,.18)!important;
+}
+#messengerOverlay .chat-head:before,#messengerOverlay .chat-head:after{display:none!important}
+#messengerOverlay .mobile-chat-back{
+  order:0!important;width:31px!important;height:31px!important;border:0!important;
+  border-radius:50%!important;background:transparent!important;font-size:25px!important;
+}
+#messengerOverlay .chat-avatar-wrap{width:39px;height:39px}
+#messengerOverlay .chat-avatar{
+  width:39px!important;height:39px!important;border-radius:50%!important;
+  font-size:19px!important;background:linear-gradient(145deg,#ff5ca7,#8e68ff)!important;
+  border:1.5px solid rgba(255,255,255,.2)!important;box-shadow:0 0 0 1px rgba(255,92,167,.08)!important;
+}
+#messengerOverlay .chat-avatar-wrap:after{inset:-2px!important;border-radius:50%!important;animation:none!important;opacity:.5}
+#messengerOverlay .chat-online{width:9px!important;height:9px!important;border:2px solid #07070a!important;box-shadow:0 0 8px rgba(115,245,176,.6)!important}
+#messengerOverlay .chat-head-copy h3{font-size:13px!important;font-weight:700!important;letter-spacing:0!important}
+#messengerOverlay .chat-head-copy p{font-size:8px!important;color:#9f9aa2!important;margin-top:1px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#messengerOverlay .chat-head-copy p:after{display:none!important}
+#messengerOverlay .chat-storm-live{display:none!important}
+#messengerOverlay .chat-head-actions{gap:2px!important}
+#messengerOverlay .chat-lock{display:none!important}
+#messengerOverlay .chat-mini-btn,#messengerOverlay .chat-menu-btn{
+  width:34px!important;height:34px!important;border:0!important;border-radius:50%!important;
+  background:transparent!important;box-shadow:none!important;font-size:21px!important;
+}
+#messengerOverlay .chat-mini-btn:hover,#messengerOverlay .chat-menu-btn:hover{transform:none!important;background:rgba(255,255,255,.07)!important}
+
+/* remove the extra quick-reply strip from V9 */
+#messengerOverlay #chatStormBar{display:none!important}
+#messengerOverlay .chat-reactions{display:none!important}
+#messengerOverlay .chat-compose-tools{display:none!important}
+
+/* messages: clean DM canvas */
+#messengerOverlay .chat-messages{
+  flex:1 1 auto!important;min-height:0!important;max-height:none!important;
+  padding:16px 12px 12px!important;gap:2px!important;
+  background:radial-gradient(circle at 50% 0,rgba(255,70,150,.055),transparent 32%),#050507!important;
+  border:0!important;scroll-behavior:auto!important;scrollbar-width:none!important;
+}
+#messengerOverlay .chat-messages::-webkit-scrollbar{display:none!important}
+#messengerOverlay .chat-day{
+  margin:8px auto 14px!important;padding:4px 9px!important;border:0!important;
+  background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;
+  color:#8f8a92!important;font-size:8px!important;
+}
+#messengerOverlay .chat-bubble-row{margin:1px 0!important;contain:layout paint}
+#messengerOverlay .chat-bubble{
+  max-width:min(78%,430px)!important;padding:8px 11px 5px!important;
+  border-radius:19px!important;background:#26262b!important;
+  border:1px solid rgba(255,255,255,.035)!important;box-shadow:none!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+  animation:none!important;transition:background .15s,transform .15s!important;
+}
+#messengerOverlay .chat-bubble-row.mine .chat-bubble{
+  background:linear-gradient(145deg,#7d3f98,#b44f8d)!important;
+  border-color:transparent!important;
+}
+#messengerOverlay .chat-bubble-row.theirs .chat-bubble{
+  background:#26262b!important;border-color:rgba(255,255,255,.035)!important;
+}
+#messengerOverlay .chat-bubble:after{display:none!important}
+#messengerOverlay .chat-bubble-name{display:none!important}
+#messengerOverlay .chat-bubble-text{font-size:12px!important;line-height:1.75!important}
+#messengerOverlay .chat-bubble-meta{font-size:7px!important;margin-top:2px!important;color:rgba(255,255,255,.48)!important;gap:4px!important}
+#messengerOverlay .chat-delete{display:none!important}
+#messengerOverlay .chat-message-actions{display:none!important}
+#messengerOverlay .chat-reaction-row{margin-top:2px!important}
+#messengerOverlay .chat-react{border-radius:999px!important;background:#18181c!important;padding:2px 6px!important;font-size:9px!important}
+/* message grouping */
+#messengerOverlay .chat-bubble-row.mine + .chat-bubble-row.mine .chat-bubble{border-top-right-radius:6px!important}
+#messengerOverlay .chat-bubble-row.mine + .chat-bubble-row.mine{margin-top:0!important}
+#messengerOverlay .chat-bubble-row.theirs + .chat-bubble-row.theirs .chat-bubble{border-top-left-radius:6px!important}
+#messengerOverlay .chat-bubble-row.theirs + .chat-bubble-row.theirs{margin-top:0!important}
+#messengerOverlay .chat-bubble-row.mine:not(:has(+ .mine)) .chat-bubble{border-bottom-right-radius:6px!important}
+#messengerOverlay .chat-bubble-row.theirs:not(:has(+ .theirs)) .chat-bubble{border-bottom-left-radius:6px!important}
+
+/* compact identity strip: keeps the sender switch available without looking like a dashboard */
+#messengerOverlay .chat-author{
+  margin:0!important;padding:4px 12px!important;min-height:0!important;
+  background:#050507!important;border:0!important;border-radius:0!important;
+  box-shadow:none!important;justify-content:flex-end!important;gap:4px!important;
+}
+#messengerOverlay .chat-author>span:first-child{display:none!important}
+#messengerOverlay .chat-author .author-btn{
+  border:0!important;background:transparent!important;padding:2px 5px!important;border-radius:999px!important;
+  font-size:8px!important;color:#8f8a92!important;box-shadow:none!important;
+}
+#messengerOverlay .chat-author .author-avatar-mini{width:17px!important;height:17px!important;font-size:7px!important}
+#messengerOverlay .chat-author .presence-label{display:none!important}
+
+/* typing */
+#messengerOverlay .chat-typing{margin:0 12px 5px!important;background:transparent!important;border:0!important;box-shadow:none!important;padding:4px 6px!important;color:#77727a!important}
+
+/* composer: floating Instagram-like capsule */
+#messengerOverlay .chat-compose{
+  padding:7px 10px calc(8px + env(safe-area-inset-bottom))!important;
+  background:#050507!important;border-top:1px solid rgba(255,255,255,.08)!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;gap:6px!important;
+}
+#messengerOverlay .chat-icon-btn{
+  width:37px!important;height:37px!important;flex:0 0 37px!important;
+  border:0!important;border-radius:50%!important;background:transparent!important;
+  box-shadow:none!important;font-size:17px!important;
+}
+#messengerOverlay .chat-icon-btn:hover{transform:none!important;background:rgba(255,255,255,.06)!important}
+#messengerOverlay .chat-input-wrap{
+  background:#19191d;border:1px solid rgba(255,255,255,.09);border-radius:21px;
+  min-width:0;overflow:hidden;
+}
+#messengerOverlay .chat-input-wrap textarea{
+  min-height:37px!important;max-height:112px!important;padding:8px 13px!important;
+  border:0!important;border-radius:21px!important;background:transparent!important;
+  box-shadow:none!important;font-size:11px!important;line-height:1.7!important;
+}
+#messengerOverlay .chat-input-wrap textarea:focus{outline:none!important}
+#messengerOverlay .chat-send{
+  width:38px!important;height:38px!important;flex:0 0 38px!important;border:0!important;
+  border-radius:50%!important;background:transparent!important;box-shadow:none!important;
+}
+#messengerOverlay .chat-send:hover{transform:scale(1.04)!important;background:rgba(255,255,255,.06)!important;box-shadow:none!important}
+#messengerOverlay .chat-file-name{font-size:7px!important;bottom:1px!important}
+
+/* new message pill */
+#messengerOverlay .chat-new-messages{bottom:76px!important;background:rgba(32,32,37,.96)!important;border:1px solid rgba(255,255,255,.12)!important;backdrop-filter:blur(12px)!important}
+
+/* remove visual clutter from mobile */
+@media(max-width:600px){
+  #messengerOverlay .chat-panel{height:min(100dvh,var(--vvh,100dvh))!important;border-radius:0!important}
+  #messengerOverlay .chat-head{height:62px!important;min-height:62px!important}
+  #messengerOverlay .chat-messages{padding:12px 10px 10px!important}
+  #messengerOverlay .chat-bubble{max-width:82%!important}
+  #messengerOverlay .chat-bubble-text{font-size:12px!important}
+  #messengerOverlay .chat-compose{padding-left:7px!important;padding-right:7px!important}
+}
+@media(min-width:700px){
+  #messengerOverlay .chat-panel{width:min(760px,100%)!important}
+  #messengerOverlay .chat-bubble{max-width:65%!important}
+}
+</style>
+
+
+<script id="instagram-dm-v10-js">
+(function(){
+ const panel=document.querySelector('#messengerOverlay .chat-panel');
+ if(!panel)return;
+ const head=panel.querySelector('.chat-head');
+ if(head){
+   const title=head.querySelector('.chat-head-copy h3');
+   const sub=head.querySelector('.chat-head-copy p');
+   if(title) title.textContent='فاضل ❤️ الهام';
+   if(sub){
+     sub.innerHTML='<span class="ig-live-dot">●</span> فعال · دنجِ خودمون';
+   }
+ }
+ const strip=document.getElementById('chatStormBar');
+ if(strip) strip.remove();
+ const reactions=document.getElementById('chatReactions');
+ if(reactions) reactions.setAttribute('aria-hidden','true');
+ // Prevent the old V9 helper strip from being recreated visibly.
+ const observer=new MutationObserver(()=>{
+   const s=document.getElementById('chatStormBar');
+   if(s) s.remove();
+ });
+ observer.observe(panel,{childList:true,subtree:true});
+ setTimeout(()=>observer.disconnect(),15000);
+})();
+</script>
+<style>
+#messengerOverlay .ig-live-dot{color:#55e58d;font-size:7px;margin-left:2px}
+</style>
+
+
+
+<style id="v13-professional-cute-chat-bg">
+/* V13 — one-piece dollhouse background + clean scroll-date */
+#messengerOverlay .chat-panel{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  background:
+    radial-gradient(ellipse at 12% 8%, rgba(255,194,222,.34), transparent 30%),
+    radial-gradient(ellipse at 88% 18%, rgba(207,190,255,.30), transparent 32%),
+    radial-gradient(ellipse at 18% 88%, rgba(255,220,238,.28), transparent 30%),
+    radial-gradient(ellipse at 86% 86%, rgba(220,205,255,.24), transparent 30%),
+    linear-gradient(135deg,#fff8fc 0%,#f9f1fb 46%,#f7f2ff 100%)!important;
+}
+#messengerOverlay .chat-panel:before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.58;
+  background:
+    radial-gradient(circle at 8% 16%, rgba(255,255,255,.95) 0 2px, transparent 3px),
+    radial-gradient(circle at 92% 34%, rgba(255,255,255,.82) 0 2px, transparent 3px),
+    radial-gradient(circle at 76% 78%, rgba(255,255,255,.78) 0 2px, transparent 3px),
+    radial-gradient(circle at 22% 72%, rgba(255,255,255,.75) 0 1.5px, transparent 2.5px),
+    repeating-linear-gradient(135deg, transparent 0 44px, rgba(255,255,255,.12) 45px 46px, transparent 47px 88px);
+}
+#messengerOverlay .chat-panel:after{
+  content:"♡   ✦   ♡";position:absolute;right:18px;top:88px;z-index:0;pointer-events:none;
+  color:rgba(190,120,166,.13);font-size:18px;letter-spacing:14px;transform:rotate(-8deg);
+  white-space:nowrap;
+}
+#messengerOverlay .chat-head,
+#messengerOverlay .chat-author,
+#messengerOverlay .chat-messages,
+#messengerOverlay .chat-typing,
+#messengerOverlay .chat-compose,
+#messengerOverlay .chat-compose-tools,
+#messengerOverlay .chat-voice-preview{position:relative;z-index:2!important}
+#messengerOverlay .chat-head{
+  background:rgba(255,250,253,.82)!important;
+  border-bottom:1px solid rgba(174,128,164,.12)!important;
+  box-shadow:0 4px 18px rgba(160,112,145,.08)!important;
+  backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important;
+}
+#messengerOverlay .chat-head-copy h3{color:#513b4b!important}
+#messengerOverlay .chat-head-copy p{color:#9b7d8f!important}
+#messengerOverlay .chat-messages{
+  background:transparent!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+}
+#messengerOverlay .chat-author{background:rgba(255,250,253,.40)!important}
+#messengerOverlay .chat-compose{
+  background:rgba(255,250,253,.86)!important;
+  border-top:1px solid rgba(174,128,164,.12)!important;
+  backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important;
+}
+#messengerOverlay .chat-input-wrap{background:rgba(255,255,255,.72)!important;border-color:rgba(172,127,163,.16)!important}
+#messengerOverlay .chat-input-wrap textarea{color:#513b4b!important}
+#messengerOverlay .chat-input-wrap textarea::placeholder{color:#a98d9d!important}
+/* Hide the real date separator. The floating "امروز" appears only while scrolling. */
+#messengerOverlay .chat-day,
+#messengerOverlay .chat-date-separator,
+#messengerOverlay .date-separator,
+#messengerOverlay .message-date,
+#messengerOverlay .today-separator{display:none!important}
+.v13-scroll-date{
+  position:fixed!important;left:50%!important;top:calc(env(safe-area-inset-top) + 72px)!important;
+  transform:translate(-50%,-6px)!important;z-index:99999!important;
+  display:none;pointer-events:none;white-space:nowrap;
+  padding:0!important;margin:0!important;border:0!important;background:transparent!important;
+  box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+  color:#866477!important;font:700 10px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif!important;
+  text-shadow:0 1px 8px rgba(255,255,255,.9)!important;
+  opacity:0;transition:opacity .18s ease,transform .18s ease;
+}
+.v13-scroll-date.show{opacity:1;transform:translate(-50%,0)!important}
+@media(max-width:600px){
+  .v13-scroll-date{top:calc(env(safe-area-inset-top) + 68px)!important;font-size:9px!important}
+}
+</style>
+<script id="v13-scroll-date-js">
+(()=>{
+  const start=()=>{
+    const scroller=document.querySelector('#messengerOverlay .chat-messages');
+    if(!scroller || document.querySelector('.v13-scroll-date')) return;
+    const label=document.createElement('div');
+    label.className='v13-scroll-date';
+    label.textContent='امروز';
+    document.body.appendChild(label);
+    let hideTimer=0;
+    const hide=()=>{label.classList.remove('show');window.clearTimeout(hideTimer);hideTimer=window.setTimeout(()=>{label.style.display='none'},180)};
+    const show=()=>{window.clearTimeout(hideTimer);label.style.display='block';requestAnimationFrame(()=>label.classList.add('show'));};
+    const onScroll=()=>{show();window.clearTimeout(hideTimer);hideTimer=window.setTimeout(hide,3000)};
+    scroller.addEventListener('scroll',onScroll,{passive:true});
+    scroller.addEventListener('touchstart',show,{passive:true});
+    scroller.addEventListener('touchend',()=>{window.clearTimeout(hideTimer);hideTimer=window.setTimeout(hide,3000)},{passive:true});
+    scroller.addEventListener('touchcancel',()=>{window.clearTimeout(hideTimer);hideTimer=window.setTimeout(hide,3000)},{passive:true});
+  };
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start,{once:true}); else start();
+})();
+</script>
+
 </body>
 </html>
+<style id="v14-galaxy-presence">
+/* V14 — deep purple galaxy + elegant stacked presence card */
+#messengerOverlay .chat-panel{
+  background:
+    radial-gradient(ellipse at 15% 12%,rgba(255,88,190,.22),transparent 28%),
+    radial-gradient(ellipse at 84% 18%,rgba(124,88,255,.28),transparent 31%),
+    radial-gradient(ellipse at 10% 78%,rgba(91,55,210,.25),transparent 30%),
+    radial-gradient(ellipse at 88% 82%,rgba(218,78,190,.18),transparent 28%),
+    linear-gradient(145deg,#12051f 0%,#1b0a35 38%,#251052 68%,#120722 100%)!important;
+  color:#fff!important;
+}
+#messengerOverlay .chat-panel:before{
+  opacity:.9!important;
+  background:
+    radial-gradient(circle at 8% 12%,rgba(255,255,255,.9) 0 1px,transparent 2px),
+    radial-gradient(circle at 19% 31%,rgba(255,186,239,.8) 0 1.5px,transparent 2.5px),
+    radial-gradient(circle at 31% 9%,rgba(196,175,255,.9) 0 1px,transparent 2px),
+    radial-gradient(circle at 47% 22%,rgba(255,255,255,.7) 0 1px,transparent 2px),
+    radial-gradient(circle at 63% 10%,rgba(224,197,255,.8) 0 1.5px,transparent 2.5px),
+    radial-gradient(circle at 79% 27%,rgba(255,255,255,.8) 0 1px,transparent 2px),
+    radial-gradient(circle at 91% 13%,rgba(255,176,232,.75) 0 1px,transparent 2px),
+    radial-gradient(circle at 14% 61%,rgba(205,185,255,.7) 0 1px,transparent 2px),
+    radial-gradient(circle at 36% 78%,rgba(255,255,255,.72) 0 1px,transparent 2px),
+    radial-gradient(circle at 58% 61%,rgba(255,171,230,.72) 0 1px,transparent 2px),
+    radial-gradient(circle at 76% 78%,rgba(205,186,255,.85) 0 1.5px,transparent 2.5px),
+    radial-gradient(circle at 94% 64%,rgba(255,255,255,.75) 0 1px,transparent 2px),
+    radial-gradient(ellipse at 50% 45%,rgba(130,77,255,.12),transparent 52%),
+    repeating-linear-gradient(120deg,transparent 0 78px,rgba(255,255,255,.025) 79px,transparent 80px 150px)!important;
+}
+#messengerOverlay .chat-panel:after{
+  content:"♡  ✦  ♡  ✧  🧸  ✦  ♡"!important;
+  color:rgba(255,174,226,.12)!important;
+  right:8px!important;top:105px!important;font-size:16px!important;letter-spacing:8px!important;
+}
+#messengerOverlay .chat-head{
+  background:rgba(15,5,28,.72)!important;
+  border-bottom:1px solid rgba(220,157,255,.16)!important;
+  box-shadow:0 8px 28px rgba(0,0,0,.28)!important;
+}
+#messengerOverlay .chat-head-copy h3{color:#fff!important;text-shadow:0 0 18px rgba(214,130,255,.22)!important}
+#messengerOverlay .chat-head-copy p{color:#cbb2dc!important}
+#messengerOverlay .chat-online{border-color:#160725!important}
+#messengerOverlay .chat-author{
+  display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:6px!important;
+  padding:8px 10px!important;margin:8px 10px 5px!important;
+  border-radius:17px!important;background:rgba(17,7,32,.54)!important;
+  border:1px solid rgba(224,164,255,.13)!important;box-shadow:0 8px 25px rgba(0,0,0,.18)!important;
+  backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;
+}
+#messengerOverlay .chat-author>span:first-child{display:none!important}
+#messengerOverlay .author-btn{
+  width:100%!important;min-height:38px!important;padding:6px 9px!important;
+  display:flex!important;align-items:center!important;gap:8px!important;
+  border:1px solid rgba(255,255,255,.07)!important;border-radius:12px!important;
+  background:rgba(255,255,255,.045)!important;color:#fff!important;
+}
+#messengerOverlay .author-btn:hover{background:rgba(220,130,255,.10)!important}
+#messengerOverlay .presence-dot{order:0!important;flex:0 0 auto!important;width:8px!important;height:8px!important}
+#messengerOverlay .author-avatar-mini{order:1!important}
+#messengerOverlay .author-btn>span:not(.presence-dot):not(.author-avatar-mini):not(.presence-label){order:2!important;font-size:11px!important;font-weight:700!important}
+#messengerOverlay .presence-label{order:3!important;display:block!important;margin-right:auto!important;font-size:9px!important;color:#a999b3!important}
+#messengerOverlay .author-btn:has(.presence-dot.online) .presence-label{color:#75f2ad!important}
+#messengerOverlay .chat-messages{background:transparent!important}
+#messengerOverlay .chat-compose{background:rgba(12,5,24,.78)!important;border-top:1px solid rgba(220,157,255,.13)!important}
+#messengerOverlay .chat-input-wrap{background:rgba(255,255,255,.07)!important;border-color:rgba(255,255,255,.11)!important}
+#messengerOverlay .chat-input-wrap textarea{color:#fff!important}
+#messengerOverlay .chat-input-wrap textarea::placeholder{color:#bda9c8!important}
+#messengerOverlay .chat-compose-tools{color:#c6accf!important}
+#messengerOverlay .chat-bubble{box-shadow:0 10px 28px rgba(0,0,0,.20)!important}
+#messengerOverlay .chat-day{display:none!important}
+.v13-scroll-date{color:#f0d7ff!important;text-shadow:0 0 14px rgba(200,115,255,.7)!important}
+@media(max-width:600px){
+  #messengerOverlay .chat-author{margin:6px 8px 4px!important;padding:7px!important}
+  #messengerOverlay .author-btn{min-height:36px!important}
+  #messengerOverlay .presence-label{display:block!important}
+}
+</style>
