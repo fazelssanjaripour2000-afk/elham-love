@@ -270,6 +270,36 @@ body.messenger-fullscreen .chat-compose-tools{display:none!important}
 .chat-icon-btn.mic{background:rgba(255,255,255,.10)!important;color:#fff!important;border-color:rgba(255,255,255,.22)!important;box-shadow:0 5px 16px rgba(0,0,0,.2)!important}.chat-icon-btn.mic .app-icon{filter:brightness(0) invert(1)!important}.chat-icon-btn.mic.recording{background:#ffffff!important;color:#111!important}.chat-icon-btn.mic.recording .app-icon{filter:none!important}
 @media(max-width:700px){.chat-panel .chat-toy{width:58px!important;height:58px!important;font-size:42px!important}.chat-panel .toy-a{left:0!important;top:29vh!important}.chat-panel .toy-b{right:0!important;top:42vh!important}.chat-panel .toy-c{left:0!important;top:61vh!important}.chat-panel .toy-d{right:0!important;top:75vh!important}.chat-menu-grid{grid-template-columns:1fr 1fr}.chat-bubble{max-width:86%!important}}
 @media(prefers-reduced-motion:reduce){.chat-panel:after,.chat-panel .chat-toy{animation:none!important}}
+
+/* ===== مستقل‌سازی دفتر دوتایی: پیام‌رسان تمام‌صفحه ===== */
+#messengerOverlay{position:fixed;inset:0;width:100vw;height:100dvh;z-index:2147483000;display:none;overflow:hidden;background:#08040d;isolation:isolate;overscroll-behavior:none;}
+#messengerOverlay.is-open{display:block;}
+#messengerOverlay .messenger-shell{position:absolute;inset:0;width:100%;height:100%;display:flex;overflow:hidden;background:transparent;}
+#messengerOverlay .nook-panel.chat-panel{display:flex!important;flex:1 1 auto;flex-direction:column;width:100%!important;height:100dvh!important;min-height:100dvh!important;max-height:none!important;margin:0!important;border:0!important;border-radius:0!important;overflow:hidden!important;padding:0!important;}
+#messengerOverlay .chat-head{flex:0 0 auto;min-height:68px;z-index:30;padding:calc(env(safe-area-inset-top) + 9px) 12px 9px;}
+#messengerOverlay .chat-head-actions{margin-inline-start:auto;display:flex;align-items:center;gap:6px;}
+#messengerOverlay .chat-menu-btn{order:99;display:grid;place-items:center;width:40px;height:40px;border-radius:13px;font-size:25px;line-height:1;}
+#messengerOverlay .mobile-chat-back{display:grid!important;place-items:center;width:40px;height:40px;flex:0 0 40px;border-radius:13px;}
+#messengerOverlay .chat-author{flex:0 0 auto;z-index:29;margin:0;border-radius:0;}
+#messengerOverlay .chat-day{flex:0 0 auto;}
+#messengerOverlay .chat-messages{flex:1 1 auto!important;min-height:0!important;height:auto!important;max-height:none!important;overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scrolling:touch!important;overscroll-behavior:contain!important;touch-action:pan-y!important;}
+#messengerOverlay .chat-reactions{flex:0 0 auto;z-index:24;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;}
+#messengerOverlay .chat-compose{flex:0 0 auto;z-index:28;padding-bottom:calc(6px + env(safe-area-inset-bottom));}
+#messengerOverlay .chat-compose textarea{max-height:120px;}
+html.chat-overlay-open,body.chat-overlay-open{overflow:hidden!important;height:100%;overscroll-behavior:none!important;}
+body.chat-overlay-open{touch-action:none!important;}
+#messengerOverlay .chat-messages,#messengerOverlay textarea,#messengerOverlay button,#messengerOverlay input{touch-action:auto;}
+@media(max-width:700px){
+  #messengerOverlay .chat-head{padding:calc(env(safe-area-inset-top) + 8px) 9px 8px;min-height:64px;}
+  #messengerOverlay .chat-head-copy h3{font-size:15px;}
+  #messengerOverlay .chat-head-copy p{font-size:10px;}
+  #messengerOverlay .chat-avatar{width:43px;height:43px;border-radius:15px;}
+  #messengerOverlay .chat-author{padding:6px 8px!important;}
+  #messengerOverlay .chat-messages{padding:10px 9px 8px!important;}
+  #messengerOverlay .chat-reactions{padding:5px 9px 3px!important;}
+  #messengerOverlay .chat-compose{padding:5px 7px calc(5px + env(safe-area-inset-bottom))!important;}
+  #messengerOverlay .chat-compose-tools{padding:0 9px 7px!important;}
+}
 </style>
 
 <style id="timed-letters-style">
@@ -400,6 +430,8 @@ main>section.hero.active-section{display:grid!important;align-content:center;jus
 </style>
 </head>
 <body>
+<div id="messengerOverlay" aria-hidden="true" role="dialog" aria-label="دفتر دوتایی ما"><div class="messenger-shell" id="messengerShell"></div></div>
+
 <aside class="relationship-widget" id="relationshipWidget" aria-label="وضعیت رابطه ما"><div class="rw-head"><div class="rw-icon">😂</div><div><h4>وضعیت رابطه ما</h4><div class="rw-status">سیستم کل‌کل و قهر فعال است 😌</div></div></div><div class="rw-text" id="relationshipJoke">رابطه ما: ۵٪ عاشقانه، ۹۵٪ کل‌کل 😂❤️</div><div class="rw-dots" id="relationshipDots"></div></aside>
 <div id="stars"></div><div class="ambient-orb orb-a"></div><div class="ambient-orb orb-b"></div><div class="ambient-orb orb-c"></div><div id="particles"></div><div id="petals"></div><div class="glow g1"></div><div class="glow g2"></div>
 
@@ -1304,7 +1336,7 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
 (function(){
  const $=id=>document.getElementById(id), sheet=$('chatSuperSheet'), body=$('chatSheetBody'), title=$('chatSheetTitle'); if(!sheet)return;
  function openSheet(t,html){title.textContent=t;body.innerHTML=html;sheet.classList.add('show')}
- $('chatMenuBtn')?.addEventListener('click',()=>openSheet('⋮ گزینه‌های دفتر دوتایی','<div class="chat-menu-grid"><button class="chat-menu-item" data-menu="search"><span>🔎</span><div><b>جستجو</b><small>پیدا کردن پیام‌ها</small></div></button><button class="chat-menu-item" data-menu="pinned"><span>📌</span><div><b>سنجاق‌ها</b><small>پیام‌های سنجاق‌شده</small></div></button><button class="chat-menu-item" data-menu="starred"><span>⭐</span><div><b>مهم‌ها</b><small>پیام‌های ستاره‌دار</small></div></button><button class="chat-menu-item" data-menu="gallery"><span>🖼️</span><div><b>گالری</b><small>عکس‌ها و نقاشی‌ها</small></div></button><button class="chat-menu-item" data-menu="memories"><span>❤️</span><div><b>خاطرات</b><small>لحظه‌های ماندگار</small></div></button><button class="chat-menu-item" data-menu="theme"><span>🎭</span><div><b>تم چت</b><small>حال‌وهوای دفتر</small></div></button></div>'));
+ $('chatMenuBtn')?.addEventListener('click',()=>openSheet('⋮ گزینه‌های دفتر دوتایی','<div class="chat-menu-grid"><button class="chat-menu-item" data-menu="search"><span>🔎</span><div><b>جستجو</b><small>پیدا کردن پیام‌ها</small></div></button><button class="chat-menu-item" data-menu="pinned"><span>📌</span><div><b>سنجاق‌شده‌ها</b><small>پیام‌های سنجاق‌شده</small></div></button><button class="chat-menu-item" data-menu="starred"><span>⭐</span><div><b>پیام‌های مهم</b><small>پیام‌های ستاره‌دار</small></div></button><button class="chat-menu-item" data-menu="gallery"><span>🖼️</span><div><b>گالری</b><small>عکس‌ها و نقاشی‌ها</small></div></button><button class="chat-menu-item" data-menu="memories"><span>❤️</span><div><b>خاطرات</b><small>لحظه‌های ماندگار</small></div></button><button class="chat-menu-item" data-menu="theme"><span>🎭</span><div><b>تم چت</b><small>حال‌وهوای دفتر</small></div></button></div>'));
 
  function closeSheet(){sheet.classList.remove('show')}
  $('chatSheetClose')?.addEventListener('click',closeSheet);sheet.addEventListener('click',e=>{if(e.target===sheet)closeSheet()});
@@ -1428,6 +1460,69 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
       input.value=b.dataset.aiPrompt||'';
       input.focus();
     });
+  });
+})();
+</script>
+
+<script id="independent-messenger-js">
+(function(){
+  const overlay=document.getElementById('messengerOverlay');
+  const shell=document.getElementById('messengerShell');
+  const chat=document.querySelector('.nook-panel.chat-panel[data-panel="notes"]');
+  const openBtn=document.querySelector('.nook-tool[data-room="notes"]');
+  if(!overlay||!shell||!chat||!openBtn)return;
+
+  // The chat is physically detached from the scrolling Nook and lives in a fixed app layer.
+  shell.appendChild(chat);
+  let savedScrollY=0;
+
+  function openMessenger(){
+    savedScrollY=window.scrollY||document.documentElement.scrollTop||0;
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden','false');
+    document.documentElement.classList.add('chat-overlay-open');
+    document.body.classList.add('chat-overlay-open');
+    chat.classList.add('active');
+    requestAnimationFrame(()=>{
+      const b=document.getElementById('sharedNotes');
+      if(b)b.scrollTop=b.scrollHeight;
+    });
+  }
+
+  function closeMessenger(){
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('aria-hidden','true');
+    document.documentElement.classList.remove('chat-overlay-open');
+    document.body.classList.remove('chat-overlay-open');
+    window.scrollTo(0,savedScrollY);
+  }
+
+  // Capture phase prevents the old Nook-tab handler from treating the chat as an inline panel.
+  openBtn.addEventListener('click',function(e){
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    document.querySelectorAll('.nook-tool').forEach(t=>t.classList.toggle('active',t===openBtn));
+    openMessenger();
+  },true);
+
+  const back=document.getElementById('mobileChatBack');
+  back?.addEventListener('click',function(e){
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    closeMessenger();
+  },true);
+
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&overlay.classList.contains('is-open'))closeMessenger();
+  });
+
+  // Never let a swipe on the app shell move the page behind it; only the message list scrolls.
+  overlay.addEventListener('touchmove',function(e){
+    if(!e.target.closest('.chat-messages'))e.preventDefault();
+  },{passive:false});
+
+  window.addEventListener('resize',()=>{
+    if(overlay.classList.contains('is-open'))overlay.style.height=window.innerHeight+'px';
   });
 })();
 </script>
