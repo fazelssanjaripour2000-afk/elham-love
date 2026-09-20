@@ -75,6 +75,48 @@ main{position:relative;z-index:3;padding-top:90px}section{width:min(1120px,calc(
 body.nook-mood-night .secret-room{background:linear-gradient(145deg,rgba(28,25,65,.72),rgba(7,4,18,.9))}body.nook-mood-pink .secret-room{background:linear-gradient(145deg,rgba(85,20,55,.72),rgba(25,5,20,.88))}body.nook-mood-dream .secret-room{background:linear-gradient(145deg,rgba(40,22,80,.75),rgba(8,4,22,.9))}body.nook-mood-cozy .secret-room{background:linear-gradient(145deg,rgba(82,38,25,.58),rgba(25,7,13,.9))}
 @media(max-width:700px){.secret-room{padding:17px;border-radius:25px}.secret-room-head{align-items:flex-start}.room-orb{width:62px;height:62px;flex-basis:62px;border-radius:20px;font-size:28px}.nook-tools{grid-template-columns:repeat(2,1fr)}.nook-tool{padding:12px}.mood-grid{grid-template-columns:repeat(2,1fr)}.love-card{font-size:16px;min-height:120px}.panel-actions span{width:100%;margin:0}.nook-panel{padding:16px}}
 
+
+/* ===== Mobile Messenger Fullscreen ===== */
+.mobile-chat-back{display:none}
+@media(max-width:700px){
+  body.messenger-fullscreen{overflow:hidden!important;height:100dvh!important}
+  body.messenger-fullscreen main,body.messenger-fullscreen footer,body.messenger-fullscreen .topbar,
+  body.messenger-fullscreen .love-bot,body.messenger-fullscreen .relationship-widget{display:none!important}
+  body.messenger-fullscreen #nook{display:block!important;position:fixed!important;inset:0!important;width:100%!important;height:100dvh!important;min-height:100dvh!important;padding:0!important;margin:0!important;z-index:9990!important;background:#08040d!important}
+  body.messenger-fullscreen #nook .nook-box{width:100%!important;height:100%!important;max-width:none!important;margin:0!important}
+  body.messenger-fullscreen #nook .section-title,body.messenger-fullscreen #nook .secret-room-head,body.messenger-fullscreen #nook .nook-tools{display:none!important}
+  body.messenger-fullscreen #nook .secret-content{height:100%!important}
+  body.messenger-fullscreen #nook .secret-room{height:100%!important;max-width:none!important;border:0!important;border-radius:0!important;padding:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important}
+  body.messenger-fullscreen .nook-panels{height:100%!important}
+  body.messenger-fullscreen .nook-panel.active{display:flex!important;flex-direction:column!important;width:100%!important;height:100dvh!important;min-height:100dvh!important;max-height:none!important;overflow:hidden!important;border-radius:0!important;padding:0!important}
+  body.messenger-fullscreen .chat-panel .chat-head{padding:calc(env(safe-area-inset-top) + 10px) 12px 10px!important;flex:0 0 auto}
+  body.messenger-fullscreen .chat-author{flex:0 0 auto;margin:7px 8px 2px!important}
+  body.messenger-fullscreen .chat-day{flex:0 0 auto;margin:5px 0!important}
+  body.messenger-fullscreen .chat-messages{flex:1 1 auto!important;min-height:0!important;max-height:none!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch!important;padding:10px 9px 8px!important}
+  body.messenger-fullscreen .chat-reactions{flex:0 0 auto;overflow-x:auto;flex-wrap:nowrap;padding:5px 9px 3px!important;scrollbar-width:none}
+  body.messenger-fullscreen .chat-compose{flex:0 0 auto;padding:5px 7px calc(5px + env(safe-area-inset-bottom))!important}
+  body.messenger-fullscreen .chat-compose-tools{flex:0 0 auto;padding:0 9px 7px!important}
+  body.messenger-fullscreen .chat-head-actions{gap:5px}
+  body.messenger-fullscreen .chat-lock{display:none}
+  body.messenger-fullscreen .mobile-chat-back{display:grid!important;place-items:center;width:34px;height:34px;flex:0 0 34px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(255,255,255,.06);color:#fff}
+  body.messenger-fullscreen .drawing-shell{height:100dvh!important;display:flex!important;flex-direction:column!important;padding:0!important}
+  body.messenger-fullscreen .drawing-head{flex:0 0 auto;padding:calc(env(safe-area-inset-top) + 9px) 10px 7px!important;margin:0!important}
+  body.messenger-fullscreen .drawing-head p{display:none}
+  body.messenger-fullscreen .drawing-board-wrap{flex:1 1 auto!important;min-height:0!important;border-radius:0!important;border-left:0!important;border-right:0!important}
+  body.messenger-fullscreen #loveCanvas{height:100%!important;width:100%!important;display:block!important}
+  body.messenger-fullscreen .draw-tools{flex:0 0 auto;overflow-x:auto;flex-wrap:nowrap!important;padding:6px 7px;margin:0!important;scrollbar-width:none;background:rgba(7,4,12,.92);-webkit-overflow-scrolling:touch}
+  body.messenger-fullscreen .draw-tool,.draw-color{flex:0 0 auto;white-space:nowrap}
+  body.messenger-fullscreen .draw-range{flex:0 0 auto;min-width:145px}
+  body.messenger-fullscreen .draw-actions{flex:0 0 auto;grid-template-columns:repeat(3,1fr)!important;padding:5px 7px calc(5px + env(safe-area-inset-bottom));background:rgba(7,4,12,.96)}
+  body.messenger-fullscreen .draw-actions button{min-height:40px;padding:7px 5px}
+  body.messenger-fullscreen .draw-tip{display:none}
+}
+@media(max-width:380px){
+  body.messenger-fullscreen .chat-icon-btn{width:34px;height:34px;flex-basis:34px}
+  body.messenger-fullscreen .chat-send{width:37px;height:37px;flex-basis:37px}
+  body.messenger-fullscreen .chat-input-wrap textarea{min-height:37px!important}
+}
+
 .modal{position:fixed;inset:0;z-index:500;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.68);backdrop-filter:blur(8px);padding:18px}.modal.show{display:flex}.modal-card{width:min(620px,100%);max-height:90vh;overflow:auto;background:#160a1a;border:1px solid var(--line);border-radius:28px;padding:28px;box-shadow:var(--shadow);position:relative}.close{position:absolute;left:15px;top:12px;border:0;background:rgba(255,255,255,.08);color:white;border-radius:50%;width:35px;height:35px}.modal-card input{width:100%;padding:13px 15px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:white;outline:none;margin:10px 0}.detail{text-align:center;line-height:2;font-size:18px}.wrong{color:#ff8cae;min-height:25px}
 .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,30px);z-index:800;background:rgba(20,8,25,.92);border:1px solid var(--line);padding:12px 18px;border-radius:16px;opacity:0;pointer-events:none;transition:.3s;max-width:90%;text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}
 footer{text-align:center;padding:50px 20px;color:#b89baa;font-size:13px}.ripple{position:fixed;border-radius:50%;border:2px solid rgba(255,130,185,.7);pointer-events:none;z-index:700;animation:ripple .7s forwards}@keyframes ripple{to{width:140px;height:140px;margin:-70px;opacity:0}}.shock{position:fixed;pointer-events:none;z-index:900;font-size:25px;animation:shock .75s forwards}@keyframes shock{to{transform:translate(var(--x),var(--y)) rotate(35deg) scale(.4);opacity:0}}
@@ -440,7 +482,7 @@ main>section.hero.active-section{display:grid!important;align-content:center;jus
   <div class="chat-head">
     <div class="chat-avatar-wrap"><div class="chat-avatar">❤️</div><span class="chat-online"></span></div>
     <div class="chat-head-copy"><h3>دفتر دوتایی ما</h3><p>فاضل ❤️ الهام · فقط برای خودمون</p></div>
-    <div class="chat-head-actions"><span class="chat-lock"><span class="app-icon app-icon-lock" aria-hidden="true"></span> خصوصی</span><button type="button" class="chat-mini-btn app-icon-btn" id="chatScrollBottom" title="رفتن به آخرین پیام"><span class="app-icon app-icon-down" aria-hidden="true"></span></button></div>
+    <div class="chat-head-actions"><button type="button" class="mobile-chat-back" id="mobileChatBack" title="بازگشت">‹</button><span class="chat-lock"><span class="app-icon app-icon-lock" aria-hidden="true"></span> خصوصی</span><button type="button" class="chat-mini-btn app-icon-btn" id="chatScrollBottom" title="رفتن به آخرین پیام"><span class="app-icon app-icon-down" aria-hidden="true"></span></button></div>
   </div>
   <div class="shared-author chat-author"><span>الان کیه؟</span><button type="button" class="author-btn" data-author="فاضل"><span class="presence-dot" data-presence="فاضل"></span><span class="author-avatar-mini">F</span><span>فاضل</span><span class="presence-label" data-presence-label="فاضل">آفلاین</span></button><button type="button" class="author-btn" data-author="الهام"><span class="presence-dot" data-presence="الهام"></span><span class="author-avatar-mini elham">E</span><span>الهام</span><span class="presence-label" data-presence-label="الهام">آفلاین</span></button><span id="cloudStatus" class="cloud-status"><span class="cloud-pulse"></span><span id="cloudStatusText">☁️ در حال اتصال...</span></span></div>
   <div class="chat-day">امروز ❤️</div>
@@ -564,7 +606,9 @@ $('unlockBtn').addEventListener('click',unlockNook);$('nookPass').addEventListen
 (function setupNookRoom(){
   const secret=$('nookSecret'); if(!secret)return;
   const tabs=[...document.querySelectorAll('.nook-tool')], panels=[...document.querySelectorAll('.nook-panel')];
-  tabs.forEach(tab=>tab.addEventListener('click',()=>{const id=tab.dataset.room;tabs.forEach(t=>t.classList.toggle('active',t===tab));panels.forEach(p=>p.classList.toggle('active',p.dataset.panel===id))}));
+  function setMessengerFullscreen(on){document.body.classList.toggle('messenger-fullscreen',!!on);if(on) window.scrollTo(0,0);}
+  tabs.forEach(tab=>tab.addEventListener('click',()=>{const id=tab.dataset.room;tabs.forEach(t=>t.classList.toggle('active',t===tab));panels.forEach(p=>p.classList.toggle('active',p.dataset.panel===id));if(id==='notes'||id==='drawing'){setMessengerFullscreen(true);if(id==='drawing'){requestAnimationFrame(()=>{try{resize(true)}catch(e){}})}}else setMessengerFullscreen(false);}));
+  $('mobileChatBack')?.addEventListener('click',()=>{setMessengerFullscreen(false);document.querySelector('.nook-tool[data-room="notes"]').classList.add('active');});
   const note=$('nookNote'), saved=$('noteSaved');
   try{note.value=localStorage.getItem('fazelElhamNookNote')||''; if(note.value)saved.textContent='یادداشت قبلی آماده است ❤️'}catch(e){}
   $('saveNookNote').addEventListener('click',()=>{try{localStorage.setItem('fazelElhamNookNote',note.value);saved.textContent='ذخیره شد؛ فقط برای همین دستگاه ❤️';toast('یادداشت گوشه دنج ذخیره شد 📝❤️')}catch(e){toast('ذخیره روی این مرورگر در دسترس نیست')}});
@@ -616,8 +660,12 @@ const relationshipJokes=['😂 رابطه ما: ۱۰٪ آرامش، ۹۰٪ کل�
  $('drawDownload').addEventListener('click',()=>{let a=document.createElement('a');a.download='Fazel-Elham-Drawing.png';a.href=canvas.toDataURL('image/png');a.click()});
  $('drawClose').addEventListener('click',()=>document.querySelector('.nook-tool[data-room="notes"]').click());
  $('drawSend').addEventListener('click',async()=>{let data=canvas.toDataURL('image/png');let note=$('nookNote');note.value='🎨 نقاشی مشترک ما\n'+data;document.querySelector('.nook-tool[data-room="notes"]').click();setTimeout(()=>$('saveNookNote')?.click(),150);$('drawStatus').textContent='در حال فرستادن نقاشی... 💌'});
- window.addEventListener('resize',()=>resize(true));setTimeout(()=>{resize(false);history=[canvas.toDataURL('image/png')]},250);
+ window.addEventListener('resize',()=>{if(document.querySelector('.nook-panel[data-panel=\"drawing\"].active')) resize(true)});setTimeout(()=>{resize(false);history=[canvas.toDataURL('image/png')]},250);
 })();
+
+window.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('messenger-fullscreen')){document.body.classList.remove('messenger-fullscreen');}});
+window.addEventListener('orientationchange',()=>setTimeout(()=>{try{if(document.body.classList.contains('messenger-fullscreen')){const c=document.getElementById('loveCanvas');if(c&&document.querySelector('.nook-panel[data-panel="drawing"].active')){const r=c.getBoundingClientRect();if(r.width>0&&r.height>0) c.dispatchEvent(new Event('canvas-visible-resize'))}}}catch(e){}},180));
+
 
 let jokeIndex=0;
 function setupRelationshipWidget(){const text=$('relationshipJoke'),dots=$('relationshipDots');dots.innerHTML=relationshipJokes.map((_,i)=>`<span class="rw-dot ${i===0?'active':''}></span>`).join('');setInterval(()=>{text.style.opacity='0';setTimeout(()=>{jokeIndex=(jokeIndex+1)%relationshipJokes.length;text.textContent=relationshipJokes[jokeIndex];[...dots.children].forEach((d,i)=>d.classList.toggle('active',i===jokeIndex));text.style.opacity='1'},280)},isMobile?6000:4500)}
