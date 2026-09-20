@@ -245,6 +245,9 @@ main>section.hero.active-section{display:grid!important;align-content:center;jus
 }
 </style>
 
+<style>
+.shared-author{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 12px;padding:10px 12px;border:1px solid rgba(255,255,255,.08);border-radius:16px;background:rgba(255,255,255,.035);font-size:11px;color:#b99aaa}.author-btn{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;border-radius:12px;padding:8px 11px;cursor:pointer;transition:.25s}.author-btn:hover,.author-btn.active{transform:translateY(-2px);border-color:rgba(255,100,170,.55);background:rgba(255,80,155,.13);box-shadow:0 0 18px rgba(255,60,140,.12)}.cloud-status{margin-right:auto;color:#8fae9f;font-size:10px}.cloud-status.offline{color:#d9a3a3}.shared-notes{display:grid;gap:10px;margin-top:18px;max-height:330px;overflow:auto;padding-left:2px}.shared-note{padding:13px 14px;border-radius:17px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);animation:noteIn .45s ease}.shared-note.mine{border-color:rgba(255,100,170,.22);background:linear-gradient(145deg,rgba(255,80,155,.08),rgba(255,255,255,.035))}.shared-note-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:7px;font-size:10px;color:#a98d9d}.shared-note-head b{color:#ffd4e5;font-size:11px}.shared-note-body{white-space:pre-wrap;line-height:1.9;color:#eee;font-size:13px}.note-delete{float:left;border:0;background:transparent;color:#9c7f8d;cursor:pointer;font-size:11px}.empty-notes{text-align:center;padding:24px;color:#866d7b;font-size:11px}.note-error{color:#ffb0c5;font-size:10px;margin-top:8px}@keyframes noteIn{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}@media(max-width:700px){.shared-author{gap:6px}.author-btn{padding:7px 9px}.cloud-status{width:100%;margin:0}.shared-notes{max-height:280px}}
+</style>
 </head>
 <body>
 <aside class="relationship-widget" id="relationshipWidget" aria-label="وضعیت رابطه ما"><div class="rw-head"><div class="rw-icon">😂</div><div><h4>وضعیت رابطه ما</h4><div class="rw-status">سیستم کل‌کل و قهر فعال است 😌</div></div></div><div class="rw-text" id="relationshipJoke">رابطه ما: ۵٪ عاشقانه، ۹۵٪ کل‌کل 😂❤️</div><div class="rw-dots" id="relationshipDots"></div></aside>
@@ -361,7 +364,7 @@ main>section.hero.active-section{display:grid!important;align-content:center;jus
     <button class="nook-tool" data-room="time"><span>⏳</span><b>لحظه‌مون</b><small>یک تایمر برای یک قرار کوچک</small></button>
   </div>
   <div class="nook-panels">
-    <div class="nook-panel active" data-panel="notes"><div class="panel-title"><span>📝</span><div><h3>دفتر دوتایی ما</h3><p>هرچی دوست داری اینجا بنویس؛ روی همین دستگاه می‌مونه.</p></div></div><textarea id="nookNote" placeholder="مثلاً: امروز دلم خواست بهت بگم... ❤️"></textarea><div class="panel-actions"><button class="btn primary" id="saveNookNote">ذخیره یادداشت ❤️</button><button class="ghost-btn" id="clearNookNote">پاک کردن</button><span id="noteSaved">هنوز چیزی ذخیره نشده</span></div></div>
+    <div class="nook-panel active" data-panel="notes"><div class="panel-title"><span>📝</span><div><h3>دفتر دوتایی ما</h3><p>اینجا هر دو نفر می‌تونین بنویسین و نوشته‌ها بین گوشی‌ها همگام می‌شن ❤️</p></div></div><div class="shared-author"><span>من:</span><button type="button" class="author-btn" data-author="فاضل">👨🏻 فاضل</button><button type="button" class="author-btn" data-author="الهام">👩🏻 الهام</button><span id="cloudStatus" class="cloud-status">☁️ در حال اتصال...</span></div><textarea id="nookNote" placeholder="مثلاً: امروز دلم خواست بهت بگم... ❤️"></textarea><div class="panel-actions"><button class="btn primary" id="saveNookNote">ارسال به دفتر ❤️</button><button class="ghost-btn" id="clearNookNote">پاک کردن</button><span id="noteSaved">هنوز چیزی نوشته نشده</span></div><div id="sharedNotes" class="shared-notes"><div class="empty-notes">هنوز نوشته‌ای نیست... اولین نامه رو تو بنویس 💌</div></div></div>
     <div class="nook-panel" data-panel="mood"><div class="panel-title"><span>🕯️</span><div><h3>نور و حالِ اتاق</h3><p>یکی از فضاها رو انتخاب کن تا حال‌وهوای گوشه دنج عوض بشه.</p></div></div><div class="mood-grid"><button data-mood="night">🌙<b>شب آرام</b></button><button data-mood="pink">🌸<b>عاشقانه</b></button><button data-mood="dream">✨<b>رویایی</b></button><button data-mood="cozy">🔥<b>گرم و دنج</b></button></div></div>
     <div class="nook-panel" data-panel="cards"><div class="panel-title"><span>💌</span><div><h3>یک کارت برای تو</h3><p>دکمه رو بزن و یک پیام مخصوص بگیر.</p></div></div><div class="love-card" id="loveCard">«هرجا باشی، یه گوشه از قلبم همیشه برای تو روشنه.» ❤️</div><button class="btn primary" id="newLoveCard">یکی دیگه بده ✨</button></div>
     <div class="nook-panel" data-panel="time"><div class="panel-title"><span>⏳</span><div><h3>قرار ۵ دقیقه‌ای</h3><p>تایمر رو بزن؛ پنج دقیقه فقط برای خودتون.</p></div></div><div class="cozy-timer" id="cozyTimer">05:00</div><button class="btn primary" id="startCozyTimer">شروع لحظه‌مون ❤️</button><p id="cozyTimerMsg" class="timer-msg">وقتی شروعش کردی، گوشی رو کنار بذار و فقط با هم باشین.</p></div>
@@ -967,5 +970,34 @@ setInterval(changeBotMessage,5000);
 })();
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  const SUPABASE_URL='https://evdkszuroxabkbedqkvs.supabase.co';
+  const SUPABASE_KEY='sb_publishable_tFJD3yr__Ju7ZitA0u4kBQ_f9PkaVGw';
+  if(!window.supabase?.createClient) return;
+  const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+  const ROOM='11111111-1111-1111-1111-111111111111';
+  let currentUser=null;
+  let author=localStorage.getItem('fazelElhamAuthor')||'فاضل';
+  const status=document.getElementById('cloudStatus'), notesBox=document.getElementById('sharedNotes'), note=document.getElementById('nookNote'), saved=document.getElementById('noteSaved');
+  const esc=v=>String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+  function setStatus(t,off=false){if(!status)return;status.textContent=t;status.classList.toggle('offline',off)}
+  function setAuthor(v){author=v;localStorage.setItem('fazelElhamAuthor',v);document.querySelectorAll('.author-btn').forEach(b=>b.classList.toggle('active',b.dataset.author===v));}
+  document.querySelectorAll('.author-btn').forEach(b=>b.addEventListener('click',()=>setAuthor(b.dataset.author)));
+  setAuthor(author);
+  function renderNotes(rows){
+    if(!notesBox)return;
+    if(!rows.length){notesBox.innerHTML='<div class="empty-notes">هنوز نوشته‌ای نیست... اولین نامه رو تو بنویس 💌</div>';return;}
+    notesBox.innerHTML=rows.map(r=>{const mine=currentUser&&r.author_id===currentUser.id;const when=new Date(r.created_at).toLocaleString('fa-IR',{dateStyle:'short',timeStyle:'short'});return `<article class="shared-note ${mine?'mine':''}"><div class="shared-note-head"><b>${esc(r.author_name)} ${mine?'✨':''}</b><span>${esc(when)}</span></div><div class="shared-note-body">${esc(r.content)}</div>${mine?`<button class="note-delete" data-id="${esc(r.id)}">حذف نوشته</button>`:''}</article>`}).join('');
+    notesBox.querySelectorAll('.note-delete').forEach(b=>b.addEventListener('click',async()=>{const {error}=await db.from('love_notes').delete().eq('id',b.dataset.id);if(error)toast('حذف نشد؛ دوباره امتحان کن 🥹')}));
+  }
+  async function loadNotes(){const {data,error}=await db.from('love_notes').select('*').eq('room_id',ROOM).order('created_at',{ascending:false}).limit(100);if(error){setStatus('⚠️ اتصال دفتر برقرار نشد',true);console.error(error);return}renderNotes(data||[]);setStatus('☁️ دفتر آنلاین است')}
+  async function init(){setStatus('☁️ در حال ورود...');let {data:{session}}=await db.auth.getSession();if(!session){const r=await db.auth.signInAnonymously();if(r.error){setStatus('⚠️ ورود آنلاین فعال نیست: '+(r.error?.message||'خطا'),true);console.error(r.error);return}session=r.data.session}currentUser=session?.user||null;await loadNotes();db.channel('love-notes-live').on('postgres_changes',{event:'*',schema:'public',table:'love_notes',filter:`room_id=eq.${ROOM}`},()=>loadNotes()).subscribe(st=>{if(st==='SUBSCRIBED')setStatus('☁️ همگام‌سازی لحظه‌ای فعال است')})}
+  document.getElementById('saveNookNote')?.addEventListener('click',async()=>{const content=(note?.value||'').trim();if(!content)return toast('اول یه چیزی بنویس ❤️');if(!author){toast('اول مشخص کن فاضلی یا الهام 🌸');return}if(!currentUser){toast('دفتر هنوز آنلاین نشده؛ چند لحظه صبر کن');return}const {error}=await db.from('love_notes').insert({room_id:ROOM,author_id:currentUser.id,author_name:author,content});if(error){console.error('love_notes insert error:',error);saved.textContent='خطا: '+(error.message||'ارسال نشد');toast('ارسال نشد: '+(error.message||'خطای ناشناخته'));return}note.value='';saved.textContent='با موفقیت در دفتر مشترک ثبت شد ❤️';toast('نوشته‌ات به دفتر مشترک اضافه شد 💌');loadNotes()});
+  document.getElementById('clearNookNote')?.addEventListener('click',()=>{if(note)note.value='';if(saved)saved.textContent='متن پاک شد'});
+  init();
+})();
+</script>
 </body>
 </html>
