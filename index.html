@@ -571,7 +571,23 @@ body:after{opacity:.45!important;animation:mobileStars 8s linear infinite!import
 .bonk-message-layer{z-index:999!important;inset:0!important;display:block!important;pointer-events:none!important}
 .bonk-float-msg{position:absolute!important;top:6%!important;left:50%!important;transform:translateX(-50%)!important;z-index:1000!important;width:92%!important;color:#fff!important;font-weight:800!important;font-size:clamp(20px,6vw,32px)!important;line-height:1.55!important;text-align:center!important;background:transparent!important;border:0!important;box-shadow:none!important;text-shadow:0 3px 18px rgba(0,0,0,.65),0 0 24px rgba(255,80,170,.7)!important}
 @media(max-width:600px){.bonk-stage{min-height:560px!important}.bonk-character{transform:scale(.92)!important;transform-origin:center 72%!important}.bonk-float-msg{top:4%!important;width:94%!important;font-size:21px!important;padding:4px!important}.bonk-hand{left:1%!important}.bonk-pillow{right:1%!important}.bonk-doll{left:1%!important}.bonk-slipper{right:1%!important}.bonk-cushion{right:0!important}}
-</style></head>
+</style>
+<style id="chat-pro-polish-v4">
+/* Premium messenger polish */
+body.messenger-fullscreen #messengerOverlay .chat-panel{background:linear-gradient(180deg,rgba(19,8,28,.72),rgba(8,5,14,.82))!important;backdrop-filter:blur(18px) saturate(125%);}
+body.messenger-fullscreen .chat-messages{scroll-behavior:smooth!important;scrollbar-width:thin;scrollbar-color:rgba(255,180,235,.42) transparent;overscroll-behavior-y:contain;scroll-padding:18px 0;touch-action:pan-y;}
+body.messenger-fullscreen .chat-messages::-webkit-scrollbar{width:5px}
+body.messenger-fullscreen .chat-messages::-webkit-scrollbar-track{background:transparent}
+body.messenger-fullscreen .chat-messages::-webkit-scrollbar-thumb{background:linear-gradient(180deg,rgba(255,185,236,.55),rgba(180,120,255,.38));border-radius:999px}
+body.messenger-fullscreen .chat-messages{padding:14px 10px 14px!important;}
+body.messenger-fullscreen .chat-bubble{box-shadow:0 8px 26px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(10px);}
+body.messenger-fullscreen .chat-head{background:linear-gradient(180deg,rgba(24,10,35,.92),rgba(18,8,27,.68))!important;border-bottom:1px solid rgba(255,255,255,.09);box-shadow:0 8px 30px rgba(0,0,0,.18);backdrop-filter:blur(18px);}
+body.messenger-fullscreen .chat-compose{background:linear-gradient(180deg,rgba(12,7,18,.45),rgba(8,5,13,.9))!important;border-top:1px solid rgba(255,255,255,.08);backdrop-filter:blur(18px);}
+body.messenger-fullscreen .chat-compose textarea,body.messenger-fullscreen .chat-compose input{box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 5px 20px rgba(0,0,0,.15);border-color:rgba(255,255,255,.12)!important;}
+@media(max-width:600px){body.messenger-fullscreen .chat-messages{padding:12px 8px 16px!important;scrollbar-width:none!important;}body.messenger-fullscreen .chat-messages::-webkit-scrollbar{display:none!important;}body.messenger-fullscreen .chat-bubble{max-width:82%!important;border-radius:18px!important;}body.messenger-fullscreen .chat-head{box-shadow:0 6px 24px rgba(0,0,0,.22);}}
+</style>
+
+</head>
 <body>
 <div aria-hidden="true" aria-label="دفتر دوتایی ما" id="messengerOverlay" role="dialog"><div class="messenger-shell" id="messengerShell"></div></div>
 <aside aria-label="وضعیت رابطه ما" class="relationship-widget" id="relationshipWidget"><div class="rw-head"><div class="rw-icon">😂</div><div><h4>وضعیت رابطه ما</h4><div class="rw-status">سیستم کل‌کل و قهر فعال است 😌</div></div></div><div class="rw-text" id="relationshipJoke">رابطه ما: ۵٪ عاشقانه، ۹۵٪ کل‌کل 😂❤️</div><div class="rw-dots" id="relationshipDots"></div></aside>
