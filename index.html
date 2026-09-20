@@ -126,6 +126,12 @@ footer{text-align:center;padding:50px 20px;color:#b89baa;font-size:13px}.ripple{
   .relationship-widget{position:fixed!important;top:82px!important;bottom:auto!important;left:8px!important;right:auto!important;width:calc(50% - 14px)!important;max-width:185px!important;z-index:960!important;}
   .love-bot{position:fixed!important;top:82px!important;bottom:auto!important;right:8px!important;left:auto!important;width:calc(50% - 14px)!important;max-width:185px!important;z-index:961!important;}
 }
+
+/* دفتر دوتایی — ظاهر پیام‌رسان خصوصی */
+.chat-panel{padding:0!important;overflow:hidden;background:linear-gradient(180deg,rgba(19,9,22,.72),rgba(7,3,10,.5));border-color:rgba(255,110,175,.16)!important}
+.chat-head{display:flex;align-items:center;gap:12px;padding:15px 17px;border-bottom:1px solid rgba(255,255,255,.08);background:linear-gradient(90deg,rgba(255,70,150,.10),rgba(120,70,255,.07));text-align:right}
+.chat-avatar-wrap{position:relative;flex:0 0 auto}.chat-avatar{width:48px;height:48px;border-radius:17px;display:grid;place-items:center;background:linear-gradient(145deg,rgba(255,80,155,.24),rgba(130,80,255,.18));border:1px solid rgba(255,255,255,.12);font-size:23px;box-shadow:0 0 24px rgba(255,70,155,.13)}.chat-online{position:absolute;right:-1px;bottom:-1px;width:12px;height:12px;border-radius:50%;background:#65e59b;border:3px solid #130a16}.chat-head-copy{min-width:0;flex:1}.chat-head-copy h3{margin:0;font-size:14px}.chat-head-copy p{margin:3px 0 0;color:#a98d9d;font-size:9px}.chat-head-actions{display:flex;align-items:center;gap:7px}.chat-lock{font-size:9px;color:#b99aaa;border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:6px 8px;background:rgba(255,255,255,.035)}.chat-mini-btn{width:31px;height:31px;border:1px solid rgba(255,255,255,.1);border-radius:11px;background:rgba(255,255,255,.05);color:#fff;cursor:pointer}.chat-author{margin:10px 12px 4px!important}.chat-day{text-align:center;color:#806777;font-size:9px;margin:8px 0}.chat-messages{max-height:390px!important;min-height:260px;padding:15px 13px!important;margin:0!important;display:flex!important;flex-direction:column;gap:3px;background:radial-gradient(circle at 50% 100%,rgba(255,70,150,.07),transparent 55%),rgba(0,0,0,.12)!important;border:0!important;scroll-behavior:smooth}.chat-messages .empty-notes{width:100%}.chat-bubble-row{display:flex;width:100%;margin:3px 0}.chat-bubble-row.mine{justify-content:flex-start}.chat-bubble-row.theirs{justify-content:flex-end}.chat-bubble{max-width:min(82%,430px);padding:10px 12px 7px;border-radius:18px 18px 5px 18px;background:linear-gradient(145deg,rgba(255,70,150,.17),rgba(120,70,255,.10));border:1px solid rgba(255,100,170,.18);box-shadow:0 8px 22px rgba(0,0,0,.13);position:relative;animation:chatBubbleIn .35s ease}.chat-bubble-row.theirs .chat-bubble{border-radius:18px 18px 18px 5px;background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.09)}.chat-bubble-name{font-size:9px;color:#ffc6dc;margin-bottom:4px}.chat-bubble-text{white-space:pre-wrap;line-height:1.85;color:#fff;font-size:12px;word-break:break-word}.chat-bubble-meta{display:flex;justify-content:flex-start;gap:5px;align-items:center;margin-top:4px;color:#8f7786;font-size:8px}.chat-ticks{color:#74b8ff;font-size:10px}.chat-reaction-row{display:flex;gap:3px;margin-top:5px}.chat-react{border:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.18);border-radius:10px;padding:2px 6px;color:#fff;font-size:10px;cursor:pointer}.chat-delete{border:0;background:transparent;color:#806777;font-size:8px;cursor:pointer;margin-right:auto}.chat-typing{display:none;align-items:center;gap:4px;width:max-content;margin:0 15px 4px;padding:7px 10px;border-radius:14px;background:rgba(255,255,255,.045);color:#8f7786;font-size:8px}.chat-typing.show{display:flex}.chat-typing span{width:4px;height:4px;border-radius:50%;background:#d99ab7;animation:chatDots 1s infinite}.chat-typing span:nth-child(2){animation-delay:.15s}.chat-typing span:nth-child(3){animation-delay:.3s}.chat-typing b{font-weight:400;margin-right:3px}.chat-reactions{display:flex;gap:6px;flex-wrap:wrap;padding:9px 13px 4px}.chat-reactions button{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.035);border-radius:12px;padding:5px 8px;cursor:pointer;font-size:13px;transition:.2s}.chat-reactions button:hover{transform:translateY(-2px);background:rgba(255,80,155,.12)}.chat-compose{display:flex;align-items:flex-end;gap:7px;padding:9px 11px 5px}.chat-icon-btn{width:38px;height:38px;flex:0 0 38px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.045);color:#fff;border-radius:13px;cursor:pointer;font-size:17px}.chat-icon-btn:hover,.chat-send:hover{transform:translateY(-1px);border-color:rgba(255,100,170,.4);background:rgba(255,80,155,.11)}.chat-icon-btn.mic.recording{background:rgba(255,55,95,.18);animation:micPulse 1s infinite}.chat-input-wrap{position:relative;flex:1}.chat-input-wrap textarea{min-height:42px!important;max-height:120px;resize:none!important;padding:11px 12px!important;border-radius:16px!important;font-size:12px!important;line-height:1.8!important;margin:0}.chat-send{width:42px;height:42px;border:1px solid rgba(255,100,170,.25);border-radius:15px;background:linear-gradient(145deg,rgba(255,80,155,.22),rgba(130,80,255,.16));color:#fff;cursor:pointer;font-size:20px;flex:0 0 42px}.chat-compose-tools{display:flex;align-items:center;gap:8px;padding:0 12px 11px}.chat-compose-tools button:first-child{border:0;background:transparent;color:#ffb8d4;font-size:10px;cursor:pointer}.chat-compose-tools .ghost-btn{padding:5px 8px;font-size:9px}.chat-compose-tools span{margin-right:auto!important;font-size:8px!important;color:#7e6a76!important}.chat-file-name{position:absolute;bottom:2px;right:10px;font-size:8px;color:#e8a7c1;max-width:80%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.chat-voice-preview{margin:0 12px 12px;padding:9px 11px;border-radius:14px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);font-size:10px;color:#cda7b7}.chat-voice-preview audio{width:100%;height:30px}.chat-bubble.voice{padding:9px}.chat-bubble.voice .voice-line{display:flex;align-items:center;gap:8px;color:#ffd3e3}.chat-bubble.voice .voice-wave{letter-spacing:2px;opacity:.7}@keyframes chatBubbleIn{from{opacity:0;transform:translateY(7px) scale(.98)}to{opacity:1;transform:none}}@keyframes chatDots{50%{transform:translateY(-3px);opacity:.5}}@keyframes micPulse{50%{box-shadow:0 0 0 7px rgba(255,70,100,.06)}}
+@media(max-width:700px){.chat-lock{display:none}.chat-messages{max-height:46vh!important}.chat-bubble{max-width:88%}.chat-head{padding:12px}.chat-avatar{width:44px;height:44px}}
 </style>
 
 <style id="timed-letters-style">
@@ -370,7 +376,27 @@ main>section.hero.active-section{display:grid!important;align-content:center;jus
     <button class="nook-tool" data-room="time"><span>⏳</span><b>لحظه‌مون</b><small>یک تایمر برای یک قرار کوچک</small></button><button class="nook-tool" data-room="counselor"><span>🧠</span><b>مشاور رابطه</b><small>حرف بزنیم و بهتر همدیگه رو بفهمیم</small></button>
   </div>
   <div class="nook-panels">
-    <div class="nook-panel active" data-panel="notes"><div class="panel-title"><span>📝</span><div><h3>دفتر دوتایی ما</h3><p>اینجا هر دو نفر می‌تونین بنویسین و نوشته‌ها بین گوشی‌ها همگام می‌شن ❤️</p></div></div><div class="shared-author"><span>من:</span><button type="button" class="author-btn" data-author="فاضل">👨🏻 فاضل</button><button type="button" class="author-btn" data-author="الهام">👩🏻 الهام</button><span id="cloudStatus" class="cloud-status">☁️ در حال اتصال...</span></div><textarea id="nookNote" placeholder="مثلاً: امروز دلم خواست بهت بگم... ❤️"></textarea><div class="panel-actions"><button class="btn primary" id="saveNookNote">ارسال به دفتر ❤️</button><button class="ghost-btn" id="clearNookNote">پاک کردن</button><span id="noteSaved">هنوز چیزی نوشته نشده</span></div><div id="sharedNotes" class="shared-notes"><div class="empty-notes">هنوز نوشته‌ای نیست... اولین نامه رو تو بنویس 💌</div></div></div>
+    <div class="nook-panel active chat-panel" data-panel="notes">
+  <div class="chat-head">
+    <div class="chat-avatar-wrap"><div class="chat-avatar">❤️</div><span class="chat-online"></span></div>
+    <div class="chat-head-copy"><h3>دفتر دوتایی ما</h3><p>فاضل ❤️ الهام · فقط برای خودمون</p></div>
+    <div class="chat-head-actions"><span class="chat-lock">🔐 خصوصی</span><button type="button" class="chat-mini-btn" id="chatScrollBottom" title="رفتن به آخرین پیام">↓</button></div>
+  </div>
+  <div class="shared-author chat-author"><span>الان کیه؟</span><button type="button" class="author-btn" data-author="فاضل">👨🏻 فاضل</button><button type="button" class="author-btn" data-author="الهام">👩🏻 الهام</button><span id="cloudStatus" class="cloud-status">☁️ در حال اتصال...</span></div>
+  <div class="chat-day">امروز ❤️</div>
+  <div id="chatTyping" class="chat-typing" aria-live="polite"><span></span><span></span><span></span><b>در حال نوشتن...</b></div>
+  <div id="sharedNotes" class="shared-notes chat-messages"><div class="empty-notes">هنوز پیامی نیست... اولین پیام رو تو بفرست 💌</div></div>
+  <div class="chat-reactions" id="chatReactions"><button type="button" data-emoji="❤️">❤️</button><button type="button" data-emoji="😘">😘</button><button type="button" data-emoji="😂">😂</button><button type="button" data-emoji="🥹">🥹</button><button type="button" data-emoji="🔥">🔥</button><button type="button" data-emoji="💋">💋</button></div>
+  <div class="chat-compose">
+    <button type="button" class="chat-icon-btn" id="chatEmojiBtn" title="ایموجی">😊</button>
+    <label class="chat-icon-btn" title="پیوست"><input id="chatFile" type="file" accept="image/*,.pdf,.txt,.doc,.docx" hidden>📎</label>
+    <div class="chat-input-wrap"><textarea id="nookNote" rows="1" placeholder="یه چیزی برای ما بنویس... ❤️"></textarea><span id="chatFileName" class="chat-file-name"></span></div>
+    <button type="button" class="chat-icon-btn mic" id="chatMic" title="پیام صوتی">🎙️</button>
+    <button type="button" class="chat-send" id="saveNookNote" title="ارسال">➤</button>
+  </div>
+  <div class="chat-compose-tools"><button type="button" id="chatLoveBtn">❤️ قلب بفرست</button><button type="button" id="clearNookNote" class="ghost-btn">پاک کردن</button><span id="noteSaved">✓✓ خوانده شد</span></div>
+  <div id="chatVoicePreview" class="chat-voice-preview" hidden></div>
+</div>
     <div class="nook-panel" data-panel="mood"><div class="panel-title"><span>🕯️</span><div><h3>نور و حالِ اتاق</h3><p>یکی از فضاها رو انتخاب کن تا حال‌وهوای گوشه دنج عوض بشه.</p></div></div><div class="mood-grid"><button data-mood="night">🌙<b>شب آرام</b></button><button data-mood="pink">🌸<b>عاشقانه</b></button><button data-mood="dream">✨<b>رویایی</b></button><button data-mood="cozy">🔥<b>گرم و دنج</b></button></div></div>
     <div class="nook-panel" data-panel="cards"><div class="panel-title"><span>💌</span><div><h3>یک کارت برای تو</h3><p>دکمه رو بزن و یک پیام مخصوص بگیر.</p></div></div><div class="love-card" id="loveCard">«هرجا باشی، یه گوشه از قلبم همیشه برای تو روشنه.» ❤️</div><button class="btn primary" id="newLoveCard">یکی دیگه بده ✨</button></div>
     <div class="nook-panel" data-panel="time"><div class="panel-title"><span>⏳</span><div><h3>قرار ۵ دقیقه‌ای</h3><p>تایمر رو بزن؛ پنج دقیقه فقط برای خودتون.</p></div></div><div class="cozy-timer" id="cozyTimer">05:00</div><button class="btn primary" id="startCozyTimer">شروع لحظه‌مون ❤️</button><p id="cozyTimerMsg" class="timer-msg">وقتی شروعش کردی، گوشی رو کنار بذار و فقط با هم باشین.</p></div><div class="nook-panel" data-panel="counselor"><div class="panel-title"><span>🧠</span><div><h3>مشاور رابطه ما</h3><p>یک فضای بی‌طرف برای حرف زدن، فهمیدن احساسات و پیدا کردن راه گفت‌وگو.</p></div></div><div class="ai-quick"><button type="button" data-ai-prompt="بین ما یک سوءتفاهم پیش آمده؛ کمکمون کن بدون سرزنش درباره‌اش حرف بزنیم.">🫶 سوءتفاهم</button><button type="button" data-ai-prompt="کمکم کن احساساتم را بدون دعوا و سرزنش به طرف مقابلم بگویم.">💬 چطور بگم؟</button><button type="button" data-ai-prompt="یک تمرین کوتاه دونفره برای بهتر شنیدن و فهمیدن همدیگه بهمون بده.">❤️ تمرین دونفره</button><button type="button" data-ai-prompt="امشب فقط ۱۰ دقیقه وقت داریم؛ یک گفت‌وگوی صمیمی و مفید برایمان طراحی کن.">🌙 گفت‌وگوی امشب</button></div><div id="aiMessages" class="ai-messages"><div class="ai-msg bot"><span class="ai-label">مشاور گوشه دنج</span>سلام فاضل و الهام ❤️ من اینجام که بدون قضاوت کمکتون کنم بهتر حرف همدیگه رو بشنوین. هر چیزی هست، از همین‌جا شروع کنین.</div></div><div class="ai-compose"><textarea id="aiInput" placeholder="مثلاً: امروز از یه حرف الهام ناراحت شدم ولی نمی‌خوام بحث کنیم..."></textarea><button class="btn primary" id="aiSend">فرستادن ❤️</button></div><div id="aiStatus" class="ai-status">☁️ آماده‌ام</div><p class="ai-note">این مشاور جای درمانگر یا متخصص سلامت روان نیست؛ برای گفت‌وگو و کمک عمومی در رابطه طراحی شده.</p></div>
@@ -848,14 +874,51 @@ setInterval(changeBotMessage,5000);
 
 <script id="timed-letters-script">
 (function(){
- const root=document.getElementById("timedLetters"); if(!root)return;
- const cards=[...root.querySelectorAll(".timed-letter-card")];
- const SITE_START_MS=1789910451617;
- const fa=n=>new Intl.NumberFormat("fa-IR").format(n);
- function remain(ms){if(ms<=0)return "نامه آماده‌ست! ❤️";let x=Math.floor(ms/1000),d=Math.floor(x/86400);x%=86400;let h=Math.floor(x/3600);x%=3600;let m=Math.floor(x/60),sec=x%60;const a=[];if(d)a.push(fa(d)+" روز");if(h||d)a.push(fa(h)+" ساعت");if(m||h||d)a.push(fa(m)+" دقیقه");a.push(fa(sec)+" ثانیه");return a.join(" و ");}
- function update(){const now=Date.now();cards.forEach(card=>{const delay=Math.max(0,Number(card.dataset.delay)||0),left=SITE_START_MS+delay-now,count=card.querySelector(".timed-countdown"),button=card.querySelector(".timed-open");if(!count||!button)return;if(left<=0){card.classList.add("unlocked");count.textContent="🔓 نامه باز شده؛ وقت خوندنه ❤️";button.disabled=false;button.textContent="باز کردن نامه 💌";}else{card.classList.remove("unlocked","open");button.disabled=true;button.textContent="هنوز وقتش نرسیده 💌";count.textContent="🔒 "+remain(left);}});}
- cards.forEach(card=>{const b=card.querySelector(".timed-open");if(b)b.addEventListener("click",()=>{if(!card.classList.contains("unlocked"))return;card.classList.toggle("open");if(card.classList.contains("open"))card.scrollIntoView({behavior:"smooth",block:"center"});});});
- update(); setInterval(update,1000);
+  const root=document.getElementById("timedLetters");
+  if(!root)return;
+  const cards=[...root.querySelectorAll(".timed-letter-card")];
+  const key="fazel_elham_timed_letters_start_v1";
+  let start=Number(localStorage.getItem(key));
+  if(!Number.isFinite(start)||start<=0){start=Date.now();localStorage.setItem(key,String(start));}
+  const fa=n=>new Intl.NumberFormat("fa-IR").format(n);
+  function remain(ms){
+    if(ms<=0)return "نامه آماده‌ست! ❤️";
+    let s=Math.floor(ms/1000),d=Math.floor(s/86400);s%=86400;
+    let h=Math.floor(s/3600);s%=3600;let m=Math.floor(s/60);s%=60;
+    const parts=[];
+    if(d)parts.push(fa(d)+" روز");
+    if(h||d)parts.push(fa(h)+" ساعت");
+    if(m||h||d)parts.push(fa(m)+" دقیقه");
+    parts.push(fa(s)+" ثانیه");
+    return parts.join(" و ");
+  }
+  function update(){
+    const now=Date.now();
+    cards.forEach(card=>{
+      const delay=Number(card.dataset.delay)||0;
+      const left=start+delay-now;
+      const count=card.querySelector(".timed-countdown");
+      const button=card.querySelector(".timed-open");
+      if(left<=0){
+        card.classList.add("unlocked");
+        count.textContent="🔓 نامه باز شده؛ وقت خوندنه ❤️";
+        button.disabled=false;
+        button.textContent="باز کردن نامه 💌";
+      }else{
+        card.classList.remove("unlocked","open");
+        button.disabled=true;
+        count.textContent="🔒 "+remain(left);
+      }
+    });
+  }
+  cards.forEach(card=>{
+    card.querySelector(".timed-open").addEventListener("click",()=>{
+      if(!card.classList.contains("unlocked"))return;
+      card.classList.toggle("open");
+      if(card.classList.contains("open")) card.scrollIntoView({behavior:"smooth",block:"center"});
+    });
+  });
+  update();setInterval(update,1000);
 })();
 </script>
 
@@ -955,15 +1018,43 @@ setInterval(changeBotMessage,5000);
   function setAuthor(v){author=v;localStorage.setItem('fazelElhamAuthor',v);document.querySelectorAll('.author-btn').forEach(b=>b.classList.toggle('active',b.dataset.author===v));}
   document.querySelectorAll('.author-btn').forEach(b=>b.addEventListener('click',()=>setAuthor(b.dataset.author)));
   setAuthor(author);
+  const reactionKey='fazelElhamChatReactions_v1';
+  let reactions={}; try{reactions=JSON.parse(localStorage.getItem(reactionKey)||'{}')||{}}catch(e){}
+  const saveReactions=()=>localStorage.setItem(reactionKey,JSON.stringify(reactions));
+  const chatTime=v=>new Date(v).toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'});
   function renderNotes(rows){
     if(!notesBox)return;
-    if(!rows.length){notesBox.innerHTML='<div class="empty-notes">هنوز نوشته‌ای نیست... اولین نامه رو تو بنویس 💌</div>';return;}
-    notesBox.innerHTML=rows.map(r=>{const mine=currentUser&&r.author_id===currentUser.id;const when=new Date(r.created_at).toLocaleString('fa-IR',{dateStyle:'short',timeStyle:'short'});return `<article class="shared-note ${mine?'mine':''}"><div class="shared-note-head"><b>${esc(r.author_name)} ${mine?'✨':''}</b><span>${esc(when)}</span></div><div class="shared-note-body">${esc(r.content)}</div>${mine?`<button class="note-delete" data-id="${esc(r.id)}">حذف نوشته</button>`:''}</article>`}).join('');
-    notesBox.querySelectorAll('.note-delete').forEach(b=>b.addEventListener('click',async()=>{const {error}=await db.from('love_notes').delete().eq('id',b.dataset.id);if(error)toast('حذف نشد؛ دوباره امتحان کن 🥹')}));
+    if(!rows.length){notesBox.innerHTML='<div class="empty-notes">هنوز پیامی نیست... اولین پیام رو تو بفرست 💌</div>';return;}
+    notesBox.innerHTML=rows.map(r=>{
+      const mine=!String(r.author_name||'').includes('الهام');
+      const reaction=reactions[r.id]||'';
+      const cls=mine?'mine':'theirs';
+      return `<div class="chat-bubble-row ${cls}" data-id="${esc(r.id)}"><article class="chat-bubble">
+        <div class="chat-bubble-name">${esc(r.author_name)}</div>
+        <div class="chat-bubble-text">${esc(r.content)}</div>
+        <div class="chat-bubble-meta"><span>${esc(chatTime(r.created_at))}</span><span class="chat-ticks">✓✓</span><button class="chat-delete" data-id="${esc(r.id)}">${mine?'حذف':''}</button></div>
+        ${reaction?`<div class="chat-reaction-row"><button class="chat-react" data-react-id="${esc(r.id)}">${esc(reaction)} 1</button></div>`:''}
+      </article></div>`;
+    }).join('');
+    notesBox.querySelectorAll('.chat-delete').forEach(b=>b.addEventListener('click',async()=>{if(!b.dataset.id)return;const {error}=await db.from('love_notes').delete().eq('id',b.dataset.id);if(error)toast('حذف نشد؛ دوباره امتحان کن 🥹')}));
+    notesBox.querySelectorAll('.chat-react').forEach(b=>b.addEventListener('click',()=>{delete reactions[b.dataset.reactId];saveReactions();renderNotes(rows)}));
+    notesBox.querySelectorAll('.chat-bubble').forEach(b=>b.addEventListener('dblclick',()=>{const id=b.closest('.chat-bubble-row')?.dataset.id;if(!id)return;reactions[id]=reactions[id]?'': '❤️';saveReactions();renderNotes(rows)}));
+    notesBox.scrollTop=notesBox.scrollHeight;
   }
-  async function loadNotes(){const {data,error}=await db.from('love_notes').select('*').eq('room_id',ROOM).order('created_at',{ascending:false}).limit(100);if(error){setStatus('⚠️ اتصال دفتر برقرار نشد',true);console.error(error);return}renderNotes(data||[]);setStatus('☁️ دفتر آنلاین است')}
+  async function loadNotes(){const {data,error}=await db.from('love_notes').select('*').eq('room_id',ROOM).order('created_at',{ascending:true}).limit(100);if(error){setStatus('⚠️ اتصال دفتر برقرار نشد',true);console.error(error);return}renderNotes(data||[]);setStatus('☁️ دفتر آنلاین است')}
   async function init(){setStatus('☁️ در حال ورود...');let {data:{session}}=await db.auth.getSession();if(!session){const r=await db.auth.signInAnonymously();if(r.error){setStatus('⚠️ ورود آنلاین فعال نیست: '+(r.error?.message||'خطا'),true);console.error(r.error);return}session=r.data.session}currentUser=session?.user||null;await loadNotes();db.channel('love-notes-live').on('postgres_changes',{event:'*',schema:'public',table:'love_notes',filter:`room_id=eq.${ROOM}`},()=>loadNotes()).subscribe(st=>{if(st==='SUBSCRIBED')setStatus('☁️ همگام‌سازی لحظه‌ای فعال است')})}
-  document.getElementById('saveNookNote')?.addEventListener('click',async()=>{const content=(note?.value||'').trim();if(!content)return toast('اول یه چیزی بنویس ❤️');if(!author){toast('اول مشخص کن فاضلی یا الهام 🌸');return}if(!currentUser){toast('دفتر هنوز آنلاین نشده؛ چند لحظه صبر کن');return}const {error}=await db.from('love_notes').insert({room_id:ROOM,author_id:currentUser.id,author_name:author,content});if(error){console.error('love_notes insert error:',error);saved.textContent='خطا: '+(error.message||'ارسال نشد');toast('ارسال نشد: '+(error.message||'خطای ناشناخته'));return}note.value='';saved.textContent='با موفقیت در دفتر مشترک ثبت شد ❤️';toast('نوشته‌ات به دفتر مشترک اضافه شد 💌');loadNotes()});
+  async function sendChat(content){content=(content||'').trim();if(!content)return;if(!author){toast('اول مشخص کن فاضلی یا الهام 🌸');return}if(!currentUser){toast('دفتر هنوز آنلاین نشده؛ چند لحظه صبر کن');return}const {error}=await db.from('love_notes').insert({room_id:ROOM,author_id:currentUser.id,author_name:author,content});if(error){console.error('love_notes insert error:',error);saved.textContent='خطا: '+(error.message||'ارسال نشد');toast('ارسال نشد: '+(error.message||'خطای ناشناخته'));return}note.value='';note.style.height='42px';saved.textContent='✓✓ ارسال شد';loadNotes()}
+  document.getElementById('saveNookNote')?.addEventListener('click',()=>sendChat(note?.value||''));
+  note?.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat(note.value)}});
+  note?.addEventListener('input',()=>{note.style.height='42px';note.style.height=Math.min(note.scrollHeight,120)+'px';const typing=document.getElementById('chatTyping');if(typing){typing.classList.add('show');clearTimeout(window.__chatTypingTimer);window.__chatTypingTimer=setTimeout(()=>typing.classList.remove('show'),900)}});
+  document.querySelectorAll('#chatReactions button').forEach(b=>b.addEventListener('click',()=>{if(!note)return;note.value+=(note.value?' ':'')+b.dataset.emoji;note.focus();note.dispatchEvent(new Event('input'))}));
+  document.getElementById('chatEmojiBtn')?.addEventListener('click',()=>{const emojis=['😊','❤️','😂','😘','🥹','😍','🔥','💋','🫶','🌙'];const e=emojis[Math.floor(Math.random()*emojis.length)];if(note){note.value+=(note.value?' ':'')+e;note.focus();note.dispatchEvent(new Event('input'))}});
+  document.getElementById('chatLoveBtn')?.addEventListener('click',()=>sendChat('❤️ دوستت دارم، دردونه‌ی من ❤️'));
+  document.getElementById('chatScrollBottom')?.addEventListener('click',()=>{if(notesBox)notesBox.scrollTop=notesBox.scrollHeight});
+  document.getElementById('chatFile')?.addEventListener('change',e=>{const f=e.target.files?.[0];const name=document.getElementById('chatFileName');if(name)name.textContent=f?'📎 '+f.name:'';if(f&&note){note.value+=(note.value?'\n':'')+'📎 فایل: '+f.name;note.dispatchEvent(new Event('input'))}});
+  let recorder=null,voiceChunks=[],voiceStarted=0;
+  document.getElementById('chatMic')?.addEventListener('click',async()=>{const mic=document.getElementById('chatMic');const preview=document.getElementById('chatVoicePreview');if(recorder&&recorder.state==='recording'){recorder.stop();mic.classList.remove('recording');return}if(!navigator.mediaDevices?.getUserMedia||!window.MediaRecorder){toast('ضبط صدا روی این مرورگر فعال نیست 🎙️');return}try{const stream=await navigator.mediaDevices.getUserMedia({audio:true});voiceChunks=[];voiceStarted=Date.now();recorder=new MediaRecorder(stream);recorder.ondataavailable=e=>{if(e.data.size)voiceChunks.push(e.data)};recorder.onstop=()=>{stream.getTracks().forEach(t=>t.stop());const blob=new Blob(voiceChunks,{type:'audio/webm'});const url=URL.createObjectURL(blob);const sec=Math.max(1,Math.round((Date.now()-voiceStarted)/1000));if(preview){preview.hidden=false;preview.innerHTML='🎙️ پیام صوتی آماده شد · '+sec+' ثانیه<audio controls src="'+url+'"></audio><button type="button" class="ghost-btn" id="sendVoiceAsChat">ارسال پیام صوتی</button>';document.getElementById('sendVoiceAsChat')?.addEventListener('click',()=>{sendChat('🎙️ پیام صوتی · '+sec+' ثانیه');preview.hidden=true;URL.revokeObjectURL(url)})}toast('ویس آماده شد؛ اگر خواستی بفرست 🎙️')};recorder.start();mic.classList.add('recording');toast('دارم گوش می‌دم... دوباره بزن تا تموم بشه 🎙️')}catch(e){toast('اجازه‌ی میکروفون داده نشد 🎙️')}});
+
   document.getElementById('clearNookNote')?.addEventListener('click',()=>{if(note)note.value='';if(saved)saved.textContent='متن پاک شد'});
   init();
 })();
