@@ -436,6 +436,85 @@ main>section.hero.active-section{display:grid!important;align-content:center;jus
 .couple-feature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.couple-feature{padding:14px;border-radius:16px;border:1px solid rgba(255,255,255,.09);background:linear-gradient(145deg,rgba(255,80,155,.08),rgba(130,80,255,.06));color:#fff;text-align:right;cursor:pointer}.couple-feature b{display:block;font-size:11px;margin-bottom:4px}.couple-feature small{display:block;color:#a98d9d;font-size:8px;line-height:1.7}.future-letter{padding:14px;border-radius:16px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);margin-top:10px}.future-letter input,.future-letter textarea{width:100%;box-sizing:border-box;margin-top:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:12px;color:#fff;padding:10px;font:inherit}.future-letter textarea{min-height:100px;resize:vertical}.future-letter button{margin-top:8px;border:0;border-radius:12px;padding:10px 14px;background:linear-gradient(135deg,rgba(255,80,155,.3),rgba(120,70,255,.24));color:#fff;cursor:pointer}.chat-longpress-sheet{position:fixed;inset:auto 12px calc(12px + env(safe-area-inset-bottom)) 12px;z-index:2147483647;display:none;background:rgba(18,7,22,.97);backdrop-filter:blur(22px);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:10px;box-shadow:0 25px 80px rgba(0,0,0,.55)}.chat-longpress-sheet.show{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.chat-longpress-sheet button{border:0;background:rgba(255,255,255,.05);color:#fff;border-radius:13px;padding:10px 5px;font-size:10px}.chat-toast-mini{position:fixed;left:50%;bottom:calc(85px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(10px);z-index:2147483647;padding:8px 13px;border-radius:999px;background:rgba(22,7,23,.9);border:1px solid rgba(255,255,255,.09);color:#ffe0ed;font-size:9px;opacity:0;transition:.25s;pointer-events:none}.chat-toast-mini.show{opacity:1;transform:translateX(-50%) translateY(0)}
 @media(max-width:600px){.relationship-pill{top:calc(env(safe-area-inset-top) + 78px)}.couple-feature-grid{grid-template-columns:1fr 1fr}}
 </style>
+
+<style id="fantasy-luxury-ui">
+/* === FANTASY LOVE MESSENGER — luxury visual layer === */
+#messengerOverlay{background:#07030d!important;color:#fff}
+#messengerOverlay:before,#messengerOverlay:after{content:"";position:absolute;inset:0;pointer-events:none;z-index:0}
+#messengerOverlay:before{background:
+ radial-gradient(circle at 12% 18%,rgba(255,76,165,.20),transparent 26%),
+ radial-gradient(circle at 88% 24%,rgba(129,92,255,.18),transparent 27%),
+ radial-gradient(circle at 50% 100%,rgba(255,186,92,.08),transparent 34%),
+ linear-gradient(145deg,#09040f 0%,#13051a 48%,#08040e 100%)}
+#messengerOverlay:after{background-image:radial-gradient(circle,rgba(255,255,255,.7) 0 1px,transparent 1.6px);background-size:73px 91px;opacity:.12;animation:luxStars 18s linear infinite}
+@keyframes luxStars{to{background-position:73px 91px}}
+#messengerOverlay .messenger-shell{z-index:1}
+#messengerOverlay .chat-panel{background:transparent!important;position:relative!important;isolation:isolate!important}
+#messengerOverlay .chat-panel:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:
+ radial-gradient(circle at 8% 35%,rgba(255,72,163,.10),transparent 23%),
+ radial-gradient(circle at 92% 68%,rgba(123,86,255,.11),transparent 24%)}
+
+/* Header */
+#messengerOverlay .chat-head{height:78px;min-height:78px!important;padding:calc(env(safe-area-inset-top) + 10px) 14px 9px!important;gap:11px!important;background:rgba(14,7,22,.62)!important;border-bottom:1px solid rgba(255,255,255,.09)!important;backdrop-filter:blur(25px) saturate(145%);-webkit-backdrop-filter:blur(25px) saturate(145%);box-shadow:0 12px 35px rgba(0,0,0,.20)!important}
+#messengerOverlay .chat-head:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,92,168,.08),transparent 42%,rgba(143,105,255,.08));pointer-events:none}
+#messengerOverlay .chat-avatar{width:48px!important;height:48px!important;border-radius:18px!important;background:linear-gradient(145deg,rgba(255,107,181,.25),rgba(125,86,255,.22))!important;border:1px solid rgba(255,255,255,.18)!important;box-shadow:0 0 0 1px rgba(255,116,181,.08),0 0 28px rgba(255,71,155,.22),inset 0 1px rgba(255,255,255,.2)!important;font-size:24px!important;position:relative}
+#messengerOverlay .chat-avatar-wrap:after{content:"";position:absolute;inset:-4px;border-radius:21px;border:1px solid rgba(255,139,196,.18);animation:avatarAura 2.8s ease-in-out infinite;pointer-events:none}
+@keyframes avatarAura{50%{transform:scale(1.06);opacity:.45}}
+#messengerOverlay .chat-online{width:11px!important;height:11px!important;background:#73f5b0!important;box-shadow:0 0 12px rgba(115,245,176,.75)!important;border-color:#100817!important}
+#messengerOverlay .chat-head-copy h3{font-size:14px!important;letter-spacing:.1px}
+#messengerOverlay .chat-head-copy p{color:#d5b8cb!important;font-size:9px!important}
+#messengerOverlay .chat-head-copy p:after{content:"  ✦ فضای خصوصی شما دو نفر";color:#ffb7d6}
+#messengerOverlay .chat-mini-btn,#messengerOverlay .chat-menu-btn{width:38px!important;height:38px!important;border-radius:14px!important;background:rgba(255,255,255,.055)!important;border:1px solid rgba(255,255,255,.11)!important;box-shadow:inset 0 1px rgba(255,255,255,.07)!important;transition:.2s}
+#messengerOverlay .chat-mini-btn:hover,#messengerOverlay .chat-menu-btn:hover{transform:translateY(-1px) scale(1.03);background:rgba(255,100,175,.11)!important;border-color:rgba(255,150,205,.3)!important}
+
+/* Messages stage */
+#messengerOverlay .chat-messages{padding:18px 13px 12px!important;gap:4px!important;background:transparent!important;scrollbar-width:thin;scrollbar-color:rgba(255,125,182,.25) transparent}
+#messengerOverlay .chat-messages::-webkit-scrollbar{width:5px}
+#messengerOverlay .chat-messages::-webkit-scrollbar-thumb{background:rgba(255,125,182,.22);border-radius:20px}
+#messengerOverlay .chat-day{margin:8px auto!important;padding:5px 12px!important;border:1px solid rgba(255,255,255,.08);border-radius:999px;background:rgba(15,7,23,.58);backdrop-filter:blur(12px);font-size:8px!important;color:#caaabd!important;box-shadow:0 6px 18px rgba(0,0,0,.16)}
+#messengerOverlay .chat-bubble-row{margin:4px 0!important}
+#messengerOverlay .chat-bubble{max-width:min(78%,440px)!important;padding:11px 13px 8px!important;border-radius:20px 20px 7px 20px!important;background:linear-gradient(135deg,rgba(255,91,169,.23),rgba(139,85,255,.13))!important;border:1px solid rgba(255,151,204,.20)!important;box-shadow:0 12px 32px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.11)!important;backdrop-filter:blur(13px);-webkit-backdrop-filter:blur(13px)}
+#messengerOverlay .chat-bubble-row.theirs .chat-bubble{border-radius:20px 20px 20px 7px!important;background:linear-gradient(135deg,rgba(255,255,255,.085),rgba(170,118,196,.06))!important;border-color:rgba(255,255,255,.11)!important}
+#messengerOverlay .chat-bubble:after{content:"";position:absolute;inset:1px;border-radius:inherit;background:linear-gradient(110deg,rgba(255,255,255,.07),transparent 35%);pointer-events:none}
+#messengerOverlay .chat-bubble-name{font-size:8px!important;color:#ffc9df!important;opacity:.9}
+#messengerOverlay .chat-bubble-text{font-size:12px!important;line-height:1.9!important;color:#fff!important}
+#messengerOverlay .chat-bubble-meta{font-size:8px!important;color:#a68b9e!important}
+#messengerOverlay .chat-ticks{color:#80c8ff!important;text-shadow:0 0 8px rgba(128,200,255,.35)}
+#messengerOverlay .chat-reaction-row .chat-react{background:rgba(255,255,255,.07)!important;border-color:rgba(255,255,255,.12)!important;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+
+/* Composer — floating love capsule */
+#messengerOverlay .chat-reactions{padding:7px 12px 5px!important;background:linear-gradient(180deg,transparent,rgba(7,3,13,.35));gap:7px!important}
+#messengerOverlay .chat-reactions button{min-width:38px;height:34px;padding:4px 9px!important;border-radius:999px!important;background:rgba(255,255,255,.055)!important;border:1px solid rgba(255,255,255,.09)!important;backdrop-filter:blur(12px);box-shadow:0 5px 15px rgba(0,0,0,.10)}
+#messengerOverlay .chat-compose{padding:7px 10px calc(7px + env(safe-area-inset-bottom))!important;background:rgba(7,3,13,.52)!important;backdrop-filter:blur(24px) saturate(145%);-webkit-backdrop-filter:blur(24px) saturate(145%);border-top:1px solid rgba(255,255,255,.07)}
+#messengerOverlay .chat-icon-btn{width:40px!important;height:40px!important;border-radius:15px!important;background:rgba(255,255,255,.055)!important;border:1px solid rgba(255,255,255,.10)!important;box-shadow:inset 0 1px rgba(255,255,255,.08),0 6px 18px rgba(0,0,0,.12)}
+#messengerOverlay .chat-input-wrap textarea{min-height:42px!important;border-radius:18px!important;background:rgba(255,255,255,.075)!important;border:1px solid rgba(255,255,255,.12)!important;box-shadow:inset 0 1px rgba(255,255,255,.08),0 7px 20px rgba(0,0,0,.12)!important;color:#fff!important;padding:10px 14px!important;backdrop-filter:blur(15px)}
+#messengerOverlay .chat-input-wrap textarea::placeholder{color:#bba1b0!important}
+#messengerOverlay .chat-send{width:44px!important;height:44px!important;border-radius:17px!important;background:linear-gradient(135deg,#ff5ca7,#9a70ff)!important;border:0!important;box-shadow:0 7px 22px rgba(255,71,151,.25),inset 0 1px rgba(255,255,255,.28)!important;transition:.2s}
+#messengerOverlay .chat-send:hover{transform:translateY(-2px) scale(1.03)!important}
+#messengerOverlay .chat-compose-tools{padding:1px 13px 7px!important;background:rgba(7,3,13,.52)!important}
+#messengerOverlay .chat-compose-tools button:first-child{padding:5px 10px;border-radius:999px;background:rgba(255,92,168,.07);border:1px solid rgba(255,255,255,.07);font-size:9px!important}
+
+/* Typing / reply */
+#messengerOverlay .chat-typing{margin:0 15px 5px!important;padding:8px 12px!important;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.055)!important;backdrop-filter:blur(12px);border-radius:16px!important}
+#messengerOverlay .chat-compose-reply{border-radius:14px!important;background:rgba(255,94,170,.09)!important;border-right:3px solid #ff76b7!important}
+
+/* Sheets */
+#messengerOverlay ~ #chatSuperSheet .chat-sheet-card,#chatSuperSheet .chat-sheet-card{background:linear-gradient(145deg,rgba(25,10,32,.96),rgba(9,5,17,.98))!important;border:1px solid rgba(255,137,194,.14)!important;box-shadow:0 30px 100px rgba(0,0,0,.55),0 0 50px rgba(255,74,159,.10)!important;backdrop-filter:blur(28px)!important}
+#chatSuperSheet .chat-sheet-head{border-bottom-color:rgba(255,255,255,.08)!important}
+
+/* Desktop app frame */
+@media(min-width:900px){
+ #messengerOverlay{background:#030207!important}
+ #messengerOverlay .messenger-shell{padding:18px!important;align-items:center;justify-content:center}
+ #messengerOverlay .chat-panel{width:min(920px,100%)!important;height:calc(100dvh - 36px)!important;min-height:0!important;max-width:920px;border:1px solid rgba(255,137,194,.13)!important;border-radius:30px!important;overflow:hidden!important;box-shadow:0 35px 120px rgba(0,0,0,.62),0 0 80px rgba(255,68,155,.10)!important}
+ #messengerOverlay .chat-head{height:76px;min-height:76px!important}
+}
+@media(max-width:600px){
+ #messengerOverlay .chat-head{height:72px;min-height:72px!important}
+ #messengerOverlay .chat-bubble{max-width:84%!important}
+}
+@media(prefers-reduced-motion:reduce){#messengerOverlay:after,#messengerOverlay .chat-avatar-wrap:after{animation:none!important}}
+</style>
 </head>
 <body>
 <div id="messengerOverlay" aria-hidden="true" role="dialog" aria-label="دفتر دوتایی ما"><div class="messenger-shell" id="messengerShell"></div></div>
@@ -1629,6 +1708,37 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
  function showLongSheet(b){let s=document.querySelector('.chat-longpress-sheet');if(!s){s=document.createElement('div');s.className='chat-longpress-sheet';overlay.appendChild(s)}const id=b.closest('.chat-bubble-row')?.dataset.id;s.innerHTML='<button data-act="reply">↩️ پاسخ</button><button data-act="react">❤️ قلب</button><button data-act="star">⭐ مهم</button><button data-act="pin">📌 سنجاق</button>';s.classList.add('show');s.onclick=ev=>{const a=ev.target.closest('[data-act]')?.dataset.act;if(!a)return;const row=b.closest('.chat-bubble-row');if(a==='reply')row?.querySelector('[data-reply-id]')?.click();if(a==='react')b.dispatchEvent(new MouseEvent('dblclick',{bubbles:true}));if(a==='star')row?.querySelector('[data-star-id]')?.click();if(a==='pin')row?.querySelector('[data-pin-id]')?.click();s.classList.remove('show');};setTimeout(()=>s.classList.remove('show'),4500)}
  // Relationship status chip.
  const head=document.querySelector('#messengerOverlay .chat-head');if(head&&!head.querySelector('.chat-status-line')){const c=head.querySelector('.chat-head-copy');if(c){const st=document.createElement('div');st.className='chat-status-line';st.innerHTML='<span class="chat-status-dot"></span><span>فضای خصوصی شما دو نفر</span>';c.appendChild(st)}}
+})();
+</script>
+
+<script id="fantasy-luxury-js">
+(function(){
+  const ov=document.getElementById('messengerOverlay'); if(!ov)return;
+  const panel=ov.querySelector('.chat-panel');
+  if(panel){
+    const head=panel.querySelector('.chat-head');
+    if(head){
+      const copy=head.querySelector('.chat-head-copy');
+      if(copy){
+        const h=copy.querySelector('h3'); if(h) h.textContent='الهام ❤️';
+        const p=copy.querySelector('p'); if(p) p.dataset.fantasy='1';
+      }
+    }
+    const msgs=panel.querySelector('.chat-messages');
+    if(msgs){
+      msgs.addEventListener('dblclick',e=>{
+        const bubble=e.target.closest('.chat-bubble'); if(!bubble)return;
+        for(let i=0;i<5;i++){
+          const el=document.createElement('span'); el.textContent=['❤','✨','💗','✦','🌸'][i];
+          el.style.cssText=`position:absolute;z-index:30;pointer-events:none;left:${35+Math.random()*30}%;top:55%;font-size:${12+Math.random()*12}px;animation:luxHeartFly ${.9+Math.random()*.7}s ease-out forwards;filter:drop-shadow(0 0 8px rgba(255,100,180,.7))`;
+          bubble.appendChild(el); setTimeout(()=>el.remove(),1800);
+        }
+      });
+    }
+  }
+  const st=document.createElement('style');
+  st.textContent='@keyframes luxHeartFly{0%{transform:translate(0,0) scale(.5);opacity:0}20%{opacity:1}100%{transform:translate('+(Math.random()>0.5?'':'-')+'35px,-70px) scale(1.2);opacity:0}}';
+  document.head.appendChild(st);
 })();
 </script>
 </body>
