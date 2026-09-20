@@ -586,6 +586,11 @@ body.messenger-fullscreen .chat-compose textarea,body.messenger-fullscreen .chat
 @media(max-width:600px){body.messenger-fullscreen .chat-messages{padding:12px 8px 16px!important;scrollbar-width:none!important;}body.messenger-fullscreen .chat-messages::-webkit-scrollbar{display:none!important;}body.messenger-fullscreen .chat-bubble{max-width:82%!important;border-radius:18px!important;}body.messenger-fullscreen .chat-head{box-shadow:0 6px 24px rgba(0,0,0,.22);}}
 </style>
 
+
+<style id="pro-chat-polish-v8">
+.chat-live-status{color:#9ff0c0;font-size:10px;white-space:nowrap}.chat-new-messages{position:absolute;z-index:20;left:50%;bottom:92px;transform:translate(-50%,12px);opacity:0;pointer-events:none;border:1px solid rgba(255,255,255,.16);background:rgba(20,12,24,.88);backdrop-filter:blur(10px);color:#fff;border-radius:999px;padding:8px 14px;box-shadow:0 8px 25px rgba(0,0,0,.28);font:700 11px inherit;transition:opacity .18s,transform .18s}.chat-new-messages.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}.chat-new-messages b{margin-right:5px;color:#ffb5d5}.chat-messages{overscroll-behavior-y:contain;overflow-anchor:auto;-webkit-overflow-scrolling:touch;contain:layout paint;scrollbar-width:thin}.chat-bubble-row{contain:layout paint}.chat-bubble{will-change:auto}.chat-compose{position:relative;z-index:25}.chat-head{position:relative;z-index:30}.chat-head-copy p{display:flex;align-items:center;gap:4px}.chat-new-messages{font-family:inherit}
+@media(max-width:700px){.chat-live-status{font-size:9px}.chat-new-messages{bottom:86px}.chat-head{backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}.chat-messages{scrollbar-width:none}.chat-messages::-webkit-scrollbar{display:none}}
+</style>
 </head>
 <body>
 <div aria-hidden="true" aria-label="دفتر دوتایی ما" id="messengerOverlay" role="dialog"><div class="messenger-shell" id="messengerShell"></div></div>
@@ -693,13 +698,14 @@ body.messenger-fullscreen .chat-compose textarea,body.messenger-fullscreen .chat
 <div class="nook-panel active chat-panel" data-panel="notes"><div aria-hidden="true" class="chat-toys"><span class="chat-toy toy-a">🧸</span><span class="chat-toy toy-b">🐰</span><span class="chat-toy toy-c">🐱</span><span class="chat-toy toy-d">🐥</span></div>
 <div class="chat-head">
 <div class="chat-avatar-wrap"><div class="chat-avatar">❤️</div><span class="chat-online"></span></div>
-<div class="chat-head-copy"><h3>دفتر دوتایی ما</h3><p>فاضل ❤️ الهام · فقط برای خودمون</p></div>
+<div class="chat-head-copy"><h3>دفتر دوتایی ما</h3><p>فاضل ❤️ الهام · <span class="chat-live-status">● آنلاینِ دلبرونه</span></p></div>
 <div class="chat-head-actions"><button class="mobile-chat-back" id="mobileChatBack" title="بازگشت" type="button">‹</button><span class="chat-lock"><span aria-hidden="true" class="app-icon app-icon-lock"></span> خصوصی</span><button class="chat-mini-btn app-icon-btn" id="chatScrollBottom" title="آخرین پیام" type="button"><span aria-hidden="true" class="app-icon app-icon-down"></span></button><button class="chat-mini-btn chat-menu-btn" id="chatMenuBtn" title="بیشتر" type="button">⋮</button></div>
 </div>
 <div class="shared-author chat-author"><span>الان کیه؟</span><button class="author-btn" data-author="فاضل" type="button"><span class="presence-dot" data-presence="فاضل"></span><span class="author-avatar-mini">F</span><span>فاضل</span><span class="presence-label" data-presence-label="فاضل">آفلاین</span></button><button class="author-btn" data-author="الهام" type="button"><span class="presence-dot" data-presence="الهام"></span><span class="author-avatar-mini elham">E</span><span>الهام</span><span class="presence-label" data-presence-label="الهام">آفلاین</span></button></div>
 <div class="chat-day">امروز ❤️</div>
 <div aria-live="polite" class="chat-typing" id="chatTyping"><span></span><span></span><span></span><b>در حال نوشتن...</b></div>
 <div class="shared-notes chat-messages" id="sharedNotes"><div class="empty-notes">هنوز پیامی نیست... اولین پیام رو تو بفرست 💌</div></div>
+<button class="chat-new-messages" id="chatNewMessages" type="button">↓ پیام‌های جدید <b id="chatNewCount">0</b></button>
 <div class="chat-reactions" id="chatReactions"><button data-emoji="❤️" type="button">❤️</button><button data-emoji="😘" type="button">😘</button><button data-emoji="😂" type="button">😂</button><button data-emoji="🥹" type="button">🥹</button><button data-emoji="🔥" type="button">🔥</button><button data-emoji="💋" type="button">💋</button></div><div style="display:none"><button id="chatGalleryBtn"></button><button id="chatMemoriesBtn"></button><button id="chatThemeBtn"></button><button id="chatSearchBtn"></button><button id="chatPinnedBtn"></button><button id="chatStarredBtn"></button></div>
 <div class="chat-compose">
 <button class="chat-icon-btn" id="chatEmojiBtn" title="ایموجی" type="button"><span aria-hidden="true" class="app-icon app-icon-smile"></span></button>
@@ -1494,6 +1500,7 @@ body.messenger-fullscreen .chat-panel .chat-toy{z-index:2!important;opacity:.42!
   const chatTime=v=>new Date(v).toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'});
   function renderNotes(rows){
     if(!notesBox)return;
+    const wasAwayFromBottom=(notesBox.scrollHeight-(notesBox.scrollTop+notesBox.clientHeight))>120;
     if(!rows.length){notesBox.innerHTML='<div class="empty-notes">هنوز پیامی نیست... اولین پیام رو تو بفرست 💌</div>';return;}
     notesBox.innerHTML=rows.map(r=>{
       const mine=!String(r.author_name||'').includes('الهام');
@@ -1506,10 +1513,14 @@ body.messenger-fullscreen .chat-panel .chat-toy{z-index:2!important;opacity:.42!
         ${reaction?`<div class="chat-reaction-row"><button class="chat-react" data-react-id="${esc(r.id)}">${esc(reaction)} 1</button></div>`:''}
       </article></div>`;
     }).join('');
+    if(wasAwayFromBottom && newBtn && rows.length){ unseen=Math.min(unseen+1,99); newCount.textContent=String(unseen); newBtn.classList.add('show'); }
     notesBox.querySelectorAll('.chat-delete').forEach(b=>b.addEventListener('click',async()=>{if(!b.dataset.id)return;const {error}=await db.from('love_notes').delete().eq('id',b.dataset.id);if(error)toast('حذف نشد؛ دوباره امتحان کن 🥹')}));
     notesBox.querySelectorAll('.chat-react').forEach(b=>b.addEventListener('click',()=>{delete reactions[b.dataset.reactId];saveReactions();renderNotes(rows)}));
     notesBox.querySelectorAll('.chat-bubble').forEach(b=>b.addEventListener('dblclick',()=>{const id=b.closest('.chat-bubble-row')?.dataset.id;if(!id)return;reactions[id]=reactions[id]?'': '❤️';saveReactions();renderNotes(rows)}));wireSuperMessageActions(rows);
-    requestAnimationFrame(()=>{notesBox.scrollTop=notesBox.scrollHeight;});
+    requestAnimationFrame(()=>{
+      const nearBottom = (notesBox.scrollHeight - (notesBox.scrollTop + notesBox.clientHeight)) < 90;
+      if(nearBottom) notesBox.scrollTop = notesBox.scrollHeight;
+    });
   }
   function wireSuperMessageActions(rows){notesBox.querySelectorAll('[data-reply-id]').forEach(b=>b.addEventListener('click',()=>{const r=rows.find(x=>String(x.id)===String(b.dataset.replyId));if(r)setReply(r.author_name+': '+String(r.content||''))}));notesBox.querySelectorAll('[data-star-id]').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.starId;starred[id]=!starred[id];saveFlags();renderNotes(rows)}));notesBox.querySelectorAll('[data-pin-id]').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.pinId;pinned[id]=!pinned[id];saveFlags();renderNotes(rows)}));}
 async function loadNotes(){const {data,error}=await db.from('love_notes').select('*').eq('room_id',ROOM).order('created_at',{ascending:true}).limit(100);if(error){setStatus('⚠️ اتصال دفتر برقرار نشد',true);console.error(error);return}renderNotes(data||[]);setStatus('')}
