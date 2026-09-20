@@ -145,18 +145,24 @@ main>section{display:none!important;width:100%;height:100dvh;min-height:100dvh;m
 main>section.active-section{display:block!important;animation:sectionIn .42s cubic-bezier(.2,.8,.2,1) both}
 main>section.hero.active-section{display:grid!important;align-content:center;justify-items:center}
 @keyframes sectionIn{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:none}}
-.topbar{z-index:1200}
+.topbar{z-index:1200;border-color:rgba(255,120,180,.24);box-shadow:0 10px 40px rgba(255,54,145,.12),var(--shadow)}
 .navlinks{display:none!important}
-.topbar.open .navlinks{display:grid!important;position:absolute;top:calc(100% + 10px);right:0;left:0;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:12px;background:rgba(20,8,24,.98);border:1px solid var(--line);border-radius:20px;box-shadow:0 25px 70px rgba(0,0,0,.45);max-height:calc(100dvh - 90px);overflow:auto}
-.navlinks a{padding:12px 10px;border-radius:14px;text-align:center;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07)}
-.navlinks a:hover,.navlinks a.active-nav{background:linear-gradient(135deg,rgba(255,93,158,.22),rgba(155,76,255,.18));border-color:rgba(255,143,186,.28)}
-.menuBtn{display:grid!important;place-items:center;width:42px;height:42px;border:1px solid rgba(255,255,255,.14);border-radius:14px;background:linear-gradient(145deg,rgba(255,255,255,.11),rgba(255,80,150,.08));color:#fff;font-size:21px;flex:none}
+.topbar.open .navlinks{display:grid!important;position:absolute;top:calc(100% + 12px);right:0;left:0;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:14px;background:linear-gradient(145deg,rgba(31,10,39,.985),rgba(16,7,25,.985));border:1px solid rgba(255,111,173,.32);border-radius:24px;box-shadow:0 28px 80px rgba(0,0,0,.58),0 0 45px rgba(255,56,145,.12);max-height:calc(100dvh - 90px);overflow:auto;animation:menuDrop .28s cubic-bezier(.2,.8,.2,1) both}
+.topbar.open .navlinks:before{content:'بخش‌های ما  ✦';grid-column:1/-1;color:#ffd9e8;font-weight:800;font-size:14px;text-align:right;padding:2px 6px 5px;text-shadow:0 0 18px rgba(255,91,158,.45)}
+.navlinks a{position:relative;padding:14px 10px;border-radius:16px;text-align:center;background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.09);box-shadow:inset 0 1px rgba(255,255,255,.06);transition:transform .2s,box-shadow .2s,background .2s,border-color .2s}
+.navlinks a:before{content:'♥';display:block;font-size:15px;line-height:1;margin-bottom:5px;color:#ff79ad;filter:drop-shadow(0 0 8px rgba(255,77,151,.5))}
+.navlinks a:hover,.navlinks a.active-nav{transform:translateY(-2px);background:linear-gradient(135deg,rgba(255,93,158,.27),rgba(155,76,255,.22));border-color:rgba(255,143,186,.48);box-shadow:0 10px 24px rgba(255,63,150,.16),inset 0 1px rgba(255,255,255,.1)}
+.menuBtn{display:grid!important;grid-template-columns:22px auto;align-items:center;justify-content:center;gap:7px;width:104px;height:44px;padding:0 13px;border:1px solid rgba(255,127,181,.42);border-radius:16px;background:linear-gradient(135deg,rgba(255,76,151,.24),rgba(126,70,255,.18));color:#fff;font-size:21px;font-weight:800;flex:none;cursor:pointer;box-shadow:0 0 0 1px rgba(255,255,255,.05) inset,0 7px 22px rgba(255,55,145,.18);transition:transform .2s,box-shadow .2s,background .2s}
+.menuBtn:after{content:'بخش‌ها';font-size:12px;letter-spacing:.2px}
+.menuBtn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(255,55,145,.28);background:linear-gradient(135deg,rgba(255,76,151,.34),rgba(126,70,255,.27))}
+.topbar.open .menuBtn{background:linear-gradient(135deg,rgba(255,76,151,.38),rgba(126,70,255,.3));box-shadow:0 8px 28px rgba(255,55,145,.28)}
+@keyframes menuDrop{from{opacity:0;transform:translateY(-10px) scale(.98)}to{opacity:1;transform:none}}
 @media(max-width:600px){
  main>section{padding:142px 10px 18px}
  main>section.hero.active-section{padding-top:90px}
  .topbar{top:8px;width:calc(100% - 16px);padding:8px 11px}
  .topbar.open .navlinks{top:calc(100% + 8px);grid-template-columns:1fr 1fr;max-height:calc(100dvh - 75px);padding:10px}
- .navlinks a{font-size:11px;padding:11px 6px}
+ .navlinks a{font-size:11px;padding:12px 6px}.menuBtn{width:96px;height:42px}
 }
 </style>
 
