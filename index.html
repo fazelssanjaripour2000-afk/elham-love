@@ -144,6 +144,31 @@ footer{text-align:center;padding:50px 20px;color:#b89baa;font-size:13px}.ripple{
 .chat-reactions button{min-width:42px;height:36px;border-radius:14px;background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,70,150,.045));box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 5px 14px rgba(0,0,0,.12);font-size:15px}.chat-reactions button:hover{transform:translateY(-3px) scale(1.06);box-shadow:0 9px 20px rgba(255,70,155,.16)}
 .chat-bubble.voice{padding:9px}.chat-bubble.voice .voice-line{display:flex;align-items:center;gap:8px;color:#ffd3e3}.chat-bubble.voice .voice-wave{letter-spacing:2px;opacity:.7}@keyframes chatBubbleIn{from{opacity:0;transform:translateY(7px) scale(.98)}to{opacity:1;transform:none}}@keyframes chatDots{50%{transform:translateY(-3px);opacity:.5}}@keyframes micPulse{50%{box-shadow:0 0 0 7px rgba(255,70,100,.06)}}
 @media(max-width:700px){.chat-lock{display:none}.chat-messages{max-height:46vh!important}.chat-bubble{max-width:88%}.chat-head{padding:12px}.chat-avatar{width:44px;height:44px}}
+
+/* ===== PREMIUM PRESENCE + MESSENGER POLISH ===== */
+.shared-author.chat-author{position:relative;overflow:hidden;padding:11px 12px;border-radius:20px;background:linear-gradient(135deg,rgba(255,255,255,.075),rgba(255,72,150,.055) 45%,rgba(117,75,255,.045));box-shadow:inset 0 1px rgba(255,255,255,.08),0 12px 35px rgba(0,0,0,.16)}
+.shared-author.chat-author:before{content:"";position:absolute;inset:-70%;background:conic-gradient(from 0deg,transparent,rgba(255,91,158,.12),transparent 30%,rgba(135,87,255,.1),transparent 60%);animation:presenceAura 9s linear infinite;pointer-events:none}
+@keyframes presenceAura{to{transform:rotate(360deg)}}
+.author-btn{position:relative;z-index:1;display:inline-flex;align-items:center;gap:7px;padding:7px 10px!important;border-radius:14px!important;background:rgba(255,255,255,.055)!important;box-shadow:inset 0 1px rgba(255,255,255,.07),0 6px 18px rgba(0,0,0,.12);font-weight:700}
+.author-avatar-mini{width:24px;height:24px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(145deg,#ff5d9e,#8e55ff);font-size:10px;font-weight:900;box-shadow:0 0 14px rgba(255,80,155,.24)}
+.author-avatar-mini.elham{background:linear-gradient(145deg,#ff83ba,#a06cff)}
+.presence-dot{width:9px;height:9px;border-radius:50%;background:#ff4e62;box-shadow:0 0 0 2px rgba(255,78,98,.12),0 0 10px rgba(255,78,98,.35);transition:.35s;flex:0 0 9px}
+.presence-dot.online{background:#54f29a;box-shadow:0 0 0 2px rgba(84,242,154,.13),0 0 14px rgba(84,242,154,.75);animation:onlinePulse 1.8s ease-in-out infinite}
+@keyframes onlinePulse{50%{transform:scale(1.25);box-shadow:0 0 0 5px rgba(84,242,154,.04),0 0 20px rgba(84,242,154,.9)}}
+.presence-label{font-size:8px;color:#c88d9f;font-weight:500;transition:.3s}.author-btn:has(.presence-dot.online) .presence-label{color:#78f0aa}
+.cloud-status{position:relative;z-index:1;display:inline-flex;align-items:center;gap:6px!important;padding:7px 9px;border-radius:12px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06);white-space:nowrap}
+.cloud-pulse{width:6px;height:6px;border-radius:50%;background:#59e99a;box-shadow:0 0 10px #59e99a;animation:cloudPulse 1.8s infinite}.cloud-status.offline .cloud-pulse{background:#ff596d;box-shadow:0 0 10px #ff596d;animation:none}@keyframes cloudPulse{50%{opacity:.35;transform:scale(.7)}}
+.chat-online{background:#54f29a!important;box-shadow:0 0 0 3px rgba(84,242,154,.07),0 0 16px rgba(84,242,154,.75);animation:onlinePulse 1.8s infinite}
+.chat-panel{box-shadow:0 30px 100px rgba(0,0,0,.38),0 0 60px rgba(255,67,151,.08)!important}
+.chat-head{position:relative;overflow:hidden}.chat-head:after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.08) 50%,transparent 65%);transform:translateX(-120%);animation:chatShine 6s ease-in-out infinite;pointer-events:none}@keyframes chatShine{45%,100%{transform:translateX(120%)}}
+.chat-avatar{position:relative;overflow:hidden;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.3),transparent 22%),linear-gradient(145deg,#ff5d9e,#7548ff)!important;box-shadow:0 0 30px rgba(255,74,155,.25)!important}
+.chat-avatar:after{content:"";position:absolute;inset:1px;border-radius:16px;border:1px solid rgba(255,255,255,.18);pointer-events:none}
+.chat-bubble{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:transform .2s,box-shadow .2s,border-color .2s}.chat-bubble:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(0,0,0,.2),0 0 22px rgba(255,70,155,.07);border-color:rgba(255,130,190,.3)}
+.chat-bubble-row.mine .chat-bubble{background:linear-gradient(135deg,rgba(255,72,154,.21),rgba(125,73,255,.14))!important}
+.chat-bubble-row.theirs .chat-bubble{background:linear-gradient(135deg,rgba(255,255,255,.075),rgba(145,95,255,.055))!important}
+.chat-send .app-icon-send{filter:drop-shadow(0 0 7px rgba(255,255,255,.35))}
+@media(max-width:700px){.shared-author.chat-author{padding:9px}.presence-label{display:none}.author-btn{padding:6px 8px!important}.cloud-status{width:auto!important;margin-right:auto!important}.cloud-status #cloudStatusText{font-size:8px}}
+
 </style>
 
 <style id="timed-letters-style">
@@ -394,7 +419,7 @@ main>section.hero.active-section{display:grid!important;align-content:center;jus
     <div class="chat-head-copy"><h3>دفتر دوتایی ما</h3><p>فاضل ❤️ الهام · فقط برای خودمون</p></div>
     <div class="chat-head-actions"><span class="chat-lock"><span class="app-icon app-icon-lock" aria-hidden="true"></span> خصوصی</span><button type="button" class="chat-mini-btn app-icon-btn" id="chatScrollBottom" title="رفتن به آخرین پیام"><span class="app-icon app-icon-down" aria-hidden="true"></span></button></div>
   </div>
-  <div class="shared-author chat-author"><span>الان کیه؟</span><button type="button" class="author-btn" data-author="فاضل">👨🏻 فاضل</button><button type="button" class="author-btn" data-author="الهام">👩🏻 الهام</button><span id="cloudStatus" class="cloud-status">☁️ در حال اتصال...</span></div>
+  <div class="shared-author chat-author"><span>الان کیه؟</span><button type="button" class="author-btn" data-author="فاضل"><span class="presence-dot" data-presence="فاضل"></span><span class="author-avatar-mini">F</span><span>فاضل</span><span class="presence-label" data-presence-label="فاضل">آفلاین</span></button><button type="button" class="author-btn" data-author="الهام"><span class="presence-dot" data-presence="الهام"></span><span class="author-avatar-mini elham">E</span><span>الهام</span><span class="presence-label" data-presence-label="الهام">آفلاین</span></button><span id="cloudStatus" class="cloud-status"><span class="cloud-pulse"></span><span id="cloudStatusText">☁️ در حال اتصال...</span></span></div>
   <div class="chat-day">امروز ❤️</div>
   <div id="chatTyping" class="chat-typing" aria-live="polite"><span></span><span></span><span></span><b>در حال نوشتن...</b></div>
   <div id="sharedNotes" class="shared-notes chat-messages"><div class="empty-notes">هنوز پیامی نیست... اولین پیام رو تو بفرست 💌</div></div>
@@ -1026,7 +1051,9 @@ setInterval(changeBotMessage,5000);
   let author=localStorage.getItem('fazelElhamAuthor')||'فاضل';
   const status=document.getElementById('cloudStatus'), notesBox=document.getElementById('sharedNotes'), note=document.getElementById('nookNote'), saved=document.getElementById('noteSaved');
   const esc=v=>String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
-  function setStatus(t,off=false){if(!status)return;status.textContent=t;status.classList.toggle('offline',off)}
+  function setStatus(t,off=false){if(!status)return;const tx=document.getElementById('cloudStatusText');if(tx)tx.textContent=t;else status.textContent=t;status.classList.toggle('offline',off)}
+  function setPresence(name,online){document.querySelectorAll('[data-presence="'+name+'"]').forEach(d=>d.classList.toggle('online',!!online));document.querySelectorAll('[data-presence-label="'+name+'"]').forEach(l=>l.textContent=online?'آنلاین':'آفلاین')}
+  function renderPresence(state){const seen={فاضل:false,الهام:false};Object.values(state||{}).forEach(list=>{(list||[]).forEach(p=>{if(p?.author_name==='فاضل')seen.فاضل=true;if(p?.author_name==='الهام')seen.الهام=true})});setPresence('فاضل',seen.فاضل);setPresence('الهام',seen.الهام);const me=seen[author]?'آنلاین':'آفلاین';document.querySelectorAll('.author-btn').forEach(b=>b.classList.toggle('is-self',b.dataset.author===author));return me}
   function setAuthor(v){author=v;localStorage.setItem('fazelElhamAuthor',v);document.querySelectorAll('.author-btn').forEach(b=>b.classList.toggle('active',b.dataset.author===v));}
   document.querySelectorAll('.author-btn').forEach(b=>b.addEventListener('click',()=>setAuthor(b.dataset.author)));
   setAuthor(author);
@@ -1054,7 +1081,17 @@ setInterval(changeBotMessage,5000);
     notesBox.scrollTop=notesBox.scrollHeight;
   }
   async function loadNotes(){const {data,error}=await db.from('love_notes').select('*').eq('room_id',ROOM).order('created_at',{ascending:true}).limit(100);if(error){setStatus('⚠️ اتصال دفتر برقرار نشد',true);console.error(error);return}renderNotes(data||[]);setStatus('☁️ دفتر آنلاین است')}
-  async function init(){setStatus('☁️ در حال ورود...');let {data:{session}}=await db.auth.getSession();if(!session){const r=await db.auth.signInAnonymously();if(r.error){setStatus('⚠️ ورود آنلاین فعال نیست: '+(r.error?.message||'خطا'),true);console.error(r.error);return}session=r.data.session}currentUser=session?.user||null;await loadNotes();db.channel('love-notes-live').on('postgres_changes',{event:'*',schema:'public',table:'love_notes',filter:`room_id=eq.${ROOM}`},()=>loadNotes()).subscribe(st=>{if(st==='SUBSCRIBED')setStatus('☁️ همگام‌سازی لحظه‌ای فعال است')})}
+  async function init(){setStatus('☁️ در حال ورود...');let {data:{session}}=await db.auth.getSession();if(!session){const r=await db.auth.signInAnonymously();if(r.error){setStatus('⚠️ ورود آنلاین فعال نیست: '+(r.error?.message||'خطا'),true);console.error(r.error);return}session=r.data.session}currentUser=session?.user||null;await loadNotes();
+    const presence=db.channel('love-presence',{config:{presence:{key:currentUser?.id||Math.random().toString(36).slice(2)}}});
+    presence.on('presence',{event:'sync'},()=>{const me=renderPresence(presence.presenceState());setStatus(me==='آنلاین'?'● همگام‌سازی زنده · شما آنلاین هستید':'☁️ همگام‌سازی لحظه‌ای فعال است')});
+    presence.on('presence',{event:'join'},()=>renderPresence(presence.presenceState()));
+    presence.on('presence',{event:'leave'},()=>renderPresence(presence.presenceState()));
+    presence.subscribe(async st=>{if(st==='SUBSCRIBED'){await presence.track({author_name:author,online_at:new Date().toISOString()});setStatus('● همگام‌سازی زنده · شما آنلاین هستید')}});
+    window.addEventListener('beforeunload',()=>{try{presence.untrack()}catch(e){}});
+    document.addEventListener('visibilitychange',async()=>{if(document.visibilityState==='visible'){try{await presence.track({author_name:author,online_at:new Date().toISOString()})}catch(e){}}else{try{await presence.untrack()}catch(e){}}});
+    document.querySelectorAll('.author-btn').forEach(b=>b.addEventListener('click',async()=>{setAuthor(b.dataset.author);try{await presence.track({author_name:author,online_at:new Date().toISOString()})}catch(e){}}));
+    db.channel('love-notes-live').on('postgres_changes',{event:'*',schema:'public',table:'love_notes',filter:`room_id=eq.${ROOM}`},()=>loadNotes()).subscribe(st=>{if(st==='SUBSCRIBED')setStatus('● همگام‌سازی لحظه‌ای فعال است')});
+  }
   async function sendChat(content){content=(content||'').trim();if(!content)return;if(!author){toast('اول مشخص کن فاضلی یا الهام 🌸');return}if(!currentUser){toast('دفتر هنوز آنلاین نشده؛ چند لحظه صبر کن');return}const {error}=await db.from('love_notes').insert({room_id:ROOM,author_id:currentUser.id,author_name:author,content});if(error){console.error('love_notes insert error:',error);saved.textContent='خطا: '+(error.message||'ارسال نشد');toast('ارسال نشد: '+(error.message||'خطای ناشناخته'));return}note.value='';note.style.height='42px';saved.textContent='✓✓ ارسال شد';loadNotes()}
   document.getElementById('saveNookNote')?.addEventListener('click',()=>sendChat(note?.value||''));
   note?.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat(note.value)}});
