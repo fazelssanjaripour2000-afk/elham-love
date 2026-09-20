@@ -848,51 +848,14 @@ setInterval(changeBotMessage,5000);
 
 <script id="timed-letters-script">
 (function(){
-  const root=document.getElementById("timedLetters");
-  if(!root)return;
-  const cards=[...root.querySelectorAll(".timed-letter-card")];
-  const key="fazel_elham_timed_letters_start_v1";
-  let start=Number(localStorage.getItem(key));
-  if(!Number.isFinite(start)||start<=0){start=Date.now();localStorage.setItem(key,String(start));}
-  const fa=n=>new Intl.NumberFormat("fa-IR").format(n);
-  function remain(ms){
-    if(ms<=0)return "نامه آماده‌ست! ❤️";
-    let s=Math.floor(ms/1000),d=Math.floor(s/86400);s%=86400;
-    let h=Math.floor(s/3600);s%=3600;let m=Math.floor(s/60);s%=60;
-    const parts=[];
-    if(d)parts.push(fa(d)+" روز");
-    if(h||d)parts.push(fa(h)+" ساعت");
-    if(m||h||d)parts.push(fa(m)+" دقیقه");
-    parts.push(fa(s)+" ثانیه");
-    return parts.join(" و ");
-  }
-  function update(){
-    const now=Date.now();
-    cards.forEach(card=>{
-      const delay=Number(card.dataset.delay)||0;
-      const left=start+delay-now;
-      const count=card.querySelector(".timed-countdown");
-      const button=card.querySelector(".timed-open");
-      if(left<=0){
-        card.classList.add("unlocked");
-        count.textContent="🔓 نامه باز شده؛ وقت خوندنه ❤️";
-        button.disabled=false;
-        button.textContent="باز کردن نامه 💌";
-      }else{
-        card.classList.remove("unlocked","open");
-        button.disabled=true;
-        count.textContent="🔒 "+remain(left);
-      }
-    });
-  }
-  cards.forEach(card=>{
-    card.querySelector(".timed-open").addEventListener("click",()=>{
-      if(!card.classList.contains("unlocked"))return;
-      card.classList.toggle("open");
-      if(card.classList.contains("open")) card.scrollIntoView({behavior:"smooth",block:"center"});
-    });
-  });
-  update();setInterval(update,1000);
+ const root=document.getElementById("timedLetters"); if(!root)return;
+ const cards=[...root.querySelectorAll(".timed-letter-card")];
+ const SITE_START_MS=1789910451617;
+ const fa=n=>new Intl.NumberFormat("fa-IR").format(n);
+ function remain(ms){if(ms<=0)return "نامه آماده‌ست! ❤️";let x=Math.floor(ms/1000),d=Math.floor(x/86400);x%=86400;let h=Math.floor(x/3600);x%=3600;let m=Math.floor(x/60),sec=x%60;const a=[];if(d)a.push(fa(d)+" روز");if(h||d)a.push(fa(h)+" ساعت");if(m||h||d)a.push(fa(m)+" دقیقه");a.push(fa(sec)+" ثانیه");return a.join(" و ");}
+ function update(){const now=Date.now();cards.forEach(card=>{const delay=Math.max(0,Number(card.dataset.delay)||0),left=SITE_START_MS+delay-now,count=card.querySelector(".timed-countdown"),button=card.querySelector(".timed-open");if(!count||!button)return;if(left<=0){card.classList.add("unlocked");count.textContent="🔓 نامه باز شده؛ وقت خوندنه ❤️";button.disabled=false;button.textContent="باز کردن نامه 💌";}else{card.classList.remove("unlocked","open");button.disabled=true;button.textContent="هنوز وقتش نرسیده 💌";count.textContent="🔒 "+remain(left);}});}
+ cards.forEach(card=>{const b=card.querySelector(".timed-open");if(b)b.addEventListener("click",()=>{if(!card.classList.contains("unlocked"))return;card.classList.toggle("open");if(card.classList.contains("open"))card.scrollIntoView({behavior:"smooth",block:"center"});});});
+ update(); setInterval(update,1000);
 })();
 </script>
 
