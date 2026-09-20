@@ -487,7 +487,7 @@ main>section.hero.active-section{display:grid!important;align-content:center;jus
     <button class="nook-tool" data-room="time"><span>⏳</span><b>لحظه‌مون</b><small>یک تایمر برای یک قرار کوچک</small></button><button class="nook-tool" data-room="counselor"><span>🧠</span><b>مشاور رابطه</b><small>حرف بزنیم و بهتر همدیگه رو بفهمیم</small></button>
   </div>
   <div class="nook-panels">
-    <div class="nook-panel active chat-panel" data-panel="notes">
+    <div class="nook-panel active chat-panel" data-panel="notes"><div class="chat-toys" aria-hidden="true"><span class="chat-toy toy-a">🧸</span><span class="chat-toy toy-b">🐰</span><span class="chat-toy toy-c">🐱</span><span class="chat-toy toy-d">🐥</span></div>
   <div class="chat-head">
     <div class="chat-avatar-wrap"><div class="chat-avatar">❤️</div><span class="chat-online"></span></div>
     <div class="chat-head-copy"><h3>دفتر دوتایی ما</h3><p>فاضل ❤️ الهام · فقط برای خودمون</p></div>
@@ -615,9 +615,9 @@ $('unlockBtn').addEventListener('click',unlockNook);$('nookPass').addEventListen
 (function setupNookRoom(){
   const secret=$('nookSecret'); if(!secret)return;
   const tabs=[...document.querySelectorAll('.nook-tool')], panels=[...document.querySelectorAll('.nook-panel')];
-  function setMessengerFullscreen(on){document.body.classList.toggle('messenger-fullscreen',!!on);if(on) window.scrollTo(0,0);}
+  function setMessengerFullscreen(on){document.body.classList.toggle('messenger-fullscreen',!!on);document.documentElement.classList.toggle('messenger-open',!!on);if(on) window.scrollTo(0,0);}
   tabs.forEach(tab=>tab.addEventListener('click',()=>{const id=tab.dataset.room;tabs.forEach(t=>t.classList.toggle('active',t===tab));panels.forEach(p=>p.classList.toggle('active',p.dataset.panel===id));if(id==='notes'||id==='drawing'){setMessengerFullscreen(true);if(id==='drawing'){requestAnimationFrame(()=>{try{resize(true)}catch(e){}})}}else setMessengerFullscreen(false);}));
-  $('mobileChatBack')?.addEventListener('click',()=>{setMessengerFullscreen(false);document.querySelector('.nook-tool[data-room="notes"]').classList.add('active');});
+  $('mobileChatBack')?.addEventListener('click',()=>{setMessengerFullscreen(false);tabs.forEach(t=>t.classList.toggle('active',t.dataset.room==='notes'));panels.forEach(p=>p.classList.toggle('active',p.dataset.panel==='notes'));});
   const note=$('nookNote'), saved=$('noteSaved');
   try{const d=localStorage.getItem('fazelElhamNookDraft')||''; note.value=d; if(d)saved.textContent='پیش‌نویس روی همین دستگاه آماده است ❤️'}catch(e){}
   $('saveNookNote').addEventListener('click',()=>{try{localStorage.setItem('fazelElhamNookDraft',note.value);saved.textContent='پیش‌نویس ذخیره شد ❤️'}catch(e){}});
@@ -919,6 +919,29 @@ setInterval(changeBotMessage,5000);
   .relationship-widget{position:fixed!important;top:82px!important;bottom:auto!important;left:8px!important;right:auto!important;width:calc(50% - 14px)!important;max-width:185px!important;z-index:960!important;}
   .love-bot{position:fixed!important;top:82px!important;bottom:auto!important;right:8px!important;left:auto!important;width:calc(50% - 14px)!important;max-width:185px!important;z-index:961!important;}
 }
+
+/* FINAL CHAT POLISH */
+html.messenger-open,html.messenger-open body{overflow:hidden!important;height:100dvh!important;overscroll-behavior:none!important}
+body.messenger-fullscreen #nook{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;z-index:99990!important;margin:0!important;padding:0!important;overflow:hidden!important}
+body.messenger-fullscreen #nook .nook-box,body.messenger-fullscreen #nook .secret-room,body.messenger-fullscreen #nook .secret-content,body.messenger-fullscreen #nook .nook-panels{width:100%!important;max-width:none!important;height:100%!important;margin:0!important;padding:0!important;border-radius:0!important}
+body.messenger-fullscreen #nook .section-title,body.messenger-fullscreen #nook .secret-room-head,body.messenger-fullscreen #nook .nook-tools{display:none!important}
+body.messenger-fullscreen .nook-panel.active.chat-panel{display:flex!important;flex-direction:column!important;width:100%!important;height:100dvh!important;min-height:100dvh!important;max-height:none!important;overflow:hidden!important;border:0!important;border-radius:0!important;margin:0!important;padding:0!important}
+body.messenger-fullscreen .chat-head{flex:0 0 auto!important;min-height:68px!important;z-index:30!important;padding:calc(env(safe-area-inset-top) + 9px) 12px 9px!important}
+body.messenger-fullscreen .chat-author{flex:0 0 auto!important;z-index:29!important;margin:0!important;border-radius:0!important}
+body.messenger-fullscreen .chat-messages{flex:1 1 auto!important;min-height:0!important;height:auto!important;max-height:none!important;overflow-y:auto!important;overflow-x:hidden!important;-webkit-overflow-scrolling:touch!important;overscroll-behavior:contain!important;z-index:5!important}
+body.messenger-fullscreen .chat-reactions,body.messenger-fullscreen .chat-super-tools{flex:0 0 auto!important;overflow-x:auto!important;flex-wrap:nowrap!important;scrollbar-width:none!important;z-index:24!important}
+body.messenger-fullscreen .chat-compose{flex:0 0 auto!important;z-index:28!important;padding-bottom:calc(6px + env(safe-area-inset-bottom))!important}
+body.messenger-fullscreen .mobile-chat-back{display:grid!important;place-items:center!important;width:38px!important;height:38px!important;flex:0 0 38px!important;border-radius:13px!important}
+.cloud-status{display:none!important}
+.chat-panel .chat-toys{position:absolute!important;inset:0!important;pointer-events:none!important;overflow:hidden!important;z-index:2!important}
+.chat-toy{position:absolute!important;display:grid!important;place-items:center!important;width:76px!important;height:76px!important;font-size:54px!important;filter:drop-shadow(0 10px 18px rgba(0,0,0,.42))!important;opacity:.96!important;animation:finalToyFloat 5.5s ease-in-out infinite!important;will-change:transform!important}
+.chat-toy:after{content:'';position:absolute;inset:5px;border-radius:50%;background:radial-gradient(circle,rgba(255,102,180,.22),transparent 68%);filter:blur(5px);z-index:-1}
+.chat-toy.toy-a{left:2%;top:31%;animation-delay:-1s!important}.chat-toy.toy-b{right:2%;top:46%;animation-delay:-3s!important}.chat-toy.toy-c{left:2%;top:62%;animation-delay:-4s!important}.chat-toy.toy-d{right:2%;top:78%;animation-delay:-2s!important}
+@keyframes finalToyFloat{0%,100%{transform:translate3d(0,0,0) rotate(-5deg)}35%{transform:translate3d(10px,-14px,0) rotate(6deg)}70%{transform:translate3d(-8px,8px,0) rotate(-2deg)}}
+.chat-panel .chat-messages,.chat-panel .chat-head,.chat-panel .chat-author,.chat-panel .chat-day,.chat-panel .chat-typing,.chat-panel .chat-reactions,.chat-panel .chat-super-tools,.chat-panel .chat-compose,.chat-panel .chat-compose-tools{position:relative}
+.chat-panel .chat-head,.chat-panel .chat-author,.chat-panel .chat-reactions,.chat-panel .chat-super-tools,.chat-panel .chat-compose{z-index:6}
+@media(max-width:700px){.chat-toy{width:62px!important;height:62px!important;font-size:44px!important}.chat-toy.toy-a{left:0;top:29%}.chat-toy.toy-b{right:0;top:45%}.chat-toy.toy-c{left:0;top:62%}.chat-toy.toy-d{right:0;top:78%}}
+@media(prefers-reduced-motion:reduce){.chat-toy{animation:none!important}}
 </style>
 
 
@@ -1220,17 +1243,17 @@ setInterval(changeBotMessage,5000);
     notesBox.scrollTop=notesBox.scrollHeight;
   }
   function wireSuperMessageActions(rows){notesBox.querySelectorAll('[data-reply-id]').forEach(b=>b.addEventListener('click',()=>{const r=rows.find(x=>String(x.id)===String(b.dataset.replyId));if(r)setReply(r.author_name+': '+String(r.content||''))}));notesBox.querySelectorAll('[data-star-id]').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.starId;starred[id]=!starred[id];saveFlags();renderNotes(rows)}));notesBox.querySelectorAll('[data-pin-id]').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.pinId;pinned[id]=!pinned[id];saveFlags();renderNotes(rows)}));}
-async function loadNotes(){const {data,error}=await db.from('love_notes').select('*').eq('room_id',ROOM).order('created_at',{ascending:true}).limit(100);if(error){setStatus('⚠️ اتصال دفتر برقرار نشد',true);console.error(error);return}renderNotes(data||[]);setStatus('☁️ دفتر آنلاین است')}
-  async function init(){setStatus('☁️ در حال ورود...');let {data:{session}}=await db.auth.getSession();if(!session){const r=await db.auth.signInAnonymously();if(r.error){setStatus('⚠️ ورود آنلاین فعال نیست: '+(r.error?.message||'خطا'),true);console.error(r.error);return}session=r.data.session}currentUser=session?.user||null;await loadNotes();
+async function loadNotes(){const {data,error}=await db.from('love_notes').select('*').eq('room_id',ROOM).order('created_at',{ascending:true}).limit(100);if(error){setStatus('⚠️ اتصال دفتر برقرار نشد',true);console.error(error);return}renderNotes(data||[]);setStatus('')}
+  async function init(){setStatus('');let {data:{session}}=await db.auth.getSession();if(!session){const r=await db.auth.signInAnonymously();if(r.error){setStatus('⚠️ ورود آنلاین فعال نیست: '+(r.error?.message||'خطا'),true);console.error(r.error);return}session=r.data.session}currentUser=session?.user||null;await loadNotes();
     const presence=db.channel('love-presence',{config:{presence:{key:currentUser?.id||Math.random().toString(36).slice(2)}}});
-    presence.on('presence',{event:'sync'},()=>{const me=renderPresence(presence.presenceState());setStatus(me==='آنلاین'?'● همگام‌سازی زنده · شما آنلاین هستید':'☁️ همگام‌سازی لحظه‌ای فعال است')});
+    presence.on('presence',{event:'sync'},()=>{const me=renderPresence(presence.presenceState());setStatus('')});
     presence.on('presence',{event:'join'},()=>renderPresence(presence.presenceState()));
     presence.on('presence',{event:'leave'},()=>renderPresence(presence.presenceState()));
-    presence.subscribe(async st=>{if(st==='SUBSCRIBED'){await presence.track({author_name:author,online_at:new Date().toISOString()});setStatus('● همگام‌سازی زنده · شما آنلاین هستید')}});
+    presence.subscribe(async st=>{if(st==='SUBSCRIBED'){await presence.track({author_name:author,online_at:new Date().toISOString()});setStatus('')}});
     window.addEventListener('beforeunload',()=>{try{presence.untrack()}catch(e){}});
     document.addEventListener('visibilitychange',async()=>{if(document.visibilityState==='visible'){try{await presence.track({author_name:author,online_at:new Date().toISOString()})}catch(e){}}else{try{await presence.untrack()}catch(e){}}});
     document.querySelectorAll('.author-btn').forEach(b=>b.addEventListener('click',async()=>{setAuthor(b.dataset.author);try{await presence.track({author_name:author,online_at:new Date().toISOString()})}catch(e){}}));
-    db.channel('love-notes-live').on('postgres_changes',{event:'*',schema:'public',table:'love_notes',filter:`room_id=eq.${ROOM}`},()=>loadNotes()).subscribe(st=>{if(st==='SUBSCRIBED')setStatus('● همگام‌سازی لحظه‌ای فعال است')});
+    db.channel('love-notes-live').on('postgres_changes',{event:'*',schema:'public',table:'love_notes',filter:`room_id=eq.${ROOM}`},()=>loadNotes()).subscribe(st=>{if(st==='SUBSCRIBED')setStatus('')});
   }
   async function sendChat(content){content=(content||'').trim();if(!content)return;if(replyText)content='↩️ '+replyText.slice(0,100)+'\n'+content;if(!author){toast('اول مشخص کن فاضلی یا الهام 🌸');return}if(!currentUser){toast('دفتر هنوز آنلاین نشده؛ چند لحظه صبر کن');return}const {error}=await db.from('love_notes').insert({room_id:ROOM,author_id:currentUser.id,author_name:author,content});if(error){console.error('love_notes insert error:',error);saved.textContent='خطا: '+(error.message||'ارسال نشد');toast('ارسال نشد: '+(error.message||'خطای ناشناخته'));return}note.value='';note.style.height='42px';try{localStorage.removeItem('fazelElhamNookDraft')}catch(e){};saved.textContent='✓✓ بفرست شد';clearReply();loadNotes()}
   document.getElementById('saveNookNote')?.addEventListener('click',()=>sendChat(note?.value||''));
