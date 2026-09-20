@@ -428,6 +428,14 @@ main>section.hero.active-section{display:grid!important;align-content:center;jus
 .ai-chat{display:flex;flex-direction:column;gap:12px}.ai-messages{min-height:300px;max-height:52vh;overflow:auto;padding:14px;border-radius:20px;background:rgba(0,0,0,.16);border:1px solid rgba(255,255,255,.08)}.ai-msg{max-width:88%;padding:12px 14px;border-radius:18px;margin:8px 0;line-height:2;font-size:13px;white-space:pre-wrap}.ai-msg.user{margin-right:auto;background:rgba(255,95,165,.13);border:1px solid rgba(255,95,165,.18)}.ai-msg.bot{margin-left:auto;background:rgba(125,90,180,.12);border:1px solid rgba(255,255,255,.1)}.ai-msg .ai-label{display:block;font-size:10px;color:#a98d9d;margin-bottom:4px}.ai-compose{display:flex;gap:10px;align-items:flex-end}.ai-compose textarea{flex:1;min-height:74px;resize:vertical}.ai-compose button{white-space:nowrap}.ai-status{font-size:10px;color:#a98d9d}.ai-status.error{color:#ff9aaa}.ai-quick{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px}.ai-quick button{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.045);color:#fff;border-radius:14px;padding:8px 11px;cursor:pointer;font-family:inherit;font-size:11px}.ai-quick button:hover{background:rgba(255,80,150,.12);transform:translateY(-1px)}.ai-note{font-size:10px;color:#8f7786;line-height:1.8;margin:0}
 @media(max-width:700px){.ai-messages{min-height:260px;max-height:48vh}.ai-compose{flex-direction:column}.ai-compose button{width:100%}.ai-msg{max-width:94%}}
 </style>
+
+<style id="premium-couple-upgrade">
+#messengerOverlay .chat-head{background:linear-gradient(180deg,rgba(16,7,22,.94),rgba(16,7,22,.72));backdrop-filter:blur(22px);border-bottom:1px solid rgba(255,255,255,.07)}
+#messengerOverlay .chat-head-copy h3{font-size:15px;letter-spacing:-.2px}.chat-status-line{display:flex;align-items:center;gap:6px;margin-top:4px;color:#a98d9d;font-size:8px}.chat-status-dot{width:6px;height:6px;border-radius:50%;background:#62e7a0;box-shadow:0 0 9px #62e7a0}.relationship-pill{position:absolute;left:50%;top:calc(env(safe-area-inset-top) + 73px);transform:translateX(-50%);z-index:20;padding:5px 10px;border:1px solid rgba(255,130,190,.13);background:rgba(27,10,29,.58);backdrop-filter:blur(14px);border-radius:999px;color:#f4c8da;font-size:8px;white-space:nowrap;pointer-events:none;opacity:.9}
+.chat-hidden-message{min-width:150px;padding:12px 14px;border-radius:16px;background:linear-gradient(135deg,rgba(255,70,150,.12),rgba(120,70,255,.1));border:1px dashed rgba(255,150,205,.22);text-align:center;cursor:pointer;user-select:none}.chat-hidden-message span{display:block;font-size:12px;color:#ffe0ec}.chat-hidden-message small{display:block;margin-top:4px;color:#a98d9d;font-size:8px}.chat-hidden-message.revealed span{font-size:11px;line-height:1.8}.chat-hidden-message.revealed small{display:none}
+.couple-feature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.couple-feature{padding:14px;border-radius:16px;border:1px solid rgba(255,255,255,.09);background:linear-gradient(145deg,rgba(255,80,155,.08),rgba(130,80,255,.06));color:#fff;text-align:right;cursor:pointer}.couple-feature b{display:block;font-size:11px;margin-bottom:4px}.couple-feature small{display:block;color:#a98d9d;font-size:8px;line-height:1.7}.future-letter{padding:14px;border-radius:16px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);margin-top:10px}.future-letter input,.future-letter textarea{width:100%;box-sizing:border-box;margin-top:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:12px;color:#fff;padding:10px;font:inherit}.future-letter textarea{min-height:100px;resize:vertical}.future-letter button{margin-top:8px;border:0;border-radius:12px;padding:10px 14px;background:linear-gradient(135deg,rgba(255,80,155,.3),rgba(120,70,255,.24));color:#fff;cursor:pointer}.chat-longpress-sheet{position:fixed;inset:auto 12px calc(12px + env(safe-area-inset-bottom)) 12px;z-index:2147483647;display:none;background:rgba(18,7,22,.97);backdrop-filter:blur(22px);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:10px;box-shadow:0 25px 80px rgba(0,0,0,.55)}.chat-longpress-sheet.show{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.chat-longpress-sheet button{border:0;background:rgba(255,255,255,.05);color:#fff;border-radius:13px;padding:10px 5px;font-size:10px}.chat-toast-mini{position:fixed;left:50%;bottom:calc(85px + env(safe-area-inset-bottom));transform:translateX(-50%) translateY(10px);z-index:2147483647;padding:8px 13px;border-radius:999px;background:rgba(22,7,23,.9);border:1px solid rgba(255,255,255,.09);color:#ffe0ed;font-size:9px;opacity:0;transition:.25s;pointer-events:none}.chat-toast-mini.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:600px){.relationship-pill{top:calc(env(safe-area-inset-top) + 78px)}.couple-feature-grid{grid-template-columns:1fr 1fr}}
+</style>
 </head>
 <body>
 <div id="messengerOverlay" aria-hidden="true" role="dialog" aria-label="دفتر دوتایی ما"><div class="messenger-shell" id="messengerShell"></div></div>
@@ -1572,6 +1580,55 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
   window.addEventListener('resize',()=>{
     if(overlay.classList.contains('is-open'))overlay.style.height=window.innerHeight+'px';
   });
+})();
+</script>
+
+<script id="premium-couple-upgrade-js">
+(function(){
+ const overlay=document.getElementById('messengerOverlay'); if(!overlay)return;
+ const menu=document.getElementById('chatMenuBtn');
+ const sheet=document.getElementById('chatSuperSheet'), body=document.getElementById('chatSheetBody'), title=document.getElementById('chatSheetTitle');
+ const note=document.getElementById('nookNote');
+ let hiddenNext=false, longTimer=null, longTarget=null;
+ const mini=(msg)=>{let t=document.querySelector('.chat-toast-mini');if(!t){t=document.createElement('div');t.className='chat-toast-mini';overlay.appendChild(t)}t.textContent=msg;t.classList.add('show');clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove('show'),1700)};
+ function openSheet(t,html){if(!sheet||!body)return;title.textContent=t;body.innerHTML=html;sheet.classList.add('show')}
+ function enhanceMenu(){
+   if(!body||!title)return;
+   if(body.querySelector('.couple-feature-grid'))return;
+   body.insertAdjacentHTML('afterbegin',`<div class="couple-feature-grid" style="margin-bottom:12px">
+    <button class="couple-feature" data-couple="relationship"><b>❤️ اتاق رابطه</b><small>حال امشب، روزهای باهم بودن و خاطرات</small></button>
+    <button class="couple-feature" data-couple="hidden"><b>🔐 پیام مخفی</b><small>پیام بعدی فقط با لمس دیده شود</small></button>
+    <button class="couple-feature" data-couple="letter"><b>💌 نامه آینده</b><small>برای یک تاریخ خاص بنویس</small></button>
+    <button class="couple-feature" data-couple="gestures"><b>✨ کنترل پیام</b><small>لمس طولانی و کشیدن برای پاسخ</small></button>
+   </div>`);
+ }
+ menu?.addEventListener('click',()=>requestAnimationFrame(enhanceMenu),true);
+ body?.addEventListener('click',e=>{
+   const b=e.target.closest('[data-couple]'); if(!b)return;
+   const type=b.dataset.couple;
+   if(type==='relationship'){
+     const days=Math.max(1,Math.floor((Date.now()-new Date('2024-01-01T00:00:00').getTime())/86400000));
+     openSheet('❤️ اتاق رابطه',`<div class="chat-memory-card" style="text-align:center"><div style="font-size:30px">❤️</div><b style="font-size:16px">فاضل و الهام</b><p style="color:#a98d9d;font-size:10px;line-height:1.8">هر روز یک خاطره تازه؛ هر پیام یک تکه از داستان شما.</p><div class="couple-feature-grid"><div class="couple-feature"><b>${days} روز</b><small>شمارش این اتاق</small></div><div class="couple-feature"><b>❤️ خصوصی</b><small>فقط برای خودتون</small></div></div></div><div class="chat-memory-card" style="margin-top:9px">امشب چه حسی داری؟<div class="couple-feature-grid" style="margin-top:8px"><button class="couple-feature" data-mood="🥰">🥰 عاشقانه</button><button class="couple-feature" data-mood="🥹">🥹 دلتنگ</button><button class="couple-feature" data-mood="😊">😊 خوبم</button><button class="couple-feature" data-mood="🤍">🤍 بغلم کن</button></div></div>`);
+   }else if(type==='hidden'){
+     hiddenNext=true; if(note){note.placeholder='🔐 پیام مخفی بعدی را بنویس...';note.focus()} sheet.classList.remove('show');mini('🔐 پیام بعدی مخفی خواهد بود');
+   }else if(type==='letter'){
+     openSheet('💌 نامه آینده',`<div class="future-letter"><b>یک نامه برای آینده</b><input id="futureDate" type="date"><textarea id="futureText" placeholder="برای آن روز چه می‌خواهی بگویی؟"></textarea><button id="saveFutureLetter">ذخیره نامه ❤️</button><div id="futureSaved" style="color:#a98d9d;font-size:9px;margin-top:8px"></div></div>`);
+     document.getElementById('saveFutureLetter')?.addEventListener('click',()=>{const d=document.getElementById('futureDate')?.value,t=document.getElementById('futureText')?.value.trim();if(!d||!t){mini('تاریخ و متن نامه را کامل کن');return}localStorage.setItem('fazelElhamFutureLetter',JSON.stringify({date:d,text:t}));document.getElementById('futureSaved').textContent='نامه ذخیره شد؛ روزش که برسد پیدایش می‌کنی 💌';});
+   }else if(type==='gestures'){openSheet('✨ کنترل پیام','<div class="chat-memory-card">روی پیام <b>دابل‌تپ</b> کن تا ❤️ شود.<br><br><b>لمس طولانی</b> برای Reply، ستاره و سنجاق.<br><br><b>کشیدن پیام به راست</b> برای پاسخ سریع.</div>')}
+ });
+ body?.addEventListener('click',e=>{const m=e.target.closest('[data-mood]');if(m){localStorage.setItem('fazelElhamMood',m.dataset.mood);mini('حال امشب ثبت شد '+m.dataset.mood);}});
+ // Mark next outgoing message as hidden without changing backend schema.
+ const send=document.getElementById('saveNookNote');
+ send?.addEventListener('click',()=>{if(hiddenNext&&note&&note.value.trim()){note.value='🔐 پیام مخفی:'+note.value;hiddenNext=false;note.placeholder='پیامت رو اینجا بنویس...';}},true);
+ // Hidden message reveal.
+ overlay.addEventListener('click',e=>{const h=e.target.closest('.chat-hidden-message');if(!h)return;const text=h.dataset.hiddenText||'';h.classList.add('revealed');h.innerHTML='<span>'+text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</span>';});
+ // Long press + swipe reply on bubbles.
+ overlay.addEventListener('pointerdown',e=>{const b=e.target.closest('.chat-bubble');if(!b)return;longTarget=b;const x=e.clientX,y=e.clientY;longTimer=setTimeout(()=>{showLongSheet(b)},520);b.dataset.px=x;b.dataset.py=y;},{passive:true});
+ overlay.addEventListener('pointerup',e=>{clearTimeout(longTimer);if(!longTarget)return;const x0=+longTarget.dataset.px,y0=+longTarget.dataset.py;const dx=e.clientX-x0,dy=e.clientY-y0;if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)){const reply=longTarget.closest('.chat-bubble-row')?.querySelector('.chat-message-actions [data-reply-id]');reply?.click();}longTarget=null;});
+ overlay.addEventListener('pointercancel',()=>{clearTimeout(longTimer);longTarget=null});
+ function showLongSheet(b){let s=document.querySelector('.chat-longpress-sheet');if(!s){s=document.createElement('div');s.className='chat-longpress-sheet';overlay.appendChild(s)}const id=b.closest('.chat-bubble-row')?.dataset.id;s.innerHTML='<button data-act="reply">↩️ پاسخ</button><button data-act="react">❤️ قلب</button><button data-act="star">⭐ مهم</button><button data-act="pin">📌 سنجاق</button>';s.classList.add('show');s.onclick=ev=>{const a=ev.target.closest('[data-act]')?.dataset.act;if(!a)return;const row=b.closest('.chat-bubble-row');if(a==='reply')row?.querySelector('[data-reply-id]')?.click();if(a==='react')b.dispatchEvent(new MouseEvent('dblclick',{bubbles:true}));if(a==='star')row?.querySelector('[data-star-id]')?.click();if(a==='pin')row?.querySelector('[data-pin-id]')?.click();s.classList.remove('show');};setTimeout(()=>s.classList.remove('show'),4500)}
+ // Relationship status chip.
+ const head=document.querySelector('#messengerOverlay .chat-head');if(head&&!head.querySelector('.chat-status-line')){const c=head.querySelector('.chat-head-copy');if(c){const st=document.createElement('div');st.className='chat-status-line';st.innerHTML='<span class="chat-status-dot"></span><span>فضای خصوصی شما دو نفر</span>';c.appendChild(st)}}
 })();
 </script>
 </body>
