@@ -1002,6 +1002,54 @@ body.messenger-fullscreen .mobile-chat-back{display:grid!important;place-items:c
 .chat-panel .chat-head,.chat-panel .chat-author,.chat-panel .chat-reactions,.chat-panel .chat-super-tools,.chat-panel .chat-compose{z-index:6}
 @media(max-width:700px){.chat-toy{width:62px!important;height:62px!important;font-size:44px!important}.chat-toy.toy-a{left:0;top:29%}.chat-toy.toy-b{right:0;top:45%}.chat-toy.toy-c{left:0;top:62%}.chat-toy.toy-d{right:0;top:78%}}
 @media(prefers-reduced-motion:reduce){.chat-toy{animation:none!important}}
+
+/* === Romantic animated messenger background === */
+body.messenger-fullscreen #nook,
+body.messenger-fullscreen #nook .secret-content,
+body.messenger-fullscreen #nook .secret-room,
+body.messenger-fullscreen .nook-panels,
+body.messenger-fullscreen .chat-panel{
+  background:#08040d!important;
+}
+body.messenger-fullscreen .chat-panel{position:relative!important;isolation:isolate!important;}
+body.messenger-fullscreen .chat-panel::before{
+  content:"";position:absolute;inset:-18%;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(circle at 18% 24%,rgba(255,55,145,.24) 0,rgba(255,55,145,.10) 15%,transparent 38%),
+    radial-gradient(circle at 82% 30%,rgba(119,74,255,.23) 0,rgba(119,74,255,.09) 17%,transparent 40%),
+    radial-gradient(circle at 48% 86%,rgba(0,210,255,.14) 0,rgba(0,210,255,.06) 14%,transparent 38%);
+  filter:blur(28px);animation:messengerAurora 13s ease-in-out infinite alternate;
+  transform:translate3d(0,0,0) scale(1.05);
+}
+body.messenger-fullscreen .chat-panel::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background-image:
+    radial-gradient(circle,rgba(255,255,255,.16) 0 1px,transparent 1.7px),
+    radial-gradient(circle,rgba(255,120,190,.11) 0 1px,transparent 1.8px);
+  background-size:92px 92px,137px 137px;background-position:8px 20px,43px 77px;
+  animation:particleDrift 22s linear infinite;opacity:.45;
+}
+body.messenger-fullscreen .chat-panel > *:not(.chat-toys){position:relative;z-index:5;}
+body.messenger-fullscreen .chat-panel .chat-toys{z-index:3!important;position:absolute!important;inset:0!important;overflow:hidden!important;pointer-events:none!important;}
+body.messenger-fullscreen .chat-panel .chat-toys::before,
+body.messenger-fullscreen .chat-panel .chat-toys::after{
+  content:"";position:absolute;border-radius:50%;pointer-events:none;
+}
+body.messenger-fullscreen .chat-panel .chat-toys::before{
+  width:180px;height:180px;left:18%;top:10%;
+  background:radial-gradient(circle,rgba(255,62,154,.16),transparent 68%);
+  filter:blur(12px);animation:haloFloat 8s ease-in-out infinite;
+}
+body.messenger-fullscreen .chat-panel .chat-toys::after{
+  width:220px;height:220px;right:5%;bottom:8%;
+  background:radial-gradient(circle,rgba(113,75,255,.15),transparent 68%);
+  filter:blur(15px);animation:haloFloat 11s ease-in-out infinite reverse;
+}
+body.messenger-fullscreen .chat-panel .chat-toy{z-index:2!important;opacity:.42!important;filter:drop-shadow(0 8px 18px rgba(0,0,0,.45)) blur(.1px)!important;}
+@keyframes messengerAurora{0%{transform:translate3d(-2%,0,0) scale(1.05);filter:blur(28px) hue-rotate(0deg)}50%{transform:translate3d(2%,-2%,0) scale(1.12);filter:blur(34px) hue-rotate(18deg)}100%{transform:translate3d(-1%,2%,0) scale(1.08);filter:blur(30px) hue-rotate(-12deg)}}
+@keyframes particleDrift{from{background-position:8px 20px,43px 77px}to{background-position:100px 120px,0 10px}}
+@keyframes haloFloat{0%,100%{transform:translate3d(0,0,0) scale(.9);opacity:.55}50%{transform:translate3d(28px,-24px,0) scale(1.15);opacity:1}}
+@media(prefers-reduced-motion:reduce){body.messenger-fullscreen .chat-panel::before,body.messenger-fullscreen .chat-panel::after,body.messenger-fullscreen .chat-panel .chat-toys::before,body.messenger-fullscreen .chat-panel .chat-toys::after{animation:none!important}.chat-panel .chat-toy{animation:none!important}}
 </style>
 
 
