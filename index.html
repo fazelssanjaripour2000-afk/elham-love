@@ -249,6 +249,11 @@ main>section.hero.active-section{display:grid!important;align-content:center;jus
 <style>
 .shared-author{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 12px;padding:10px 12px;border:1px solid rgba(255,255,255,.08);border-radius:16px;background:rgba(255,255,255,.035);font-size:11px;color:#b99aaa}.author-btn{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#fff;border-radius:12px;padding:8px 11px;cursor:pointer;transition:.25s}.author-btn:hover,.author-btn.active{transform:translateY(-2px);border-color:rgba(255,100,170,.55);background:rgba(255,80,155,.13);box-shadow:0 0 18px rgba(255,60,140,.12)}.cloud-status{margin-right:auto;color:#8fae9f;font-size:10px}.cloud-status.offline{color:#d9a3a3}.shared-notes{display:grid;gap:10px;margin-top:18px;max-height:330px;overflow:auto;padding-left:2px}.shared-note{padding:13px 14px;border-radius:17px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);animation:noteIn .45s ease}.shared-note.mine{border-color:rgba(255,100,170,.22);background:linear-gradient(145deg,rgba(255,80,155,.08),rgba(255,255,255,.035))}.shared-note-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:7px;font-size:10px;color:#a98d9d}.shared-note-head b{color:#ffd4e5;font-size:11px}.shared-note-body{white-space:pre-wrap;line-height:1.9;color:#eee;font-size:13px}.note-delete{float:left;border:0;background:transparent;color:#9c7f8d;cursor:pointer;font-size:11px}.empty-notes{text-align:center;padding:24px;color:#866d7b;font-size:11px}.note-error{color:#ffb0c5;font-size:10px;margin-top:8px}@keyframes noteIn{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}@media(max-width:700px){.shared-author{gap:6px}.author-btn{padding:7px 9px}.cloud-status{width:100%;margin:0}.shared-notes{max-height:280px}}
 </style>
+
+<style id="ai-counselor-css">
+.ai-chat{display:flex;flex-direction:column;gap:12px}.ai-messages{min-height:300px;max-height:52vh;overflow:auto;padding:14px;border-radius:20px;background:rgba(0,0,0,.16);border:1px solid rgba(255,255,255,.08)}.ai-msg{max-width:88%;padding:12px 14px;border-radius:18px;margin:8px 0;line-height:2;font-size:13px;white-space:pre-wrap}.ai-msg.user{margin-right:auto;background:rgba(255,95,165,.13);border:1px solid rgba(255,95,165,.18)}.ai-msg.bot{margin-left:auto;background:rgba(125,90,180,.12);border:1px solid rgba(255,255,255,.1)}.ai-msg .ai-label{display:block;font-size:10px;color:#a98d9d;margin-bottom:4px}.ai-compose{display:flex;gap:10px;align-items:flex-end}.ai-compose textarea{flex:1;min-height:74px;resize:vertical}.ai-compose button{white-space:nowrap}.ai-status{font-size:10px;color:#a98d9d}.ai-status.error{color:#ff9aaa}.ai-quick{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px}.ai-quick button{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.045);color:#fff;border-radius:14px;padding:8px 11px;cursor:pointer;font-family:inherit;font-size:11px}.ai-quick button:hover{background:rgba(255,80,150,.12);transform:translateY(-1px)}.ai-note{font-size:10px;color:#8f7786;line-height:1.8;margin:0}
+@media(max-width:700px){.ai-messages{min-height:260px;max-height:48vh}.ai-compose{flex-direction:column}.ai-compose button{width:100%}.ai-msg{max-width:94%}}
+</style>
 </head>
 <body>
 <aside class="relationship-widget" id="relationshipWidget" aria-label="وضعیت رابطه ما"><div class="rw-head"><div class="rw-icon">😂</div><div><h4>وضعیت رابطه ما</h4><div class="rw-status">سیستم کل‌کل و قهر فعال است 😌</div></div></div><div class="rw-text" id="relationshipJoke">رابطه ما: ۵٪ عاشقانه، ۹۵٪ کل‌کل 😂❤️</div><div class="rw-dots" id="relationshipDots"></div></aside>
@@ -362,13 +367,13 @@ main>section.hero.active-section{display:grid!important;align-content:center;jus
     <button class="nook-tool active" data-room="notes"><span>📝</span><b>دفتر دوتایی</b><small>حرف‌هایی که فقط خودمون می‌خونیم</small></button>
     <button class="nook-tool" data-room="mood"><span>🕯️</span><b>حالِ امشب</b><small>فضای اتاق رو عوض کن</small></button>
     <button class="nook-tool" data-room="cards"><span>💌</span><b>کارت عاشقانه</b><small>یک پیام تصادفی برای هم</small></button>
-    <button class="nook-tool" data-room="time"><span>⏳</span><b>لحظه‌مون</b><small>یک تایمر برای یک قرار کوچک</small></button>
+    <button class="nook-tool" data-room="time"><span>⏳</span><b>لحظه‌مون</b><small>یک تایمر برای یک قرار کوچک</small></button><button class="nook-tool" data-room="counselor"><span>🧠</span><b>مشاور رابطه</b><small>حرف بزنیم و بهتر همدیگه رو بفهمیم</small></button>
   </div>
   <div class="nook-panels">
     <div class="nook-panel active" data-panel="notes"><div class="panel-title"><span>📝</span><div><h3>دفتر دوتایی ما</h3><p>اینجا هر دو نفر می‌تونین بنویسین و نوشته‌ها بین گوشی‌ها همگام می‌شن ❤️</p></div></div><div class="shared-author"><span>من:</span><button type="button" class="author-btn" data-author="فاضل">👨🏻 فاضل</button><button type="button" class="author-btn" data-author="الهام">👩🏻 الهام</button><span id="cloudStatus" class="cloud-status">☁️ در حال اتصال...</span></div><textarea id="nookNote" placeholder="مثلاً: امروز دلم خواست بهت بگم... ❤️"></textarea><div class="panel-actions"><button class="btn primary" id="saveNookNote">ارسال به دفتر ❤️</button><button class="ghost-btn" id="clearNookNote">پاک کردن</button><span id="noteSaved">هنوز چیزی نوشته نشده</span></div><div id="sharedNotes" class="shared-notes"><div class="empty-notes">هنوز نوشته‌ای نیست... اولین نامه رو تو بنویس 💌</div></div></div>
     <div class="nook-panel" data-panel="mood"><div class="panel-title"><span>🕯️</span><div><h3>نور و حالِ اتاق</h3><p>یکی از فضاها رو انتخاب کن تا حال‌وهوای گوشه دنج عوض بشه.</p></div></div><div class="mood-grid"><button data-mood="night">🌙<b>شب آرام</b></button><button data-mood="pink">🌸<b>عاشقانه</b></button><button data-mood="dream">✨<b>رویایی</b></button><button data-mood="cozy">🔥<b>گرم و دنج</b></button></div></div>
     <div class="nook-panel" data-panel="cards"><div class="panel-title"><span>💌</span><div><h3>یک کارت برای تو</h3><p>دکمه رو بزن و یک پیام مخصوص بگیر.</p></div></div><div class="love-card" id="loveCard">«هرجا باشی، یه گوشه از قلبم همیشه برای تو روشنه.» ❤️</div><button class="btn primary" id="newLoveCard">یکی دیگه بده ✨</button></div>
-    <div class="nook-panel" data-panel="time"><div class="panel-title"><span>⏳</span><div><h3>قرار ۵ دقیقه‌ای</h3><p>تایمر رو بزن؛ پنج دقیقه فقط برای خودتون.</p></div></div><div class="cozy-timer" id="cozyTimer">05:00</div><button class="btn primary" id="startCozyTimer">شروع لحظه‌مون ❤️</button><p id="cozyTimerMsg" class="timer-msg">وقتی شروعش کردی، گوشی رو کنار بذار و فقط با هم باشین.</p></div>
+    <div class="nook-panel" data-panel="time"><div class="panel-title"><span>⏳</span><div><h3>قرار ۵ دقیقه‌ای</h3><p>تایمر رو بزن؛ پنج دقیقه فقط برای خودتون.</p></div></div><div class="cozy-timer" id="cozyTimer">05:00</div><button class="btn primary" id="startCozyTimer">شروع لحظه‌مون ❤️</button><p id="cozyTimerMsg" class="timer-msg">وقتی شروعش کردی، گوشی رو کنار بذار و فقط با هم باشین.</p></div><div class="nook-panel" data-panel="counselor"><div class="panel-title"><span>🧠</span><div><h3>مشاور رابطه ما</h3><p>یک فضای بی‌طرف برای حرف زدن، فهمیدن احساسات و پیدا کردن راه گفت‌وگو.</p></div></div><div class="ai-quick"><button type="button" data-ai-prompt="بین ما یک سوءتفاهم پیش آمده؛ کمکمون کن بدون سرزنش درباره‌اش حرف بزنیم.">🫶 سوءتفاهم</button><button type="button" data-ai-prompt="کمکم کن احساساتم را بدون دعوا و سرزنش به طرف مقابلم بگویم.">💬 چطور بگم؟</button><button type="button" data-ai-prompt="یک تمرین کوتاه دونفره برای بهتر شنیدن و فهمیدن همدیگه بهمون بده.">❤️ تمرین دونفره</button><button type="button" data-ai-prompt="امشب فقط ۱۰ دقیقه وقت داریم؛ یک گفت‌وگوی صمیمی و مفید برایمان طراحی کن.">🌙 گفت‌وگوی امشب</button></div><div id="aiMessages" class="ai-messages"><div class="ai-msg bot"><span class="ai-label">مشاور گوشه دنج</span>سلام فاضل و الهام ❤️ من اینجام که بدون قضاوت کمکتون کنم بهتر حرف همدیگه رو بشنوین. هر چیزی هست، از همین‌جا شروع کنین.</div></div><div class="ai-compose"><textarea id="aiInput" placeholder="مثلاً: امروز از یه حرف الهام ناراحت شدم ولی نمی‌خوام بحث کنیم..."></textarea><button class="btn primary" id="aiSend">فرستادن ❤️</button></div><div id="aiStatus" class="ai-status">☁️ آماده‌ام</div><p class="ai-note">این مشاور جای درمانگر یا متخصص سلامت روان نیست؛ برای گفت‌وگو و کمک عمومی در رابطه طراحی شده.</p></div>
   </div>
 </div></div></div></section>
 
@@ -998,6 +1003,115 @@ setInterval(changeBotMessage,5000);
   document.getElementById('saveNookNote')?.addEventListener('click',async()=>{const content=(note?.value||'').trim();if(!content)return toast('اول یه چیزی بنویس ❤️');if(!author){toast('اول مشخص کن فاضلی یا الهام 🌸');return}if(!currentUser){toast('دفتر هنوز آنلاین نشده؛ چند لحظه صبر کن');return}const {error}=await db.from('love_notes').insert({room_id:ROOM,author_id:currentUser.id,author_name:author,content});if(error){console.error('love_notes insert error:',error);saved.textContent='خطا: '+(error.message||'ارسال نشد');toast('ارسال نشد: '+(error.message||'خطای ناشناخته'));return}note.value='';saved.textContent='با موفقیت در دفتر مشترک ثبت شد ❤️';toast('نوشته‌ات به دفتر مشترک اضافه شد 💌');loadNotes()});
   document.getElementById('clearNookNote')?.addEventListener('click',()=>{if(note)note.value='';if(saved)saved.textContent='متن پاک شد'});
   init();
+})();
+</script>
+
+<script id="ai-counselor-js">
+(function(){
+  const input=document.getElementById('aiInput'), send=document.getElementById('aiSend'), box=document.getElementById('aiMessages'), status=document.getElementById('aiStatus');
+  if(!input||!send||!box)return;
+
+  const SUPABASE_URL='https://evdkszuroxabkbedqkvs.supabase.co';
+  const SUPABASE_KEY='sb_publishable_tFJD3yr__Ju7ZitA0u4kBQ_f9PkaVGW';
+  const FN=SUPABASE_URL+'/functions/v1/relationship-counselor';
+
+  const esc=v=>String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+  function addMsg(role,text){
+    const d=document.createElement('div');
+    d.className='ai-msg '+role;
+    d.innerHTML='<span class="ai-label">'+(role==='user'?'شما':'مشاور گوشه دنج')+'</span>'+esc(text);
+    box.appendChild(d);
+    box.scrollTop=box.scrollHeight;
+  }
+
+  async function getToken(){
+    if(!window.supabase?.createClient) throw new Error('کتابخانه اتصال به Supabase در سایت پیدا نشد.');
+    const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+    let {data:{session}}=await db.auth.getSession();
+    if(!session){
+      const r=await db.auth.signInAnonymously();
+      if(r.error) throw r.error;
+      session=r.data.session;
+    }
+    if(!session?.access_token) throw new Error('ورود ناشناس انجام نشد.');
+    return session.access_token;
+  }
+
+  function extractReply(data){
+    if(!data) return '';
+    if(typeof data.reply==='string' && data.reply.trim()) return data.reply.trim();
+    if(typeof data.output_text==='string' && data.output_text.trim()) return data.output_text.trim();
+
+    const parts=[];
+    for(const item of (Array.isArray(data.output)?data.output:[])){
+      for(const c of (Array.isArray(item?.content)?item.content:[])){
+        if(typeof c?.text==='string' && c.text.trim()) parts.push(c.text.trim());
+      }
+    }
+    return parts.join('\n').trim();
+  }
+
+  async function ask(text){
+    text=(text||'').trim();
+    if(!text)return;
+
+    send.disabled=true;
+    input.disabled=true;
+    addMsg('user',text);
+    status.className='ai-status';
+    status.textContent='🧠 دارم فکر می‌کنم...';
+
+    try{
+      const token=await getToken();
+      const r=await fetch(FN,{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json',
+          'apikey':SUPABASE_KEY,
+          'Authorization':'Bearer '+token
+        },
+        body:JSON.stringify({message:text})
+      });
+
+      const raw=await r.text();
+      let data={};
+      try{ data=raw?JSON.parse(raw):{}; }catch(_){}
+
+      if(!r.ok){
+        throw new Error(data?.error||data?.message||raw||('خطای سرور '+r.status));
+      }
+
+      const reply=extractReply(data);
+      if(!reply) throw new Error('سرور پاسخ داد، اما متن پاسخ خالی بود.');
+
+      addMsg('bot',reply);
+      status.className='ai-status';
+      status.textContent='☁️ آماده‌ام';
+      input.value='';
+    }catch(e){
+      console.error('relationship-counselor:',e);
+      status.className='ai-status error';
+      status.textContent='⚠️ '+(e?.message||'اتصال برقرار نشد');
+    }finally{
+      send.disabled=false;
+      input.disabled=false;
+      input.focus();
+    }
+  }
+
+  send.addEventListener('click',()=>ask(input.value));
+  input.addEventListener('keydown',e=>{
+    if(e.key==='Enter'&&!e.shiftKey){
+      e.preventDefault();
+      ask(input.value);
+    }
+  });
+  document.querySelectorAll('[data-ai-prompt]').forEach(b=>{
+    b.addEventListener('click',()=>{
+      input.value=b.dataset.aiPrompt||'';
+      input.focus();
+    });
+  });
 })();
 </script>
 </body>
