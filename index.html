@@ -136,6 +136,30 @@ footer{text-align:center;padding:50px 20px;color:#b89baa;font-size:13px}.ripple{
 @media(max-width:600px){.timed-letter-box{padding:14px;border-radius:25px}.timed-box-head{font-size:18px}.timed-letter-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.timed-letter-card{padding:14px 9px}.timed-envelope{width:72px;height:65px}.timed-sub{min-height:44px}.timed-letter-card h3{font-size:12px}.timed-countdown{font-size:10px}}
 </style>
 
+
+<style id="section-navigation-overhaul">
+/* Navigation: one reliable menu on every screen */
+html,body{overflow:hidden!important;height:100%;scroll-behavior:auto!important}
+main{height:100dvh;overflow:hidden}
+main>section{display:none!important;width:100%;height:100dvh;min-height:100dvh;margin:0;padding:105px 28px 28px;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain}
+main>section.active-section{display:block!important;animation:sectionIn .42s cubic-bezier(.2,.8,.2,1) both}
+main>section.hero.active-section{display:grid!important;align-content:center;justify-items:center}
+@keyframes sectionIn{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:none}}
+.topbar{z-index:1200}
+.navlinks{display:none!important}
+.topbar.open .navlinks{display:grid!important;position:absolute;top:calc(100% + 10px);right:0;left:0;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:12px;background:rgba(20,8,24,.98);border:1px solid var(--line);border-radius:20px;box-shadow:0 25px 70px rgba(0,0,0,.45);max-height:calc(100dvh - 90px);overflow:auto}
+.navlinks a{padding:12px 10px;border-radius:14px;text-align:center;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07)}
+.navlinks a:hover,.navlinks a.active-nav{background:linear-gradient(135deg,rgba(255,93,158,.22),rgba(155,76,255,.18));border-color:rgba(255,143,186,.28)}
+.menuBtn{display:grid!important;place-items:center;width:42px;height:42px;border:1px solid rgba(255,255,255,.14);border-radius:14px;background:linear-gradient(145deg,rgba(255,255,255,.11),rgba(255,80,150,.08));color:#fff;font-size:21px;flex:none}
+@media(max-width:600px){
+ main>section{padding:142px 10px 18px}
+ main>section.hero.active-section{padding-top:90px}
+ .topbar{top:8px;width:calc(100% - 16px);padding:8px 11px}
+ .topbar.open .navlinks{top:calc(100% + 8px);grid-template-columns:1fr 1fr;max-height:calc(100dvh - 75px);padding:10px}
+ .navlinks a{font-size:11px;padding:11px 6px}
+}
+</style>
+
 </head>
 <body>
 <aside class="relationship-widget" id="relationshipWidget" aria-label="وضعیت رابطه ما"><div class="rw-head"><div class="rw-icon">😂</div><div><h4>وضعیت رابطه ما</h4><div class="rw-status">سیستم کل‌کل و قهر فعال است 😌</div></div></div><div class="rw-text" id="relationshipJoke">رابطه ما: ۵٪ عاشقانه، ۹۵٪ کل‌کل 😂❤️</div><div class="rw-dots" id="relationshipDots"></div></aside>
@@ -143,7 +167,7 @@ footer{text-align:center;padding:50px 20px;color:#b89baa;font-size:13px}.ripple{
 
 <div class="intro" id="intro"><div class="intro-box"><div class="intro-line">یه نفر هست...</div><div class="intro-line">که برای فاضل...</div><span class="intro-heart">❤️</span><div class="intro-line">از همه مهم‌تره...</div><div class="intro-line">دردونه کوشولوی فاضل ❤️</div></div></div>
 
-<header class="topbar" id="topbar"><nav class="nav"><div class="logo">Fazel <span>♥</span> Elham</div><button class="menuBtn" id="menuBtn" aria-label="منو">☰</button><div class="navlinks"><a href="#home">خانه</a><a href="#story">داستان ما</a><a href="#calendar">تقویم عشق</a><a href="#memories">خاطرات</a><a href="#letter">نامه</a><a href="#timedLetters">نامه‌های زمان‌دار 💌</a><a href="#surprise">سورپرایز</a><a href="#music">موزیک</a><a href="#nook">گوشه دنج ما</a></div></nav></header>
+<header class="topbar" id="topbar"><nav class="nav"><div class="logo">Fazel <span>♥</span> Elham</div><button class="menuBtn" id="menuBtn" aria-label="باز کردن منوی بخش‌ها" aria-expanded="false">☰</button><div class="navlinks"><a href="#home">خانه</a><a href="#story">داستان ما</a><a href="#calendar">تقویم عشق</a><a href="#memories">خاطرات</a><a href="#letter">نامه</a><a href="#timedLetters">نامه‌های زمان‌دار 💌</a><a href="#surprise">سورپرایز</a><a href="#music">موزیک</a><a href="#nook">گوشه دنج ما</a></div></nav></header>
 
 
 <div class="love-bot" id="loveBot">
@@ -338,8 +362,6 @@ function sendKiss(){if(reduced){toast('یه بوسه مجازی برای اله�
 function missingYou(){document.body.classList.add('missing-mode');toast('دلم برات تنگ شده... حتی بیشتر از چیزی که بشه گفت 🥹❤️');setTimeout(()=>document.body.classList.remove('missing-mode'),2600)}
 function relationshipAI(){$('loveAIResult').innerHTML='کل‌کل: 🔥🔥🔥🔥🔥<br>لوس‌بازی: 💗💗💗💗<br>آشتی: ⚡⚡⚡<br>دلتنگی: 🥹🥹🥹🥹🥹<br>عاشقی: <span class="pulse-heart">♾️❤️</span><br><br>نتیجه: این دو نفر ظاهراً بدون کل‌کل نمی‌تونن زندگی کنن 😂'}
 $('fortuneBtn').addEventListener('click',showLoveFortune);$('survivalBtn').addEventListener('click',survivalGuide);$('kissBtn').addEventListener('click',sendKiss);$('missingBtn').addEventListener('click',missingYou);$('aiBtn').addEventListener('click',relationshipAI);
-$('menuBtn').addEventListener('click',()=> $('topbar').classList.toggle('open'));
-document.querySelectorAll('.navlinks a').forEach(a=>a.addEventListener('click',()=> $('topbar').classList.remove('open')));
 
 let lastRipple=0;
 document.addEventListener('click',e=>{
@@ -737,6 +759,79 @@ setInterval(changeBotMessage,5000);
     });
   });
   update();setInterval(update,1000);
+})();
+</script>
+
+
+<script id="section-navigation-overhaul-script">
+(function(){
+  const sections=[...document.querySelectorAll('main > section')];
+  const topbar=document.getElementById('topbar');
+  const menuBtn=document.getElementById('menuBtn');
+  const links=[...document.querySelectorAll('.navlinks a[href^="#"]')];
+  if(!sections.length || !menuBtn) return;
+
+  // The timeline/premium sections without a link still work; give the timeline a stable id.
+  const timeline=sections.find(s=>!s.id && s.querySelector('.timeline'));
+  if(timeline) timeline.id='timeline';
+
+  const labels={
+    home:'🏠 خانه',story:'💞 داستان ما',calendar:'📅 تقویم عشق',memories:'📸 خاطرات',
+    letter:'💌 نامه',timedLetters:'🔐 نامه‌های زمان‌دار',surprise:'🎁 سورپرایز',music:'🎵 موزیک',
+    game:'🎮 بازی',timeline:'🕰️ فصل‌های داستان',nook:'🌙 گوشه دنج ما',premiumExtras:'✨ چیزهای مخصوص ما'
+  };
+
+  function closeMenu(){
+    topbar.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded','false');
+    menuBtn.textContent='☰';
+  }
+  function openMenu(){
+    topbar.classList.add('open');
+    menuBtn.setAttribute('aria-expanded','true');
+    menuBtn.textContent='✕';
+  }
+  function showSection(id, changeHash=true){
+    const target=document.getElementById(id) || document.getElementById('home');
+    sections.forEach(s=>s.classList.toggle('active-section',s===target));
+    links.forEach(a=>a.classList.toggle('active-nav',a.getAttribute('href')==='#'+target.id));
+    closeMenu();
+    target.scrollTop=0;
+    if(changeHash){
+      try{history.replaceState(null,'','#'+target.id)}catch(e){location.hash=target.id}
+    }
+  }
+
+  menuBtn.addEventListener('click',function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    topbar.classList.contains('open') ? closeMenu() : openMenu();
+  });
+
+  links.forEach(a=>a.addEventListener('click',function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    showSection(a.getAttribute('href').slice(1));
+  }));
+
+  // Any internal CTA such as «بریم توی داستانمون» also switches sections without scrolling.
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    if(a.closest('.navlinks')) return;
+    a.addEventListener('click',function(e){
+      const id=a.getAttribute('href').slice(1);
+      if(!document.getElementById(id)) return;
+      e.preventDefault();
+      showSection(id);
+    });
+  });
+
+  document.addEventListener('click',function(e){
+    if(topbar.classList.contains('open') && !topbar.contains(e.target)) closeMenu();
+  });
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
+  window.addEventListener('hashchange',()=>showSection((location.hash||'#home').slice(1),false));
+
+  showSection((location.hash||'#home').slice(1),false);
 })();
 </script>
 
