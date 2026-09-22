@@ -151,10 +151,20 @@ exports.handler = async (event) => {
       );
     }
 
-    const reply =
-      typeof data.output_text === "string"
-        ? data.output_text.trim()
-        : "";
+    const reply = (data.output || [])
+      .flatMap(item =>
+        item?.type === "message"
+          ? (item.content || [])
+          : []
+      )
+      .filter(
+        item =>
+          item?.type === "output_text" &&
+          typeof item.text === "string"
+      )
+      .map(item => item.text)
+      .join("\n")
+      .trim();
 
     if (!reply) {
       return json(502, {
