@@ -653,13 +653,6 @@ body.messenger-fullscreen .chat-compose textarea,body.messenger-fullscreen .chat
  font-size:12px;font-weight:700;pointer-events:none;box-shadow:0 6px 18px rgba(68,38,67,.18);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
 </style>
 
-
-<style id="ai-speaker-style">
-.ai-speaker{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0;font-size:.9rem}
-.ai-speaker>span{font-weight:700;opacity:.85}
-.ai-speaker-btn{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:inherit;border-radius:999px;padding:7px 12px;cursor:pointer}
-.ai-speaker-btn.active{box-shadow:0 0 0 2px rgba(255,105,180,.35);background:rgba(255,105,180,.14)}
-</style>
 </head>
 <body>
 <div aria-hidden="true" aria-label="دفتر دوتایی ما" id="messengerOverlay" role="dialog"><div class="messenger-shell" id="messengerShell"></div></div>
@@ -801,7 +794,7 @@ body.messenger-fullscreen .chat-compose textarea,body.messenger-fullscreen .chat
 </div>
 <div class="nook-panel" data-panel="mood"><div class="panel-title"><span>🕯️</span><div><h3>نور و حالِ اتاق</h3><p>یکی از فضاها رو انتخاب کن تا حال‌وهوای گوشه دنج عوض بشه.</p></div></div><div class="mood-grid"><button data-mood="night">🌙<b>شب آرام</b></button><button data-mood="pink">🌸<b>عاشقانه</b></button><button data-mood="dream">✨<b>رویایی</b></button><button data-mood="cozy">🔥<b>گرم و دنج</b></button></div></div>
 <div class="nook-panel" data-panel="cards"><div class="panel-title"><span>💌</span><div><h3>یک کارت برای تو</h3><p>دکمه رو بزن و یک پیام مخصوص بگیر.</p></div></div><div class="love-card" id="loveCard">«هرجا باشی، یه گوشه از قلبم همیشه برای تو روشنه.» ❤️</div><button class="btn primary" id="newLoveCard">یکی دیگه بده ✨</button></div>
-<div class="nook-panel" data-panel="time"><div class="panel-title"><span>⏳</span><div><h3>قرار ۵ دقیقه‌ای</h3><p>تایمر رو بزن؛ پنج دقیقه فقط برای خودتون.</p></div></div><div class="cozy-timer" id="cozyTimer">05:00</div><button class="btn primary" id="startCozyTimer">شروع لحظه‌مون ❤️</button><p class="timer-msg" id="cozyTimerMsg">وقتی شروعش کردی، گوشی رو کنار بذار و فقط با هم باشین.</p></div><div class="nook-panel" data-panel="counselor"><div class="panel-title"><span>🧠</span><div><h3>مشاور رابطه ما</h3><p>یک فضای بی‌طرف برای حرف زدن، فهمیدن احساسات و پیدا کردن راه گفت‌وگو.</p></div></div><div class="ai-quick"><button data-ai-prompt="بین ما یک سوءتفاهم پیش آمده؛ کمکمون کن بدون سرزنش درباره‌اش حرف بزنیم." type="button">🫶 سوءتفاهم</button><button data-ai-prompt="کمکم کن احساساتم را بدون دعوا و سرزنش به طرف مقابلم بگویم." type="button">💬 چطور بگم؟</button><button data-ai-prompt="یک تمرین کوتاه دونفره برای بهتر شنیدن و فهمیدن همدیگه بهمون بده." type="button">❤️ تمرین دونفره</button><button data-ai-prompt="امشب فقط ۱۰ دقیقه وقت داریم؛ یک گفت‌وگوی صمیمی و مفید برایمان طراحی کن." type="button">🌙 گفت‌وگوی امشب</button></div><div class="ai-messages" id="aiMessages"><div class="ai-msg bot"><span class="ai-label">مشاور گوشه دنج</span>سلام فاضل و الهام ❤️ من اینجام که بدون قضاوت کمکتون کنم بهتر حرف همدیگه رو بشنوین. هر چیزی هست، از همین‌جا شروع کنین.</div></div><div class="ai-compose"><textarea id="aiInput" placeholder="مثلاً: امروز از یه حرف الهام ناراحت شدم ولی نمی‌خوام بحث کنیم..."></textarea><button class="btn primary" id="aiSend">فرستادن ❤️</button></div><div class="ai-status" id="aiStatus">☁️ آماده‌ام</div><p class="ai-note">این مشاور جای درمانگر یا متخصص سلامت روان نیست؛ برای گفت‌وگو و کمک عمومی در رابطه طراحی شده.</p></div>
+<div class="nook-panel" data-panel="time"><div class="panel-title"><span>⏳</span><div><h3>قرار ۵ دقیقه‌ای</h3><p>تایمر رو بزن؛ پنج دقیقه فقط برای خودتون.</p></div></div><div class="cozy-timer" id="cozyTimer">05:00</div><button class="btn primary" id="startCozyTimer">شروع لحظه‌مون ❤️</button><p class="timer-msg" id="cozyTimerMsg">وقتی شروعش کردی، گوشی رو کنار بذار و فقط با هم باشین.</p></div><div class="nook-panel" data-panel="counselor"><div class="panel-title"><span>🧠</span><div><h3>مشاور رابطه ما ❤️</h3><p>اینجا دعوا ممنوع؛ حرف‌هامون رو با عشق، کمی شوخی و بدون طرفداری باز می‌کنیم 😄</p></div></div><div class="ai-who" aria-label="انتخاب گوینده"><span class="ai-who-label">الان کیه؟</span><button type="button" data-ai-speaker="فاضل">فاضل</button><button type="button" data-ai-speaker="الهام">الهام</button><span class="ai-who-current" id="aiWhoCurrent">فاضل انتخاب شده ❤️</span></div><div class="ai-quick"><button data-ai-prompt="بین ما یک سوءتفاهم پیش آمده؛ کمکمون کن بدون سرزنش درباره‌اش حرف بزنیم." type="button">🫶 سوءتفاهم</button><button data-ai-prompt="کمکم کن احساساتم را بدون دعوا و سرزنش به طرف مقابلم بگویم." type="button">💬 چطور بگم؟</button><button data-ai-prompt="یک تمرین کوتاه دونفره برای بهتر شنیدن و فهمیدن همدیگه بهمون بده." type="button">❤️ تمرین دونفره</button><button data-ai-prompt="امشب فقط ۱۰ دقیقه وقت داریم؛ یک گفت‌وگوی صمیمی و مفید برایمان طراحی کن." type="button">🌙 گفت‌وگوی امشب</button></div><div class="ai-messages" id="aiMessages"><div class="ai-msg bot"><span class="ai-label">مشاور گوشه دنج</span>سلام فاضل و الهام ❤️ من اینجام که بدون قضاوت کمکتون کنم بهتر حرف همدیگه رو بشنوین. هر چیزی هست، از همین‌جا شروع کنین.</div></div><div class="ai-compose"><textarea id="aiInput" placeholder="مثلاً: امروز از یه حرف الهام ناراحت شدم ولی نمی‌خوام بحث کنیم..."></textarea><button class="btn primary" id="aiSend">فرستادن ❤️</button></div><div class="ai-status" id="aiStatus">☁️ آماده‌ام</div><p class="ai-note">این مشاور جای درمانگر یا متخصص سلامت روان نیست؛ برای گفت‌وگو و کمک عمومی در رابطه طراحی شده.</p></div>
 <div class="nook-panel bonk-panel" data-panel="bonk">
 <div class="bonk-head"><div><span class="secret-badge">ELHAM'S PLAYFUL ZONE • CARTOON ONLY</span><h3>اتاق شیطنت الهام 😭🩷</h3><p>الهام وسیله رو انتخاب می‌کنه، می‌زنه و پسره هم با هر ضربه قیافه‌ش رو عوض می‌کنه 😂</p></div><div class="bonk-count" id="bonkCount">۰ ضربه</div></div>
 <div class="bonk-stage" id="bonkStage">
@@ -1649,105 +1642,92 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
   const send=document.getElementById('aiSend');
   const box=document.getElementById('aiMessages');
   const status=document.getElementById('aiStatus');
+  const whoCurrent=document.getElementById('aiWhoCurrent');
   if(!input||!send||!box)return;
 
-  // The counselor lives on Netlify; the public GitHub Pages site calls it directly.
+  // The browser never sees the OpenAI key. It calls the public Netlify Function.
   const FN='https://sparkly-quokka-2e5258.netlify.app/.netlify/functions/relationship-counselor';
+  let speaker=localStorage.getItem('fazelElhamAuthor')==='الهام'?'الهام':'فاضل';
   let history=[];
-  let speaker=localStorage.getItem('fazelElhamAuthor')||'فاضل';
+  let busy=false;
 
-  const esc=v=>String(v??'').replace(/[&<>'"]/g,c=>({
-    '&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'
-  }[c]));
+  function setSpeaker(name){
+    speaker=name==='الهام'?'الهام':'فاضل';
+    localStorage.setItem('fazelElhamAuthor',speaker);
+    document.querySelectorAll('[data-ai-speaker]').forEach(b=>{
+      b.classList.toggle('active',b.dataset.aiSpeaker===speaker);
+    });
+    if(whoCurrent)whoCurrent.textContent=speaker+' انتخاب شده ❤️';
+    input.placeholder=speaker==='الهام'
+      ?'مثلاً: فاضل امروز یه حرفی زد که دلم گرفت، ولی نمی‌خوام دعوا کنیم...'
+      :'مثلاً: الهام از یه حرفم ناراحت شده؛ کمکم کن قشنگ‌تر باهاش حرف بزنم...';
+  }
 
-  function addMsg(role,text){
+  function addMsg(role,text,label){
     const d=document.createElement('div');
     d.className='ai-msg '+role;
-    d.innerHTML='<span class="ai-label">'+
-      (role==='user'?speaker:'مشاور گوشه دنج')+
-      '</span>'+esc(text);
+    const lab=document.createElement('span');
+    lab.className='ai-label';
+    lab.textContent=label||(role==='user'?speaker:'مشاور گوشه دنج');
+    d.appendChild(lab);
+    d.appendChild(document.createTextNode(String(text||'')));
     box.appendChild(d);
     box.scrollTop=box.scrollHeight;
   }
 
-  function syncSpeaker(){
-    speaker=localStorage.getItem('fazelElhamAuthor')||'فاضل';
-    document.querySelectorAll('.ai-speaker-btn').forEach(b=>{
-      b.classList.toggle('active',b.dataset.speaker===speaker);
-    });
+  function setStatus(text,error){
+    status.className='ai-status'+(error?' error':'');
+    status.textContent=text;
   }
-
-  // Add a clear speaker selector to the counselor itself.
-  const compose=document.querySelector('.ai-compose');
-  if(compose && !document.getElementById('aiSpeaker')){
-    const wrap=document.createElement('div');
-    wrap.className='ai-speaker';
-    wrap.id='aiSpeaker';
-    wrap.innerHTML=
-      '<span>الان کیه؟</span>'+
-      '<button type="button" class="ai-speaker-btn" data-speaker="فاضل">❤️ فاضل</button>'+
-      '<button type="button" class="ai-speaker-btn" data-speaker="الهام">🌸 الهام</button>';
-    compose.parentNode.insertBefore(wrap,compose);
-    wrap.addEventListener('click',e=>{
-      const b=e.target.closest('.ai-speaker-btn');
-      if(!b)return;
-      speaker=b.dataset.speaker;
-      localStorage.setItem('fazelElhamAuthor',speaker);
-      syncSpeaker();
-    });
-  }
-  syncSpeaker();
 
   async function ask(text){
     text=(text||'').trim();
-    if(!text)return;
-
-    syncSpeaker();
+    if(!text||busy)return;
+    busy=true;
     send.disabled=true;
     input.disabled=true;
-    addMsg('user',text);
-
-    const nextHistory=history.concat([{role:'user',content:text}]).slice(-24);
-    status.className='ai-status';
-    status.textContent='🧠 دارم فکر می‌کنم...';
+    addMsg('user',text,speaker);
+    history.push({role:'user',content:text});
+    setStatus('🧠 دارم بین دل‌هامون صلح برقرار می‌کنم...');
 
     try{
       const r=await fetch(FN,{
         method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          messages:nextHistory,
-          speaker:speaker
-        })
+        mode:'cors',
+        headers:{'Content-Type':'text/plain;charset=UTF-8'},
+        body:JSON.stringify({messages:history.slice(-24),speaker})
       });
-
       const raw=await r.text();
       let data={};
-      try{data=raw?JSON.parse(raw):{};}catch(_){}
-
-      if(!r.ok){
-        throw new Error(data?.error||data?.message||raw||('خطای سرور '+r.status));
-      }
-
-      const reply=(data?.reply||'').trim();
-      if(!reply)throw new Error('سرور پاسخ داد، اما متن پاسخ خالی بود.');
-
-      history=nextHistory.concat([{role:'assistant',content:reply}]).slice(-24);
-      addMsg('bot',reply);
-      status.className='ai-status';
-      status.textContent='☁️ آماده‌ام';
+      try{data=raw?JSON.parse(raw):{};}catch(_){ }
+      if(!r.ok)throw new Error(data&&data.error?data.error:(raw||('خطای سرور '+r.status)));
+      const reply=typeof data.reply==='string'?data.reply.trim():'';
+      if(!reply)throw new Error('پاسخ مشاور خالی بود.');
+      history.push({role:'assistant',content:reply});
+      addMsg('bot',reply,'مشاور گوشه دنج 🧠❤️');
       input.value='';
+      setStatus('☁️ آماده‌ام؛ دعوا رو بیارین، آشتی تحویل بگیرین 😄❤️');
     }catch(e){
       console.error('relationship-counselor:',e);
-      status.className='ai-status error';
-      status.textContent='⚠️ '+(e?.message||'اتصال برقرار نشد');
+      history.pop();
+      setStatus('⚠️ '+(e&&e.message?e.message:'اتصال به مشاور برقرار نشد'),true);
     }finally{
+      busy=false;
       send.disabled=false;
       input.disabled=false;
       input.focus();
     }
   }
 
+  document.querySelectorAll('[data-ai-speaker]').forEach(b=>{
+    b.addEventListener('click',()=>setSpeaker(b.dataset.aiSpeaker));
+  });
+  document.querySelectorAll('[data-ai-prompt]').forEach(b=>{
+    b.addEventListener('click',()=>{
+      input.value=b.dataset.aiPrompt||'';
+      input.focus();
+    });
+  });
   send.addEventListener('click',()=>ask(input.value));
   input.addEventListener('keydown',e=>{
     if(e.key==='Enter'&&!e.shiftKey){
@@ -1755,13 +1735,7 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
       ask(input.value);
     }
   });
-
-  document.querySelectorAll('[data-ai-prompt]').forEach(b=>{
-    b.addEventListener('click',()=>{
-      input.value=b.dataset.aiPrompt||'';
-      input.focus();
-    });
-  });
+  setSpeaker(speaker);
 })();
 </script>
 <script id="independent-messenger-js">
@@ -2233,7 +2207,6 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
 })();
 </script>
 
-
 <style id="v16-clean-galaxy-glass">
 /* V16 — no separate presence box; compact presence lives inside the main chat header. */
 #messengerOverlay .chat-author{display:none!important}
@@ -2395,10 +2368,12 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
 <style id="v17-final-presence-cleanup">
 /* V17 FINAL: remove the legacy standalone presence card completely. */
 #messengerOverlay .chat-author,
-#messengerOverlay .shared-author.chat-author{display:none!important!important;height:0!important;min-height:0!important;max-height:0!important;margin:0!important;padding:0!important;border:0!important;overflow:hidden!important;visibility:hidden!important;pointer-events:none!important}
+#messengerOverlay .shared-author.chat-author{display:none!important;height:0!important;min-height:0!important;max-height:0!important;margin:0!important;padding:0!important;border:0!important;overflow:hidden!important;visibility:hidden!important;pointer-events:none!important}
 /* Keep presence compact inside the real main header. */
 #messengerOverlay .chat-head .header-presence-stack{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:1px!important;margin-top:2px!important}
 #messengerOverlay .chat-head .header-presence-row{display:flex!important;align-items:center!important;gap:5px!important;min-height:10px!important}
+
+.ai-who{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0 12px;padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08)}.ai-who-label{font-size:11px;color:#d9c5d0;margin-left:2px}.ai-who button{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:#fff;border-radius:12px;padding:7px 12px;cursor:pointer;font-family:inherit;font-size:11px;transition:.2s}.ai-who button.active{background:rgba(55,210,130,.16);border-color:rgba(55,210,130,.5);box-shadow:0 0 0 1px rgba(55,210,130,.12) inset}.ai-who button.active::before{content:'● ';color:#55e28b}.ai-who-current{font-size:10px;color:#9eeab8;margin-right:auto}
 </style>
 <script id="v17-remove-legacy-presence">
 (()=>{
