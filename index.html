@@ -713,6 +713,37 @@ body.messenger-fullscreen .chat-compose textarea,body.messenger-fullscreen .chat
  #elhamTrading .et-ledger-row{grid-template-columns:1fr 1fr}
 }
 </style>
+
+<style id="et-hide-jokes">
+#elhamTrading .et-joke,#elhamTrading .et-humor,#elhamTrading .et-robot,
+#elhamTrading .et-bot,#elhamTrading [data-joke],#elhamTrading [data-robot],
+#elhamTrading [id*="joke"],#elhamTrading [id*="robot"],#elhamTrading [class*="joke"],
+#elhamTrading [class*="robot"]{display:none!important}
+</style>
+
+<style id="et-ledger-final-fix">
+#elhamTrading .et-ledger-pane{display:none!important}
+#elhamTrading .et-ledger-pane.active{display:block!important}
+#elhamTrading .et-ledger-tabs button{position:relative;z-index:2}
+#elhamTrading .et-joke,#elhamTrading .et-humor,#elhamTrading .et-robot,#elhamTrading .et-bot,
+#elhamTrading [id*="joke"],#elhamTrading [id*="robot"],
+#elhamTrading [class*="joke"],#elhamTrading [class*="robot"]{display:none!important}
+
+/* فقط هنگام باز بودن بخش «ترید برای الهام» این دو کادر سراسری پنهان شوند؛ در بقیه بخش‌ها دست‌نخورده بمانند. */
+body.trading-section-active #loveBot,
+html.trading-section-active #loveBot,
+body.trading-section-active #relationshipWidget,
+html.trading-section-active #relationshipWidget,
+body.trading-section-active .love-bot,
+html.trading-section-active .love-bot,
+body.trading-section-active .relationship-widget,
+html.trading-section-active .relationship-widget{
+  display:none !important;
+  visibility:hidden !important;
+  opacity:0 !important;
+  pointer-events:none !important;
+}
+</style>
 </head>
 <body>
 <div aria-hidden="true" aria-label="دفتر دوتایی ما" id="messengerOverlay" role="dialog"><div class="messenger-shell" id="messengerShell"></div></div>
@@ -896,7 +927,7 @@ body.messenger-fullscreen .chat-compose textarea,body.messenger-fullscreen .chat
       <button class="et-asset active" data-asset="ELHAM"><strong>👑 ELHAM / USDT</strong><small id="etAssetElham">$100.00</small></button>
       <button class="et-asset" data-asset="QUEEN"><strong>💎 QUEEN / USDT</strong><small id="etAssetQueen">$74.00</small></button>
       <button class="et-asset" data-asset="LOVE"><strong>❤️ LOVE / USDT</strong><small id="etAssetLove">$128.00</small></button>
-      <button class="et-asset" data-asset="FAZEL"><strong>🔥 FAZEL / USDT</strong><small id="etAssetFazel">$92.00</small></button>
+      <button class="et-asset" data-asset="ELHAM2"><strong>👑 ELHAM / USDT</strong><small id="etAssetElham2">$92.00</small></button>
     </div>
 
     <div class="et-ticker"><div class="et-ticker-track" id="etTicker"></div></div>
@@ -1647,6 +1678,8 @@ body.messenger-fullscreen .chat-panel .chat-toy{z-index:2!important;opacity:.42!
   function showSection(id, changeHash=true){
     const target=document.getElementById(id) || document.getElementById('home');
     sections.forEach(s=>s.classList.toggle('active-section',s===target));
+    document.body.classList.toggle('trading-section-active',target.id==='elhamTrading');
+    document.documentElement.classList.toggle('trading-section-active',target.id==='elhamTrading');
     links.forEach(a=>a.classList.toggle('active-nav',a.getAttribute('href')==='#'+target.id));
     closeMenu();
     target.scrollTop=0;
@@ -2550,12 +2583,52 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
     ELHAM:{price:100,seed:100,drift:.48},
     QUEEN:{price:74,seed:74,drift:.42},
     LOVE:{price:128,seed:128,drift:.56},
-    FAZEL:{price:92,seed:92,drift:.45}
+    ELHAM2:{price:92,seed:92,drift:.45}
   };
 
   const TF={10:10,60:60,300:300,900:900};
   let current='ELHAM', candles=[], zoom=1, paused=false;
   let mode='buy', position=null, history=[], daily=0;
+  const LEDGER_KEY='elhamTradingLedgerV2', START_BALANCE=10000;
+  let ledger;
+  try{ ledger=JSON.parse(localStorage.getItem(LEDGER_KEY)||'null'); }catch(e){ ledger=null; }
+  if(!ledger || typeof ledger!=='object') ledger={balance:START_BALANCE,realizedPnl:0,trades:[],transactions:[],daily:{}};
+  ledger.balance=Number.isFinite(+ledger.balance)?+ledger.balance:START_BALANCE;
+  ledger.realizedPnl=Number.isFinite(+ledger.realizedPnl)?+ledger.realizedPnl:0;
+  ledger.trades=Array.isArray(ledger.trades)?ledger.trades:[];
+  ledger.transactions=Array.isArray(ledger.transactions)?ledger.transactions:[];
+  ledger.daily=ledger.daily&&typeof ledger.daily==='object'?ledger.daily:{};
+  function saveLedger(){localStorage.setItem(LEDGER_KEY,JSON.stringify(ledger));}
+  function ledgerDay(ts){return new Date(ts||Date.now()).toLocaleDateString('fa-IR');}
+  function addLedgerTx(type,amount,balance,meta){
+    ledger.transactions.unshift({id:Date.now()+Math.random(),time:new Date().toISOString(),type,amount,balance,meta:meta||''});
+    ledger.transactions=ledger.transactions.slice(0,500);
+  }
+  function recordLedgerDay(pnl,ts){
+    const d=ledgerDay(ts); ledger.daily[d]=Number(ledger.daily[d]||0)+Number(pnl||0);
+  }
+  function syncLedgerUI(){
+    const balance=byId('etBalanceLedger'), top=byId('etBalance');
+    if(balance) balance.textContent=money(ledger.balance);
+    if(top) top.textContent=money(ledger.balance)+' $';
+    const open=ledger.trades.filter(t=>t.status==='open');
+    const today=Number(ledger.daily[ledgerDay()]||0);
+    const total=Number(ledger.realizedPnl||0);
+    const ov=byId('etOpenValue'), tp=byId('etTodayPnl'), tc=byId('etTradeCount'), tt=byId('etTotalPnl');
+    if(ov)ov.textContent=money(open.reduce((a,t)=>a+t.amount,0));
+    if(tp){tp.textContent=(today>=0?'+':'')+money(today);tp.className=today>=0?'et-profit':'et-loss'}
+    if(tc)tc.textContent=String(ledger.trades.length);
+    if(tt){tt.textContent=(total>=0?'+':'')+money(total);tt.className=total>=0?'et-profit':'et-loss'}
+    const tl=byId('etTradeLedger');
+    if(tl)tl.innerHTML=ledger.trades.slice(0,100).map(t=>'<div class="et-ledger-row"><div><b>'+t.asset+'</b><small>'+(t.side==='buy'?'خرید':'فروش')+' · '+(t.status==='open'?'باز':'بسته')+'</small></div><div>'+money(t.amount)+'<small>سرمایه</small></div><div>'+money(t.entryPrice)+'<small>ورود</small></div><div class="'+(t.pnl>=0?'et-profit':t.pnl<0?'et-loss':'')+'">'+(t.status==='open'?'باز':(t.pnl>=0?'+':'')+money(t.pnl))+'<small>'+ledgerDay(t.closedAt||t.openedAt)+'</small></div></div>').join('')||'<div style="padding:20px;text-align:center;color:rgba(255,255,255,.5)">هنوز معامله‌ای ثبت نشده.</div>';
+    const tx=byId('etTransactionLedger');
+    if(tx)tx.innerHTML=ledger.transactions.slice(0,100).map(x=>'<div class="et-ledger-row"><div><b>'+(x.type==='open'?'باز کردن معامله':'بستن معامله')+'</b><small>'+x.meta+'</small></div><div class="'+(x.amount>=0?'et-profit':'et-loss')+'">'+(x.amount>=0?'+':'')+money(x.amount)+'</div><div>'+money(x.balance)+'<small>موجودی بعد تراکنش</small></div><div><small>'+new Date(x.time).toLocaleString('fa-IR')+'</small></div></div>').join('')||'<div style="padding:20px;text-align:center;color:rgba(255,255,255,.5)">تراکنشی ثبت نشده.</div>';
+    const dl=byId('etDailyLedger');
+    if(dl){
+      const keys=Object.keys(ledger.daily).sort().reverse();
+      dl.innerHTML=keys.map(d=>{const v=+ledger.daily[d]||0;return '<div class="et-day-row"><b>'+d+'</b><strong class="'+(v>=0?'et-profit':'et-loss')+'">'+(v>=0?'+':'')+money(v)+' USDT</strong></div>'}).join('')||'<div style="padding:20px;text-align:center;color:rgba(255,255,255,.5)">گزارش روزانه هنوز ساخته نشده.</div>';
+    }
+  }
   let timeframe=10, countdown=10;
   let timer=null, touchStartDist=0, touchStartZoom=1;
 
@@ -2658,7 +2731,7 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
   }
 
   function updateTicker(){
-    const names=[['ELHAM','👑'],['QUEEN','💎'],['LOVE','❤️'],['FAZEL','🔥'],['ELHAM','👑'],['QUEEN','💎'],['LOVE','❤️'],['FAZEL','🔥']];
+    const names=[['ELHAM','👑'],['QUEEN','💎'],['LOVE','❤️'],['ELHAM2','👑'],['ELHAM','👑'],['QUEEN','💎'],['LOVE','❤️'],['ELHAM2','👑']];
     byId('etTicker').innerHTML=names.map(([n,ic])=>{
       const a=assets[n],pct=(a.price/a.seed-1)*100;
       return '<span class="et-tick">'+ic+' <b>'+n+'/USDT</b> <b>$'+money(a.price)+'</b> <span class="'+(pct>=0?'g':'r')+'">'+(pct>=0?'+':'')+pct.toFixed(2)+'%</span></span>';
@@ -2666,7 +2739,7 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
     byId('etAssetElham').textContent='$'+money(assets.ELHAM.price);
     byId('etAssetQueen').textContent='$'+money(assets.QUEEN.price);
     byId('etAssetLove').textContent='$'+money(assets.LOVE.price);
-    byId('etAssetFazel').textContent='$'+money(assets.FAZEL.price);
+    byId('etAssetElham2').textContent='$'+money(assets.ELHAM2.price);
   }
 
   function update(){
@@ -2674,7 +2747,7 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
     byId('etPrice').textContent='$'+money(a.price);
     byId('etChange').textContent=(pct>=0?'+':'')+pct.toFixed(2)+'%';
     byId('etChange').className='et-change '+(pct>=0?'up':'down');
-    byId('etBalance').textContent=money(10000+daily)+' $';
+    syncLedgerUI();
 
     if(position){
       const liveAsset=assets[position.asset];
@@ -2695,15 +2768,17 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
     if(paused)return;
     Object.keys(assets).forEach(k=>{
       const a=assets[k],o=a.price;
-      const v=a.drift*(Math.random()<.08?4.8:1.35);
-      a.price=Math.max(.01,o+(Math.random()-.47)*v);
+      const regime=Math.random()<.16?3.8:Math.random()<.08?7.5:1.25;
+      const momentum=(Math.random()-.5)*a.drift*.9;
+      const impulse=(Math.random()<.07?(Math.random()<.5?-1:1)*a.drift*regime:0);
+      a.price=Math.max(.01,o+momentum+(Math.random()-.44)*a.drift*regime+impulse);
     });
     const a=assets[current],o=candles.length?candles[candles.length-1].c:a.price;
     const d=a.price-o;
     candles.push({
       o,c:a.price,
-      h:Math.max(o,a.price)+Math.random()*a.drift,
-      l:Math.max(.01,Math.min(o,a.price)-Math.random()*a.drift),
+      h:Math.max(o,a.price)+Math.random()*a.drift*(Math.random()<.18?3.8:1.15),
+      l:Math.max(.01,Math.min(o,a.price)-Math.random()*a.drift*(Math.random()<.18?3.8:1.15)),
       volume:20+Math.random()*100,
       time:Date.now()
     });
@@ -2713,9 +2788,21 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
 
   function closePosition(){
     if(!position)return;
-    daily+=position.pnl||0;
-    history.unshift({...position,exit:assets[position.asset].price});
-    position=null;renderHistory();update();
+    const live=assets[position.asset];
+    const pnl=position.amount*(live.price/position.entry-1)*(position.side==='buy'?1:-1);
+    const t=ledger.trades.find(x=>String(x.id)===String(position.id)&&x.status==='open');
+    if(t){
+      t.status='closed'; t.exitPrice=live.price; t.pnl=pnl; t.closedAt=new Date().toISOString();
+      const returned=position.amount+pnl;
+      ledger.balance+=returned;
+      ledger.realizedPnl+=pnl;
+      recordLedgerDay(pnl,t.closedAt);
+      addLedgerTx('close',returned,ledger.balance,position.asset+' / '+(pnl>=0?'سود ':'ضرر ')+money(pnl));
+      saveLedger();
+    }
+    daily+=pnl;
+    history.unshift({...position,exit:live.price,pnl});
+    position=null;renderHistory();syncLedgerUI();update();
   }
 
   function renderHistory(){
@@ -2775,8 +2862,15 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
   });
   byId('etOpen').onclick=()=>{
     if(position){alert('اول معامله فعلی را ببند.');return}
-    position={asset:current,side:mode,amount:+byId('etAmount').value,entry:assets[current].price,pnl:0};
-    update();
+    const amount=+byId('etAmount').value, entry=assets[current].price;
+    if(amount>ledger.balance){alert('موجودی برای این معامله کافی نیست.');return}
+    const trade={id:Date.now()+Math.random(),asset:current,side:mode,amount,entryPrice:entry,openedAt:new Date().toISOString(),status:'open'};
+    ledger.balance-=amount;
+    ledger.trades.unshift(trade);
+    addLedgerTx('open',-amount,ledger.balance,current+' / '+(mode==='buy'?'خرید':'فروش'));
+    saveLedger();
+    position={...trade,entry, pnl:0};
+    syncLedgerUI(); update();
   };
 
   byId('etZoomIn').onclick=()=>{zoom=Math.min(4,zoom*1.3);draw()};
@@ -2826,164 +2920,51 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
     }
   },1000);
 
-  seed();updateTicker();update();requestAnimationFrame(resize);
+  seed();updateTicker();syncLedgerUI();update();requestAnimationFrame(resize);
 })();
 </script>
 
-
-
-
-<script id="et-ledger-engine">
+<script id="et-ledger-tabs-fix">
 (function(){
-  const KEY="elhamTradingLedgerV1";
-  const START=10000;
-  let store;
-  try{store=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){store=null}
-  if(!store) store={balance:START,realizedPnl:0,trades:[],transactions:[],daily:{}};
-  store.balance=Number.isFinite(+store.balance)?+store.balance:START;
-  store.realizedPnl=Number.isFinite(+store.realizedPnl)?+store.realizedPnl:0;
-  store.trades=Array.isArray(store.trades)?store.trades:[];
-  store.transactions=Array.isArray(store.transactions)?store.transactions:[];
-  store.daily=store.daily&&typeof store.daily==="object"?store.daily:{};
-
-  function save(){localStorage.setItem(KEY,JSON.stringify(store))}
-  function money(n){return Number(n||0).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2})}
-  function day(ts){return new Date(ts||Date.now()).toLocaleDateString("fa-IR")}
-  function now(){return new Date().toISOString()}
-  function addTx(type,amount,balance,meta){
-    store.transactions.unshift({id:Date.now()+Math.random(),time:now(),type,amount,balance,meta:meta||""});
-    store.transactions=store.transactions.slice(0,500);
+  function money2(n){
+    return Number(n||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
   }
-  function recordDaily(pnl,ts){
-    const d=day(ts); store.daily[d]=Number(store.daily[d]||0)+Number(pnl||0);
+  function todayFa(){
+    return new Date().toLocaleDateString('fa-IR');
   }
-
-  window.elhamTradingLedger={
-    get(){return store},
-    // Reserve trade capital at entry; release capital + realized P/L at close.
-    open({asset,side,amount,entryPrice}){
-      amount=Number(amount); entryPrice=Number(entryPrice);
-      if(!(amount>0&&entryPrice>0)) return {ok:false,error:"مقدار معامله معتبر نیست."};
-      if(amount>store.balance) return {ok:false,error:"موجودی برای این معامله کافی نیست."};
-      const trade={id:Date.now()+Math.random(),asset,side,amount,entryPrice,openedAt:now(),status:"open"};
-      store.balance-=amount;
-      store.trades.unshift(trade);
-      addTx("open",-amount,store.balance,asset+" / "+side);
-      save(); render(); return {ok:true,trade};
-    },
-    close(tradeId,currentPrice){
-      const t=store.trades.find(x=>String(x.id)===String(tradeId)&&x.status==="open");
-      currentPrice=Number(currentPrice);
-      if(!t||!(currentPrice>0)) return {ok:false,error:"معامله باز پیدا نشد."};
-      const pnl=t.amount*(currentPrice/t.entryPrice-1)*(t.side==="buy"?1:-1);
-      const returned=t.amount+pnl;
-      t.status="closed";t.exitPrice=currentPrice;t.pnl=pnl;t.closedAt=now();
-      store.balance+=returned;
-      store.realizedPnl+=pnl;
-      recordDaily(pnl,t.closedAt);
-      addTx("close",returned,store.balance,t.asset+" / "+(pnl>=0?"سود":"ضرر")+" "+money(pnl));
-      save(); render(); return {ok:true,pnl,returned,trade:t};
-    }
-  };
-
-  function render(){
-    const s=store;
-    const open=s.trades.filter(t=>t.status==="open");
-    const today=day();
-    const todayPnl=Number(s.daily[today]||0);
-    const closed=s.trades.filter(t=>t.status==="closed");
-    const balance=document.getElementById("etBalanceLedger");
-    if(balance)balance.textContent=money(s.balance);
-    const ov=document.getElementById("etOpenValue");if(ov)ov.textContent=money(open.reduce((a,t)=>a+t.amount,0));
-    const tp=document.getElementById("etTodayPnl");if(tp){tp.textContent=(todayPnl>=0?"+":"")+money(todayPnl);tp.className=todayPnl>=0?"et-profit":"et-loss"}
-    const tc=document.getElementById("etTradeCount");if(tc)tc.textContent=String(s.trades.length);
-    const tot=document.getElementById("etTotalPnl");if(tot){tot.textContent=(s.realizedPnl>=0?"+":"")+money(s.realizedPnl);tot.className=s.realizedPnl>=0?"et-profit":"et-loss"}
-
-    const tl=document.getElementById("etTradeLedger");
-    if(tl)tl.innerHTML=s.trades.slice(0,100).map(t=>`<div class="et-ledger-row">
-      <div><b>${t.asset}</b><small>${t.side==="buy"?"خرید":"فروش"} · ${t.status==="open"?"باز":"بسته"}</small></div>
-      <div>${money(t.amount)}<small>سرمایه</small></div>
-      <div>${money(t.entryPrice)}<small>ورود</small></div>
-      <div class="${t.pnl>=0?"et-profit":t.pnl<0?"et-loss":""}">${t.status==="open"?"باز":(t.pnl>=0?"+":"")+money(t.pnl)}<small>${day(t.closedAt||t.openedAt)}</small></div>
-    </div>`).join("") || '<div style="padding:20px;text-align:center;color:rgba(255,255,255,.5)">هنوز معامله‌ای ثبت نشده.</div>';
-
-    const tx=document.getElementById("etTransactionLedger");
-    if(tx)tx.innerHTML=s.transactions.slice(0,100).map(x=>`<div class="et-ledger-row">
-      <div><b>${x.type==="open"?"باز کردن معامله":"بستن معامله"}</b><small>${x.meta||""}</small></div>
-      <div class="${x.amount>=0?"et-profit":"et-loss"}">${x.amount>=0?"+":""}${money(x.amount)}</div>
-      <div>${money(x.balance)}<small>موجودی بعد تراکنش</small></div>
-      <div><small>${new Date(x.time).toLocaleString("fa-IR")}</small></div>
-    </div>`).join("") || '<div style="padding:20px;text-align:center;color:rgba(255,255,255,.5)">تراکنشی ثبت نشده.</div>';
-
-    const dl=document.getElementById("etDailyLedger");
-    if(dl){
-      const keys=Object.keys(s.daily).sort((a,b)=>b.localeCompare(a,"fa"));
-      dl.innerHTML=keys.map(d=>{const v=+s.daily[d]||0;return `<div class="et-day-row"><b>${d}</b><strong class="${v>=0?"et-profit":"et-loss"}">${v>=0?"+":""}${money(v)} USDT</strong></div>`}).join("")||'<div style="padding:20px;text-align:center;color:rgba(255,255,255,.5)">گزارش روزانه هنوز ساخته نشده.</div>';
-    }
-  }
-
-  document.addEventListener("click",e=>{
-    const b=e.target.closest("[data-et-ledger-tab]");if(!b)return;
-    document.querySelectorAll("[data-et-ledger-tab]").forEach(x=>x.classList.remove("active"));
-    document.querySelectorAll("[data-et-ledger-pane]").forEach(x=>x.classList.remove("active"));
-    b.classList.add("active");
-    document.querySelector(`[data-et-ledger-pane="${b.dataset.etLedgerTab}"]`)?.classList.add("active");
-  });
-  render();
-  window.addEventListener("storage",e=>{if(e.key===KEY)location.reload()});
-})();
-</script>
-
-<script id="et-ledger-bridge">
-(function(){
-  function findState(){
-    return window.__elhamTradingState || null;
-  }
-  function currentPrice(){
-    const s=findState();
-    if(s && typeof s.currentPrice==="number") return s.currentPrice;
-    const el=document.querySelector("#etPrice,#etCurrentPrice,[data-et-price]");
-    return parseFloat((el?.textContent||"").replace(/,/g,""))||0;
-  }
-  function amount(){
-    const el=document.querySelector("#etAmount,#etTradeAmount,input[data-et-amount]");
-    return parseFloat(el?.value||el?.dataset?.value||"0")||0;
-  }
-  function asset(){
-    const el=document.querySelector("#etAsset,.et-asset.active,[data-et-asset].active");
-    return el?.dataset?.etAsset || el?.dataset?.asset || (findState()?.asset||"ELHAM");
-  }
-  function side(){
-    const el=document.querySelector(".et-side.active,[data-et-side].active");
-    return el?.dataset?.etSide || findState()?.side || "buy";
-  }
-
-  // Expose hooks for the trading engine. If the existing UI calls these, the ledger becomes authoritative.
-  window.__elhamOpenTradeLedger=function(opts){
-    return window.elhamTradingLedger?.open(opts||{
-      asset:asset(),side:side(),amount:amount(),entryPrice:currentPrice()
+  function refreshLedgerTabs(){
+    const tabs=document.querySelectorAll('#elhamTrading [data-et-ledger-tab]');
+    const panes=document.querySelectorAll('#elhamTrading [data-et-ledger-pane]');
+    tabs.forEach(btn=>btn.onclick=()=>{
+      const key=btn.dataset.etLedgerTab;
+      tabs.forEach(x=>x.classList.toggle('active',x===btn));
+      panes.forEach(x=>x.classList.toggle('active',x.dataset.etLedgerPane===key));
+      if(key==='daily'){
+        const el=document.getElementById('etDailyLedger');
+        if(el && !el.children.length){
+          el.innerHTML='<div class="et-day-row"><b>'+todayFa()+'</b><strong>0.00 USDT</strong></div>';
+        }
+      }
     });
-  };
-  window.__elhamCloseTradeLedger=function(id,p){
-    return window.elhamTradingLedger?.close(id,p||currentPrice());
-  };
+  }
+  refreshLedgerTabs();
 
-  // Also listen to generic custom events if the existing engine emits them.
-  document.addEventListener("elham-trade-open",e=>{
-    const d=e.detail||{}; window.elhamTradingLedger?.open({
-      asset:d.asset||asset(),side:d.side||side(),amount:d.amount||amount(),entryPrice:d.entryPrice||currentPrice()
-    });
+  // Keep the three views updated whenever the trading engine updates the page.
+  const observer=new MutationObserver(()=>{
+    refreshLedgerTabs();
+    const daily=document.getElementById('etDailyLedger');
+    if(daily && !daily.children.length){
+      daily.innerHTML='<div class="et-day-row"><b>'+todayFa()+'</b><strong>0.00 USDT</strong></div>';
+    }
   });
-  document.addEventListener("elham-trade-close",e=>{
-    const d=e.detail||{}; if(d.id)window.elhamTradingLedger?.close(d.id,d.price||currentPrice());
-  });
+  const card=document.getElementById('etLedgerCard');
+  if(card) observer.observe(card,{childList:true,subtree:true});
 
-  // Keep displayed balance synced with the ledger.
-  setInterval(()=>{
-    const s=window.elhamTradingLedger?.get?.();
-    if(!s)return;
-    document.querySelectorAll("#etBalance,#etWalletBalance,[data-et-balance]").forEach(el=>el.textContent=Number(s.balance).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}));
-  },500);
+  // If old ledger data exists, force a visible refresh after the trading engine initializes.
+  setTimeout(()=>{
+    const ev=document.getElementById('etLedgerCard');
+    if(ev) refreshLedgerTabs();
+  },800);
 })();
 </script>
 </body>
