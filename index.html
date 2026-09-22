@@ -653,6 +653,13 @@ body.messenger-fullscreen .chat-compose textarea,body.messenger-fullscreen .chat
  font-size:12px;font-weight:700;pointer-events:none;box-shadow:0 6px 18px rgba(68,38,67,.18);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
 </style>
 
+
+<style id="ai-speaker-style">
+.ai-speaker{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0;font-size:.9rem}
+.ai-speaker>span{font-weight:700;opacity:.85}
+.ai-speaker-btn{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:inherit;border-radius:999px;padding:7px 12px;cursor:pointer}
+.ai-speaker-btn.active{box-shadow:0 0 0 2px rgba(255,105,180,.35);background:rgba(255,105,180,.14)}
+</style>
 </head>
 <body>
 <div aria-hidden="true" aria-label="دفتر دوتایی ما" id="messengerOverlay" role="dialog"><div class="messenger-shell" id="messengerShell"></div></div>
@@ -1638,77 +1645,105 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
 </script>
 <script id="ai-counselor-js">
 (function(){
-  const input=document.getElementById('aiInput'), send=document.getElementById('aiSend'), box=document.getElementById('aiMessages'), status=document.getElementById('aiStatus');
+  const input=document.getElementById('aiInput');
+  const send=document.getElementById('aiSend');
+  const box=document.getElementById('aiMessages');
+  const status=document.getElementById('aiStatus');
   if(!input||!send||!box)return;
 
-  const FN='/.netlify/functions/relationship-counselor';
-  const history=[];
+  // The counselor lives on Netlify; the public GitHub Pages site calls it directly.
+  const FN='https://sparkly-quokka-2e5258.netlify.app/.netlify/functions/relationship-counselor';
+  let history=[];
+  let speaker=localStorage.getItem('fazelElhamAuthor')||'فاضل';
 
-  const esc=v=>String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+  const esc=v=>String(v??'').replace(/[&<>'"]/g,c=>({
+    '&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'
+  }[c]));
+
   function addMsg(role,text){
     const d=document.createElement('div');
     d.className='ai-msg '+role;
-    d.innerHTML='<span class="ai-label">'+(role==='user'?'شما':'مشاور رابطه')+'</span>'+esc(text);
+    d.innerHTML='<span class="ai-label">'+
+      (role==='user'?speaker:'مشاور گوشه دنج')+
+      '</span>'+esc(text);
     box.appendChild(d);
     box.scrollTop=box.scrollHeight;
   }
 
-  function setBusy(busy){
-    send.disabled=busy;
-    input.disabled=busy;
+  function syncSpeaker(){
+    speaker=localStorage.getItem('fazelElhamAuthor')||'فاضل';
+    document.querySelectorAll('.ai-speaker-btn').forEach(b=>{
+      b.classList.toggle('active',b.dataset.speaker===speaker);
+    });
   }
 
-  function extractReply(data){
-    if(!data)return '';
-    if(typeof data.reply==='string'&&data.reply.trim())return data.reply.trim();
-    if(typeof data.output_text==='string'&&data.output_text.trim())return data.output_text.trim();
-    const parts=[];
-    for(const item of (Array.isArray(data.output)?data.output:[])){
-      for(const c of (Array.isArray(item?.content)?item.content:[])){
-        if(typeof c?.text==='string'&&c.text.trim())parts.push(c.text.trim());
-      }
-    }
-    return parts.join('\n').trim();
+  // Add a clear speaker selector to the counselor itself.
+  const compose=document.querySelector('.ai-compose');
+  if(compose && !document.getElementById('aiSpeaker')){
+    const wrap=document.createElement('div');
+    wrap.className='ai-speaker';
+    wrap.id='aiSpeaker';
+    wrap.innerHTML=
+      '<span>الان کیه؟</span>'+
+      '<button type="button" class="ai-speaker-btn" data-speaker="فاضل">❤️ فاضل</button>'+
+      '<button type="button" class="ai-speaker-btn" data-speaker="الهام">🌸 الهام</button>';
+    compose.parentNode.insertBefore(wrap,compose);
+    wrap.addEventListener('click',e=>{
+      const b=e.target.closest('.ai-speaker-btn');
+      if(!b)return;
+      speaker=b.dataset.speaker;
+      localStorage.setItem('fazelElhamAuthor',speaker);
+      syncSpeaker();
+    });
   }
+  syncSpeaker();
 
   async function ask(text){
     text=(text||'').trim();
     if(!text)return;
 
-    setBusy(true);
+    syncSpeaker();
+    send.disabled=true;
+    input.disabled=true;
     addMsg('user',text);
-    status.className='ai-status';
-    status.textContent='🧠 دارم با دقت گوش می‌دم...';
 
-    const speaker=localStorage.getItem('fazelElhamAuthor')||'فاضل';
-    history.push({role:'user',content:text});
+    const nextHistory=history.concat([{role:'user',content:text}]).slice(-24);
+    status.className='ai-status';
+    status.textContent='🧠 دارم فکر می‌کنم...';
 
     try{
       const r=await fetch(FN,{
         method:'POST',
         headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({messages:history,speaker})
+        body:JSON.stringify({
+          messages:nextHistory,
+          speaker:speaker
+        })
       });
 
       const raw=await r.text();
       let data={};
       try{data=raw?JSON.parse(raw):{};}catch(_){}
-      if(!r.ok)throw new Error(data?.error||data?.message||raw||('خطای سرور '+r.status));
 
-      const reply=extractReply(data);
-      if(!reply)throw new Error('پاسخ مشاور خالی بود.');
-      history.push({role:'assistant',content:reply});
+      if(!r.ok){
+        throw new Error(data?.error||data?.message||raw||('خطای سرور '+r.status));
+      }
+
+      const reply=(data?.reply||'').trim();
+      if(!reply)throw new Error('سرور پاسخ داد، اما متن پاسخ خالی بود.');
+
+      history=nextHistory.concat([{role:'assistant',content:reply}]).slice(-24);
       addMsg('bot',reply);
       status.className='ai-status';
       status.textContent='☁️ آماده‌ام';
       input.value='';
     }catch(e){
-      history.pop();
       console.error('relationship-counselor:',e);
       status.className='ai-status error';
       status.textContent='⚠️ '+(e?.message||'اتصال برقرار نشد');
     }finally{
-      setBusy(false);
+      send.disabled=false;
+      input.disabled=false;
       input.focus();
     }
   }
@@ -1720,6 +1755,7 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
       ask(input.value);
     }
   });
+
   document.querySelectorAll('[data-ai-prompt]').forEach(b=>{
     b.addEventListener('click',()=>{
       input.value=b.dataset.aiPrompt||'';
@@ -2197,7 +2233,7 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
 })();
 </script>
 
-</body>
+
 <style id="v16-clean-galaxy-glass">
 /* V16 — no separate presence box; compact presence lives inside the main chat header. */
 #messengerOverlay .chat-author{display:none!important}
@@ -2373,4 +2409,5 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
  if(root) mo.observe(root,{childList:true,subtree:true});
 })();
 </script>
+</body>
 </html>
