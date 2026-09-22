@@ -653,6 +653,46 @@ body.messenger-fullscreen .chat-compose textarea,body.messenger-fullscreen .chat
  font-size:12px;font-weight:700;pointer-events:none;box-shadow:0 6px 18px rgba(68,38,67,.18);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
 </style>
 
+
+<style id="truth-dare-style">
+.truth-dare-section{padding:70px 0}.truth-dare-card{max-width:900px;margin:auto;padding:24px;border-radius:30px;background:linear-gradient(145deg,rgba(38,19,38,.94),rgba(18,15,29,.97));border:1px solid rgba(255,130,190,.22);box-shadow:0 24px 70px rgba(0,0,0,.22),0 0 50px rgba(255,86,157,.08)}.td-head{display:flex;justify-content:space-between;gap:20px;align-items:center}.td-kicker{font-size:10px;letter-spacing:2px;color:#ff9ac8}.td-head h3{margin:6px 0 0;font-size:25px}.td-speaker{display:flex;gap:7px}.td-speaker button{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:#fff;border-radius:14px;padding:9px 14px;font-family:inherit;cursor:pointer}.td-speaker button.active{background:rgba(255,91,157,.18);border-color:rgba(255,120,180,.65);box-shadow:0 0 0 1px rgba(255,120,180,.12) inset}.td-status{display:flex;justify-content:space-between;gap:10px;margin:18px 0 10px;color:#cdbbc7;font-size:11px}.td-question-wrap{min-height:290px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px 18px;border-radius:24px;background:radial-gradient(circle at 50% 10%,rgba(255,112,178,.15),transparent 42%),rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08)}.td-number{font-size:13px;color:#ff9bc7;font-weight:800}.td-type{margin-top:8px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.07);font-size:11px}.td-question{max-width:720px;margin-top:22px;font-size:clamp(20px,3vw,30px);line-height:1.95;font-weight:800;color:#fff}.td-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.td-actions button{border:0;border-radius:16px;padding:14px;font-family:inherit;font-weight:800;cursor:pointer}.td-random{background:linear-gradient(135deg,#ff5b9d,#ff8ac0);color:#fff;box-shadow:0 12px 30px rgba(255,91,157,.2)}.td-send{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.12)!important}.td-send:disabled{opacity:.45;cursor:not-allowed}.td-note{text-align:center;color:#a995a4;font-size:10px;margin-top:12px}@media(max-width:700px){.truth-dare-card{padding:16px;border-radius:24px}.td-head{flex-direction:column;align-items:stretch}.td-speaker{width:100%}.td-speaker button{flex:1}.td-question-wrap{min-height:320px;padding:24px 12px}.td-question{font-size:19px;line-height:2}.td-actions{grid-template-columns:1fr}.td-status{font-size:10px}}
+</style>
+
+<style id="premium-chat-v3">
+/* Premium messenger polish */
+.chat-messages{position:relative;isolation:isolate}
+.chat-bubble-row{position:relative;contain:layout paint}
+.chat-bubble{background:rgba(255,255,255,.075)!important;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(212,171,78,.78)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 8px 26px rgba(0,0,0,.18),0 0 0 1px rgba(255,205,90,.08);overflow:visible}
+.chat-bubble-row.mine .chat-bubble{border-radius:18px 18px 5px 18px!important}
+.chat-bubble-row.theirs .chat-bubble{border-radius:18px 18px 18px 5px!important}
+.chat-bubble-row.mine .chat-bubble:before,
+.chat-bubble-row.theirs .chat-bubble:before{content:"";position:absolute;inset:-2px;border-radius:inherit;pointer-events:none;opacity:.92;z-index:-1}
+.chat-bubble-row.mine .chat-bubble:before{border:2px solid transparent;border-left-color:#48a8ff;border-bottom-color:#177cff;filter:drop-shadow(0 0 5px rgba(48,143,255,.55));animation:blueOrbit 3.8s linear infinite}
+.chat-bubble-row.theirs .chat-bubble:before{border:2px solid transparent;border-right-color:#ff72b8;border-top-color:#ff3d98;filter:drop-shadow(0 0 5px rgba(255,67,165,.5));animation:pinkOrbit 3.8s linear infinite}
+.chat-bubble-row.theirs .chat-bubble:after{content:"🎀";position:absolute;left:-7px;top:-9px;font-size:13px;filter:drop-shadow(0 2px 4px rgba(255,64,150,.4));animation:ribbonFloat 2.8s ease-in-out infinite;pointer-events:none}
+@keyframes blueOrbit{0%{clip-path:inset(0 0 96% 0)}25%{clip-path:inset(0 0 0 96%)}50%{clip-path:inset(96% 0 0 0)}75%{clip-path:inset(0 96% 0 0)}100%{clip-path:inset(0 0 96% 0)}}
+@keyframes pinkOrbit{0%{clip-path:inset(96% 0 0 0)}25%{clip-path:inset(0 96% 0 0)}50%{clip-path:inset(0 0 96% 0)}75%{clip-path:inset(0 0 0 96%)}100%{clip-path:inset(96% 0 0 0)}}
+@keyframes ribbonFloat{50%{transform:translateY(-2px) rotate(-4deg)}}
+.chat-ticks{font-weight:700;letter-spacing:-2px;font-size:11px;min-width:17px;display:inline-block}
+.chat-ticks.sent{color:#aaa0b0}
+.chat-ticks.read{color:#58b7ff;text-shadow:0 0 7px rgba(88,183,255,.35)}
+.chat-heart-burst{position:absolute;inset:0;pointer-events:none;z-index:10;overflow:visible}
+.chat-heart-burst i{position:absolute;left:50%;top:50%;font-style:normal;font-size:19px;animation:heartBurst .8s cubic-bezier(.2,.75,.25,1) forwards;will-change:transform,opacity}
+@keyframes heartBurst{0%{transform:translate(-50%,-50%) scale(.25);opacity:0}15%{opacity:1}100%{transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(1.15) rotate(var(--r));opacity:0}}
+.premium-react-pop{position:fixed;z-index:12000;display:flex;align-items:center;gap:3px;padding:7px 8px;border:1px solid rgba(224,187,91,.9);border-radius:18px;background:rgba(20,12,25,.94);box-shadow:0 12px 35px rgba(0,0,0,.42),0 0 22px rgba(221,179,73,.14);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transform:translate(-50%,-100%) scale(.92);opacity:0;transition:.16s ease}
+.premium-react-pop.show{opacity:1;transform:translate(-50%,-100%) scale(1)}
+.premium-react-pop button{border:0;background:transparent;width:34px;height:34px;border-radius:12px;font-size:20px;cursor:pointer;transition:transform .15s,background .15s}
+.premium-react-pop button:active,.premium-react-pop button:hover{transform:scale(1.22);background:rgba(255,255,255,.08)}
+.premium-react-label{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);font-size:7px;color:#e8d9b0;white-space:nowrap}
+@media(max-width:600px){
+  .chat-bubble{backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 5px 16px rgba(0,0,0,.16)}
+  .chat-bubble-row.mine .chat-bubble:before,.chat-bubble-row.theirs .chat-bubble:before{animation-duration:5.5s}
+}
+@media(prefers-reduced-motion:reduce){
+  .chat-bubble-row.mine .chat-bubble:before,.chat-bubble-row.theirs .chat-bubble:before,.chat-bubble-row.theirs .chat-bubble:after{animation:none}
+}
+</style>
+
 </head>
 <body>
 <div aria-hidden="true" aria-label="دفتر دوتایی ما" id="messengerOverlay" role="dialog"><div class="messenger-shell" id="messengerShell"></div></div>
@@ -744,6 +784,7 @@ body.messenger-fullscreen .chat-compose textarea,body.messenger-fullscreen .chat
 <section id="music"><div class="section-title"><h2>Music for you 🎵</h2><p>موزیکی که با تو قشنگ‌تر میشه.</p></div><div class="card music-box"><button class="music-heart" id="musicPlay"><span>♪</span></button><div><div class="music-title">music for you</div><small style="color:var(--muted)">فایل music.mp3 را کنار index.html قرار بده.</small></div><audio id="audio" loop="" src="music.mp3"></audio></div></section>
 <section id="surprise"><div class="section-title"><h2>یه سورپرایز کوچولو 🎁</h2><p>هر بار ممکنه یه اتفاق متفاوت بیفته.</p></div><div class="card surprise"><button class="gift" id="giftBtn">🎁</button><div class="surprise-msg" id="surpriseMsg">بزن روش ببین چی برات دارم... 👀</div></div></section>
 <section id="game"><div class="section-title"><h2>بازی قلب‌ها 🎮</h2><p>در ۱۵ ثانیه هرچقدر قلب بیشتری بگیری، عشق بیشتری جمع کردی! ❤️</p></div><div class="card game"><div class="score">امتیاز: <b id="score">0</b> | زمان: <b id="time">15</b></div><button class="game-heart" id="gameHeart">❤️</button><br/><button class="btn primary" id="startGameBtn">شروع بازی</button></div></section>
+
 <section><div class="section-title"><h2>فصل‌های داستانمون 🕰️</h2><p>هرچی جلوتر بریم، این خط زمانی پرتر میشه.</p></div><div class="timeline"><div class="time-item card"><div class="time-dot">🌱</div><h3>شروع داستان</h3><p>۱۰ اسفند ۱۴۰۳؛ روزی که فصل اول ما شروع شد.</p></div><div class="time-item card"><div class="time-dot">🌸</div><h3>روزهای بعد</h3><p>خاطره‌های کوچیکی که کم‌کم یه داستان بزرگ ساختن.</p></div><div class="time-item card"><div class="time-dot">💞</div><h3>امروز</h3><p>هنوز وسط داستانیم؛ و بهترین قسمت‌ها شاید جلوتر باشن.</p></div><div class="time-item card"><div class="time-dot">♾️</div><h3>ادامه دارد...</h3><p>چون داستان ما قرار نیست اینجا تموم بشه.</p></div></div></section>
 <section class="nook" id="nook"><div class="nook-box"><div class="section-title"><h2>گوشه دنج ما 🌙</h2><p>یه جای کوچیک که فقط برای خودمونه.</p></div><div class="card" id="nookLock"><div class="lock">🔐</div><h3>ورود به گوشه دنج</h3><input id="nookPass" placeholder="رمز را وارد کن" type="password"/><button class="btn primary" id="unlockBtn">بازش کن ❤️</button><div class="wrong" id="nookWrong"></div></div><div class="secret-content" id="nookSecret">
 <div class="secret-room">
@@ -754,21 +795,24 @@ body.messenger-fullscreen .chat-compose textarea,body.messenger-fullscreen .chat
 <button class="nook-tool" data-room="mood"><span>🕯️</span><b>حالِ امشب</b><small>فضای اتاق رو عوض کن</small></button>
 <button class="nook-tool" data-room="cards"><span>💌</span><b>کارت عاشقانه</b><small>یک پیام تصادفی برای هم</small></button>
 <button class="nook-tool" data-room="time"><span>⏳</span><b>لحظه‌مون</b><small>یک تایمر برای یک قرار کوچک</small></button><button class="nook-tool" data-room="counselor"><span>🧠</span><b>مشاور رابطه</b><small>حرف بزنیم و بهتر همدیگه رو بفهمیم</small></button>
+<button class="nook-tool" data-room="truthDare"><span>😈</span><b>جرأت یا حقیقت</b><small>سؤال‌های سخت، شماره‌دار و بدون تکرار</small></button>
 <button class="nook-tool" data-room="bonk"><span>🩷</span><b>اتاق شیطنت الهام</b><small>کتکِ کارتونیِ بامزه 😭😂</small></button>
 </div>
 <div class="nook-panels">
 <div class="nook-panel active chat-panel" data-panel="notes"><div aria-hidden="true" class="chat-toys"><span class="chat-toy toy-a">🧸</span><span class="chat-toy toy-b">🐰</span><span class="chat-toy toy-c">🐱</span><span class="chat-toy toy-d">🐥</span></div>
 <div class="chat-head">
 <div class="chat-avatar-wrap"><div class="chat-avatar">❤️</div><span class="chat-online"></span></div>
-<div class="chat-head-copy"><h3>دفتر دوتایی ما</h3><div class="header-presence-stack" aria-label="وضعیت حضور"><span class="header-presence-row"><i class="header-presence-dot" data-header-presence="فاضل"></i><b>فاضل</b><em data-header-presence-label="فاضل">آفلاین</em></span><span class="header-presence-row"><i class="header-presence-dot" data-header-presence="الهام"></i><b>الهام</b><em data-header-presence-label="الهام">آفلاین</em></span></div></div>
+<div class="chat-head-copy"><h3>دفتر دوتایی ما</h3><div class="header-who-picker" aria-label="انتخاب فرستنده"><span>الان کیه؟</span><button type="button" class="header-who-btn" data-header-author="فاضل">فاضل 👑</button><button type="button" class="header-who-btn" data-header-author="الهام">الهام 👸</button></div></div>
 <div class="chat-head-actions"><button class="mobile-chat-back" id="mobileChatBack" title="بازگشت" type="button">‹</button><span class="chat-lock"><span aria-hidden="true" class="app-icon app-icon-lock"></span> خصوصی</span><button class="chat-mini-btn app-icon-btn" id="chatScrollBottom" title="آخرین پیام" type="button"><span aria-hidden="true" class="app-icon app-icon-down"></span></button><button class="chat-mini-btn chat-menu-btn" id="chatMenuBtn" title="بیشتر" type="button">⋮</button></div>
 </div>
-<div class="shared-author chat-author"><span>الان کیه؟</span><button class="author-btn" data-author="فاضل" type="button"><span class="presence-dot" data-presence="فاضل"></span><span class="author-avatar-mini">F</span><span>فاضل</span><span class="presence-label" data-presence-label="فاضل">آفلاین</span></button><button class="author-btn" data-author="الهام" type="button"><span class="presence-dot" data-presence="الهام"></span><span class="author-avatar-mini elham">E</span><span>الهام</span><span class="presence-label" data-presence-label="الهام">آفلاین</span></button></div>
+
 <div class="chat-day">امروز ❤️</div>
 <div aria-live="polite" class="chat-typing" id="chatTyping"><span></span><span></span><span></span><b>در حال نوشتن...</b></div>
 <div class="shared-notes chat-messages" id="sharedNotes"><div class="empty-notes">هنوز پیامی نیست... اولین پیام رو تو بفرست 💌</div></div>
 <button class="chat-new-messages" id="chatNewMessages" type="button">↓ پیام‌های جدید <b id="chatNewCount">0</b></button>
-<div class="chat-reactions" id="chatReactions"><button data-emoji="❤️" type="button">❤️</button><button data-emoji="😘" type="button">😘</button><button data-emoji="😂" type="button">😂</button><button data-emoji="🥹" type="button">🥹</button><button data-emoji="🔥" type="button">🔥</button><button data-emoji="💋" type="button">💋</button></div><div style="display:none"><button id="chatGalleryBtn"></button><button id="chatMemoriesBtn"></button><button id="chatThemeBtn"></button><button id="chatSearchBtn"></button><button id="chatPinnedBtn"></button><button id="chatStarredBtn"></button></div>
+<div class="chat-reactions" id="chatReactions" aria-label="واکنش‌های لوکس">
+<button data-emoji="❤️" title="عشق" type="button">❤️</button><button data-emoji="💎" title="الماس" type="button">💎</button><button data-emoji="👑" title="پادشاه و ملکه" type="button">👑</button><button data-emoji="💍" title="قول همیشگی" type="button">💍</button><button data-emoji="🫦" title="شیطنت" type="button">🫦</button><button data-emoji="🥂" title="به سلامتی ما" type="button">🥂</button><button data-emoji="✨" title="درخشش" type="button">✨</button><button data-emoji="🫶" title="باهم" type="button">🫶</button><button data-emoji="💋" title="بوسه" type="button">💋</button><button data-emoji="🔥" title="داغ" type="button">🔥</button>
+</div><div style="display:none"><button id="chatGalleryBtn"></button><button id="chatMemoriesBtn"></button><button id="chatThemeBtn"></button><button id="chatSearchBtn"></button><button id="chatPinnedBtn"></button><button id="chatStarredBtn"></button></div>
 <div class="chat-compose">
 <button class="chat-icon-btn" id="chatEmojiBtn" title="ایموجی" type="button"><span aria-hidden="true" class="app-icon app-icon-smile"></span></button>
 <label class="chat-icon-btn" title="پیوست"><input accept="image/*,.pdf,.txt,.doc,.docx" hidden="" id="chatFile" type="file"/><span aria-hidden="true" class="app-icon app-icon-clip"></span></label>
@@ -794,7 +838,7 @@ body.messenger-fullscreen .chat-compose textarea,body.messenger-fullscreen .chat
 </div>
 <div class="nook-panel" data-panel="mood"><div class="panel-title"><span>🕯️</span><div><h3>نور و حالِ اتاق</h3><p>یکی از فضاها رو انتخاب کن تا حال‌وهوای گوشه دنج عوض بشه.</p></div></div><div class="mood-grid"><button data-mood="night">🌙<b>شب آرام</b></button><button data-mood="pink">🌸<b>عاشقانه</b></button><button data-mood="dream">✨<b>رویایی</b></button><button data-mood="cozy">🔥<b>گرم و دنج</b></button></div></div>
 <div class="nook-panel" data-panel="cards"><div class="panel-title"><span>💌</span><div><h3>یک کارت برای تو</h3><p>دکمه رو بزن و یک پیام مخصوص بگیر.</p></div></div><div class="love-card" id="loveCard">«هرجا باشی، یه گوشه از قلبم همیشه برای تو روشنه.» ❤️</div><button class="btn primary" id="newLoveCard">یکی دیگه بده ✨</button></div>
-<div class="nook-panel" data-panel="time"><div class="panel-title"><span>⏳</span><div><h3>قرار ۵ دقیقه‌ای</h3><p>تایمر رو بزن؛ پنج دقیقه فقط برای خودتون.</p></div></div><div class="cozy-timer" id="cozyTimer">05:00</div><button class="btn primary" id="startCozyTimer">شروع لحظه‌مون ❤️</button><p class="timer-msg" id="cozyTimerMsg">وقتی شروعش کردی، گوشی رو کنار بذار و فقط با هم باشین.</p></div><div class="nook-panel" data-panel="counselor"><div class="panel-title"><span>🧠</span><div><h3>مشاور رابطه ما</h3><p>یک فضای بی‌طرف برای حرف زدن، فهمیدن احساسات و پیدا کردن راه گفت‌وگو.</p></div></div><div class="ai-quick"><button data-ai-prompt="بین ما یک سوءتفاهم پیش آمده؛ کمکمون کن بدون سرزنش درباره‌اش حرف بزنیم." type="button">🫶 سوءتفاهم</button><button data-ai-prompt="کمکم کن احساساتم را بدون دعوا و سرزنش به طرف مقابلم بگویم." type="button">💬 چطور بگم؟</button><button data-ai-prompt="یک تمرین کوتاه دونفره برای بهتر شنیدن و فهمیدن همدیگه بهمون بده." type="button">❤️ تمرین دونفره</button><button data-ai-prompt="امشب فقط ۱۰ دقیقه وقت داریم؛ یک گفت‌وگوی صمیمی و مفید برایمان طراحی کن." type="button">🌙 گفت‌وگوی امشب</button></div><div class="ai-messages" id="aiMessages"><div class="ai-msg bot"><span class="ai-label">مشاور گوشه دنج</span>سلام فاضل و الهام ❤️ من اینجام که بدون قضاوت کمکتون کنم بهتر حرف همدیگه رو بشنوین. هر چیزی هست، از همین‌جا شروع کنین.</div></div><div class="ai-compose"><textarea id="aiInput" placeholder="مثلاً: امروز از یه حرف الهام ناراحت شدم ولی نمی‌خوام بحث کنیم..."></textarea><button class="btn primary" id="aiSend">فرستادن ❤️</button></div><div class="ai-status" id="aiStatus">☁️ آماده‌ام</div><p class="ai-note">این مشاور جای درمانگر یا متخصص سلامت روان نیست؛ برای گفت‌وگو و کمک عمومی در رابطه طراحی شده.</p></div>
+<div class="nook-panel" data-panel="time"><div class="panel-title"><span>⏳</span><div><h3>قرار ۵ دقیقه‌ای</h3><p>تایمر رو بزن؛ پنج دقیقه فقط برای خودتون.</p></div></div><div class="cozy-timer" id="cozyTimer">05:00</div><button class="btn primary" id="startCozyTimer">شروع لحظه‌مون ❤️</button><p class="timer-msg" id="cozyTimerMsg">وقتی شروعش کردی، گوشی رو کنار بذار و فقط با هم باشین.</p></div><div class="nook-panel" data-panel="counselor"><div class="panel-title"><span>🧠</span><div><h3>مشاور رابطه ما ❤️</h3><p>اینجا دعوا ممنوع؛ حرف‌هامون رو با عشق، کمی شوخی و بدون طرفداری باز می‌کنیم 😄</p></div></div><div class="ai-who" aria-label="انتخاب گوینده"><span class="ai-who-label">الان کیه؟</span><button type="button" data-ai-speaker="فاضل">فاضل</button><button type="button" data-ai-speaker="الهام">الهام</button><span class="ai-who-current" id="aiWhoCurrent">فاضل انتخاب شده ❤️</span></div><div class="ai-quick"><button data-ai-prompt="بین ما یک سوءتفاهم پیش آمده؛ کمکمون کن بدون سرزنش درباره‌اش حرف بزنیم." type="button">🫶 سوءتفاهم</button><button data-ai-prompt="کمکم کن احساساتم را بدون دعوا و سرزنش به طرف مقابلم بگویم." type="button">💬 چطور بگم؟</button><button data-ai-prompt="یک تمرین کوتاه دونفره برای بهتر شنیدن و فهمیدن همدیگه بهمون بده." type="button">❤️ تمرین دونفره</button><button data-ai-prompt="امشب فقط ۱۰ دقیقه وقت داریم؛ یک گفت‌وگوی صمیمی و مفید برایمان طراحی کن." type="button">🌙 گفت‌وگوی امشب</button></div><div class="ai-messages" id="aiMessages"><div class="ai-msg bot"><span class="ai-label">مشاور گوشه دنج</span>سلام فاضل و الهام ❤️ من اینجام که بدون قضاوت کمکتون کنم بهتر حرف همدیگه رو بشنوین. هر چیزی هست، از همین‌جا شروع کنین.</div></div><div class="ai-compose"><textarea id="aiInput" placeholder="مثلاً: امروز از یه حرف الهام ناراحت شدم ولی نمی‌خوام بحث کنیم..."></textarea><button class="btn primary" id="aiSend">فرستادن ❤️</button></div><div class="ai-status" id="aiStatus">☁️ آماده‌ام</div><p class="ai-note">این مشاور جای درمانگر یا متخصص سلامت روان نیست؛ برای گفت‌وگو و کمک عمومی در رابطه طراحی شده.</p></div>
 <div class="nook-panel bonk-panel" data-panel="bonk">
 <div class="bonk-head"><div><span class="secret-badge">ELHAM'S PLAYFUL ZONE • CARTOON ONLY</span><h3>اتاق شیطنت الهام 😭🩷</h3><p>الهام وسیله رو انتخاب می‌کنه، می‌زنه و پسره هم با هر ضربه قیافه‌ش رو عوض می‌کنه 😂</p></div><div class="bonk-count" id="bonkCount">۰ ضربه</div></div>
 <div class="bonk-stage" id="bonkStage">
@@ -818,7 +862,15 @@ body.messenger-fullscreen .chat-compose textarea,body.messenger-fullscreen .chat
 </div>
 <div class="bonk-controls"><b>وسیله رو انتخاب کن و بزن 😭</b><div class="bonk-tools"><button data-bonk="hand">✋ دست</button><button data-bonk="slipper">🩴 دمپایی</button><button data-bonk="pillow">🛏️ بالش</button><button data-bonk="doll">🧸 عروسک</button><button data-bonk="sock">🧦 جوراب</button><button data-bonk="scarf">🧣 شال</button><button data-bonk="cap">🧢 کلاه</button><button data-bonk="cushion">🛋️ کوسن</button></div><div class="bonk-actions"><button class="btn primary" id="bonkHit">بزنش 😭😂</button><button class="btn" id="bonkHug">آشتی 🫂</button><button class="btn" id="bonkReset">از اول ✨</button></div><p class="bonk-note">همه‌چیز کارتونی و شوخیه؛ هیچ آسیب واقعی وجود نداره. هر پیام ۵ ثانیه بعد محو می‌شه.</p></div>
 </div></div>
-</div></div></div></section>
+</div></div><div class="nook-panel truth-dare-panel" data-panel="truthDare">
+<div class="td-inner">
+<div class="td-head"><div><span class="td-kicker">FAZEL × ELHAM • PRIVATE GAME</span><h3>جرأت یا حقیقت 😈</h3><p class="td-subtitle">۵۰۰ سؤال واقعی و چالشی؛ شماره‌ها تا تمام شدن دور تکرار نمی‌شوند.</p></div><div class="td-speaker" id="tdSpeaker"><button type="button" data-td-speaker="فاضل">فاضل ❤️</button><button type="button" data-td-speaker="الهام">الهام 🌸</button></div></div>
+<div class="td-status"><span id="tdCurrent">فاضل انتخاب شده</span><span id="tdRemaining">۵۰۰ سؤال باقی مانده</span></div>
+<div class="td-question-wrap"><div class="td-number" id="tdNumber">#۰۰۰</div><div class="td-type" id="tdType">منتظر شماره...</div><div class="td-question" id="tdQuestion">شماره رندوم بگیر... اگر جرأتش رو داری 😈</div></div>
+<div class="td-actions"><button class="td-random" id="tdRandom" type="button">🎲 شماره رندوم بده</button><button class="td-send" id="tdSend" type="button" disabled>💌 این سؤال رو بفرست به دفتر</button></div>
+<div class="td-note" id="tdNote">هر شماره فقط یک بار در هر دور استفاده می‌شود.</div>
+</div></div>
+</div></section>
 <section class="premium-extras" id="premiumExtras"><div class="section-title"><span>OUR CHAOTIC LITTLE UNIVERSE</span><h2>یه عالمه چیزِ مخصوصِ <b>ما ❤️</b></h2><p>چون رابطه ما فقط عشق نیست؛ یه مقدار کل‌کل، قهر، آشتی و شیطنت هم لازمه 😂</p></div><div class="extra-grid"><article class="extra-card"><div class="extra-icon">📊</div><h3>آمار عجیب رابطه</h3><p>کل‌کل‌ها: ∞<br/>قهرها: قابل شمارش نیست<br/>آشتی‌ها: همیشه بیشتر از چیزی که فکر می‌کردیم ❤️</p></article><article class="extra-card"><div class="extra-icon">🔮</div><h3>فال رابطه</h3><p id="fortuneText">امروز ستاره‌ها می‌گن یک آشتی شیرین در راهه... 😂</p><button class="extra-action" id="fortuneBtn">آینده رو ببین ✨</button></article><article class="extra-card"><div class="extra-icon">😈</div><h3>الهام قهر کرده؟</h3><p>راهنمای بقا برای فاضل؛ استفاده در شرایط بحرانی توصیه می‌شود 😂</p><button class="extra-action" id="survivalBtn">راهنمای بقا 😭</button></article><article class="extra-card"><div class="extra-icon">💋</div><h3>بوسه مجازی</h3><p>یک بوسه بفرست و ببین صفحه چطور پر از عشق می‌شود.</p><button class="extra-action" id="kissBtn">ارسال بوسه 💋</button></article><article class="extra-card"><div class="extra-icon">🥹</div><h3>دلم برات تنگ شده</h3><p>برای وقت‌هایی که حتی کل‌کل هم دلتنگی را کم نمی‌کند.</p><button class="extra-action" id="missingBtn">دلم تنگته 🥹</button></article><article class="extra-card"><div class="extra-icon">🧠</div><h3>هوش رابطه ما</h3><p>یک تحلیل کاملاً غیرعلمی اما کاملاً واقعی از میزان لوس‌بازی، کل‌کل و عاشقی 😂</p><button class="extra-action" id="aiBtn">تحلیل کن ❤️</button><div id="loveAIResult"></div></article></div></section>
 </main>
 <footer>ساخته شده با عشق، برای الهامِ فاضل ❤️</footer>
@@ -1564,28 +1616,50 @@ body.messenger-fullscreen .chat-panel .chat-toy{z-index:2!important;opacity:.42!
     if(!notesBox)return;
     const wasAwayFromBottom=(notesBox.scrollHeight-(notesBox.scrollTop+notesBox.clientHeight))>120;
     if(!rows.length){notesBox.innerHTML='<div class="empty-notes">هنوز پیامی نیست... اولین پیام رو تو بفرست 💌</div>';return;}
+    let readMap={};try{readMap=JSON.parse(localStorage.getItem('fazelElhamReadMessages_v1')||'{}')||{}}catch(e){}
+    const currentAuthor=author;
+    let markReadTimer=null;
     notesBox.innerHTML=rows.map(r=>{
-      const mine=!String(r.author_name||'').includes('الهام');
+      const mine=!String(r.author_name||'').includes('الهام') === (currentAuthor==='فاضل');
       const reaction=reactions[r.id]||'';
       const cls=mine?'mine':'theirs';
+      const isRead=!!readMap[r.id];
+      const tick=mine?(isRead?'✓✓':'✓'):'';
       return `<div class="chat-bubble-row ${cls}" data-id="${esc(r.id)}"><article class="chat-bubble">
-        <div class="chat-bubble-name">${esc(r.author_name)}</div>
+        <div class="chat-bubble-name">${esc(r.author_name)} ${String(r.author_name||'').includes('فاضل')?'👑':'🎀'}</div>
         <div class="chat-bubble-text">${String(r.content||'').startsWith('🎨 نقاشی مشترک ما\n')?`<div class="shared-drawing-message"><div class="drawing-msg-title">🎨 نقاشی مشترک ما</div><img src="${esc(String(r.content).slice(12))}" alt="نقاشی مشترک فاضل و الهام" loading="lazy"></div>`:esc(r.content)}</div>
-        <div class="chat-bubble-meta"><span>${esc(chatTime(r.created_at))}</span><span class="chat-ticks">✓✓</span><button class="chat-delete" data-id="${esc(r.id)}">${mine?'حذف':''}</button></div><div class="chat-message-actions"><button data-reply-id="${esc(r.id)}">↩️ پاسخ</button><button data-star-id="${esc(r.id)}" class="${starred[r.id]?'chat-star':''}">⭐</button><button data-pin-id="${esc(r.id)}" class="${pinned[r.id]?'chat-star':''}">📌</button></div>
+        <div class="chat-bubble-meta"><span>${esc(chatTime(r.created_at))}</span>${mine?`<span class="chat-ticks ${isRead?'read':'sent'}" title="${isRead?'خوانده شد':'ارسال شد'}">${tick}</span>`:''}<button class="chat-delete" data-id="${esc(r.id)}">${mine?'حذف':''}</button></div><div class="chat-message-actions"><button data-reply-id="${esc(r.id)}">↩️ پاسخ</button><button data-star-id="${esc(r.id)}" class="${starred[r.id]?'chat-star':''}">⭐</button><button data-pin-id="${esc(r.id)}" class="${pinned[r.id]?'chat-star':''}">📌</button></div>
         ${reaction?`<div class="chat-reaction-row"><button class="chat-react" data-react-id="${esc(r.id)}">${esc(reaction)} 1</button></div>`:''}
       </article></div>`;
     }).join('');
     if(wasAwayFromBottom && newBtn && rows.length){ unseen=Math.min(unseen+1,99); newCount.textContent=String(unseen); newBtn.classList.add('show'); }
     notesBox.querySelectorAll('.chat-delete').forEach(b=>b.addEventListener('click',async()=>{if(!b.dataset.id)return;const {error}=await db.from('love_notes').delete().eq('id',b.dataset.id);if(error)toast('حذف نشد؛ دوباره امتحان کن 🥹')}));
     notesBox.querySelectorAll('.chat-react').forEach(b=>b.addEventListener('click',()=>{delete reactions[b.dataset.reactId];saveReactions();renderNotes(rows)}));
-    notesBox.querySelectorAll('.chat-bubble').forEach(b=>b.addEventListener('dblclick',()=>{const id=b.closest('.chat-bubble-row')?.dataset.id;if(!id)return;reactions[id]=reactions[id]?'': '❤️';saveReactions();renderNotes(rows)}));wireSuperMessageActions(rows);
+    notesBox.querySelectorAll('.chat-bubble').forEach(b=>b.addEventListener('dblclick',()=>{const id=b.closest('.chat-bubble-row')?.dataset.id;if(!id)return;reactions[id]=reactions[id]?'': '❤️';saveReactions();renderNotes(rows)}));
+    wireSuperMessageActions(rows);
+    if(window.__wirePremiumLongPress)window.__wirePremiumLongPress();
+    // Messages visible to the current viewer are marked read locally.
+    clearTimeout(markReadTimer);markReadTimer=setTimeout(()=>{
+      let changed=false;
+      rows.forEach(r=>{
+        const isMine=(String(r.author_name||'').includes('الهام') ? 'الهام':'فاضل')===currentAuthor;
+        if(!isMine && !readMap[r.id]){readMap[r.id]=Date.now();changed=true;}
+      });
+      if(changed){localStorage.setItem('fazelElhamReadMessages_v1',JSON.stringify(readMap));}
+    },220);
+    if(window.__chatBurstPending){
+      window.__chatBurstPending=false;
+      const last=notesBox.querySelector('.chat-bubble-row:last-of-type');
+      requestAnimationFrame(()=>window.__premiumHeartBurst?.(last));
+    }
     requestAnimationFrame(()=>{
       const nearBottom = (notesBox.scrollHeight - (notesBox.scrollTop + notesBox.clientHeight)) < 90;
       if(nearBottom) notesBox.scrollTop = notesBox.scrollHeight;
     });
   }
+  window.__renderNotesNow=()=>{if(window.__lastChatRows)renderNotes(window.__lastChatRows)};
   function wireSuperMessageActions(rows){notesBox.querySelectorAll('[data-reply-id]').forEach(b=>b.addEventListener('click',()=>{const r=rows.find(x=>String(x.id)===String(b.dataset.replyId));if(r)setReply(r.author_name+': '+String(r.content||''))}));notesBox.querySelectorAll('[data-star-id]').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.starId;starred[id]=!starred[id];saveFlags();renderNotes(rows)}));notesBox.querySelectorAll('[data-pin-id]').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.pinId;pinned[id]=!pinned[id];saveFlags();renderNotes(rows)}));}
-async function loadNotes(){const {data,error}=await db.from('love_notes').select('*').eq('room_id',ROOM).order('created_at',{ascending:true}).limit(100);if(error){setStatus('⚠️ اتصال دفتر برقرار نشد',true);console.error(error);return}renderNotes(data||[]);setStatus('')}
+async function loadNotes(){const {data,error}=await db.from('love_notes').select('*').eq('room_id',ROOM).order('created_at',{ascending:true}).limit(100);if(error){setStatus('⚠️ اتصال دفتر برقرار نشد',true);console.error(error);return}window.__lastChatRows=data||[];renderNotes(window.__lastChatRows);setStatus('')}
   async function init(){setStatus('');let {data:{session}}=await db.auth.getSession();if(!session){const r=await db.auth.signInAnonymously();if(r.error){setStatus('⚠️ ورود آنلاین فعال نیست: '+(r.error?.message||'خطا'),true);console.error(r.error);return}session=r.data.session}currentUser=session?.user||null;await loadNotes();
     const presence=db.channel('love-presence',{config:{presence:{key:currentUser?.id||Math.random().toString(36).slice(2)}}});
     presence.on('presence',{event:'sync'},()=>{const me=renderPresence(presence.presenceState());setStatus('')});
@@ -1597,7 +1671,7 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
     document.querySelectorAll('.author-btn').forEach(b=>b.addEventListener('click',async()=>{setAuthor(b.dataset.author);try{await presence.track({author_name:author,online_at:new Date().toISOString()})}catch(e){}}));
     db.channel('love-notes-live').on('postgres_changes',{event:'*',schema:'public',table:'love_notes',filter:`room_id=eq.${ROOM}`},()=>loadNotes()).subscribe(st=>{if(st==='SUBSCRIBED')setStatus('')});
   }
-  async function sendChat(content){content=(content||'').trim();if(!content)return;if(replyText)content='↩️ '+replyText.slice(0,100)+'\n'+content;if(!author){toast('اول مشخص کن فاضلی یا الهام 🌸');return}if(!currentUser){toast('دفتر هنوز آنلاین نشده؛ چند لحظه صبر کن');return}const {error}=await db.from('love_notes').insert({room_id:ROOM,author_id:currentUser.id,author_name:author,content});if(error){console.error('love_notes insert error:',error);saved.textContent='خطا: '+(error.message||'ارسال نشد');toast('ارسال نشد: '+(error.message||'خطای ناشناخته'));return}note.value='';note.style.height='42px';try{localStorage.removeItem('fazelElhamNookDraft')}catch(e){};saved.textContent='✓✓ بفرست شد';clearReply();loadNotes()}
+  async function sendChat(content){content=(content||'').trim();if(!content)return;if(replyText)content='↩️ '+replyText.slice(0,100)+'\n'+content;if(!author){toast('اول مشخص کن فاضلی یا الهام 🌸');return}if(!currentUser){toast('دفتر هنوز آنلاین نشده؛ چند لحظه صبر کن');return}const {error}=await db.from('love_notes').insert({room_id:ROOM,author_id:currentUser.id,author_name:author,content});if(error){console.error('love_notes insert error:',error);saved.textContent='خطا: '+(error.message||'ارسال نشد');toast('ارسال نشد: '+(error.message||'خطای ناشناخته'));return}note.value='';note.style.height='42px';try{localStorage.removeItem('fazelElhamNookDraft')}catch(e){};saved.textContent='✓ بفرست شد';window.__chatBurstPending=true;clearReply();loadNotes()}
   document.getElementById('saveNookNote')?.addEventListener('click',()=>sendChat(note?.value||''));
   note?.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat(note.value)}});
   note?.addEventListener('input',()=>{try{localStorage.setItem('fazelElhamNookDraft',note.value)}catch(e){};note.style.height='42px';note.style.height=Math.min(note.scrollHeight,120)+'px';const typing=document.getElementById('chatTyping');if(typing){typing.classList.add('show');clearTimeout(window.__chatTypingTimer);window.__chatTypingTimer=setTimeout(()=>typing.classList.remove('show'),900)}});
@@ -1638,87 +1712,88 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
 </script>
 <script id="ai-counselor-js">
 (function(){
-  const input=document.getElementById('aiInput'), send=document.getElementById('aiSend'), box=document.getElementById('aiMessages'), status=document.getElementById('aiStatus');
+  const input=document.getElementById('aiInput');
+  const send=document.getElementById('aiSend');
+  const box=document.getElementById('aiMessages');
+  const status=document.getElementById('aiStatus');
+  const whoCurrent=document.getElementById('aiWhoCurrent');
   if(!input||!send||!box)return;
 
+  // The browser never sees the OpenAI key. It calls the public Netlify Function.
   const FN='https://sparkly-quokka-2e5258.netlify.app/.netlify/functions/relationship-counselor';
-  const history=[];
+  let speaker=localStorage.getItem('fazelElhamAuthor')==='الهام'?'الهام':'فاضل';
+  let history=[];
+  let busy=false;
 
-  const esc=v=>String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
-  function addMsg(role,text){
+  function setSpeaker(name){
+    speaker=name==='الهام'?'الهام':'فاضل';
+    localStorage.setItem('fazelElhamAuthor',speaker);
+    document.querySelectorAll('[data-ai-speaker]').forEach(b=>{
+      b.classList.toggle('active',b.dataset.aiSpeaker===speaker);
+    });
+    if(whoCurrent)whoCurrent.textContent=speaker+' انتخاب شده ❤️';
+    input.placeholder=speaker==='الهام'
+      ?'مثلاً: فاضل امروز یه حرفی زد که دلم گرفت، ولی نمی‌خوام دعوا کنیم...'
+      :'مثلاً: الهام از یه حرفم ناراحت شده؛ کمکم کن قشنگ‌تر باهاش حرف بزنم...';
+  }
+
+  function addMsg(role,text,label){
     const d=document.createElement('div');
     d.className='ai-msg '+role;
-    d.innerHTML='<span class="ai-label">'+(role==='user'?'شما':'مشاور رابطه')+'</span>'+esc(text);
+    const lab=document.createElement('span');
+    lab.className='ai-label';
+    lab.textContent=label||(role==='user'?speaker:'مشاور گوشه دنج');
+    d.appendChild(lab);
+    d.appendChild(document.createTextNode(String(text||'')));
     box.appendChild(d);
     box.scrollTop=box.scrollHeight;
   }
 
-  function setBusy(busy){
-    send.disabled=busy;
-    input.disabled=busy;
-  }
-
-  function extractReply(data){
-    if(!data)return '';
-    if(typeof data.reply==='string'&&data.reply.trim())return data.reply.trim();
-    if(typeof data.output_text==='string'&&data.output_text.trim())return data.output_text.trim();
-    const parts=[];
-    for(const item of (Array.isArray(data.output)?data.output:[])){
-      for(const c of (Array.isArray(item?.content)?item.content:[])){
-        if(typeof c?.text==='string'&&c.text.trim())parts.push(c.text.trim());
-      }
-    }
-    return parts.join('\n').trim();
+  function setStatus(text,error){
+    status.className='ai-status'+(error?' error':'');
+    status.textContent=text;
   }
 
   async function ask(text){
     text=(text||'').trim();
-    if(!text)return;
-
-    setBusy(true);
-    addMsg('user',text);
-    status.className='ai-status';
-    status.textContent='🧠 دارم با دقت گوش می‌دم...';
-
-    const speaker=localStorage.getItem('fazelElhamAuthor')||'فاضل';
+    if(!text||busy)return;
+    busy=true;
+    send.disabled=true;
+    input.disabled=true;
+    addMsg('user',text,speaker);
     history.push({role:'user',content:text});
+    setStatus('🧠 دارم بین دل‌هامون صلح برقرار می‌کنم...');
 
     try{
       const r=await fetch(FN,{
         method:'POST',
         headers:{'Content-Type':'text/plain;charset=UTF-8'},
-        body:JSON.stringify({messages:history,speaker})
+        body:JSON.stringify({messages:history.slice(-24),speaker})
       });
-
       const raw=await r.text();
       let data={};
-      try{data=raw?JSON.parse(raw):{};}catch(_){}
-      if(!r.ok)throw new Error(data?.error||data?.message||raw||('خطای سرور '+r.status));
-
-      const reply=extractReply(data);
+      try{data=raw?JSON.parse(raw):{};}catch(_){ }
+      if(!r.ok)throw new Error(data&&data.error?data.error:(raw||('خطای سرور '+r.status)));
+      const reply=typeof data.reply==='string'?data.reply.trim():'';
       if(!reply)throw new Error('پاسخ مشاور خالی بود.');
       history.push({role:'assistant',content:reply});
-      addMsg('bot',reply);
-      status.className='ai-status';
-      status.textContent='☁️ آماده‌ام';
+      addMsg('bot',reply,'مشاور گوشه دنج 🧠❤️');
       input.value='';
+      setStatus('☁️ آماده‌ام؛ دعوا رو بیارین، آشتی تحویل بگیرین 😄❤️');
     }catch(e){
-      history.pop();
       console.error('relationship-counselor:',e);
-      status.className='ai-status error';
-      status.textContent='⚠️ '+(e?.message||'اتصال برقرار نشد');
+      history.pop();
+      setStatus('⚠️ '+(e&&e.message?e.message:'اتصال به مشاور برقرار نشد'),true);
     }finally{
-      setBusy(false);
+      busy=false;
+      send.disabled=false;
+      input.disabled=false;
       input.focus();
     }
   }
 
-  send.addEventListener('click',()=>ask(input.value));
-  input.addEventListener('keydown',e=>{
-    if(e.key==='Enter'&&!e.shiftKey){
-      e.preventDefault();
-      ask(input.value);
-    }
+  document.querySelectorAll('[data-ai-speaker]').forEach(b=>{
+    b.addEventListener('click',()=>setSpeaker(b.dataset.aiSpeaker));
   });
   document.querySelectorAll('[data-ai-prompt]').forEach(b=>{
     b.addEventListener('click',()=>{
@@ -1726,6 +1801,14 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
       input.focus();
     });
   });
+  send.addEventListener('click',()=>ask(input.value));
+  input.addEventListener('keydown',e=>{
+    if(e.key==='Enter'&&!e.shiftKey){
+      e.preventDefault();
+      ask(input.value);
+    }
+  });
+  setSpeaker(speaker);
 })();
 </script>
 <script id="independent-messenger-js">
@@ -2197,7 +2280,6 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
 })();
 </script>
 
-</body>
 <style id="v16-clean-galaxy-glass">
 /* V16 — no separate presence box; compact presence lives inside the main chat header. */
 #messengerOverlay .chat-author{display:none!important}
@@ -2359,10 +2441,12 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
 <style id="v17-final-presence-cleanup">
 /* V17 FINAL: remove the legacy standalone presence card completely. */
 #messengerOverlay .chat-author,
-#messengerOverlay .shared-author.chat-author{display:none!important!important;height:0!important;min-height:0!important;max-height:0!important;margin:0!important;padding:0!important;border:0!important;overflow:hidden!important;visibility:hidden!important;pointer-events:none!important}
+#messengerOverlay .shared-author.chat-author{display:none!important;height:0!important;min-height:0!important;max-height:0!important;margin:0!important;padding:0!important;border:0!important;overflow:hidden!important;visibility:hidden!important;pointer-events:none!important}
 /* Keep presence compact inside the real main header. */
 #messengerOverlay .chat-head .header-presence-stack{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:1px!important;margin-top:2px!important}
 #messengerOverlay .chat-head .header-presence-row{display:flex!important;align-items:center!important;gap:5px!important;min-height:10px!important}
+
+.ai-who{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0 12px;padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08)}.ai-who-label{font-size:11px;color:#d9c5d0;margin-left:2px}.ai-who button{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:#fff;border-radius:12px;padding:7px 12px;cursor:pointer;font-family:inherit;font-size:11px;transition:.2s}.ai-who button.active{background:rgba(55,210,130,.16);border-color:rgba(55,210,130,.5);box-shadow:0 0 0 1px rgba(55,210,130,.12) inset}.ai-who button.active::before{content:'● ';color:#55e28b}.ai-who-current{font-size:10px;color:#9eeab8;margin-right:auto}
 </style>
 <script id="v17-remove-legacy-presence">
 (()=>{
@@ -2373,4 +2457,209 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
  if(root) mo.observe(root,{childList:true,subtree:true});
 })();
 </script>
+
+<style id="v18-chat-and-td-premium">
+/* V18 — real messenger header + dreamy private-room wallpaper */
+#messengerOverlay .header-who-picker{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:5px;min-width:0}
+#messengerOverlay .header-who-picker>span{font-size:8px;color:#e6cfe1;opacity:.78}
+#messengerOverlay .header-who-btn{border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.055);color:#fff;border-radius:12px;padding:5px 8px;font:700 8px Vazirmatn,sans-serif;cursor:pointer;box-shadow:inset 0 1px rgba(255,255,255,.08),0 4px 12px rgba(0,0,0,.12);transition:.2s}
+#messengerOverlay .header-who-btn.active{background:linear-gradient(135deg,rgba(255,79,157,.28),rgba(121,78,255,.22));border-color:rgba(255,150,207,.48);box-shadow:0 0 0 1px rgba(255,117,187,.12) inset,0 0 18px rgba(255,76,166,.16)}
+#messengerOverlay .header-who-btn.active:before{content:'● ';color:#62f2a4}
+#messengerOverlay .chat-head-copy p{display:none!important}
+#messengerOverlay .chat-head{min-height:72px!important}
+#messengerOverlay .chat-panel{background:
+ radial-gradient(500px 320px at 12% 8%,rgba(255,110,191,.20),transparent 60%),
+ radial-gradient(540px 360px at 88% 16%,rgba(112,84,255,.22),transparent 62%),
+ radial-gradient(600px 420px at 52% 88%,rgba(255,76,166,.12),transparent 64%),
+ linear-gradient(135deg,#090315 0%,#16062c 35%,#24104b 63%,#080311 100%)!important;
+ position:relative!important;isolation:isolate!important;overflow:hidden!important}
+#messengerOverlay .chat-panel:before{content:'✦  ♡  ✨   ˚  💗  ⋆  ♡   ✦  💫   ˚  ❤️  ✦  ♡  ˚   ✨';position:absolute;inset:-18%;z-index:-1;color:rgba(255,191,224,.11);font-size:24px;line-height:3.3;letter-spacing:20px;transform:rotate(-9deg);animation:tdStars 28s linear infinite;pointer-events:none;white-space:pre-wrap}
+#messengerOverlay .chat-panel:after{content:'♡';position:absolute;right:6%;top:17%;z-index:-1;font-size:180px;font-weight:300;color:rgba(255,99,174,.055);transform:rotate(12deg);filter:blur(.2px);animation:tdHeartFloat 8s ease-in-out infinite;pointer-events:none}
+#messengerOverlay .chat-messages{background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.025),transparent 60%)!important;box-shadow:inset 0 0 70px rgba(255,72,160,.05)!important}
+#messengerOverlay .chat-bubble{border-color:rgba(255,255,255,.11)!important;box-shadow:0 12px 35px rgba(0,0,0,.17),0 0 24px rgba(255,72,164,.035)!important}
+#messengerOverlay .chat-compose{background:linear-gradient(135deg,rgba(10,4,19,.88),rgba(35,12,51,.78))!important;border-top-color:rgba(255,255,255,.10)!important;backdrop-filter:blur(20px) saturate(140%)!important;-webkit-backdrop-filter:blur(20px) saturate(140%)!important}
+@keyframes tdStars{to{transform:rotate(-9deg) translate3d(70px,45px,0)}}
+@keyframes tdHeartFloat{50%{transform:rotate(7deg) translateY(-10px) scale(1.04);opacity:.75}}
+.truth-dare-panel{padding:0!important;background:transparent!important}
+.truth-dare-panel .td-inner{position:relative;overflow:hidden;padding:18px;border-radius:26px;background:radial-gradient(circle at 15% 15%,rgba(255,84,163,.17),transparent 30%),radial-gradient(circle at 90% 80%,rgba(120,88,255,.18),transparent 35%),linear-gradient(145deg,rgba(24,7,31,.92),rgba(12,5,20,.88));border:1px solid rgba(255,255,255,.12);box-shadow:0 22px 70px rgba(0,0,0,.30),inset 0 1px rgba(255,255,255,.08)}
+.truth-dare-panel .td-inner:before{content:'😈 ✦ ♡ ✨ 💋 ✦ ♡';position:absolute;inset:-50%;font-size:30px;line-height:3;letter-spacing:22px;color:rgba(255,116,183,.055);transform:rotate(-12deg);pointer-events:none}
+.truth-dare-panel .td-head,.truth-dare-panel .td-status,.truth-dare-panel .td-question-wrap,.truth-dare-panel .td-actions,.truth-dare-panel .td-note{position:relative;z-index:1}
+.td-subtitle{margin-top:5px;color:#cdb6c8;font-size:10px;line-height:1.8}
+@media(max-width:700px){#messengerOverlay .header-who-picker{gap:4px}#messengerOverlay .header-who-picker>span{font-size:7px}.header-who-btn{padding:5px 7px!important;font-size:7px!important}.truth-dare-panel .td-inner{padding:14px;border-radius:22px}}
+</style>
+<script id="truth-dare-js">
+(()=>{
+const questions=[{"id":1,"type":"حقیقت","text":"آخرین چیزی که درباره رابطه‌مان فهمیدی ولی هنوز به زبان نیاوردی چیست؟"},{"id":2,"type":"حقیقت","text":"اگر مجبور باشی یک ایراد واقعی در رفتار خودت با طرف مقابل اعتراف کنی، چیست؟"},{"id":3,"type":"حقیقت","text":"کدام رفتار من بیشتر از چیزی که نشان می‌دهی ناراحتت می‌کند؟"},{"id":4,"type":"حقیقت","text":"تا حالا کِی از ترسِ از دست دادن من، چیزی را پنهان کرده‌ای؟"},{"id":5,"type":"حقیقت","text":"کدام حرف من را هنوز در ذهنت نگه داشته‌ای، حتی اگر وانمود کرده باشی فراموشش کرده‌ای؟"},{"id":6,"type":"حقیقت","text":"اگر یک سوءتفاهم قدیمی را می‌توانستی پاک کنی، کدام بود؟"},{"id":7,"type":"حقیقت","text":"کدام دعوای ما را هنوز حق را کاملاً به خودت نمی‌دهی؟"},{"id":8,"type":"حقیقت","text":"آخرین باری که از من عذرخواهی نکردی ولی می‌دانستی باید بکنی، چه زمانی بود؟"},{"id":9,"type":"حقیقت","text":"کدام ویژگی من اول برایت عجیب بود و بعداً به آن وابسته شدی؟"},{"id":10,"type":"حقیقت","text":"کدام ویژگی من را دوست داری ولی کمتر از آنچه واقعاً هست تحسینش می‌کنی؟"},{"id":11,"type":"حقیقت","text":"چه چیزی درباره خودت هست که می‌ترسی روزی باعث خسته شدن من شود؟"},{"id":12,"type":"حقیقت","text":"اگر من بتوانم فقط یک فکر پنهان تو را بخوانم، دوست نداری کدام فکر باشد؟"},{"id":13,"type":"حقیقت","text":"تا حالا شده از من ناراحت باشی و عمداً سردتر رفتار کنی تا واکنشم را ببینی؟"},{"id":14,"type":"حقیقت","text":"آخرین بار چه زمانی حس کردی من تو را درست نفهمیدم؟"},{"id":15,"type":"حقیقت","text":"کدام نیاز عاطفی‌ات را سخت‌تر از همه می‌توانی مستقیم درخواست کنی؟"},{"id":16,"type":"حقیقت","text":"چه چیزی را از من می‌خواهی ولی غرورت اجازه نمی‌دهد بخواهی؟"},{"id":17,"type":"حقیقت","text":"اگر قرار باشد یک عادت بد خودت را به خاطر رابطه کنار بگذاری، کدام است؟"},{"id":18,"type":"حقیقت","text":"کدام رفتار تو احتمالاً بیشتر از چیزی که فکر می‌کنی روی من اثر منفی دارد؟"},{"id":19,"type":"حقیقت","text":"چه چیزی را در رابطه‌مان بیش از حد به شوخی گرفته‌ای؟"},{"id":20,"type":"حقیقت","text":"تا حالا شده چیزی را ببخشی ولی واقعاً از دلت نگذشته باشد؟ چه چیزی؟"},{"id":21,"type":"حقیقت","text":"کدام لحظه باعث شد بفهمی این رابطه برایت جدی شده؟"},{"id":22,"type":"حقیقت","text":"اگر هیچ ترسی از قضاوت شدن نداشتی، همین امشب چه حرفی به من می‌زدی؟"},{"id":23,"type":"حقیقت","text":"کدام سؤال را همیشه دوست داشته‌ای من از تو بپرسم ولی نپرسیده‌ام؟"},{"id":24,"type":"حقیقت","text":"کدام موضوع را در رابطه‌مان بیشتر از حد لازم عقب انداخته‌ایم؟"},{"id":25,"type":"حقیقت","text":"اگر بتوانی یک ویژگی از خودت را در رابطه عوض کنی، اولین انتخابت چیست؟"},{"id":26,"type":"حقیقت","text":"آخرین بار چه زمانی به من حسادت کردی و دقیقاً چه چیزی آن حس را ساخت؟"},{"id":27,"type":"حقیقت","text":"کدام موقعیت باعث می‌شود ناخواسته خودت را با دیگران مقایسه کنی؟"},{"id":28,"type":"حقیقت","text":"آیا تا حالا از توجهی که شخص دیگری به من کرده خوشحال یا ناراحت شده‌ای؟ چرا؟"},{"id":29,"type":"حقیقت","text":"کدام مرز رابطه برایت خیلی مهم است ولی شاید من از اهمیتش خبر نداشته باشم؟"},{"id":30,"type":"حقیقت","text":"کدام رفتار اجتماعی من بیشتر از همه تو را حساس می‌کند؟"},{"id":31,"type":"حقیقت","text":"تا حالا شده برای جلوگیری از دعوا، حقیقت کامل را نگویی؟ درباره چه چیزی؟"},{"id":32,"type":"حقیقت","text":"کدام جمله را در یک دعوا گفته‌ای که دوست داری بتوانی پسش بگیری؟"},{"id":33,"type":"حقیقت","text":"کدام سکوت تو بیشتر از یک حرف، پیام داشته است؟"},{"id":34,"type":"حقیقت","text":"آخرین بار چه چیزی را به خاطر آرام نگه داشتن فضا در خودت ریختی؟"},{"id":35,"type":"حقیقت","text":"کدام نوع بی‌توجهی بیشتر از هر چیز دیگری آزارت می‌دهد؟"},{"id":36,"type":"حقیقت","text":"اگر ناراحتی‌ات یک جمله داشت، درباره من چه می‌گفت؟"},{"id":37,"type":"حقیقت","text":"اگر ترست یک جمله داشت، درباره آینده ما چه می‌گفت؟"},{"id":38,"type":"حقیقت","text":"اگر غرورت را کنار بگذاری، الان چه چیزی از من می‌خواهی؟"},{"id":39,"type":"حقیقت","text":"کدام عذرخواهی را هنوز از من نشنیده‌ای؟"},{"id":40,"type":"حقیقت","text":"کدام عذرخواهی را هنوز خودت به من بدهکاری؟"},{"id":41,"type":"حقیقت","text":"چه چیزی را درباره اختلاف‌هایمان دیر فهمیدی؟"},{"id":42,"type":"حقیقت","text":"تا حالا شده برای اثبات حقانیتت، آرامش رابطه را قربانی کنی؟"},{"id":43,"type":"حقیقت","text":"کدام موضوع کوچک بین ما می‌تواند سریع‌تر از چیزی که انتظار داری به دعوا تبدیل شود؟"},{"id":44,"type":"حقیقت","text":"کدام جمله من در دعوا بیشترین اثر را روی تو می‌گذارد؟"},{"id":45,"type":"حقیقت","text":"وقتی قهری، بیشتر دوست داری من دنبالت بیایم یا فضا بدهم؟"},{"id":46,"type":"حقیقت","text":"کدام رفتار من در زمان ناراحتی واقعاً به تو کمک می‌کند؟"},{"id":47,"type":"حقیقت","text":"کدام رفتار من در زمان ناراحتی اوضاع را بدتر می‌کند؟"},{"id":48,"type":"حقیقت","text":"اگر یک قانون برای دعواهای ما بنویسی، مهم‌ترین قانونش چیست؟"},{"id":49,"type":"حقیقت","text":"تا حالا شده عمداً جواب پیامم را دیر بدهی تا بفهمم ناراحتی؟"},{"id":50,"type":"حقیقت","text":"کدام نوع پیام من بیشتر از چیزی که نشان می‌دهی خوشحالت می‌کند؟"},{"id":51,"type":"حقیقت","text":"کدام جمله را دوست داری بیشتر از من بشنوی؟"},{"id":52,"type":"حقیقت","text":"کدام تعریف را از من باور نمی‌کنی، حتی وقتی می‌گویمش؟"},{"id":53,"type":"حقیقت","text":"کدام تعریف درباره ظاهر یا شخصیتت را secretly دوست داری از من بشنوی؟"},{"id":54,"type":"حقیقت","text":"کدام خاطره مشترک را اگر کسی مسخره کند، واقعاً ناراحت می‌شوی؟"},{"id":55,"type":"حقیقت","text":"کدام عکس دونفره‌مان را بیشتر از بقیه دوست داری و چرا؟"},{"id":56,"type":"حقیقت","text":"کدام لحظه ساده بین ما برایت از یک اتفاق بزرگ ارزشمندتر بوده است؟"},{"id":57,"type":"حقیقت","text":"اگر بخواهی رابطه‌مان را با سه کلمه توصیف کنی، چه کلماتی هستند؟"},{"id":58,"type":"حقیقت","text":"کدام کلمه را دوست داری برای رابطه‌مان استفاده کنیم ولی هنوز جا نیفتاده؟"},{"id":59,"type":"حقیقت","text":"چه چیزی در من باعث می‌شود احساس امنیت بیشتری کنی؟"},{"id":60,"type":"حقیقت","text":"چه چیزی در من گاهی باعث می‌شود احساس ناامنی کنی؟"},{"id":61,"type":"حقیقت","text":"کدام قسمت شخصیتت را سخت‌تر به من نشان داده‌ای؟"},{"id":62,"type":"حقیقت","text":"کدام ضعف خودت را هنوز کامل به من نشان نداده‌ای؟"},{"id":63,"type":"حقیقت","text":"تا حالا شده وانمود کنی قوی هستی چون نمی‌خواستی من نگران شوم؟"},{"id":64,"type":"حقیقت","text":"چه زمانی بیشتر از همیشه نیاز داشتی من کنارت باشم ولی نگفتی؟"},{"id":65,"type":"حقیقت","text":"کدام ترس شخصی‌ات روی رابطه‌مان اثر می‌گذارد؟"},{"id":66,"type":"حقیقت","text":"اگر آینده‌مان دقیقاً مطابق خواسته تو پیش برود، یک سال دیگر چه شکلی است؟"},{"id":67,"type":"حقیقت","text":"کدام بخش آینده مشترکمان بیشتر از همه برایت هیجان‌انگیز است؟"},{"id":68,"type":"حقیقت","text":"کدام بخش آینده مشترکمان بیشتر از همه تو را می‌ترساند؟"},{"id":69,"type":"حقیقت","text":"اگر قرار باشد درباره پول و رابطه یک حقیقت سخت بگویی، چیست؟"},{"id":70,"type":"حقیقت","text":"کدام موضوع مالی می‌تواند بین دو نفر بیشترین سوءتفاهم را بسازد؟"},{"id":71,"type":"حقیقت","text":"اگر یک تصمیم بزرگ زندگی را فقط بر اساس قلبت بگیری، چه تصمیمی است؟"},{"id":72,"type":"حقیقت","text":"اگر فقط بر اساس منطق تصمیم بگیری، چه چیزی را متفاوت انجام می‌دهی؟"},{"id":73,"type":"حقیقت","text":"کدام تفاوت بین ما را در ظاهر دوست نداری ولی در عمل برایمان مفید می‌دانی؟"},{"id":74,"type":"حقیقت","text":"کدام شباهت بین ما گاهی باعث دعوا می‌شود؟"},{"id":75,"type":"حقیقت","text":"چه چیزی در رابطه‌مان هست که دوست داری هیچ‌وقت عادی نشود؟"},{"id":76,"type":"حقیقت","text":"چه چیزی را می‌ترسی بعد از مدتی عادی بگیریم؟"},{"id":77,"type":"حقیقت","text":"اگر بتوانی یک عادت مشترک برای هر روزمان بسازی، چیست؟"},{"id":78,"type":"حقیقت","text":"اگر بتوانی یک عادت مشترک را حذف کنی، کدام است؟"},{"id":79,"type":"حقیقت","text":"تا حالا شده از موفقیت یا خوشحالی من احساس عجیبی داشته باشی و دلیلش را خودت هم دقیق ندانی؟"},{"id":80,"type":"حقیقت","text":"کدام لحظه از رابطه‌مان را دوست داری هیچ‌کس دیگری درباره‌اش نداند؟"},{"id":81,"type":"حقیقت","text":"چه چیزی را درباره رابطه‌مان فقط با یک نفر در میان گذاشته‌ای و چرا؟"},{"id":82,"type":"حقیقت","text":"تا حالا شده برای محافظت از تصویر خودت، بخشی از حقیقت را نگویی؟"},{"id":83,"type":"حقیقت","text":"اگر من از تو بپرسم «از چی ناراحتی؟» و مجبور باشی دقیق جواب بدهی، چه می‌گویی؟"},{"id":84,"type":"حقیقت","text":"اگر من بپرسم «چی کم داری؟» سخت‌ترین جوابت چیست؟"},{"id":85,"type":"حقیقت","text":"اگر من بپرسم «از چی می‌ترسی؟» صادقانه‌ترین جوابت چیست؟"},{"id":86,"type":"حقیقت","text":"اگر من بپرسم «چی رو نمی‌تونی ببخشی؟» چه چیزی به ذهنت می‌آید؟"},{"id":87,"type":"حقیقت","text":"اگر من بپرسم «چی رو هیچ‌وقت نمی‌خوای از دست بدی؟» جواب تو چیست؟"},{"id":88,"type":"حقیقت","text":"کدام قسمت رابطه‌مان را بیشتر از بقیه جدی می‌گیری؟"},{"id":89,"type":"حقیقت","text":"کدام قسمت رابطه‌مان را کمتر از بقیه جدی گرفته‌ای؟"},{"id":90,"type":"حقیقت","text":"تا حالا شده برای اینکه برنده بحث شوی، چیزی بگویی که می‌دانستی عادلانه نیست؟"},{"id":91,"type":"حقیقت","text":"کدام رفتار تو در بحث‌ها بیشتر شبیه دفاع کردن است تا حل کردن مسئله؟"},{"id":92,"type":"حقیقت","text":"کدام رفتار من در بحث‌ها بیشتر شبیه دفاع کردن است تا حل کردن مسئله؟"},{"id":93,"type":"حقیقت","text":"اگر یک بار بتوانی بدون اینکه طرف مقابل ناراحت شود حقیقتی را بگویی، چه می‌گویی؟"},{"id":94,"type":"حقیقت","text":"کدام حقیقت درباره خودت را بیشتر از همه از گفتنش خجالت می‌کشی؟"},{"id":95,"type":"حقیقت","text":"کدام اشتباه رابطه‌ای را نمی‌خواهی دوباره تکرار کنی؟"},{"id":96,"type":"حقیقت","text":"کدام اشتباه را احتمال می‌دهی دوباره انجام بدهی چون هنوز روی خودت کار نکرده‌ای؟"},{"id":97,"type":"حقیقت","text":"تا حالا شده از من چیزی بخواهی ولی طوری مطرحش کنی که انگار اصلاً مهم نیست؟"},{"id":98,"type":"حقیقت","text":"چه چیزی باعث می‌شود احساس کنی دیده می‌شوی؟"},{"id":99,"type":"حقیقت","text":"چه چیزی باعث می‌شود احساس کنی نادیده گرفته شده‌ای؟"},{"id":100,"type":"حقیقت","text":"کدام نوع محبت برایت سخت‌تر است که دریافتش کنی؟"},{"id":101,"type":"حقیقت","text":"کدام نوع محبت برایت سخت‌تر است که نشانش بدهی؟"},{"id":102,"type":"حقیقت","text":"اگر بخواهی یک تشکر واقعی از من بکنی که مدت‌ها نگهش داشته‌ای، بابت چیست؟"},{"id":103,"type":"حقیقت","text":"کدام کار کوچک من هنوز در ذهنت مانده و شاید خودم خبر نداشته باشم؟"},{"id":104,"type":"حقیقت","text":"چه چیزی در من باعث شد بیشتر از حد انتظار به من نزدیک شوی؟"},{"id":105,"type":"حقیقت","text":"کدام لحظه باعث شد بفهمی دلت برایم تنگ می‌شود؟"},{"id":106,"type":"حقیقت","text":"اولین چیزی که در شخصیت من توجهت را جلب کرد چه بود؟"},{"id":107,"type":"حقیقت","text":"اولین چیزی که درباره من اشتباه فهمیدی چه بود؟"},{"id":108,"type":"حقیقت","text":"کدام برداشت اولیه‌ات از من کاملاً غلط از آب درآمد؟"},{"id":109,"type":"حقیقت","text":"اگر به روز اول آشنایی‌مان برگردی، چه چیزی را متفاوت می‌گویی؟"},{"id":110,"type":"حقیقت","text":"اگر به اولین دعوایمان برگردی، چه چیزی را متفاوت انجام می‌دهی؟"},{"id":111,"type":"حقیقت","text":"اگر به آخرین دعوایمان برگردی، چه چیزی را متفاوت انجام می‌دهی؟"},{"id":112,"type":"حقیقت","text":"کدام خاطره را دوست داری دوباره بسازیم ولی این بار بهتر؟"},{"id":113,"type":"حقیقت","text":"کدام لحظه را دوست داری از نو تجربه کنیم بدون اینکه چیزی را تغییر دهیم؟"},{"id":114,"type":"حقیقت","text":"چه چیزی در صدای من یا طرز حرف زدنم روی احساس تو اثر می‌گذارد؟"},{"id":115,"type":"حقیقت","text":"کدام عادت کلامی من برایت بامزه است؟"},{"id":116,"type":"حقیقت","text":"کدام عادت کلامی من واقعاً روی اعصابت می‌رود؟"},{"id":117,"type":"حقیقت","text":"کدام شوخی من خط قرمز توست؟"},{"id":118,"type":"حقیقت","text":"کدام شوخی تو را دوست دارم ولی شاید خودت ندانی؟"},{"id":119,"type":"حقیقت","text":"کدام رفتار محبت‌آمیز من را بیشتر از بقیه به خاطر می‌سپاری؟"},{"id":120,"type":"حقیقت","text":"کدام رفتار محبت‌آمیز را دوست داری از این به بعد بیشتر ببینی؟"},{"id":121,"type":"حقیقت","text":"اگر یک روز کامل بدون موبایل کنار هم باشیم، دوست داری چطور بگذرد؟"},{"id":122,"type":"حقیقت","text":"اگر یک هفته فقط وقت کمی برای هم داشته باشیم، چه چیزی را حفظ می‌کنی؟"},{"id":123,"type":"حقیقت","text":"اگر مجبور شوی یک ماه از یک عادت شخصی‌ات کم کنی تا زمان بیشتری برای رابطه داشته باشی، چیست؟"},{"id":124,"type":"حقیقت","text":"کدام چیز کوچک می‌تواند در یک روز بد فوراً حالت را بهتر کند؟"},{"id":125,"type":"حقیقت","text":"وقتی دلت برای من تنگ می‌شود، اولین چیزی که به آن فکر می‌کنی چیست؟"},{"id":126,"type":"حقیقت","text":"وقتی از من عصبانی می‌شوی، عمیق‌ترین نیازت پشت آن عصبانیت چیست؟"},{"id":127,"type":"حقیقت","text":"وقتی از من می‌ترسی یا نگران می‌شوی، معمولاً چه چیزی را پیش‌بینی می‌کنی؟"},{"id":128,"type":"حقیقت","text":"وقتی من ساکت می‌شوم، معمولاً چه برداشتی می‌کنی؟"},{"id":129,"type":"حقیقت","text":"کدام سکوت من را بیشتر از همه بد تعبیر کرده‌ای؟"},{"id":130,"type":"حقیقت","text":"کدام حرف نگفته بین ما هنوز سنگینی می‌کند؟"},{"id":131,"type":"حقیقت","text":"اگر رابطه‌مان یک اتاق بود، کدام گوشه‌اش نیاز به مرتب کردن داشت؟"},{"id":132,"type":"حقیقت","text":"اگر رابطه‌مان یک فصل بود، کدام فصل بود و چرا؟"},{"id":133,"type":"حقیقت","text":"اگر رابطه‌مان یک آهنگ بود، حال‌وهوایش چه بود؟"},{"id":134,"type":"حقیقت","text":"اگر رابطه‌مان یک قانون نانوشته داشت، چیست؟"},{"id":135,"type":"حقیقت","text":"کدام قانون نانوشته را دوست داری عوض کنیم؟"},{"id":136,"type":"حقیقت","text":"کدام موضوع را دوست داری قبل از جدی‌تر شدن رابطه درباره‌اش شفاف باشیم؟"},{"id":137,"type":"حقیقت","text":"کدام ارزش برایت در یک رابطه غیرقابل مذاکره است؟"},{"id":138,"type":"حقیقت","text":"کدام ارزش را فکر می‌کنی در عمل هنوز خوب نشان نداده‌ایم؟"},{"id":139,"type":"حقیقت","text":"کدام رفتار برایت نشانه احترام واقعی است؟"},{"id":140,"type":"حقیقت","text":"کدام رفتار برایت نشانه بی‌احترامی واقعی است؟"},{"id":141,"type":"حقیقت","text":"تا حالا شده از ترس اینکه needy به نظر برسی، محبت یا توجهی را درخواست نکنی؟"},{"id":142,"type":"حقیقت","text":"تا حالا شده از ترس رد شدن، پیشنهادی را مطرح نکنی؟ چه پیشنهادی؟"},{"id":143,"type":"حقیقت","text":"کدام خواسته‌ات را هنوز به خاطر خجالت نگفته‌ای؟"},{"id":144,"type":"حقیقت","text":"اگر مطمئن باشی جواب «نه» نمی‌شنوی، چه چیزی از من می‌خواهی؟"},{"id":145,"type":"حقیقت","text":"اگر مطمئن باشی هیچ‌کس قضاوتت نمی‌کند، چه اعترافی می‌کنی؟"},{"id":146,"type":"حقیقت","text":"کدام راز کوچک شخصی را هنوز برای خودت نگه داشته‌ای؟"},{"id":147,"type":"حقیقت","text":"کدام موضوع را دوست داری من درباره‌اش بیشتر از تو سؤال بپرسم؟"},{"id":148,"type":"حقیقت","text":"کدام قسمت زندگی گذشته‌ات بیشترین اثر را روی رابطه امروزی‌ات گذاشته؟"},{"id":149,"type":"حقیقت","text":"کدام تجربه گذشته باعث شده سخت‌تر اعتماد کنی؟"},{"id":150,"type":"حقیقت","text":"کدام تجربه باعث شده راحت‌تر عاشق شوی؟"},{"id":151,"type":"حقیقت","text":"تا حالا شده در ذهن خودت سناریویی درباره جدایی بسازی؟ چه چیزی آن را شروع کرد؟"},{"id":152,"type":"حقیقت","text":"وقتی از آینده بدت می‌آید، بدترین سناریویی که در ذهنت می‌سازی چیست؟"},{"id":153,"type":"حقیقت","text":"چه چیزی باعث می‌شود مطمئن شوی هنوز دوستت دارم؟"},{"id":154,"type":"حقیقت","text":"چه چیزی باعث می‌شود شک کنی که دوستت دارم؟"},{"id":155,"type":"حقیقت","text":"کدام رفتار من ناخواسته این شک را بیشتر می‌کند؟"},{"id":156,"type":"حقیقت","text":"کدام رفتار من ناخواسته اعتماد تو را بیشتر می‌کند؟"},{"id":157,"type":"حقیقت","text":"اگر اعتماد بین ما یک درصد کمتر شود، فکر می‌کنی اولین نشانه‌اش چیست؟"},{"id":158,"type":"حقیقت","text":"کدام موضوع را ترجیح می‌دهی از من مستقیم بشنوی تا از دیگران؟"},{"id":159,"type":"حقیقت","text":"تا حالا شده حرف شخص دیگری درباره من روی نگاهت اثر بگذارد؟"},{"id":160,"type":"حقیقت","text":"کدام نوع دخالت دیگران در رابطه‌مان برایت غیرقابل تحمل است؟"},{"id":161,"type":"حقیقت","text":"کدام تصمیم درباره رابطه‌مان باید فقط بین خودمان بماند؟"},{"id":162,"type":"حقیقت","text":"چه چیزی را دوست داری فقط «مال خودمان» باشد؟"},{"id":163,"type":"حقیقت","text":"کدام خاطره هنوز با یک بو، آهنگ یا مکان فوراً زنده می‌شود؟"},{"id":164,"type":"حقیقت","text":"کدام پیام قدیمی من را اگر ببینی هنوز لبخند می‌زنی؟"},{"id":165,"type":"حقیقت","text":"کدام پیام قدیمی‌ات را دوست داری من دوباره بخوانم؟"},{"id":166,"type":"حقیقت","text":"اگر بتوانی یک پیام از گذشته‌مان را قاب بگیری، کدام است؟"},{"id":167,"type":"حقیقت","text":"کدام جمله عاشقانه برایت زیادی کلیشه‌ای است و کدام واقعاً اثر می‌کند؟"},{"id":168,"type":"حقیقت","text":"کدام لقب یا اسم صمیمی را secretly دوست داری از من بشنوی؟"},{"id":169,"type":"حقیقت","text":"کدام حرکت رمانتیک اگر از من ببینی بیشتر از هدیه گران‌قیمت خوشحالت می‌کند؟"},{"id":170,"type":"حقیقت","text":"کدام هدیه را بیشتر به خاطر فکر پشت آن دوست داری تا قیمتش؟"},{"id":171,"type":"حقیقت","text":"اگر فقط یک شب را بتوانی برای همیشه در خاطره نگه داری، کدام شب است؟"},{"id":172,"type":"حقیقت","text":"کدام روز عادی ما را بیشتر از چیزی که باید دوست داری؟"},{"id":173,"type":"حقیقت","text":"اگر فردا مجبور شویم از صفر شروع کنیم، اولین چیزی که دوباره می‌سازی چیست؟"},{"id":174,"type":"حقیقت","text":"اگر یک ویژگی از رابطه‌مان را به زوج دیگری آموزش بدهی، چیست؟"},{"id":175,"type":"حقیقت","text":"اگر یک هشدار درباره رابطه‌مان روی جعبه‌اش نوشته می‌شد، چه می‌نوشتی؟"},{"id":176,"type":"حقیقت","text":"اگر یک جمله حقیقت درباره ما روی پیشانی هر دویمان نوشته می‌شد، چه بود؟"},{"id":177,"type":"حقیقت","text":"کدام نقطه ضعف مشترکمان را می‌بینی که شاید خودمان انکارش کنیم؟"},{"id":178,"type":"حقیقت","text":"کدام نقطه قوت مشترکمان را می‌بینی که شاید خودمان دست‌کم بگیریم؟"},{"id":179,"type":"حقیقت","text":"اگر قرار باشد یک شب بدون هیچ بحثی فقط حقیقت بگوییم، اولین موضوعت چیست؟"},{"id":180,"type":"حقیقت","text":"چه چیزی را در مورد من تحسین می‌کنی ولی گفتنش برایت سخت است؟"},{"id":181,"type":"حقیقت","text":"کدام رفتار من باعث می‌شود بخواهی بهتر شوی؟"},{"id":182,"type":"حقیقت","text":"کدام رفتار من باعث می‌شود بخواهی از خودت دفاع کنی؟"},{"id":183,"type":"حقیقت","text":"اگر من یک روز کاملاً بی‌حرف باشم، چه فکری می‌کنی؟"},{"id":184,"type":"حقیقت","text":"اگر من یک روز بیش از حد مهربان باشم، اولین برداشتت چیست؟"},{"id":185,"type":"حقیقت","text":"اگر من ناگهان از یک عادتت انتقاد کنم، اولین واکنشت چیست؟"},{"id":186,"type":"حقیقت","text":"چه چیزی باعث می‌شود در برابر من گارد بگیری؟"},{"id":187,"type":"حقیقت","text":"چه چیزی باعث می‌شود گاردت را پایین بیاوری؟"},{"id":188,"type":"حقیقت","text":"کدام سؤال را از ترس جوابش هیچ‌وقت از من نپرسیده‌ای؟"},{"id":189,"type":"حقیقت","text":"کدام سؤال را از ترس جوابش از خودت هم نپرسیده‌ای؟"},{"id":190,"type":"حقیقت","text":"تا حالا شده برای اینکه تصویر خوبی از خودت بسازی، چیزی را در رابطه پنهان کنی؟"},{"id":191,"type":"حقیقت","text":"کدام بخش شخصیتت را دوست داری من بیشتر ببینم؟"},{"id":192,"type":"حقیقت","text":"کدام بخش شخصیتت را دوست داری من کمتر برداشت اشتباه کنم؟"},{"id":193,"type":"حقیقت","text":"کدام رفتار تو بیشتر از همه نیاز به توضیح دارد تا بد برداشت نشود؟"},{"id":194,"type":"حقیقت","text":"کدام رفتار من را گاهی بیش از حد شخصی برداشت می‌کنی؟"},{"id":195,"type":"حقیقت","text":"کدام حرف من را هنوز مطمئن نیستی جدی گفته‌ام یا شوخی؟"},{"id":196,"type":"حقیقت","text":"اگر بتوانی یک حقیقت را بدون هیچ پیامدی بگویی، آن حقیقت چیست؟"},{"id":197,"type":"حقیقت","text":"کدام اعتراف را احتمالاً فقط همین بازی می‌تواند از تو بیرون بکشد؟"},{"id":198,"type":"حقیقت","text":"کدام سؤال این بازی را امیدوار بودی هیچ‌وقت به تو نرسد؟"},{"id":199,"type":"حقیقت","text":"کدام سؤال را دوست داری همین حالا از طرف مقابلت بشنوی؟"},{"id":200,"type":"حقیقت","text":"کدام جواب را اگر از من بشنوی، واقعاً خوشحال می‌شوی؟"},{"id":201,"type":"حقیقت","text":"کدام جواب را اگر از من بشنوی، احتمالاً نیاز به گفت‌وگوی جدی خواهی داشت؟"},{"id":202,"type":"حقیقت","text":"اگر امشب باید یک حقیقت را درباره خودت ثابت کنی، چه چیزی را انتخاب می‌کنی؟"},{"id":203,"type":"حقیقت","text":"اگر قرار باشد یک قول واقعی و قابل اجرا بدهی، چه قولی می‌دهی؟"},{"id":204,"type":"حقیقت","text":"چه چیزی را در خودت می‌خواهی من ببینم که معمولاً از دیگران پنهان می‌کنی؟"},{"id":205,"type":"حقیقت","text":"کدام بخش رابطه‌مان را دوست داری عمیق‌تر کنیم؟"},{"id":206,"type":"حقیقت","text":"کدام بخش رابطه‌مان را دوست داری سبک‌تر کنیم؟"},{"id":207,"type":"حقیقت","text":"کدام توقع را از من داری که شاید هیچ‌وقت واضح نگفته‌ای؟"},{"id":208,"type":"حقیقت","text":"کدام توقع را از خودت داری که شاید غیرواقعی باشد؟"},{"id":209,"type":"حقیقت","text":"اگر بتوانی یک سوءتفاهم را از ذهن من پاک کنی، کدام است؟"},{"id":210,"type":"حقیقت","text":"اگر بتوانی یک برداشت اشتباه از خودت را از ذهن من پاک کنی، کدام است؟"},{"id":211,"type":"حقیقت","text":"کدام ویژگی تو را بیشتر از همه قابل‌دوست‌داشتن می‌دانی؟"},{"id":212,"type":"حقیقت","text":"کدام ویژگی خودت را سخت‌تر دوست داری؟"},{"id":213,"type":"حقیقت","text":"چه چیزی باعث می‌شود احساس کنی لایق عشق هستی؟"},{"id":214,"type":"حقیقت","text":"چه چیزی باعث می‌شود گاهی احساس کنی باید عشق را «ثابت» کنی؟"},{"id":215,"type":"حقیقت","text":"اگر یک شب جای من بودی، فکر می‌کنی سخت‌ترین بخش رابطه با خودت چه بود؟"},{"id":216,"type":"حقیقت","text":"اگر یک شب جای من بودی، اولین چیزی که از من می‌خواستی چه بود؟"},{"id":217,"type":"حقیقت","text":"اگر من جای تو بودم، فکر می‌کنی کدام ترسم را بیشتر می‌فهمیدی؟"},{"id":218,"type":"حقیقت","text":"اگر من جای تو بودم، کدام رفتارت را بیشتر نقد می‌کردم؟"},{"id":219,"type":"حقیقت","text":"کدام بخش رابطه‌مان نیاز به صداقت بیشتری دارد؟"},{"id":220,"type":"حقیقت","text":"کدام بخش رابطه‌مان همین حالا هم صداقت خوبی دارد؟"},{"id":221,"type":"حقیقت","text":"کدام مسئله را اگر همین ماه حل نکنیم، ممکن است بزرگ‌تر شود؟"},{"id":222,"type":"حقیقت","text":"کدام گفت‌وگوی مهم را بی‌دلیل عقب انداخته‌ای؟"},{"id":223,"type":"حقیقت","text":"اگر فقط ده دقیقه فرصت گفت‌وگوی کاملاً صادقانه داشته باشی، درباره چه می‌گویی؟"},{"id":224,"type":"حقیقت","text":"کدام جمله را دوست داری از من بشنوی وقتی حالت خوب نیست؟"},{"id":225,"type":"حقیقت","text":"کدام جمله را دوست داری از من بشنوی وقتی از خودت ناامیدی؟"},{"id":226,"type":"حقیقت","text":"کدام رفتار من به تو حس «خانه» می‌دهد؟"},{"id":227,"type":"حقیقت","text":"کدام رفتار من باعث می‌شود حس کنی هنوز باید برای نزدیک شدن تلاش کنی؟"},{"id":228,"type":"حقیقت","text":"اگر یک شب فقط با نگاه کردن به هم حرف بزنیم، چه چیزی را می‌خواهی بفهمم؟"},{"id":229,"type":"حقیقت","text":"کدام چیز درباره من هنوز برایت معماست؟"},{"id":230,"type":"حقیقت","text":"کدام چیز درباره خودت هنوز برای خودت هم معماست؟"},{"id":231,"type":"حقیقت","text":"اگر یک روز تمام رازهای ذهنمان آشکار شود، از کدام بخش بیشتر می‌ترسی؟"},{"id":232,"type":"حقیقت","text":"کدام حقیقت را دوست داری بدانم حتی اگر شنیدنش سخت باشد؟"},{"id":233,"type":"حقیقت","text":"کدام حقیقت را ترجیح می‌دهی فعلاً فقط خودت بدانی؟"},{"id":234,"type":"حقیقت","text":"تا حالا شده از شدت علاقه، بیش از حد حساس شوی؟ درباره چه چیزی؟"},{"id":235,"type":"حقیقت","text":"کدام لحظه را می‌توانی دقیقاً با تاریخ یا ساعت به یاد بیاوری چون خیلی رویت اثر گذاشت؟"},{"id":236,"type":"حقیقت","text":"کدام لحظه باعث شد دلت بخواهد بیشتر کنار من بمانی؟"},{"id":237,"type":"حقیقت","text":"کدام لحظه باعث شد برای اولین بار از آینده مشترک حرف بزنی؟"},{"id":238,"type":"حقیقت","text":"کدام بخش از رابطه‌مان را هیچ‌وقت حاضر نیستی با رابطه دیگری مقایسه کنی؟"},{"id":239,"type":"حقیقت","text":"آیا تا حالا ما را با زوج دیگری مقایسه کرده‌ای؟ چه چیزی در ذهنت بود؟"},{"id":240,"type":"حقیقت","text":"کدام مقایسه درباره رابطه‌ها بیشتر از همه اذیتت می‌کند؟"},{"id":241,"type":"حقیقت","text":"اگر شبکه‌های اجتماعی نبودند، فکر می‌کنی کدام بخش رابطه‌مان بهتر می‌شد؟"},{"id":242,"type":"حقیقت","text":"کدام رفتار آنلاین می‌تواند اعتماد تو را خراب کند؟"},{"id":243,"type":"حقیقت","text":"کدام رفتار آنلاین برایت کاملاً بی‌اهمیت است ولی شاید برای من مهم باشد؟"},{"id":244,"type":"حقیقت","text":"کدام حریم خصوصی را دوست داری بین ما کاملاً محترم بماند؟"},{"id":245,"type":"حقیقت","text":"اگر رمز گوشی‌ات را هیچ‌وقت به من ندهی، مهم‌ترین دلیلش چیست؟"},{"id":246,"type":"حقیقت","text":"اگر گوشی‌ات برای پنج دقیقه دست من باشد، از کدام بخش بیشتر خجالت می‌کشی؟"},{"id":247,"type":"حقیقت","text":"کدام اپ یا بخش گوشی‌ات بیشتر از بقیه نماینده زندگی واقعی توست؟"},{"id":248,"type":"حقیقت","text":"کدام چت قدیمی می‌تواند یک خاطره مهم از گذشته‌ات را زنده کند؟"},{"id":249,"type":"حقیقت","text":"کدام عادت دیجیتال خودت را دوست داری تغییر بدهی؟"},{"id":250,"type":"حقیقت","text":"چه چیزی در فضای مجازی درباره رابطه‌ها تو را غیرواقعی می‌کند؟"},{"id":251,"type":"جرأت","text":"۶۰ ثانیه بدون خندیدن به چشم‌های طرف مقابل نگاه کن و آخرش یک جمله کاملاً صادقانه بگو."},{"id":252,"type":"جرأت","text":"یک ویس ۲۰ ثانیه‌ای بفرست که در آن بدون شوخی بگویی دقیقاً چرا دوستش داری."},{"id":253,"type":"جرأت","text":"سه چیزی را که در طرف مقابلت جذاب می‌دانی پشت سر هم و بدون مکث بگو."},{"id":254,"type":"جرأت","text":"یک تعریف خیلی مشخص بگو که تا حالا به خاطر خجالت نگفته‌ای."},{"id":255,"type":"جرأت","text":"آخرین پیامی را که برای طرف مقابل فرستادی با صدای نمایشی اجرا کن."},{"id":256,"type":"جرأت","text":"یک لقب تازه و کاملاً شخصی برای طرف مقابل بساز و دلیلش را توضیح بده."},{"id":257,"type":"جرأت","text":"یک جمله عاشقانه بگو که در آن اجازه نداری از کلمات «دوستت دارم» استفاده کنی."},{"id":258,"type":"جرأت","text":"۳۰ ثانیه درباره اولین برداشتت از طرف مقابل حرف بزن، بدون اینکه کلمه‌ای را سانسور کنی."},{"id":259,"type":"جرأت","text":"یک خاطره مشترک را از دید طرف مقابل تعریف کن، انگار خود او هستی."},{"id":260,"type":"جرأت","text":"سه ویژگی خودت را بگو که می‌دانی گاهی رابطه را سخت می‌کند."},{"id":261,"type":"جرأت","text":"یک عذرخواهی واقعی بابت یک اشتباه کوچک گذشته انجام بده، بدون «ولی» گفتن."},{"id":262,"type":"جرأت","text":"یک تشکر مشخص بکن که دلیلش را هیچ‌وقت درست نگفته‌ای."},{"id":263,"type":"جرأت","text":"یک پیام کوتاه بنویس که اگر فردا صبح دیده شود، حال طرف مقابل را خوب کند."},{"id":264,"type":"جرأت","text":"یک جمله بگو که نشان دهد وقتی ناراحتی دقیقاً چه چیزی از طرف مقابل می‌خواهی."},{"id":265,"type":"جرأت","text":"یک دقیقه فقط گوش بده و حق نداری وسط حرف طرف مقابل دفاع یا توضیح بدهی."},{"id":266,"type":"جرأت","text":"یک سؤال سخت بپرس که واقعاً دوست داری جوابش را بدانی."},{"id":267,"type":"جرأت","text":"به یک سؤال سختی که طرف مقابل می‌پرسد، بدون شوخی و فرار جواب بده."},{"id":268,"type":"جرأت","text":"یک اعتراف کوچک درباره یک عادت بد خودت انجام بده."},{"id":269,"type":"جرأت","text":"یک اعتراف درباره یک لحظه حسادت گذشته بکن."},{"id":270,"type":"جرأت","text":"یک اعتراف درباره چیزی که از گفتنش خجالت می‌کشی بکن."},{"id":271,"type":"جرأت","text":"یک خاطره را تعریف کن که در آن طرف مقابل ناخواسته خیلی روی دلت اثر گذاشت."},{"id":272,"type":"جرأت","text":"یک جمله بگو که اگر دعوا شد، دوست داری از این به بعد به عنوان رمز آشتی استفاده کنید."},{"id":273,"type":"جرأت","text":"یک قانون جدید برای دعواهای آینده پیشنهاد بده و دلیلش را بگو."},{"id":274,"type":"جرأت","text":"یک قول کوچک و قابل اجرا برای همین هفته بده."},{"id":275,"type":"جرأت","text":"یک خواسته واقعی را مستقیم و بدون مقدمه درخواست کن."},{"id":276,"type":"جرأت","text":"یک «نه» گفتن محترمانه را تمرین کن تا نشان بدهی مرزهایت را می‌شناسی."},{"id":277,"type":"جرأت","text":"یک دقیقه درباره چیزی که از آینده رابطه می‌خواهی حرف بزن."},{"id":278,"type":"جرأت","text":"سه چیز را که می‌خواهی در رابطه بهتر شوند، بدون سرزنش نام ببر."},{"id":279,"type":"جرأت","text":"سه چیز را که همین حالا در رابطه خوب پیش می‌روند، با مثال بگو."},{"id":280,"type":"جرأت","text":"یک جمله بگو که نشان دهد در چه شرایطی بیشتر احساس امنیت می‌کنی."},{"id":281,"type":"جرأت","text":"یک جمله بگو که نشان دهد چه چیزی سریعاً تو را از نظر عاطفی می‌بندد."},{"id":282,"type":"جرأت","text":"یک پیام برای «نسخه فردای خودت» بنویس که درباره رابطه باشد."},{"id":283,"type":"جرأت","text":"یک پیام برای طرف مقابل بنویس که با «اگر یک روز...» شروع شود."},{"id":284,"type":"جرأت","text":"یک پیام عاشقانه بنویس که فقط ۷ کلمه داشته باشد."},{"id":285,"type":"جرأت","text":"یک پیام خجالت‌آور بنویس که فقط خودتان دو نفر ببینید."},{"id":286,"type":"جرأت","text":"سه خاطره را فقط با سه کلمه برای هرکدام توصیف کن و بگذار طرف مقابل حدس بزند."},{"id":287,"type":"جرأت","text":"یک آهنگ را انتخاب کن و بگو کدام بخشش شبیه رابطه‌تان است."},{"id":288,"type":"جرأت","text":"یک عکس قدیمی از خاطره مشترک انتخاب کن و داستان پشتش را تعریف کن."},{"id":289,"type":"جرأت","text":"یک عکس بفرست که حال امشبت را بدون هیچ توضیحی نشان دهد."},{"id":290,"type":"جرأت","text":"یک ایموجی انتخاب کن که بیشترین شباهت را به حال فعلی‌ات دارد و دلیلش را بگو."},{"id":291,"type":"جرأت","text":"یک دقیقه با لحن کاملاً جدی از یک ویژگی بامزه طرف مقابل تعریف کن."},{"id":292,"type":"جرأت","text":"یک دقیقه نقش «مشاور رابطه» را بازی کن و یک توصیه به خودتان بده."},{"id":293,"type":"جرأت","text":"یک دقیقه نقش طرف مقابل را بازی کن و چیزی را بگو که فکر می‌کنی او درباره تو احساس می‌کند."},{"id":294,"type":"جرأت","text":"یک جمله بگو که اگر در یک دعوا گفته شود، فضا را نرم‌تر می‌کند."},{"id":295,"type":"جرأت","text":"یک جمله بگو که معمولاً در دعوا می‌گویی و این بار باید حذفش کنی."},{"id":296,"type":"جرأت","text":"یک رفتار خودت را نام ببر که همین هفته می‌توانی تغییر بدهی."},{"id":297,"type":"جرأت","text":"یک رفتار طرف مقابل را نام ببر که بیشتر از آنچه نشان می‌دهی قدردانی می‌کنی."},{"id":298,"type":"جرأت","text":"یک خاطره را با پنج جزئیات دقیق تعریف کن تا معلوم شود واقعاً یادت مانده."},{"id":299,"type":"جرأت","text":"۳۰ ثانیه فقط از خوبی‌های طرف مقابل بگو و تکرار ممنوع."},{"id":300,"type":"جرأت","text":"۳۰ ثانیه فقط از یک نقطه ضعف خودت حرف بزن و توجیه ممنوع."},{"id":301,"type":"جرأت","text":"یک جمله بگو که شروعش «من از تو می‌خواهم...» باشد."},{"id":302,"type":"جرأت","text":"یک جمله بگو که شروعش «من از خودم می‌خواهم...» باشد."},{"id":303,"type":"جرأت","text":"یک جمله بگو که شروعش «من از رابطه‌مان می‌ترسم که...» باشد."},{"id":304,"type":"جرأت","text":"یک جمله بگو که شروعش «من امیدوارم روزی...» باشد."},{"id":305,"type":"جرأت","text":"یک جمله بگو که شروعش «من هنوز یادم نرفته که...» باشد."},{"id":306,"type":"جرأت","text":"یک جمله بگو که شروعش «هیچ‌وقت بهت نگفتم که...» باشد."},{"id":307,"type":"جرأت","text":"یک جمله بگو که شروعش «اگر غرورم نبود...» باشد."},{"id":308,"type":"جرأت","text":"یک جمله بگو که شروعش «چیزی که ازت پنهان نمی‌کنم اینه که...» باشد."},{"id":309,"type":"جرأت","text":"یک جمله بگو که شروعش «چیزی که هنوز گفتنش سخته اینه که...» باشد."},{"id":310,"type":"جرأت","text":"یک دقیقه دست از گوشی بکش و فقط به طرف مقابل توجه کامل بده."},{"id":311,"type":"جرأت","text":"یک دقیقه کنار طرف مقابل بنشین و هیچ‌کس حق ندارد گوشی را لمس کند."},{"id":312,"type":"جرأت","text":"اگر هر دو راحتید، یک بغل ۳۰ ثانیه‌ای بدون حرف انجام دهید."},{"id":313,"type":"جرأت","text":"اگر هر دو راحتید، ۳۰ ثانیه دست هم را بگیرید و درباره یک خاطره خوب حرف بزنید."},{"id":314,"type":"جرأت","text":"اگر هر دو راحتید، یک عکس دونفره کاملاً ساده و بدون ژست بگیرید."},{"id":315,"type":"جرأت","text":"اگر هر دو راحتید، یک سلفی بگیرید که قرار نیست هیچ‌جا منتشر شود."},{"id":316,"type":"جرأت","text":"یک «قرار ۱۰ دقیقه‌ای» با بودجه صفر طراحی کن و همان را اجرا کنید."},{"id":317,"type":"جرأت","text":"برای امشب یک قانون بگذارید که هر دو بتوانید رعایتش کنید."},{"id":318,"type":"جرأت","text":"یک بازی دو نفره خیلی کوتاه بساز و قوانینش را در ۳۰ ثانیه توضیح بده."},{"id":319,"type":"جرأت","text":"یک مسابقه تعریف راه بیندازید: هرکس سه تعریف متفاوت بگوید، برنده است."},{"id":320,"type":"جرأت","text":"یک خاطره مشترک را بدون استفاده از اسم مکان یا شخص تعریف کن تا طرف مقابل حدس بزند."},{"id":321,"type":"جرأت","text":"یک خاطره را فقط با ایموجی بنویس و طرف مقابل باید حدس بزند."},{"id":322,"type":"جرأت","text":"یک پیام را طوری بنویس که انگار اولین بار است به طرف مقابل پیام می‌دهی."},{"id":323,"type":"جرأت","text":"یک پیام را طوری بنویس که انگار ۱۰ سال است کنار هم هستید."},{"id":324,"type":"جرأت","text":"یک پیام را طوری بنویس که انگار فردا قرار است از هم دور شوید و فقط یک پیام فرصت داری."},{"id":325,"type":"جرأت","text":"یک پیام را طوری بنویس که انگار بعد از یک آشتی بزرگ است."},{"id":326,"type":"جرأت","text":"یک پیام را طوری بنویس که هیچ کلمه عاشقانه کلیشه‌ای نداشته باشد."},{"id":327,"type":"جرأت","text":"یک پیام را طوری بنویس که فقط با شوخی شروع شود و جدی تمام شود."},{"id":328,"type":"جرأت","text":"یک پیام را طوری بنویس که فقط سؤال باشد و هیچ جمله خبری نداشته باشد."},{"id":329,"type":"جرأت","text":"یک پیام را طوری بنویس که در آن یک خاطره خیلی مشخص پنهان شده باشد."},{"id":330,"type":"جرأت","text":"یک پیام را طوری بنویس که طرف مقابل مجبور شود جواب طولانی بدهد."},{"id":331,"type":"جرأت","text":"یک سؤال بپرس که جوابش فقط با «بله» یا «نه» ممکن نباشد."},{"id":332,"type":"جرأت","text":"یک سؤال بپرس که جوابش نیاز به یک مثال واقعی داشته باشد."},{"id":333,"type":"جرأت","text":"یک سؤال بپرس که درباره آینده باشد نه گذشته."},{"id":334,"type":"جرأت","text":"یک سؤال بپرس که درباره نیازهای عاطفی باشد نه خاطره‌ها."},{"id":335,"type":"جرأت","text":"یک سؤال بپرس که احتمالاً جوابش تو را غافلگیر می‌کند."},{"id":336,"type":"جرأت","text":"یک سؤال بپرس که خودت هم اگر جای طرف مقابل بودی، برای جوابش مکث می‌کردی."},{"id":337,"type":"جرأت","text":"یک دقیقه اجازه بده طرف مقابل هر سؤالی خواست بپرسد و حق نداری سؤال را عوض کنی."},{"id":338,"type":"جرأت","text":"یک دقیقه بدون دفاع به یک نقد واقعی گوش بده و در پایان فقط بگو «فهمیدم»."},{"id":339,"type":"جرأت","text":"یک نقد درباره خودت بگو که قبلاً شنیده‌ای و حالا قبولش کرده‌ای."},{"id":340,"type":"جرأت","text":"یک ویژگی طرف مقابل را بگو که دوست داری هیچ‌وقت تغییر نکند."},{"id":341,"type":"جرأت","text":"یک ویژگی خودت را بگو که دوست داری طرف مقابل بهتر درکش کند."},{"id":342,"type":"جرأت","text":"یک خاطره را تعریف کن و در پایان بگو امروز چه معنایی برایت دارد."},{"id":343,"type":"جرأت","text":"یک جمله درباره آینده مشترک بگو که واقعاً برایش حاضر به تلاش هستی."},{"id":344,"type":"جرأت","text":"یک هدف مشترک کوچک برای هفت روز آینده تعیین کن."},{"id":345,"type":"جرأت","text":"یک هدف دونفره برای یک ماه آینده تعیین کن."},{"id":346,"type":"جرأت","text":"یک عادت مشترک ۵ دقیقه‌ای طراحی کن که بتوانید هر شب انجام دهید."},{"id":347,"type":"جرأت","text":"یک سنت دونفره جدید پیشنهاد بده و اولین اجرای آن را همین امشب مشخص کنید."},{"id":348,"type":"جرأت","text":"یک چیز کوچک را که مدت‌ها عقب انداخته‌ای، برای رابطه همین امشب شروع کن."},{"id":349,"type":"جرأت","text":"یک کار محبت‌آمیز انجام بده که هیچ هزینه‌ای نداشته باشد."},{"id":350,"type":"جرأت","text":"یک کار محبت‌آمیز انجام بده که کمتر از پنج دقیقه طول بکشد."},{"id":351,"type":"جرأت","text":"یک کار محبت‌آمیز انجام بده که طرف مقابل انتظارش را ندارد."},{"id":352,"type":"جرأت","text":"یک کار محبت‌آمیز انجام بده و بعد درباره دلیل انتخابش توضیح بده."},{"id":353,"type":"جرأت","text":"یک نامه ۵ خطی بنویس که قرار نیست هیچ‌کس جز طرف مقابل بخواند."},{"id":354,"type":"جرأت","text":"یک نامه کوتاه بنویس با عنوان «چیزی که می‌خواهم یادت بماند»."},{"id":355,"type":"جرأت","text":"یک نامه کوتاه بنویس با عنوان «چیزی که هنوز از گفتنش خجالت می‌کشم»."},{"id":356,"type":"جرأت","text":"یک نامه کوتاه بنویس با عنوان «اگر فردا همه‌چیز بهتر شود...»."},{"id":357,"type":"جرأت","text":"یک نامه کوتاه بنویس با عنوان «من تو را وقتی بیشتر دوست دارم که...»."},{"id":358,"type":"جرأت","text":"یک جمله بگو که در آن از کلمه «اما» استفاده نکنی."},{"id":359,"type":"جرأت","text":"یک عذرخواهی بکن که در آن از هیچ توجیهی استفاده نکنی."},{"id":360,"type":"جرأت","text":"یک تشکر بکن که حتماً شامل یک مثال واقعی باشد."},{"id":361,"type":"جرأت","text":"یک تعریف بکن که درباره شخصیت باشد نه ظاهر."},{"id":362,"type":"جرأت","text":"یک تعریف بکن که درباره یک رفتار خیلی کوچک باشد."},{"id":363,"type":"جرأت","text":"یک تعریف بکن که تا حالا هیچ‌وقت نگفته‌ای."},{"id":364,"type":"جرأت","text":"یک اعتراف بکن که باعث می‌شود کمی خجالت بکشی ولی به رابطه آسیب نمی‌زند."},{"id":365,"type":"جرأت","text":"یک اعتراف بکن درباره یک عادت بامزه که از طرف مقابل پنهان کرده‌ای."},{"id":366,"type":"جرأت","text":"یک اعتراف بکن درباره اولین فکری که بعد از دیدن پیام طرف مقابل به ذهنت می‌آید."},{"id":367,"type":"جرأت","text":"یک اعتراف بکن درباره زمانی که دلت برای طرف مقابل تنگ شده ولی نگفته‌ای."},{"id":368,"type":"جرأت","text":"یک اعتراف بکن درباره زمانی که خواستی توجه بگیری ولی مستقیم نگفتی."},{"id":369,"type":"جرأت","text":"یک اعتراف بکن درباره زمانی که از سر غرور سکوت کردی."},{"id":370,"type":"جرأت","text":"یک اعتراف بکن درباره زمانی که اشتباه کردی و دیر فهمیدی."},{"id":371,"type":"جرأت","text":"یک اعتراف بکن درباره چیزی که دوست داری بیشتر دریافت کنی."},{"id":372,"type":"جرأت","text":"یک اعتراف بکن درباره چیزی که دوست داری بیشتر بدهی."},{"id":373,"type":"جرأت","text":"یک اعتراف بکن درباره یک ترس واقعی از آینده."},{"id":374,"type":"جرأت","text":"یک اعتراف بکن درباره یک امید واقعی برای آینده."},{"id":375,"type":"جرأت","text":"یک نقش بازی کنید: تو «خودت در پنج سال آینده» باش و یک پیام به امروزت بده."},{"id":376,"type":"جرأت","text":"یک نقش بازی کنید: طرف مقابل «تو» باشد و تو باید یک سؤال از خودت بپرسی."},{"id":377,"type":"جرأت","text":"یک نقش بازی کنید: انگار اولین قرار است و دوباره خودت را معرفی کن."},{"id":378,"type":"جرأت","text":"یک نقش بازی کنید: انگار بعد از یک قهر طولانی بالاخره آشتی کرده‌اید."},{"id":379,"type":"جرأت","text":"یک نقش بازی کنید: انگار قرار است فردا یک سفر دو نفره شروع کنید."},{"id":380,"type":"جرأت","text":"یک نقش بازی کنید: انگار ۲۰ سال گذشته و دارید اولین روز آشنایی را تعریف می‌کنید."},{"id":381,"type":"جرأت","text":"یک نقش بازی کنید: انگار باید در ۳۰ ثانیه از رابطه‌تان دفاع کنید."},{"id":382,"type":"جرأت","text":"یک نقش بازی کنید: انگار باید در ۳۰ ثانیه یک ایراد واقعی را بدون سرزنش توضیح دهید."},{"id":383,"type":"جرأت","text":"یک نقش بازی کنید: انگار طرف مقابل خبرنگار است و تو باید به پنج سؤال سریع جواب بدهی."},{"id":384,"type":"جرأت","text":"یک نقش بازی کنید: انگار باید یک پیام آشتی بنویسی ولی فقط ۱۰ کلمه اجازه داری."},{"id":385,"type":"جرأت","text":"یک نقش بازی کنید: انگار باید یک پیام عاشقانه بنویسی ولی اجازه نداری از قلب و عشق استفاده کنی."},{"id":386,"type":"جرأت","text":"یک نقش بازی کنید: انگار باید برای طرف مقابل تبلیغ بسازی و سه ویژگی اصلی‌اش را بفروشی."},{"id":387,"type":"جرأت","text":"یک نقش بازی کنید: انگار باید برای رابطه‌تان اسم یک فیلم انتخاب کنی و دلیلش را بگویی."},{"id":388,"type":"جرأت","text":"یک نقش بازی کنید: انگار رابطه‌تان یک برند است و شعارش را بساز."},{"id":389,"type":"جرأت","text":"یک نقش بازی کنید: انگار قرار است یک پادکست درباره رابطه‌تان ضبط کنید؛ عنوان قسمت اول چیست؟"},{"id":390,"type":"جرأت","text":"یک دقیقه از طرف مقابل تعریف کن بدون اینکه از ظاهرش حرف بزنی."},{"id":391,"type":"جرأت","text":"یک دقیقه از خودت تعریف کن بدون اینکه از موفقیت یا ظاهر حرف بزنی."},{"id":392,"type":"جرأت","text":"یک دقیقه درباره یک چیزی که از خودت ناراضی هستی صادقانه حرف بزن."},{"id":393,"type":"جرأت","text":"یک دقیقه درباره چیزی که به آن افتخار می‌کنی حرف بزن."},{"id":394,"type":"جرأت","text":"یک دقیقه درباره یک خاطره‌ای که دوست داری تکرار شود حرف بزن."},{"id":395,"type":"جرأت","text":"یک دقیقه درباره چیزی که دوست داری دیگر تکرار نشود حرف بزن."},{"id":396,"type":"جرأت","text":"یک دقیقه درباره یک رؤیای مشترک حرف بزن."},{"id":397,"type":"جرأت","text":"یک دقیقه درباره یک ترس مشترک احتمالی حرف بزن."},{"id":398,"type":"جرأت","text":"یک دقیقه درباره چیزی که می‌خواهی طرف مقابل از تو بیشتر بداند حرف بزن."},{"id":399,"type":"جرأت","text":"یک دقیقه درباره چیزی که می‌خواهی خودت درباره طرف مقابل بیشتر بفهمی حرف بزن."},{"id":400,"type":"جرأت","text":"یک بازی «حدس بزن» اجرا کن: سه حقیقت درباره خودت بگو که یکی‌شان ساختگی است."},{"id":401,"type":"جرأت","text":"سه خاطره بگو که یکی‌شان ساختگی باشد و طرف مقابل حدس بزند."},{"id":402,"type":"جرأت","text":"سه تعریف بگو که یکی‌شان دروغ باشد و طرف مقابل تشخیص دهد."},{"id":403,"type":"جرأت","text":"سه خواسته بگو که یکی‌شان شوخی باشد و طرف مقابل حدس بزند."},{"id":404,"type":"جرأت","text":"سه ترس بگو که یکی‌شان ساختگی باشد و طرف مقابل حدس بزند."},{"id":405,"type":"جرأت","text":"سه عادت بگو که یکی‌شان ساختگی باشد و طرف مقابل حدس بزند."},{"id":406,"type":"جرأت","text":"سه رؤیا بگو که یکی‌شان ساختگی باشد و طرف مقابل حدس بزند."},{"id":407,"type":"جرأت","text":"سه خاطره کوتاه بگو که طرف مقابل باید ترتیب زمانی‌شان را حدس بزند."},{"id":408,"type":"جرأت","text":"سه ویژگی طرف مقابل را بگو و از او بخواه یکی را که بیشتر دوست دارد انتخاب کند."},{"id":409,"type":"جرأت","text":"سه قرار خیالی پیشنهاد بده و طرف مقابل فقط یکی را انتخاب کند."},{"id":410,"type":"جرأت","text":"یک چالش ۲ دقیقه‌ای بساز که هر دو بتوانید انجام دهید."},{"id":411,"type":"جرأت","text":"یک چالش ۵ دقیقه‌ای بساز که نتیجه‌اش یک خاطره جدید باشد."},{"id":412,"type":"جرأت","text":"یک چالش بساز که هیچ خرجی نداشته باشد ولی خنده‌دار باشد."},{"id":413,"type":"جرأت","text":"یک چالش بساز که آرام و رمانتیک باشد."},{"id":414,"type":"جرأت","text":"یک چالش بساز که درباره شناخت شخصیت باشد."},{"id":415,"type":"جرأت","text":"یک چالش بساز که درباره آینده باشد."},{"id":416,"type":"جرأت","text":"یک چالش بساز که درباره خاطرات باشد."},{"id":417,"type":"جرأت","text":"یک چالش بساز که درباره قدردانی باشد."},{"id":418,"type":"جرأت","text":"یک چالش بساز که درباره اعتماد باشد و هر دو باید در آن احساس امنیت کنید."},{"id":419,"type":"جرأت","text":"یک چالش بساز که آخرش یک سؤال صادقانه داشته باشد."},{"id":420,"type":"جرأت","text":"یک «مأموریت مخفی» برای طرف مقابل تعیین کن که تا پایان شب انجامش دهد."},{"id":421,"type":"جرأت","text":"یک «مأموریت مخفی» برای خودت تعیین کن که طرف مقابل نباید بداند چیست تا آخر بازی."},{"id":422,"type":"جرأت","text":"یک کد مخفی دو نفره برای امشب بسازید و فقط خودتان معنایش را بدانید."},{"id":423,"type":"جرأت","text":"یک کلمه رمز برای آشتی انتخاب کنید."},{"id":424,"type":"جرأت","text":"یک کلمه رمز برای وقتی که یکی‌تان به توجه نیاز دارد انتخاب کنید."},{"id":425,"type":"جرأت","text":"یک کلمه رمز برای «بیا حرف بزنیم» انتخاب کنید."},{"id":426,"type":"جرأت","text":"یک کلمه رمز برای «الان فقط بغلم کن» انتخاب کنید، اگر هر دو راحتید."},{"id":427,"type":"جرأت","text":"یک ژست یا علامت مخصوص دو نفره طراحی کنید."},{"id":428,"type":"جرأت","text":"یک امضای پیام مخصوص رابطه‌تان بسازید."},{"id":429,"type":"جرأت","text":"یک جمله کوتاه بسازید که فقط خودتان معنی کاملش را بدانید."},{"id":430,"type":"جرأت","text":"یک خاطره را با یک اسم رمز ذخیره کنید و اسم رمز را توضیح دهید."},{"id":431,"type":"جرأت","text":"یک عکس از یک شیء معمولی بگیر که برای شما معنی خاصی دارد و داستانش را بگو."},{"id":432,"type":"جرأت","text":"یک شیء نزدیکت را انتخاب کن و توضیح بده چرا اگر هدیه بود، به طرف مقابل می‌دادی."},{"id":433,"type":"جرأت","text":"یک شیء نزدیکت را انتخاب کن و بگو اگر قرار بود نماد رابطه‌تان باشد، چرا؟"},{"id":434,"type":"جرأت","text":"یک صدای محیط را ضبط کن و بگو چرا حال امشب را نشان می‌دهد."},{"id":435,"type":"جرأت","text":"یک آهنگ را بدون فرستادن متنش معرفی کن و فقط بگو چرا انتخابش کردی."},{"id":436,"type":"جرأت","text":"یک فیلم یا سریال انتخاب کن که فکر می‌کنی طرف مقابل با آن ارتباط می‌گیرد و دلیلش را بگو."},{"id":437,"type":"جرأت","text":"یک غذای ساده برای یک قرار دونفره انتخاب کن و دلیلش را بگو."},{"id":438,"type":"جرأت","text":"یک مکان خیالی برای قرار بساز و سه جزئیاتش را تعریف کن."},{"id":439,"type":"جرأت","text":"یک سفر خیالی با سه توقف طراحی کن."},{"id":440,"type":"جرأت","text":"یک صبح خیالی ایده‌آل برای دو نفر طراحی کن."},{"id":441,"type":"جرأت","text":"یک شب خیالی ایده‌آل برای دو نفر طراحی کن."},{"id":442,"type":"جرأت","text":"یک روز بدون موبایل برای دو نفر طراحی کن."},{"id":443,"type":"جرأت","text":"یک «قرار ۱۵ دقیقه‌ای» طراحی کن که در خانه قابل اجرا باشد."},{"id":444,"type":"جرأت","text":"یک «قرار بارانی» طراحی کن حتی اگر الان باران نمی‌بارد."},{"id":445,"type":"جرأت","text":"یک «قرار شبانه» طراحی کن که هیچ خرجی نداشته باشد."},{"id":446,"type":"جرأت","text":"یک «قرار نوستالژیک» طراحی کن که به یک خاطره قدیمی وصل باشد."},{"id":447,"type":"جرأت","text":"یک «قرار آینده‌نگر» طراحی کن که شامل یک رؤیای مشترک باشد."},{"id":448,"type":"جرأت","text":"یک جمله کوتاه برای قاب کردن درباره رابطه‌تان بنویس."},{"id":449,"type":"جرأت","text":"یک جمله کوتاه برای پشت عکس مشترک بنویس."},{"id":450,"type":"جرأت","text":"یک جمله کوتاه برای روزی که حال یکی‌تان بد است بنویس."},{"id":451,"type":"جرأت","text":"یک جمله کوتاه برای روزی که از خودت ناامیدی بنویس."},{"id":452,"type":"جرأت","text":"یک جمله کوتاه برای روزی که از هم ناراحتید بنویس."},{"id":453,"type":"جرأت","text":"یک جمله کوتاه برای روزی که دلتنگید بنویس."},{"id":454,"type":"جرأت","text":"یک جمله کوتاه برای روزی که موفقیتی را جشن می‌گیرید بنویس."},{"id":455,"type":"جرأت","text":"یک جمله کوتاه برای اولین سفر مشترک آینده بنویس."},{"id":456,"type":"جرأت","text":"یک جمله کوتاه برای سالگرد آینده‌تان بنویس."},{"id":457,"type":"جرأت","text":"یک جمله کوتاه برای نسخه پیرتر خودتان بنویس."},{"id":458,"type":"جرأت","text":"در ۱۵ ثانیه سه چیز بگو که همین الان بابتشان شکرگزار رابطه‌ای."},{"id":459,"type":"جرأت","text":"در ۱۵ ثانیه یک خاطره را با دقیق‌ترین جزئیات ممکن تعریف کن."},{"id":460,"type":"جرأت","text":"در ۱۵ ثانیه بگو وقتی اسم طرف مقابل می‌آید اولین تصویر ذهنت چیست."},{"id":461,"type":"جرأت","text":"در ۱۵ ثانیه بگو اولین ویژگی‌ای که دلت برایش تنگ می‌شود چیست."},{"id":462,"type":"جرأت","text":"در ۱۵ ثانیه بگو چه چیزی در طرف مقابلت هنوز تو را غافلگیر می‌کند."},{"id":463,"type":"جرأت","text":"در ۱۵ ثانیه بگو چه چیزی در خودت دوست داری طرف مقابل بیشتر ببیند."},{"id":464,"type":"جرأت","text":"در ۱۵ ثانیه بگو چه چیزی را باید کمتر از خودت پنهان کنی."},{"id":465,"type":"جرأت","text":"در ۱۵ ثانیه بگو یک عذرخواهی که باید زودتر می‌کردی بابت چیست."},{"id":466,"type":"جرأت","text":"در ۱۵ ثانیه بگو یک تشکر که باید زودتر می‌کردی بابت چیست."},{"id":467,"type":"جرأت","text":"در ۱۵ ثانیه بگو یک آرزوی واقعی برای رابطه‌تان چیست."},{"id":468,"type":"جرأت","text":"یک «سؤال ممنوع» تعریف کن که هر دو توافق کنید امشب نپرسید و دلیلش را بگویید."},{"id":469,"type":"جرأت","text":"یک «مرز امن» برای بازی تعریف کنید که هر دو باید رعایتش کنید."},{"id":470,"type":"جرأت","text":"یک قانون بگذارید که اگر کسی ناراحت شد، بازی فوراً متوقف شود."},{"id":471,"type":"جرأت","text":"یک قانون بگذارید که هر جواب سختی باید با احترام شنیده شود."},{"id":472,"type":"جرأت","text":"یک قانون بگذارید که هیچ‌کس حق مسخره کردن جواب دیگری را نداشته باشد."},{"id":473,"type":"جرأت","text":"یک قانون بگذارید که بعد از هر جواب سخت، یک تشکر گفته شود."},{"id":474,"type":"جرأت","text":"یک قانون بگذارید که هیچ سؤال خصوصی بدون رضایت طرف مقابل ادامه پیدا نکند."},{"id":475,"type":"جرأت","text":"یک قانون بگذارید که هرکس حق دارد یک بار کارت را رد کند."},{"id":476,"type":"جرأت","text":"یک قانون بگذارید که هرکس حق دارد یک بار سؤال را عوض کند."},{"id":477,"type":"جرأت","text":"یک قانون بگذارید که پایان بازی با یک جمله خوب درباره طرف مقابل باشد."},{"id":478,"type":"جرأت","text":"یک دقیقه بدون استفاده از واژه‌های «خوب»، «عالی» و «دوستت دارم» از طرف مقابل تعریف کن."},{"id":479,"type":"جرأت","text":"یک ویس ۳۰ ثانیه‌ای بساز که در آن یک خاطره مشخص را تعریف کنی و بگویی چرا هنوز مهم است."},{"id":480,"type":"جرأت","text":"یک جمله بگو که همزمان هم یک عذرخواهی باشد هم یک قول عملی."},{"id":481,"type":"جرأت","text":"سه نیاز عاطفی خودت را از مهم‌ترین به کم‌اهمیت‌ترین مرتب کن و برای هرکدام یک مثال بزن."},{"id":482,"type":"جرأت","text":"یک سؤال بپرس که اگر جوابش را بشنوی، احتمالاً نگاهت به یک موضوع تغییر می‌کند."},{"id":483,"type":"جرأت","text":"یک دقیقه اجازه بده طرف مقابل هر چیزی که درباره رابطه می‌خواهد بگوید و فقط گوش بده."},{"id":484,"type":"جرأت","text":"یک پیام بنویس که اگر ۵ سال بعد دوباره خوانده شود، هنوز معنی داشته باشد."},{"id":485,"type":"جرأت","text":"یک خاطره را تعریف کن و از طرف مقابل بخواه بگوید از آن لحظه چه چیزی یادش مانده."},{"id":486,"type":"جرأت","text":"یک «قرار رؤیایی» با سه محدودیت بساز: بدون پول، بدون سفر، بدون موبایل."},{"id":487,"type":"جرأت","text":"یک جمله بساز که در آن هم یک ترس و هم یک امید درباره آینده رابطه باشد."},{"id":488,"type":"جرأت","text":"یک دقیقه درباره چیزی حرف بزن که معمولاً برای پنهان کردنش شوخی می‌کنی."},{"id":489,"type":"جرأت","text":"یک دقیقه درباره چیزی حرف بزن که معمولاً برای پنهان کردنش سکوت می‌کنی."},{"id":490,"type":"جرأت","text":"یک دقیقه درباره چیزی حرف بزن که معمولاً برای پنهان کردنش خودت را مشغول نگه می‌داری."},{"id":491,"type":"جرأت","text":"یک تعریف بگو که اگر طرف مقابل آن را باور کند، اعتمادبه‌نفسش بیشتر شود."},{"id":492,"type":"جرأت","text":"یک جمله بگو که دوست داری در روزهای سخت بین شما تبدیل به عادت شود."},{"id":493,"type":"جرأت","text":"یک قول کوچک بده که بتوانی تا ۷۲ ساعت آینده واقعاً انجامش دهی."},{"id":494,"type":"جرأت","text":"یک کار محبت‌آمیز انجام بده که نتیجه‌اش را طرف مقابل همان لحظه حس کند."},{"id":495,"type":"جرأت","text":"یک چالش دو دقیقه‌ای بساز که در آن هر دو باید چیزی تازه درباره هم کشف کنید."},{"id":496,"type":"جرأت","text":"یک سؤال بپرس که جوابش باید با یک خاطره واقعی همراه باشد."},{"id":497,"type":"جرأت","text":"یک سؤال بپرس که جوابش باید با یک برنامه واقعی برای آینده همراه باشد."},{"id":498,"type":"جرأت","text":"یک پیام آشتی بنویس که حتی اگر الان قهری نیستید، خواندنش حس خوبی بدهد."},{"id":499,"type":"جرأت","text":"یک پیام بنویس که در آن هیچ صفت ظاهری استفاده نشده باشد."},{"id":500,"type":"جرأت","text":"یک پیام بنویس که در آن فقط یک بار از ایموجی استفاده شده باشد."}];
+const randomBtn=document.getElementById('tdRandom'),sendBtn=document.getElementById('tdSend'),qEl=document.getElementById('tdQuestion'),nEl=document.getElementById('tdNumber'),tEl=document.getElementById('tdType'),curEl=document.getElementById('tdCurrent'),remEl=document.getElementById('tdRemaining'),noteEl=document.getElementById('tdNote');
+if(!randomBtn||!qEl)return;
+let speaker=localStorage.getItem('fazelElhamAuthor')==='الهام'?'الهام':'فاضل';
+let used=[]; try{used=JSON.parse(localStorage.getItem('fazelElhamTDUsed')||'[]')}catch(e){used=[]}
+let current=null;
+const fa=n=>String(n).padStart(3,'0').replace(/0/g,'۰').replace(/1/g,'۱').replace(/2/g,'۲').replace(/3/g,'۳').replace(/4/g,'۴').replace(/5/g,'۵').replace(/6/g,'۶').replace(/7/g,'۷').replace(/8/g,'۸').replace(/9/g,'۹');
+function syncSpeaker(){document.querySelectorAll('[data-td-speaker]').forEach(b=>b.classList.toggle('active',b.dataset.tdSpeaker===speaker));document.querySelectorAll('[data-header-author]').forEach(b=>b.classList.toggle('active',b.dataset.headerAuthor===speaker));curEl.textContent=speaker+' انتخاب شده ❤️';}
+function remaining(){remEl.textContent=fa(questions.length-used.length)+' سؤال باقی مانده';}
+function save(){localStorage.setItem('fazelElhamTDUsed',JSON.stringify(used));}
+function pick(){if(used.length>=questions.length){used=[];save();noteEl.textContent='۵۰۰ سؤال کامل شد؛ دور جدید شروع شد 🔥';}let available=questions.filter(x=>!used.includes(x.id));current=available[Math.floor(Math.random()*available.length)];used.push(current.id);save();nEl.textContent='#'+fa(current.id);tEl.textContent=current.type; qEl.textContent=current.text;sendBtn.disabled=false;remaining();}
+document.querySelectorAll('[data-td-speaker]').forEach(b=>b.addEventListener('click',()=>{speaker=b.dataset.tdSpeaker==='الهام'?'الهام':'فاضل';localStorage.setItem('fazelElhamAuthor',speaker);syncSpeaker();}));document.querySelectorAll('[data-header-author]').forEach(b=>b.addEventListener('click',()=>{speaker=b.dataset.headerAuthor==='الهام'?'الهام':'فاضل';localStorage.setItem('fazelElhamAuthor',speaker);document.querySelectorAll('.author-btn').forEach(x=>x.classList.toggle('active',x.dataset.author===speaker));syncSpeaker();}));
+randomBtn.addEventListener('click',pick);
+sendBtn.addEventListener('click',()=>{if(!current)return;const note=document.getElementById('nookNote');const saveBtn=document.getElementById('saveNookNote');const openBtn=document.querySelector('.nook-tool[data-room="notes"]');const msg='😈 جرأت یا حقیقت — سوال #'+fa(current.id)+'\n'+current.text+'\n\n👤 انتخاب شده: '+speaker; if(openBtn)openBtn.click(); setTimeout(()=>{if(note){note.value=msg;note.dispatchEvent(new Event('input',{bubbles:true}));} if(saveBtn)saveBtn.click();},180); noteEl.textContent='💌 سؤال برای دفتر دوتایی آماده شد؛ حالا نوبت جواب دادنه!';});
+syncSpeaker();remaining();
+})();
+</script>
+
+<style id="luxury-modern-chat-v10">
+/* Luxury modern messenger: glass, gold, diamond/ruby frame, lightweight on mobile */
+#messengerOverlay .chat-panel{
+ position:relative!important;isolation:isolate!important;overflow:hidden!important;
+ border:1px solid rgba(224,190,102,.34)!important;
+ border-radius:24px!important;
+ background:radial-gradient(circle at 15% 10%,rgba(255,70,155,.10),transparent 30%),radial-gradient(circle at 85% 88%,rgba(110,78,255,.10),transparent 32%),linear-gradient(180deg,rgba(18,10,25,.88),rgba(6,4,12,.90))!important;
+ box-shadow:0 28px 90px rgba(0,0,0,.45),0 0 0 1px rgba(153,32,65,.18),0 0 35px rgba(205,158,62,.08)!important;
+}
+#messengerOverlay .chat-panel:before{content:""!important;position:absolute!important;inset:5px!important;z-index:0!important;pointer-events:none!important;border:1px solid transparent!important;border-radius:19px!important;background:linear-gradient(135deg,rgba(255,226,145,.50),rgba(255,255,255,.05) 20%,rgba(151,26,55,.55) 48%,rgba(255,255,255,.04) 72%,rgba(255,215,115,.48)) border-box!important;-webkit-mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0)!important;-webkit-mask-composite:xor!important;mask-composite:exclude!important;opacity:.68!important}
+#messengerOverlay .chat-panel:after{content:""!important;position:absolute!important;inset:10px!important;z-index:0!important;pointer-events:none!important;border-radius:16px!important;border:1px solid rgba(150,22,56,.28)!important;box-shadow:inset 0 0 18px rgba(212,170,72,.035)!important;animation:none!important}
+#messengerOverlay .chat-head,#messengerOverlay .chat-messages,#messengerOverlay .chat-compose,#messengerOverlay .chat-compose-tools,#messengerOverlay .chat-reactions,#messengerOverlay .chat-day,#messengerOverlay .chat-typing{position:relative!important;z-index:2!important}
+#messengerOverlay .chat-head{background:linear-gradient(180deg,rgba(21,12,29,.88),rgba(17,9,24,.62))!important;border-bottom:1px solid rgba(221,186,93,.20)!important;box-shadow:0 8px 30px rgba(0,0,0,.18)!important}
+#messengerOverlay .header-who-picker{display:flex;align-items:center;gap:5px;margin-top:6px;flex-wrap:wrap}
+#messengerOverlay .header-who-picker>span{font-size:8px;color:#cbb7c2}
+#messengerOverlay .header-who-btn{border:1px solid rgba(224,190,102,.22);background:rgba(255,255,255,.045);color:#f9edf3;border-radius:999px;padding:5px 9px;font:700 9px/1 Vazirmatn,sans-serif;cursor:pointer;transition:.18s;box-shadow:inset 0 1px rgba(255,255,255,.08)}
+#messengerOverlay .header-who-btn.active{background:linear-gradient(135deg,rgba(218,178,79,.22),rgba(255,92,158,.12));border-color:rgba(241,204,111,.60);box-shadow:0 0 14px rgba(224,184,79,.10)}
+#messengerOverlay .chat-messages{background:radial-gradient(circle at 20% 25%,rgba(255,70,155,.06),transparent 30%),radial-gradient(circle at 80% 75%,rgba(117,87,255,.06),transparent 32%),rgba(4,3,8,.24)!important}
+#messengerOverlay .chat-bubble{background:linear-gradient(135deg,rgba(255,255,255,.105),rgba(255,255,255,.045))!important;border:1px solid rgba(231,198,112,.48)!important;box-shadow:inset 0 1px rgba(255,255,255,.12),0 9px 25px rgba(0,0,0,.20),0 0 16px rgba(210,166,63,.045)!important;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+#messengerOverlay .chat-bubble-row.mine .chat-bubble{background:linear-gradient(135deg,rgba(255,90,161,.15),rgba(151,87,255,.11))!important;border-color:rgba(239,194,94,.62)!important}
+#messengerOverlay .chat-bubble-row.theirs .chat-bubble{border-color:rgba(181,77,108,.40)!important}
+#messengerOverlay .chat-reactions{gap:6px;padding:8px 12px 5px;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}
+#messengerOverlay .chat-reactions::-webkit-scrollbar{display:none}
+#messengerOverlay .chat-reactions button{flex:0 0 39px;width:39px;height:35px;padding:0;border:1px solid rgba(225,190,100,.24);background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(190,120,35,.06));border-radius:12px;box-shadow:inset 0 1px rgba(255,255,255,.08),0 5px 14px rgba(0,0,0,.16);font-size:16px}
+#messengerOverlay .chat-reactions button:active{transform:scale(.91)}
+#messengerOverlay .chat-menu-btn{font-size:21px!important;line-height:1!important;color:#f5d98d!important;border-color:rgba(224,190,102,.35)!important;background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(187,128,34,.08))!important}
+#chatSuperSheet{z-index:99999!important}
+#chatSuperSheet .chat-sheet-card{border-color:rgba(224,190,102,.30)!important;box-shadow:0 30px 100px rgba(0,0,0,.65),0 0 40px rgba(211,165,59,.09)!important}
+@media(max-width:700px){
+ #messengerOverlay .chat-panel{border-radius:18px!important;box-shadow:0 18px 50px rgba(0,0,0,.38)!important}
+ #messengerOverlay .chat-panel:before{inset:3px!important;border-radius:15px!important;opacity:.48!important}
+ #messengerOverlay .chat-panel:after{inset:6px!important;border-radius:13px!important}
+ #messengerOverlay .chat-head{box-shadow:none!important}
+ #messengerOverlay .chat-bubble{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:inset 0 1px rgba(255,255,255,.09),0 5px 13px rgba(0,0,0,.14)!important}
+ #messengerOverlay .chat-bubble:hover{transform:none!important}
+ #messengerOverlay .chat-head:after{display:none!important}
+ #messengerOverlay .chat-reactions button{box-shadow:0 3px 9px rgba(0,0,0,.13)!important}
+}
+@media(prefers-reduced-motion:reduce){#messengerOverlay .chat-panel:before{animation:none!important}}
+</style>
+<script id="luxury-modern-chat-v10-js">
+(function(){
+ const overlay=document.getElementById('messengerOverlay'); if(!overlay)return;
+ const whoBtns=[...document.querySelectorAll('[data-header-author]')];
+ const storage='fazelElhamAuthor';
+ function setWho(v){
+   try{localStorage.setItem(storage,v)}catch(e){}
+   document.querySelectorAll('.header-who-btn').forEach(b=>b.classList.toggle('active',b.dataset.headerAuthor===v));
+   document.querySelectorAll('.author-btn').forEach(b=>b.classList.toggle('active',b.dataset.author===v));
+ }
+ whoBtns.forEach(b=>b.addEventListener('click',()=>setWho(b.dataset.headerAuthor)));
+ setWho(localStorage.getItem(storage)||'فاضل');
+ // Make the three-dot menu reliable even if older listeners exist.
+ const menu=document.getElementById('chatMenuBtn'),sheet=document.getElementById('chatSuperSheet'),body=document.getElementById('chatSheetBody'),title=document.getElementById('chatSheetTitle');
+ if(menu&&sheet&&body){
+   menu.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();title.textContent='⋮ امکانات لوکس دفتر';body.innerHTML=`<div class="chat-menu-grid"><button class="chat-menu-item" data-v10="search"><span>🔎</span><div><b>جستجوی پیام‌ها</b><small>داخل پیام‌های همین چت</small></div></button><button class="chat-menu-item" data-v10="pinned"><span>📌</span><div><b>سنجاق‌شده‌ها</b><small>پیام‌های مهم</small></div></button><button class="chat-menu-item" data-v10="starred"><span>💎</span><div><b>الماس‌های من</b><small>پیام‌های ویژه</small></div></button><button class="chat-menu-item" data-v10="gallery"><span>🖼️</span><div><b>گالری</b><small>عکس و نقاشی</small></div></button><button class="chat-menu-item" data-v10="theme"><span>🎭</span><div><b>تم چت</b><small>ظاهر دفتر</small></div></button><button class="chat-menu-item" data-v10="luxreact"><span>✨</span><div><b>ری‌اکشن‌های پریمیوم</b><small>واکنش‌های خاص</small></div></button></div>`;sheet.classList.add('show');return false;},true);
+   body.addEventListener('click',function(e){
+     const b=e.target.closest('[data-v10]'); if(!b)return; const m=b.dataset.v10;
+     if(m==='search'){title.textContent='🔎 جستجوی پیام‌ها';body.innerHTML='<input id="chatSearchInputV10" class="chat-search-input" placeholder="مثلاً: دوستت دارم، سفر، دلتنگی..."><div id="chatSearchResultsV10" class="chat-memory-card" style="margin-top:10px">عبارتت را بنویس ❤️</div>';setTimeout(()=>document.getElementById('chatSearchInputV10')?.focus(),50);}
+     else if(m==='pinned'){const ids=JSON.parse(localStorage.getItem('fazelElhamPinned')||'{}');const els=[...document.querySelectorAll('#sharedNotes .chat-bubble-row')].filter(x=>ids[x.dataset.id]);title.textContent='📌 سنجاق‌شده‌ها';body.innerHTML=els.length?els.map(x=>'<div class="chat-memory-card">'+x.querySelector('.chat-bubble').innerHTML+'</div>').join(''):'هنوز پیامی سنجاق نشده ❤️';}
+     else if(m==='starred'){const ids=JSON.parse(localStorage.getItem('fazelElhamStarred')||'{}');const els=[...document.querySelectorAll('#sharedNotes .chat-bubble-row')].filter(x=>ids[x.dataset.id]);title.textContent='💎 پیام‌های ویژه';body.innerHTML=els.length?els.map(x=>'<div class="chat-memory-card">'+x.querySelector('.chat-bubble').innerHTML+'</div>').join(''):'هنوز پیامی اینجا نیست ✨';}
+     else if(m==='gallery'){document.getElementById('chatGalleryBtn')?.click();}
+     else if(m==='theme'){document.getElementById('chatThemeBtn')?.click();}
+     else if(m==='luxreact'){title.textContent='✨ ری‌اکشن‌های پریمیوم';body.innerHTML='<div class="chat-lux-reaction-grid">'+['💎','👑','💍','🫦','🥂','🪄','🩷','💋','🔥','✨','🫶','🌹','🪽','💫','🎀','🖤'].map(x=>'<button data-lux-emoji="'+x+'">'+x+'</button>').join('')+'</div><p style="font-size:9px;color:#aa94a1;text-align:center;margin:12px 0 0">یک واکنش را انتخاب کن تا وارد کادر پیام شود.</p>';}
+   });
+   body.addEventListener('click',e=>{const b=e.target.closest('[data-lux-emoji]');if(!b)return;const n=document.getElementById('nookNote');if(n){n.value+=(n.value?' ':'')+b.dataset.luxEmoji;n.focus();n.dispatchEvent(new Event('input',{bubbles:true}));}sheet.classList.remove('show');});
+   document.addEventListener('input',e=>{if(e.target.id!=='chatSearchInputV10')return;const q=e.target.value.trim().toLowerCase(),box=document.getElementById('chatSearchResultsV10');if(!box)return;const rs=[...document.querySelectorAll('#sharedNotes .chat-bubble')].filter(x=>(x.innerText||'').toLowerCase().includes(q));box.innerHTML=!q?'عبارتت را بنویس ❤️':rs.length?rs.slice(0,40).map(x=>'<div class="chat-memory-card">'+x.innerHTML+'</div>').join(''):'چیزی پیدا نشد 🥹';});
+ }
+ // Premium reaction visual feedback without expensive animations.
+ document.querySelectorAll('#chatReactions button').forEach(b=>b.addEventListener('click',()=>{b.animate?.([{transform:'scale(.88)'},{transform:'scale(1.14)'},{transform:'scale(1)'}],{duration:260,easing:'ease-out'});}));
+})();
+</script>
+<style id="luxury-reaction-grid-v10">.chat-lux-reaction-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.chat-lux-reaction-grid button{height:55px;border-radius:17px;border:1px solid rgba(224,190,102,.24);background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(174,107,34,.06));font-size:25px;cursor:pointer;box-shadow:inset 0 1px rgba(255,255,255,.08),0 8px 20px rgba(0,0,0,.16)}.chat-lux-reaction-grid button:active{transform:scale(.93)}@media(max-width:600px){.chat-lux-reaction-grid{grid-template-columns:repeat(4,1fr);gap:7px}.chat-lux-reaction-grid button{height:50px}}
+</style>
+
+<script id="premium-chat-v3-js">
+(function(){
+  const emojis=['❤️','💎','👑','💍','✨','🔥','💋','🥂','🫶','🎀','🌹','😘'];
+  let pop=null, pressTimer=null, pressTarget=null, pressStart=null;
+  function ensurePop(){
+    if(pop)return pop;
+    pop=document.createElement('div');
+    pop.className='premium-react-pop';
+    pop.setAttribute('role','menu');
+    pop.innerHTML=emojis.map(e=>`<button type="button" data-premium-react="${e}" aria-label="واکنش ${e}">${e}</button>`).join('')+'<span class="premium-react-label">واکنش پریمیوم</span>';
+    document.body.appendChild(pop);
+    pop.addEventListener('click',e=>{
+      const b=e.target.closest('[data-premium-react]');
+      if(!b||!pressTarget)return;
+      const id=pressTarget.closest('.chat-bubble-row')?.dataset.id;
+      if(!id)return;
+      const key='fazelElhamChatReactions_v1';
+      let map={};try{map=JSON.parse(localStorage.getItem(key)||'{}')||{}}catch(_){}
+      map[id]=b.dataset.premiumReact;localStorage.setItem(key,JSON.stringify(map));
+      pop.classList.remove('show');
+      pressTarget=null;
+      if(typeof window.__renderNotesNow==='function')window.__renderNotesNow();
+    });
+    return pop;
+  }
+  function hidePop(){if(pop)pop.classList.remove('show');pressTarget=null}
+  function showPop(bubble){
+    const p=ensurePop(), r=bubble.getBoundingClientRect();
+    pressTarget=bubble;
+    p.style.left=Math.max(170,Math.min(window.innerWidth-170,r.left+r.width/2))+'px';
+    p.style.top=Math.max(70,r.top-8)+'px';
+    p.classList.add('show');
+  }
+  function startPress(e){
+    if(e.target.closest('button'))return;
+    pressTarget=e.currentTarget;pressStart={x:e.clientX||e.touches?.[0]?.clientX||0,y:e.clientY||e.touches?.[0]?.clientY||0};
+    clearTimeout(pressTimer);pressTimer=setTimeout(()=>{if(pressTarget===e.currentTarget)showPop(e.currentTarget)},480);
+  }
+  function cancelPress(e){
+    clearTimeout(pressTimer);
+    if(pressStart){
+      const x=e?.clientX||e?.changedTouches?.[0]?.clientX||pressStart.x,y=e?.clientY||e?.changedTouches?.[0]?.clientY||pressStart.y;
+      if(Math.hypot(x-pressStart.x,y-pressStart.y)>12)hidePop();
+    }
+    pressStart=null;
+  }
+  document.addEventListener('click',e=>{if(pop?.classList.contains('show')&&!e.target.closest('.premium-react-pop'))hidePop()});
+  document.addEventListener('scroll',hidePop,true);
+  window.addEventListener('resize',hidePop,{passive:true});
+  function wireLongPress(){
+    document.querySelectorAll('#sharedNotes .chat-bubble').forEach(b=>{
+      if(b.dataset.premiumWired)return;
+      b.dataset.premiumWired='1';
+      b.addEventListener('pointerdown',startPress,{passive:true});
+      b.addEventListener('pointermove',cancelPress,{passive:true});
+      b.addEventListener('pointerup',cancelPress,{passive:true});
+      b.addEventListener('pointercancel',cancelPress,{passive:true});
+      b.addEventListener('contextmenu',e=>{e.preventDefault();showPop(b)});
+    });
+  }
+  window.__wirePremiumLongPress=wireLongPress;
+
+  function burst(row){
+    if(!row||row.dataset.burstDone)return;
+    row.dataset.burstDone='1';
+    const wrap=document.createElement('div');wrap.className='chat-heart-burst';
+    const hearts=['❤️','💖','💕','💗','💘','✨'];
+    hearts.forEach((h,i)=>{
+      const x=(Math.random()-.5)*130,y=-(35+Math.random()*75),r=(Math.random()-.5)*35;
+      const el=document.createElement('i');el.textContent=h;el.style.setProperty('--x',x+'px');el.style.setProperty('--y',y+'px');el.style.setProperty('--r',r+'deg');el.style.animationDelay=(i*35)+'ms';wrap.appendChild(el);
+    });
+    row.appendChild(wrap);
+    setTimeout(()=>wrap.remove(),1050);
+  }
+  window.__premiumHeartBurst=burst;
+  window.__premiumReactWire=wireLongPress;
+})();
+</script>
+
+</body>
 </html>
