@@ -1616,15 +1616,26 @@ body.messenger-fullscreen .chat-panel .chat-toy{z-index:2!important;opacity:.42!
     if(!notesBox)return;
     const wasAwayFromBottom=(notesBox.scrollHeight-(notesBox.scrollTop+notesBox.clientHeight))>120;
     if(!rows.length){notesBox.innerHTML='<div class="empty-notes">هنوز پیامی نیست... اولین پیام رو تو بفرست 💌</div>';return;}
-    let readMap={};try{readMap=JSON.parse(localStorage.getItem('fazelElhamReadMessages_v1')||'{}')||{}}catch(e){}
     const currentAuthor=author;
+    // Read receipts are stored as tiny system records inside the same love_notes table,
+    // so both phones can see them in realtime without requiring a new database column.
+    const readMap={};
+    rows.forEach(r=>{
+      const c=String(r.content||'');
+      if(c.startsWith('\u2063READ_RECEIPT|')){
+        const parts=c.split('|');
+        if(parts[1]&&parts[2]&&parts[3]) readMap[parts[1]]={by:parts[2],at:parts[3]};
+      }
+    });
+    const visibleRows=rows.filter(r=>!String(r.content||'').startsWith('\u2063READ_RECEIPT|'));
     let markReadTimer=null;
-    notesBox.innerHTML=rows.map(r=>{
-      const mine=!String(r.author_name||'').includes('الهام') === (currentAuthor==='فاضل');
+    notesBox.innerHTML=visibleRows.map(r=>{
+      const sender=String(r.author_name||'').includes('الهام')?'الهام':'فاضل';
+      const mine=sender===currentAuthor;
       const reaction=reactions[r.id]||'';
       const cls=mine?'mine':'theirs';
-      const isRead=!!readMap[r.id];
-      const tick=mine?(isRead?'✓✓':'✓'):'';
+      const isRead=!!readMap[r.id] && readMap[r.id].by!==currentAuthor;
+      const tick=isRead?'✓✓':'✓';
       return `<div class="chat-bubble-row ${cls}" data-id="${esc(r.id)}"><article class="chat-bubble">
         <div class="chat-bubble-name">${esc(r.author_name)} ${String(r.author_name||'').includes('فاضل')?'👑':'🎀'}</div>
         <div class="chat-bubble-text">${String(r.content||'').startsWith('🎨 نقاشی مشترک ما\n')?`<div class="shared-drawing-message"><div class="drawing-msg-title">🎨 نقاشی مشترک ما</div><img src="${esc(String(r.content).slice(12))}" alt="نقاشی مشترک فاضل و الهام" loading="lazy"></div>`:esc(r.content)}</div>
@@ -1632,21 +1643,23 @@ body.messenger-fullscreen .chat-panel .chat-toy{z-index:2!important;opacity:.42!
         ${reaction?`<div class="chat-reaction-row"><button class="chat-react" data-react-id="${esc(r.id)}">${esc(reaction)} 1</button></div>`:''}
       </article></div>`;
     }).join('');
-    if(wasAwayFromBottom && newBtn && rows.length){ unseen=Math.min(unseen+1,99); newCount.textContent=String(unseen); newBtn.classList.add('show'); }
+    if(wasAwayFromBottom && newBtn && visibleRows.length){ unseen=Math.min(unseen+1,99); newCount.textContent=String(unseen); newBtn.classList.add('show'); }
     notesBox.querySelectorAll('.chat-delete').forEach(b=>b.addEventListener('click',async()=>{if(!b.dataset.id)return;const {error}=await db.from('love_notes').delete().eq('id',b.dataset.id);if(error)toast('حذف نشد؛ دوباره امتحان کن 🥹')}));
     notesBox.querySelectorAll('.chat-react').forEach(b=>b.addEventListener('click',()=>{delete reactions[b.dataset.reactId];saveReactions();renderNotes(rows)}));
     notesBox.querySelectorAll('.chat-bubble').forEach(b=>b.addEventListener('dblclick',()=>{const id=b.closest('.chat-bubble-row')?.dataset.id;if(!id)return;reactions[id]=reactions[id]?'': '❤️';saveReactions();renderNotes(rows)}));
     wireSuperMessageActions(rows);
     if(window.__wirePremiumLongPress)window.__wirePremiumLongPress();
-    // Messages visible to the current viewer are marked read locally.
-    clearTimeout(markReadTimer);markReadTimer=setTimeout(()=>{
-      let changed=false;
-      rows.forEach(r=>{
-        const isMine=(String(r.author_name||'').includes('الهام') ? 'الهام':'فاضل')===currentAuthor;
-        if(!isMine && !readMap[r.id]){readMap[r.id]=Date.now();changed=true;}
-      });
-      if(changed){localStorage.setItem('fazelElhamReadMessages_v1',JSON.stringify(readMap));}
-    },220);
+    // Real cross-device read receipts. When the other person's message is visible,
+    // write one lightweight receipt into the existing table. The receipt itself is hidden.
+    clearTimeout(markReadTimer);markReadTimer=setTimeout(async()=>{
+      const incoming=visibleRows.filter(r=>String(r.author_name||'').includes('الهام') ? currentAuthor==='فاضل' : currentAuthor==='الهام');
+      const missing=incoming.filter(r=>!readMap[r.id] || readMap[r.id].by!==currentAuthor);
+      for(const r of missing.slice(-30)){
+        const marker='\u2063READ_RECEIPT|'+String(r.id)+'|'+currentAuthor+'|'+Date.now();
+        try{await db.from('love_notes').insert({room_id:ROOM,author_id:currentUser?.id,author_name:currentAuthor,content:marker});readMap[r.id]={by:currentAuthor,at:Date.now()};}catch(e){console.warn('read receipt failed',e)}
+      }
+      if(missing.length) loadNotes();
+    },260);
     if(window.__chatBurstPending){
       window.__chatBurstPending=false;
       const last=notesBox.querySelector('.chat-bubble-row:last-of-type');
@@ -1659,7 +1672,7 @@ body.messenger-fullscreen .chat-panel .chat-toy{z-index:2!important;opacity:.42!
   }
   window.__renderNotesNow=()=>{if(window.__lastChatRows)renderNotes(window.__lastChatRows)};
   function wireSuperMessageActions(rows){notesBox.querySelectorAll('[data-reply-id]').forEach(b=>b.addEventListener('click',()=>{const r=rows.find(x=>String(x.id)===String(b.dataset.replyId));if(r)setReply(r.author_name+': '+String(r.content||''))}));notesBox.querySelectorAll('[data-star-id]').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.starId;starred[id]=!starred[id];saveFlags();renderNotes(rows)}));notesBox.querySelectorAll('[data-pin-id]').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.pinId;pinned[id]=!pinned[id];saveFlags();renderNotes(rows)}));}
-async function loadNotes(){const {data,error}=await db.from('love_notes').select('*').eq('room_id',ROOM).order('created_at',{ascending:true}).limit(100);if(error){setStatus('⚠️ اتصال دفتر برقرار نشد',true);console.error(error);return}window.__lastChatRows=data||[];renderNotes(window.__lastChatRows);setStatus('')}
+async function loadNotes(){const {data,error}=await db.from('love_notes').select('*').eq('room_id',ROOM).order('created_at',{ascending:true}).limit(500);if(error){setStatus('⚠️ اتصال دفتر برقرار نشد',true);console.error(error);return}window.__lastChatRows=data||[];renderNotes(window.__lastChatRows);setStatus('')}
   async function init(){setStatus('');let {data:{session}}=await db.auth.getSession();if(!session){const r=await db.auth.signInAnonymously();if(r.error){setStatus('⚠️ ورود آنلاین فعال نیست: '+(r.error?.message||'خطا'),true);console.error(r.error);return}session=r.data.session}currentUser=session?.user||null;await loadNotes();
     const presence=db.channel('love-presence',{config:{presence:{key:currentUser?.id||Math.random().toString(36).slice(2)}}});
     presence.on('presence',{event:'sync'},()=>{const me=renderPresence(presence.presenceState());setStatus('')});
@@ -2661,5 +2674,57 @@ syncSpeaker();remaining();
 })();
 </script>
 
+
+<style id="elham-ribbon-orbit-v4">
+#messengerOverlay .chat-bubble-row.mine .chat-bubble:before{content:"";position:absolute;inset:-3px;border-radius:inherit;pointer-events:none;z-index:-1;border:2px solid transparent;border-left-color:#48a8ff;border-bottom-color:#177cff;filter:drop-shadow(0 0 5px rgba(48,143,255,.55));animation:blueOrbit 3.8s linear infinite}
+#messengerOverlay .chat-bubble-row.theirs .chat-bubble:before{content:"";position:absolute;inset:-3px;border-radius:inherit;pointer-events:none;z-index:-1;border:2px solid transparent;border-right-color:#ff72b8;border-top-color:#ff3d98;filter:drop-shadow(0 0 5px rgba(255,67,165,.5));animation:pinkOrbit 3.8s linear infinite}
+#messengerOverlay .chat-bubble-row.theirs .chat-bubble:after{content:"🎀";position:absolute;top:-8px;right:22%;font-size:11px;line-height:1;z-index:3;pointer-events:none;filter:drop-shadow(0 2px 4px rgba(255,75,170,.5));animation:ribbonOrbit 3.6s ease-in-out infinite}
+#messengerOverlay .chat-bubble-row.theirs .chat-bubble{overflow:visible!important}
+@keyframes ribbonOrbit{0%{transform:translate(0,0) rotate(-12deg)}25%{transform:translate(32px,8px) rotate(10deg)}50%{transform:translate(8px,calc(100% + 4px)) rotate(18deg)}75%{transform:translate(-34px,8px) rotate(-8deg)}100%{transform:translate(0,0) rotate(-12deg)}}
+@media(max-width:600px){#messengerOverlay .chat-bubble-row.theirs .chat-bubble:after{font-size:9px;top:-7px}}
+</style>
+
+<style id="v20-neon-ticks-fix">
+/* V20 — stable neon orbit + visible delivery/read ticks for BOTH people */
+#messengerOverlay .chat-bubble{position:relative!important;overflow:visible!important;isolation:isolate!important}
+#messengerOverlay .chat-bubble::before{
+  content:"";position:absolute;inset:-2px;border-radius:inherit;padding:2px;
+  background:conic-gradient(from 0deg,transparent 0deg,transparent 275deg,var(--neon-a) 310deg,var(--neon-b) 340deg,transparent 360deg);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  pointer-events:none;z-index:0;animation:neonOrbit 2.6s linear infinite;
+  filter:drop-shadow(0 0 3px var(--neon-a)) drop-shadow(0 0 7px var(--neon-b));
+}
+#messengerOverlay .chat-bubble-row.mine .chat-bubble{--neon-a:#35a9ff;--neon-b:#74e7ff}
+#messengerOverlay .chat-bubble-row.theirs .chat-bubble{--neon-a:#ff3f9f;--neon-b:#ff9ed4}
+#messengerOverlay .chat-bubble>*{position:relative;z-index:1}
+@keyframes neonOrbit{to{transform:rotate(360deg)}}
+#messengerOverlay .chat-ticks{position:relative;z-index:3;font-size:12px;min-width:19px;font-weight:900;letter-spacing:-3px;line-height:1;text-shadow:0 0 5px currentColor}
+#messengerOverlay .chat-ticks.sent{color:#d9d2dc!important}
+#messengerOverlay .chat-ticks.read{color:#51c7ff!important;text-shadow:0 0 5px #51c7ff,0 0 10px rgba(81,199,255,.55)!important}
+@media(max-width:600px){
+  #messengerOverlay .chat-bubble::before{inset:-1.5px;padding:1.5px;filter:drop-shadow(0 0 2px var(--neon-a)) drop-shadow(0 0 5px var(--neon-b));animation-duration:3s}
+  #messengerOverlay .chat-ticks{font-size:11px}
+}
+@media(prefers-reduced-motion:reduce){#messengerOverlay .chat-bubble::before{animation:none}}
+</style>
+
+<style id="mobile-performance-and-neon-v6">
+#messengerOverlay .chat-bubble{position:relative!important;isolation:isolate!important;overflow:visible!important;border:1px solid rgba(255,255,255,.13)!important}
+#messengerOverlay .chat-bubble::before{content:"";position:absolute;inset:-2px;border-radius:inherit;padding:1.5px;background:linear-gradient(90deg,var(--neon-a),var(--neon-b),var(--neon-a));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:-1;opacity:.95;animation:luxNeonPulse 2.8s ease-in-out infinite;filter:drop-shadow(0 0 3px var(--neon-a))}
+#messengerOverlay .chat-bubble-row.mine .chat-bubble{--neon-a:#25a7ff;--neon-b:#70e8ff}
+#messengerOverlay .chat-bubble-row.theirs .chat-bubble{--neon-a:#ff3d9b;--neon-b:#ff9bd2}
+@keyframes luxNeonPulse{0%,100%{opacity:.72}50%{opacity:1}}
+#messengerOverlay .chat-bubble-row.theirs .chat-bubble::after{content:"🎀";position:absolute;right:-7px;top:10px;font-size:10px;line-height:1;z-index:4;animation:ribbonFloat 2.4s ease-in-out infinite;pointer-events:none;filter:drop-shadow(0 0 3px rgba(255,76,170,.75))}
+@keyframes ribbonFloat{0%,100%{transform:translateY(0) rotate(-7deg)}50%{transform:translateY(5px) rotate(7deg)}}
+@media(max-width:700px){
+#messengerOverlay .chat-panel,#messengerOverlay .chat-head,#messengerOverlay .chat-messages,#messengerOverlay .chat-compose,#messengerOverlay .chat-input-wrap,#messengerOverlay .chat-bubble,#messengerOverlay .chat-reactions,#messengerOverlay .chat-typing{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+#messengerOverlay .chat-bubble{box-shadow:0 5px 14px rgba(0,0,0,.16)!important}
+#messengerOverlay .chat-bubble::before{animation-duration:3.8s;filter:drop-shadow(0 0 2px var(--neon-a))}
+#messengerOverlay .chat-bubble-row.theirs .chat-bubble::after{font-size:9px;right:-6px}
+#messengerOverlay .chat-messages{contain:strict!important}
+}
+@media(prefers-reduced-motion:reduce){#messengerOverlay .chat-bubble::before,#messengerOverlay .chat-bubble-row.theirs .chat-bubble::after{animation:none!important}}
+</style>
 </body>
 </html>
