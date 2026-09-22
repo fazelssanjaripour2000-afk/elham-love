@@ -3,6 +3,9 @@ const json = (statusCode, body) => ({
   headers: {
     "Content-Type": "application/json; charset=utf-8",
     "Cache-Control": "no-store",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
   },
   body: JSON.stringify(body),
 });
@@ -12,33 +15,28 @@ const SYSTEM_PROMPT = `تو «مشاور رابطه» برای یک زوج به 
 
 قواعد:
 - بین اتفاق/واقعیت، برداشت، احساس و نیاز/درخواست تفاوت بگذار.
-- هیچ‌کدام را سرزنش، تحقیر یا مسخره نکن و درباره نیت‌های پنهان حدس قطعی نزن.
+- هیچ‌کدام را سرزنش، تحقیر یا مسخره نکن.
+- درباره نیت‌های پنهان حدس قطعی نزن.
 - اگر اطلاعات کافی نیست، سؤال روشن‌کننده بپرس.
 - حرف هر دو نفر را با وزن برابر و با دقت بررسی کن.
 - به جای تعیین مقصر، روی مسئله، نیازهای دو طرف و راه‌حل قابل اجرا تمرکز کن.
 - اگر مناسب بود، جمله‌های آماده برای گفت‌وگوی آرام پیشنهاد بده.
 - اگر هر دو نفر روی یک راه‌حل توافق کردند، آن را به یک توافق کوتاه، روشن و دوطرفه تبدیل کن.
-- اگر یکی از دو نفر هنوز ناراضی است، مسئله را باز کن و برای رسیدن به راه‌حل دیگری سؤال بپرس؛ توافق را تحمیل نکن.
+- اگر یکی از دو نفر هنوز ناراضی است، توافق را تحمیل نکن و سؤال روشن‌کننده بپرس.
 - از اطلاعات خصوصی یک نفر برای فشار آوردن به نفر دیگر استفاده نکن.
 - تشخیص پزشکی یا روان‌شناختی نده.
-- اگر نشانه‌ای از خشونت، تهدید، اجبار، آزار یا خطر فوری وجود دارد، اولویت با امنیت فرد در معرض خطر است و باید به کمک محلی، فرد مورد اعتماد یا خدمات اضطراری مناسب توصیه کنی.
-- پاسخ‌ها فارسی، گرم، محترمانه و کاربردی باشند و از طولانی‌گویی غیرضروری پرهیز کن.`;
+- اگر نشانه‌ای از خشونت، تهدید، اجبار، آزار یا خطر فوری وجود دارد، اولویت با امنیت فرد در معرض خطر است.
+- پاسخ‌ها فارسی، گرم، محترمانه و کاربردی باشند.`;
 
 exports.handler = async (event) => {
   if (event.httpMethod === "OPTIONS") {
-    return {
-      statusCode: 204,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Methods": "POST, OPTIONS",
-      },
-      body: "",
-    };
+    return json(204, {});
   }
 
   if (event.httpMethod !== "POST") {
-    return json(405, { error: "Method not allowed" });
+    return json(405, {
+      error: "Method not allowed",
+    });
   }
 
   if (!process.env.OPENAI_API_KEY) {
@@ -62,7 +60,9 @@ exports.handler = async (event) => {
     : [];
 
   const speaker =
-    payload.speaker === "الهام" ? "الهام" : "فاضل";
+    payload.speaker === "الهام"
+      ? "الهام"
+      : "فاضل";
 
   const safeMessages = messages
     .filter(
@@ -93,20 +93,26 @@ exports.handler = async (event) => {
         },
       ],
     },
+
     {
       role: "developer",
       content: [
         {
           type: "input_text",
-          text: `پیام فعلی از طرف «${speaker}» است. فقط برای درک گوینده از این اطلاعات استفاده کن.`,
+          text:
+            `پیام فعلی از طرف «${speaker}» است. فقط برای درک گوینده از این اطلاعات استفاده کن.`,
         },
       ],
     },
+
     ...safeMessages.map((m) => ({
       role: m.role,
       content: [
         {
-          type: "input_text",
+          type:
+            m.role === "assistant"
+              ? "output_text"
+              : "input_text",
           text: m.content,
         },
       ],
@@ -118,10 +124,13 @@ exports.handler = async (event) => {
       "https://api.openai.com/v1/responses",
       {
         method: "POST",
+
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
+          "Authorization":
+            `Bearer ${process.env.OPENAI_API_KEY}`,
         },
+
         body: JSON.stringify({
           model: "gpt-5.6-luna",
           input,
@@ -136,7 +145,9 @@ exports.handler = async (event) => {
 
     try {
       data = raw ? JSON.parse(raw) : {};
-    } catch (_) {}
+    } catch (_) {
+      data = {};
+    }
 
     if (!response.ok) {
       const message =
@@ -144,25 +155,28 @@ exports.handler = async (event) => {
         "خطا در ارتباط با OpenAI";
 
       return json(
-        response.status >= 400 && response.status < 500
+        response.status >= 400 &&
+        response.status < 500
           ? response.status
           : 502,
-        { error: message }
+        {
+          error: message,
+        }
       );
     }
 
     const reply = (data.output || [])
-      .flatMap(item =>
+      .flatMap((item) =>
         item?.type === "message"
-          ? (item.content || [])
+          ? item.content || []
           : []
       )
       .filter(
-        item =>
+        (item) =>
           item?.type === "output_text" &&
           typeof item.text === "string"
       )
-      .map(item => item.text)
+      .map((item) => item.text)
       .join("\n")
       .trim();
 
@@ -172,13 +186,19 @@ exports.handler = async (event) => {
       });
     }
 
-    return json(200, { reply });
+    return json(200, {
+      reply,
+    });
 
   } catch (error) {
-    console.error("OpenAI request failed:", error);
+    console.error(
+      "OpenAI request failed:",
+      error
+    );
 
     return json(502, {
-      error: "ارتباط با سرویس مشاوره برقرار نشد.",
+      error:
+        "ارتباط با سرویس مشاوره برقرار نشد.",
     });
   }
 };
