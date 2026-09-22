@@ -1693,7 +1693,6 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
     try{
       const r=await fetch(FN,{
         method:'POST',
-        mode:'cors',
         headers:{'Content-Type':'text/plain;charset=UTF-8'},
         body:JSON.stringify({messages:history.slice(-24),speaker})
       });
