@@ -920,7 +920,7 @@ html.trading-section-active .relationship-widget{
   <div class="et-wrap">
     <div class="et-title">
       <div><h2>👑 بازار الهام</h2><p>کندل‌ها زنده حرکت می‌کنند و نتیجه معامله لحظه‌ای تغییر می‌کند.</p></div>
-      <div class="et-wallet"><small>موجودی</small><b id="etBalance">10,000.00 $</b></div>
+      <div class="et-wallet"><small>موجودی</small><b id="etBalance">300.00 $</b></div>
     </div>
 
     <div class="et-assets" id="etAssets">
@@ -976,7 +976,7 @@ html.trading-section-active .relationship-widget{
     </div>
     <div class="et-equity-box">
       <span>موجودی فعلی</span>
-      <strong id="etBalanceLedger">10,000.00</strong>
+      <strong id="etBalanceLedger">300.00</strong>
       <small>USDT</small>
     </div>
   </div>
@@ -2580,19 +2580,36 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
   const byId=id=>document.getElementById(id);
 
   const assets={
-    ELHAM:{price:100,seed:100,drift:.48},
-    QUEEN:{price:74,seed:74,drift:.42},
-    LOVE:{price:128,seed:128,drift:.56},
-    ELHAM2:{price:92,seed:92,drift:.45}
+    ELHAM:{price:100,seed:100,drift:.14},
+    QUEEN:{price:74,seed:74,drift:.12},
+    LOVE:{price:128,seed:128,drift:.16},
+    ELHAM2:{price:92,seed:92,drift:.13}
   };
 
   const TF={10:10,60:60,300:300,900:900};
   let current='ELHAM', candles=[], zoom=1, paused=false;
   let mode='buy', position=null, history=[], daily=0;
-  const LEDGER_KEY='elhamTradingLedgerV2', START_BALANCE=10000;
+  const LEDGER_KEY='elhamTradingLedgerFresh300V1', START_BALANCE=300;
   let ledger;
-  try{ ledger=JSON.parse(localStorage.getItem(LEDGER_KEY)||'null'); }catch(e){ ledger=null; }
-  if(!ledger || typeof ledger!=='object') ledger={balance:START_BALANCE,realizedPnl:0,trades:[],transactions:[],daily:{}};
+  let hasV3=false;
+  try{
+    const rawV3=localStorage.getItem(LEDGER_KEY);
+    hasV3=!!rawV3;
+    ledger=JSON.parse(rawV3||'null');
+  }catch(e){ ledger=null; }
+  if(!ledger || typeof ledger!=='object'){
+    // If an older test ledger exists, carry it forward; otherwise start Elham's account at $300.
+    try{
+      const old=JSON.parse(localStorage.getItem('elhamTradingLedgerV2')||'null');
+      if(old && Array.isArray(old.trades) && old.trades.length){
+        ledger=old;
+      }else{
+        ledger={balance:START_BALANCE,realizedPnl:0,trades:[],transactions:[],daily:{}};
+      }
+    }catch(e){
+      ledger={balance:START_BALANCE,realizedPnl:0,trades:[],transactions:[],daily:{}};
+    }
+  }
   ledger.balance=Number.isFinite(+ledger.balance)?+ledger.balance:START_BALANCE;
   ledger.realizedPnl=Number.isFinite(+ledger.realizedPnl)?+ledger.realizedPnl:0;
   ledger.trades=Array.isArray(ledger.trades)?ledger.trades:[];
@@ -2607,6 +2624,7 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
   function recordLedgerDay(pnl,ts){
     const d=ledgerDay(ts); ledger.daily[d]=Number(ledger.daily[d]||0)+Number(pnl||0);
   }
+  saveLedger();
   function syncLedgerUI(){
     const balance=byId('etBalanceLedger'), top=byId('etBalance');
     if(balance) balance.textContent=money(ledger.balance);
@@ -2620,9 +2638,13 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
     if(tc)tc.textContent=String(ledger.trades.length);
     if(tt){tt.textContent=(total>=0?'+':'')+money(total);tt.className=total>=0?'et-profit':'et-loss'}
     const tl=byId('etTradeLedger');
-    if(tl)tl.innerHTML=ledger.trades.slice(0,100).map(t=>'<div class="et-ledger-row"><div><b>'+t.asset+'</b><small>'+(t.side==='buy'?'خرید':'فروش')+' · '+(t.status==='open'?'باز':'بسته')+'</small></div><div>'+money(t.amount)+'<small>سرمایه</small></div><div>'+money(t.entryPrice)+'<small>ورود</small></div><div class="'+(t.pnl>=0?'et-profit':t.pnl<0?'et-loss':'')+'">'+(t.status==='open'?'باز':(t.pnl>=0?'+':'')+money(t.pnl))+'<small>'+ledgerDay(t.closedAt||t.openedAt)+'</small></div></div>').join('')||'<div style="padding:20px;text-align:center;color:rgba(255,255,255,.5)">هنوز معامله‌ای ثبت نشده.</div>';
+    if(tl)tl.innerHTML=ledger.trades.slice(0,100).map(t=>{
+      const opened=new Date(t.openedAt||Date.now()).toLocaleString('fa-IR',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'});
+      const closed=t.status==='closed'&&t.closedAt?new Date(t.closedAt).toLocaleString('fa-IR',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}):'باز';
+      return '<div class="et-ledger-row"><div><b>'+(t.asset==='FAZEL'?'ELHAM':t.asset)+'</b><small>'+(t.side==='buy'?'خرید':'فروش')+' · '+(t.status==='open'?'باز':'بسته')+'</small></div><div>'+money(t.amount)+'<small>سرمایه</small></div><div>'+money(t.entryPrice)+'<small>ورود · '+opened+'</small></div><div class="'+(t.pnl>=0?'et-profit':t.pnl<0?'et-loss':'')+'">'+(t.status==='open'?'باز':(t.pnl>=0?'+':'')+money(t.pnl))+'<small>'+(t.status==='open'?'باز':('خروج · '+closed))+'</small></div></div>';
+    }).join('')||'<div style="padding:20px;text-align:center;color:rgba(255,255,255,.5)">هنوز معامله‌ای ثبت نشده.</div>';
     const tx=byId('etTransactionLedger');
-    if(tx)tx.innerHTML=ledger.transactions.slice(0,100).map(x=>'<div class="et-ledger-row"><div><b>'+(x.type==='open'?'باز کردن معامله':'بستن معامله')+'</b><small>'+x.meta+'</small></div><div class="'+(x.amount>=0?'et-profit':'et-loss')+'">'+(x.amount>=0?'+':'')+money(x.amount)+'</div><div>'+money(x.balance)+'<small>موجودی بعد تراکنش</small></div><div><small>'+new Date(x.time).toLocaleString('fa-IR')+'</small></div></div>').join('')||'<div style="padding:20px;text-align:center;color:rgba(255,255,255,.5)">تراکنشی ثبت نشده.</div>';
+    if(tx)tx.innerHTML=ledger.transactions.slice(0,100).map(x=>'<div class="et-ledger-row"><div><b>'+(x.type==='open'?'باز کردن معامله':'بستن معامله')+'</b><small>'+String(x.meta||'').replace(/FAZEL/g,'ELHAM').replace(/فاضل/g,'الهام')+'</small></div><div class="'+(x.amount>=0?'et-profit':'et-loss')+'">'+(x.amount>=0?'+':'')+money(x.amount)+'</div><div>'+money(x.balance)+'<small>موجودی بعد تراکنش</small></div><div><small>'+new Date(x.time).toLocaleString('fa-IR')+'</small></div></div>').join('')||'<div style="padding:20px;text-align:center;color:rgba(255,255,255,.5)">تراکنشی ثبت نشده.</div>';
     const dl=byId('etDailyLedger');
     if(dl){
       const keys=Object.keys(ledger.daily).sort().reverse();
@@ -2641,11 +2663,11 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
     const now=Date.now();
     for(let i=0;i<90;i++){
       const o=p;
-      const shock=Math.random()<.08?4.5:1.4;
+      const shock=Math.random()<.04?1.8:1.05;
       const d=(Math.random()-.47)*assets[current].drift*shock;
       const c=Math.max(.01,o+d);
-      const h=Math.max(o,c)+Math.random()*assets[current].drift*(Math.random()<.12?3:1);
-      const l=Math.max(.01,Math.min(o,c)-Math.random()*assets[current].drift*(Math.random()<.12?3:1));
+      const h=Math.max(o,c)+Math.random()*assets[current].drift*(Math.random()<.08?1.8:1);
+      const l=Math.max(.01,Math.min(o,c)-Math.random()*assets[current].drift*(Math.random()<.08?1.8:1));
       candles.push({o,c,h,l,volume:20+Math.random()*80,time:now-(90-i)*timeframe*1000});
       p=c;
     }
@@ -2768,17 +2790,17 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
     if(paused)return;
     Object.keys(assets).forEach(k=>{
       const a=assets[k],o=a.price;
-      const regime=Math.random()<.16?3.8:Math.random()<.08?7.5:1.25;
-      const momentum=(Math.random()-.5)*a.drift*.9;
-      const impulse=(Math.random()<.07?(Math.random()<.5?-1:1)*a.drift*regime:0);
-      a.price=Math.max(.01,o+momentum+(Math.random()-.44)*a.drift*regime+impulse);
+      const regime=Math.random()<.08?1.8:1.0;
+      const momentum=(Math.random()-.5)*a.drift*.55;
+      const impulse=(Math.random()<.025?(Math.random()<.5?-1:1)*a.drift*regime:0);
+      a.price=Math.max(.01,o+momentum+(Math.random()-.48)*a.drift*regime+impulse);
     });
     const a=assets[current],o=candles.length?candles[candles.length-1].c:a.price;
     const d=a.price-o;
     candles.push({
       o,c:a.price,
-      h:Math.max(o,a.price)+Math.random()*a.drift*(Math.random()<.18?3.8:1.15),
-      l:Math.max(.01,Math.min(o,a.price)-Math.random()*a.drift*(Math.random()<.18?3.8:1.15)),
+      h:Math.max(o,a.price)+Math.random()*a.drift*(Math.random()<.08?1.8:1.05),
+      l:Math.max(.01,Math.min(o,a.price)-Math.random()*a.drift*(Math.random()<.08?1.8:1.05)),
       volume:20+Math.random()*100,
       time:Date.now()
     });
@@ -2969,3 +2991,4 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
 </script>
 </body>
 </html>
+                                                                                                                                                                                                                                            
