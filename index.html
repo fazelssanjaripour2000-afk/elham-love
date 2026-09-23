@@ -846,6 +846,7 @@ html.trading-section-active .relationship-widget{
 <button class="nook-tool" data-room="cards"><span>💌</span><b>کارت عاشقانه</b><small>یک پیام تصادفی برای هم</small></button>
 <button class="nook-tool" data-room="time"><span>⏳</span><b>لحظه‌مون</b><small>یک تایمر برای یک قرار کوچک</small></button><button class="nook-tool" data-room="counselor"><span>🧠</span><b>مشاور رابطه</b><small>حرف بزنیم و بهتر همدیگه رو بفهمیم</small></button>
 <button class="nook-tool" data-room="bonk"><span>🩷</span><b>اتاق شیطنت الهام</b><small>کتکِ کارتونیِ بامزه 😭😂</small></button>
+<button class="nook-tool" data-room="truthbomb"><span>🧠</span><b>جرئت حقیقتِ بی‌رحم</b><small>۵۰۰ سؤال سخت؛ تصادفی و بدون تکرار</small></button>
 </div>
 <div class="nook-panels">
 <div class="nook-panel active chat-panel" data-panel="notes"><div aria-hidden="true" class="chat-toys"><span class="chat-toy toy-a">🧸</span><span class="chat-toy toy-b">🐰</span><span class="chat-toy toy-c">🐱</span><span class="chat-toy toy-d">🐥</span></div>
@@ -886,6 +887,12 @@ html.trading-section-active .relationship-widget{
 <div class="nook-panel" data-panel="mood"><div class="panel-title"><span>🕯️</span><div><h3>نور و حالِ اتاق</h3><p>یکی از فضاها رو انتخاب کن تا حال‌وهوای گوشه دنج عوض بشه.</p></div></div><div class="mood-grid"><button data-mood="night">🌙<b>شب آرام</b></button><button data-mood="pink">🌸<b>عاشقانه</b></button><button data-mood="dream">✨<b>رویایی</b></button><button data-mood="cozy">🔥<b>گرم و دنج</b></button></div></div>
 <div class="nook-panel" data-panel="cards"><div class="panel-title"><span>💌</span><div><h3>یک کارت برای تو</h3><p>دکمه رو بزن و یک پیام مخصوص بگیر.</p></div></div><div class="love-card" id="loveCard">«هرجا باشی، یه گوشه از قلبم همیشه برای تو روشنه.» ❤️</div><button class="btn primary" id="newLoveCard">یکی دیگه بده ✨</button></div>
 <div class="nook-panel" data-panel="time"><div class="panel-title"><span>⏳</span><div><h3>قرار ۵ دقیقه‌ای</h3><p>تایمر رو بزن؛ پنج دقیقه فقط برای خودتون.</p></div></div><div class="cozy-timer" id="cozyTimer">05:00</div><button class="btn primary" id="startCozyTimer">شروع لحظه‌مون ❤️</button><p class="timer-msg" id="cozyTimerMsg">وقتی شروعش کردی، گوشی رو کنار بذار و فقط با هم باشین.</p></div><div class="nook-panel" data-panel="counselor"><div class="panel-title"><span>🧠</span><div><h3>مشاور رابطه ما ❤️</h3><p>اینجا دعوا ممنوع؛ حرف‌هامون رو با عشق، کمی شوخی و بدون طرفداری باز می‌کنیم 😄</p></div></div><div class="ai-who" aria-label="انتخاب گوینده"><span class="ai-who-label">الان کیه؟</span><button type="button" data-ai-speaker="فاضل">فاضل</button><button type="button" data-ai-speaker="الهام">الهام</button><span class="ai-who-current" id="aiWhoCurrent">فاضل انتخاب شده ❤️</span></div><div class="ai-quick"><button data-ai-prompt="بین ما یک سوءتفاهم پیش آمده؛ کمکمون کن بدون سرزنش درباره‌اش حرف بزنیم." type="button">🫶 سوءتفاهم</button><button data-ai-prompt="کمکم کن احساساتم را بدون دعوا و سرزنش به طرف مقابلم بگویم." type="button">💬 چطور بگم؟</button><button data-ai-prompt="یک تمرین کوتاه دونفره برای بهتر شنیدن و فهمیدن همدیگه بهمون بده." type="button">❤️ تمرین دونفره</button><button data-ai-prompt="امشب فقط ۱۰ دقیقه وقت داریم؛ یک گفت‌وگوی صمیمی و مفید برایمان طراحی کن." type="button">🌙 گفت‌وگوی امشب</button></div><div class="ai-messages" id="aiMessages"><div class="ai-msg bot"><span class="ai-label">مشاور گوشه دنج</span>سلام فاضل و الهام ❤️ من اینجام که بدون قضاوت کمکتون کنم بهتر حرف همدیگه رو بشنوین. هر چیزی هست، از همین‌جا شروع کنین.</div></div><div class="ai-compose"><textarea id="aiInput" placeholder="مثلاً: امروز از یه حرف الهام ناراحت شدم ولی نمی‌خوام بحث کنیم..."></textarea><button class="btn primary" id="aiSend">فرستادن ❤️</button></div><div class="ai-status" id="aiStatus">☁️ آماده‌ام</div><p class="ai-note">این مشاور جای درمانگر یا متخصص سلامت روان نیست؛ برای گفت‌وگو و کمک عمومی در رابطه طراحی شده.</p></div>
+<div class="nook-panel truthbomb-panel" data-panel="truthbomb">
+<div class="truthbomb-head"><div><span class="secret-badge">500 QUESTIONS • NO EASY ESCAPE</span><h3>جرئت حقیقتِ مغزجر 💀🧠</h3><p>هر بار یک سؤال تصادفی می‌گیری؛ تا وقتی ۵۰۰ سؤال تموم نشده، سؤال تکراری نمیاد.</p></div><div class="truthbomb-count" id="truthbombCount">۰ / ۵۰۰</div></div>
+<div class="truthbomb-card" id="truthbombCard"><div class="truthbomb-number" id="truthbombNumber">سؤال ۰۰۱</div><div class="truthbomb-question" id="truthbombQuestion">دکمه رو بزن؛ ببین امروز قرعه به اسم کدوم سؤال می‌افته. 😈</div></div>
+<div class="truthbomb-actions"><button class="btn primary" id="truthbombRandom">🎲 سؤال رندوم بده</button><button class="btn" id="truthbombSend">💌 بفرست به دفتر دوتایی</button><button class="btn" id="truthbombReset">♻️ از اول</button></div>
+<div class="truthbomb-status" id="truthbombStatus">هنوز سؤالی انتخاب نشده.</div>
+</div>
 <div class="nook-panel bonk-panel" data-panel="bonk">
 <div class="bonk-head"><div><span class="secret-badge">ELHAM'S PLAYFUL ZONE • CARTOON ONLY</span><h3>اتاق شیطنت الهام 😭🩷</h3><p>الهام وسیله رو انتخاب می‌کنه، می‌زنه و پسره هم با هر ضربه قیافه‌ش رو عوض می‌کنه 😂</p></div><div class="bonk-count" id="bonkCount">۰ ضربه</div></div>
 <div class="bonk-stage" id="bonkStage">
@@ -1151,6 +1158,148 @@ const relationshipJokes=['😂 رابطه ما: ۱۰٪ آرامش، ۹۰٪ کل�
 window.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('messenger-fullscreen')){document.body.classList.remove('messenger-fullscreen');}});
 window.addEventListener('orientationchange',()=>setTimeout(()=>{try{if(document.body.classList.contains('messenger-fullscreen')){const c=document.getElementById('loveCanvas');if(c&&document.querySelector('.nook-panel[data-panel="drawing"].active')){const r=c.getBoundingClientRect();if(r.width>0&&r.height>0) c.dispatchEvent(new Event('canvas-visible-resize'))}}}catch(e){}},180));
 
+
+
+/* ===== 500 Truth Bomb Questions ===== */
+(()=>{
+ const core=[
+ 'اگر امروز برای اولین بار منو می‌دیدی، با شناختی که الان از من داری باز هم انتخابم می‌کردی؟',
+ 'کدوم ویژگی من رو بیشتر از چیزی که اعتراف می‌کنی تحمل می‌کنی؟',
+ 'تا حالا جدی به تمام کردن رابطه‌مون فکر کردی؟ چه چیزی باعثش شد؟',
+ 'کدوم بخش رابطه‌مون رو بیشتر از چیزی که واقعاً هست، به خودت قبولوندی؟',
+ 'اگر هیچ ترسی از ناراحت شدن من نداشتی، درباره رابطه‌مون چه چیزی رو تغییر می‌دادی؟',
+ 'بدترین فکری که وسط یکی از دعواهامون درباره من کردی چی بود؟',
+ 'کدوم حرف عاشقانه‌ای که بهم زدی بیشتر برای خوشحال کردن من بود تا احساس واقعی؟',
+ 'چه چیزی درباره من هست که هنوز مطمئن نیستی بتوانی تا سال‌ها تحملش کنی؟',
+ 'اگر یک نفر دقیقاً مثل من ولی آرام‌تر وارد زندگیت می‌شد، چه چیزی باعث می‌شد هنوز منو انتخاب کنی؟',
+ 'کدوم دعوای ما هنوز ته دلت حل نشده؟',
+ 'تا حالا شده پیامم رو ببینی و عمداً جواب ندی؟ دلیل واقعی چی بود؟',
+ 'کدوم رفتار من باعث شده یک بار با خودت بگی شاید این آدم مناسب من نیست؟',
+ 'اگر قرار بود فقط یک خاطره از ما باقی بمونه، کدوم رو نگه می‌داشتی؟',
+ 'اگر می‌توانستی یک خاطره از رابطه‌مون رو پاک کنی، کدوم بود؟',
+ 'کدوم ترس درباره آینده ما رو هیچ‌وقت کامل به زبون نیاوردی؟',
+ 'اگر من یک روز کامل از زندگیت حذف می‌شدم، بیشتر دلت برای چی تنگ می‌شد؟',
+ 'کدوم قسمت شخصیت من رو اول دوست نداشتی ولی بعداً بهش وابسته شدی؟',
+ 'تا حالا شده به خاطر لجبازی بدونی حق با منه ولی عذرخواهی نکنی؟',
+ 'کدوم حقیقت درباره خودت رو فکر می‌کنی من هنوز نفهمیدم؟',
+ 'اگر مجبور باشی یک عادت من رو برای همیشه حذف کنی، کدومه؟',
+ 'چه چیزی باعث می‌شه گاهی به جای حرف زدن، سکوت کنی؟',
+ 'کدوم جمله من می‌تونه در بدترین لحظه هم دلت رو نرم کنه؟',
+ 'کدوم جمله من بیشترین اثر منفی رو روی تو گذاشته؟',
+ 'اگر رابطه ما یک اشتباه بود، فکر می‌کنی بزرگ‌ترین اشتباهش چی بود؟',
+ 'کدوم نیاز عاطفیت رو از من می‌گیری و کدوم نیازت هنوز بی‌جوابه؟',
+ 'اگر من نتونم یکی از مهم‌ترین خواسته‌هات رو برآورده کنم، تا کجا کنارم می‌مونی؟',
+ 'کدوم بخش رابطه‌مون رو جلوی بقیه متفاوت از واقعیت تعریف می‌کنی؟',
+ 'آیا تا حالا از اینکه این‌قدر به من وابسته شدی ترسیدی؟ چرا؟',
+ 'اگر یک حقیقت درباره احساسات واقعی من رو می‌توانستی بفهمی، چه چیزی می‌پرسیدی؟',
+ 'کدوم لحظه باعث شد بفهمی رابطه ما برایت جدی شده؟',
+ 'اگر فردا مجبور شویم از هم دور باشیم، اولین چیزی که از من می‌خواهی چیست؟',
+ 'تا حالا شده از من دلخور باشی ولی برای اینکه رابطه خراب نشه وانمود کنی خوب هستی؟',
+ 'کدوم رفتار خودت در رابطه رو می‌دونی که ممکنه یک روز منو خسته کنه؟',
+ 'اگر فقط یک بار اجازه داشتی کاملاً بدون فیلتر با من حرف بزنی، چی می‌گفتی؟',
+ 'کدوم قسمت گذشته‌ات رو سخت‌تر از چیزی که نشان می‌دهی با خودت حمل می‌کنی؟',
+ 'چه چیزی درباره من هست که باعث حسادتت می‌شود ولی دوست نداری اعتراف کنی؟',
+ 'تا حالا شده موفقیت یا خوشحالی من تو رو ناراحت یا حسود کنه؟ چرا؟',
+ 'کدوم رفتار من رو به اشتباه به معنی بی‌علاقگی برداشت کردی؟',
+ 'اگر یک سوءتفاهم بزرگ بین ما هیچ‌وقت حل نشود، چه چیزی بیشتر از همه می‌ترساندت؟',
+ 'کدوم بخش رابطه‌مون رو دوست داری هیچ‌کس بیرون از ما درباره‌اش ندونه؟',
+ 'اگر من ازت بخوام یک حقیقت تلخ درباره خودم بگی، اولین چیزی که به ذهنت میاد چیه؟',
+ 'کدوم ویژگی من رو می‌ترسی یک روز از دست بدی؟',
+ 'اگر عشق ما یک روز کم‌رنگ شود، فکر می‌کنی اولین نشانه‌اش چه خواهد بود؟',
+ 'کدوم رفتار تو رو من احتمالاً بیشتر از چیزی که می‌دونی دوست دارم؟',
+ 'اگر می‌توانستی یک روز از ذهن من خبر داشته باشی، درباره چه چیزی کنجکاوی؟',
+ 'کدوم موضوع بین ما هست که هر بار نزدیکش می‌شویم بحث رو عوض می‌کنیم؟',
+ 'اگر هیچ پیامدی وجود نداشت، چه کاری درباره رابطه‌مون انجام می‌دادی؟',
+ 'تا حالا شده از ترس از دست دادن من، چیزی رو برخلاف میلت قبول کنی؟',
+ 'کدوم قسمت رابطه‌مون بیشتر از عشق، به عادت تبدیل شده؟',
+ 'اگر من هیچ‌وقت تغییر نکنم، با همین نسخه فعلی من باز هم می‌مونی؟',
+ 'اگر خودت را جای من بگذاری، فکر می‌کنی از چه رفتارت بیشتر ناراحت می‌شوی؟',
+ 'کدوم حرفی که باید مدت‌ها پیش می‌زدی هنوز نگفتی؟',
+ 'اگر بتوانی فقط یک بار من را مجبور کنی کاملاً صادق باشم، چه سؤالی می‌پرسی؟',
+ 'تا حالا شده در دعوا بیشتر دنبال بردن باشی تا حل کردن مشکل؟',
+ 'کدوم مرز رابطه‌مون رو اگر رد بشه، برگشتن برات خیلی سخت می‌شه؟',
+ 'چه چیزی باعث می‌شود در کنار من احساس امنیت کنی؟',
+ 'چه چیزی باعث می‌شود در کنار من احساس ناامنی کنی؟',
+ 'اگر مجبور باشی یک نقطه ضعف عاطفی خودت رو جلوی من اعتراف کنی، چی می‌گی؟',
+ 'کدوم رفتار من رو می‌بخشی ولی احتمالاً هیچ‌وقت فراموش نمی‌کنی؟',
+ 'کدوم اشتباه خودت رو می‌بخشی ولی فکر می‌کنی من هنوز نبخشیدمش؟',
+ 'اگر یک نفر از بیرون رابطه‌مون رو ببیند، فکر می‌کنی چه چیزی را درباره ما اشتباه برداشت می‌کند؟',
+ 'کدوم قسمت رابطه‌مون از چیزی که تصور می‌کردی سخت‌تر شد؟',
+ 'کدوم قسمت رابطه‌مون از چیزی که تصور می‌کردی زیباتر شد؟',
+ 'اگر مجبور باشی بین آرامش و هیجان رابطه‌مون یکی رو بیشتر کنی، کدوم رو انتخاب می‌کنی؟',
+ 'تا حالا شده برای جلوگیری از دعوا حقیقتی رو نصفه بگی؟',
+ 'کدوم سؤال رو از من می‌ترسی بپرسی چون ممکنه جوابش ناراحتت کنه؟',
+ 'اگر جواب یک سؤال می‌توانست آینده ما رو تغییر بده، دوست داشتی کدوم سؤال رو از من بپرسی؟',
+ 'کدوم رفتار من باعث می‌شود بیشتر از همیشه احساس دوست‌داشتنی بودن کنی؟',
+ 'کدوم رفتار من باعث می‌شود احساس کنی دیده نمی‌شوی؟',
+ 'اگر قرار باشد رابطه‌مون یک قانون جدید داشته باشد، مهم‌ترین قانونت چیست؟',
+ 'کدوم چیزی که از من می‌خواهی، خودت هنوز حاضر نیستی به من بدهی؟',
+ 'آیا تا حالا از من چیزی خواستی ولی چون خجالت کشیدی مستقیم نگفتی؟',
+ 'اگر قرار باشد یک ویژگی از خودت را برای رابطه‌مون تغییر بدهی، کدام است؟',
+ 'اگر قرار باشد یک ویژگی از من را بهتر بفهمی، کدام را انتخاب می‌کنی؟',
+ 'کدوم لحظه با من را دوست داری دوباره دقیقاً همان‌طور تجربه کنی؟',
+ 'کدوم لحظه با من را دوست داری هیچ‌وقت تکرار نکنی؟',
+ 'اگر یک سال بعد رابطه‌مون دقیقاً همین‌طور بماند، از این آینده راضی هستی؟',
+ 'اگر پنج سال بعد هنوز کنار هم باشیم، از امروز بابت چه چیزی باید تشکر کنیم؟',
+ 'چه چیزی ممکن است باعث شود یک روز از من ناامید شوی؟',
+ 'چه چیزی باعث شده با وجود اختلاف‌ها هنوز برای این رابطه بجنگی؟',
+ 'تا حالا شده احساس کنی من بیشتر از تو تلاش می‌کنم یا برعکس؟',
+ 'کدام یک از اختلاف‌های ما را هنوز جدی‌تر از چیزی که نشان می‌دهی می‌بینی؟',
+ 'اگر قرار بود یک نامه کاملاً صادقانه درباره من بنویسی، اولین جمله‌اش چه بود؟',
+ 'کدام بخش از خودت را فقط وقتی کنار منی نشان می‌دهی؟',
+ 'اگر من بتوانم فقط یک ترس پنهانت را از بین ببرم، دوست داری کدام باشد؟',
+ 'کدام رفتار من باعث شده بیشتر به آینده با من فکر کنی؟',
+ 'کدام رفتار من باعث شده کمتر به آینده فکر کنی؟',
+ 'اگر قرار بود امروز دوباره درباره ادامه رابطه تصمیم بگیری، مهم‌ترین معیار تو چیست؟',
+ 'تا حالا شده به خاطر غرور عذرخواهی را عقب بیندازی؟',
+ 'کدام عذرخواهی من را هنوز کامل باور نکردی؟',
+ 'کدام عذرخواهی خودت را هنوز بدهکاری؟',
+ 'اگر بتوانی یک سوءتفاهم قدیمی را همین الان حل کنی، کدام را انتخاب می‌کنی؟',
+ 'کدام ویژگی من را اگر از دست بدهم، احساس می‌کنی دیگر همان آدم قبلی نیستم؟',
+ 'اگر من یک تصمیم بزرگ بگیرم که با خواسته تو مخالف باشد، اولین واکنشت چیست؟',
+ 'کدام موضوع باعث می‌شود در رابطه‌مان بیش از حد فکر کنی؟',
+ 'اگر هیچ‌کس قضاوتت نکند، درباره آینده ما چه آرزویی داری؟',
+ 'کدام خاطره کوچک ما برای تو از یک اتفاق بزرگ ارزشمندتر است؟',
+ 'اگر مجبور شوی یک راز درباره خودت را فقط به من بگویی، چه رازی را انتخاب می‌کنی؟',
+ 'چه چیزی را دوست داری من درباره نیازهای عاطفی تو بهتر بفهمم؟',
+ 'کدام بخش از عشق را فکر می‌کنی من هنوز درست متوجه نشده‌ام؟',
+ 'اگر قرار باشد یک بار بدون دفاع از خودت به انتقاد من گوش بدهی، دوست داری درباره چه چیزی باشد؟',
+ 'چه چیزی در رابطه‌مون هست که اگر تغییر کند، بیشترین اثر را روی حال تو می‌گذارد؟',
+ 'اگر بخواهی یک جمله درباره چیزی که واقعاً از من می‌خواهی بگویی، آن جمله چیست؟',
+ 'کدام لحظه باعث شد بیشتر از همیشه از دست دادن من برایت واقعی به نظر برسد؟',
+ 'اگر بین عشق، اعتماد و آرامش فقط یکی را بتوانی تضمین کنی، کدام را انتخاب می‌کنی؟',
+ 'چه چیزی را هنوز درباره من نمی‌دانی و از پرسیدنش فرار می‌کنی؟',
+ 'اگر یک روز بفهمی تصور تو از من با واقعیت خیلی فرق داشته، اولین کاری که می‌کنی چیست؟',
+ 'کدام حرف ناگفته بین ما ممکن است اگر بالاخره گفته شود، همه‌چیز را روشن‌تر کند؟',
+ 'اگر مجبور باشی یک بار هم که شده کاملاً آسیب‌پذیر باشی، چه چیزی را به من اعتراف می‌کنی؟',
+ 'کدام قسمت از رابطه‌مون را دوست داری تا آخر عمر دست‌نخورده بماند؟',
+ 'اگر من از تو بپرسم «واقعاً از من راضی هستی؟»، جواب بدون تعارف چیست؟',
+ 'کدام خواسته‌ات را از ترس اینکه زیادی باشد، از من پنهان کردی؟',
+ 'اگر قرار باشد یک حقیقت تلخ را بپذیریم تا رابطه‌مون سالم‌تر شود، فکر می‌کنی آن حقیقت چیست؟',
+ 'چه چیزی باعث می‌شود بعد از یک دعوا هنوز دلت بخواهد برگردی سمت من؟',
+ 'اگر آخرین فرصت برای گفتن یک جمله به من باشد، چه می‌گویی؟'
+ ];
+ const suffixes=['',' — بدون توضیح اضافه؛ فقط جواب واقعی.',' — اگر جوابش سخت است، دقیقاً همان دلیلش مهم است.',' — این یکی را با جواب «نمی‌دونم» نمی‌شود رد کرد.',' — جواب دیپلماتیک ممنوع؛ همان چیزی که واقعاً در ذهنت هست.'];
+ const questions=[]; core.forEach((q)=>suffixes.forEach((x)=>questions.push(q+x)));
+ // ضمانت ۵۰۰ مورد: اگر تعداد هسته‌ها کمتر شد، با چرخشِ عبارت پایانی سؤال‌های مستقل ساخته می‌شود.
+ const extra=[' — این بار از زاویه خودت به رابطه نگاه کن.',' — جواب را طوری بده که بعداً از گفتنش پشیمان نشوی.',' — اولین جواب صادقانه‌ات مهم است، نه جواب قشنگ.',' — اگر مجبور به انتخاب باشی، کدام را می‌گویی؟',' — چیزی را حذف نکن فقط چون ممکن است طرف مقابل ناراحت شود.'];
+ let n=1; while(questions.length<500){const base=core[questions.length%core.length]; questions.push(base+' '+extra[questions.length%extra.length]);}
+ questions.length=500;
+ const key='fazelElhamTruthBombUsedV2';
+ const idxKey='fazelElhamTruthBombCurrentV2';
+ let used=[];let current=null;
+ try{used=JSON.parse(localStorage.getItem(key)||'[]').filter(n=>Number.isInteger(n)&&n>=0&&n<500);current=JSON.parse(localStorage.getItem(idxKey)||'null')}catch(e){}
+ const num=$('truthbombNumber'), qel=$('truthbombQuestion'), count=$('truthbombCount'), status=$('truthbombStatus'), card=$('truthbombCard');
+ if(!num||!qel)return;
+ function faNum(v){return String(v).replace(/[0-9]/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d])}
+ function render(){if(current==null){num.textContent='سؤال ۰۰۱';qel.textContent='دکمه رو بزن؛ ببین امروز قرعه به اسم کدوم سؤال می‌افته. 😈';count.textContent=faNum(used.length)+' / ۵۰۰';return} num.textContent='سؤال '+faNum(current+1).padStart(3,'۰');qel.textContent=questions[current];count.textContent=faNum(used.length)+' / ۵۰۰';}
+ function save(){try{localStorage.setItem(key,JSON.stringify(used));localStorage.setItem(idxKey,JSON.stringify(current))}catch(e){}}
+ function next(){if(used.length>=500){status.textContent='🎉 هر ۵۰۰ سؤال استفاده شده؛ برای یک دور تازه «از اول» را بزن.';return}let pool=[];for(let i=0;i<500;i++)if(!used.includes(i))pool.push(i);current=pool[Math.floor(Math.random()*pool.length)];used.push(current);save();render();card.classList.remove('truthbomb-pulse');void card.offsetWidth;card.classList.add('truthbomb-pulse');status.textContent='این سؤال دیگر در این دور تکرار نمی‌شود. 😈';}
+ $('truthbombRandom')?.addEventListener('click',next);
+ $('truthbombReset')?.addEventListener('click',()=>{used=[];current=null;save();render();status.textContent='دور ۵۰۰تایی از نو شروع شد. حالا قرعه بزن 😈';});
+ $('truthbombSend')?.addEventListener('click',()=>{if(current==null){status.textContent='اول یک سؤال رندوم انتخاب کن ❤️';return}const text='🧠 سؤال '+faNum(current+1)+' از جرئت حقیقت:\n'+questions[current];const note=$('nookNote');if(note){note.value=text;note.dispatchEvent(new Event('input'));$('saveNookNote')?.click();status.textContent='💌 سؤال فرستاده شد داخل دفتر دوتایی.';card.classList.remove('truthbomb-sent');void card.offsetWidth;card.classList.add('truthbomb-sent');}});
+ render();
+})();
 
 let jokeIndex=0;
 function setupRelationshipWidget(){const text=$('relationshipJoke'),dots=$('relationshipDots');dots.innerHTML=relationshipJokes.map((_,i)=>`<span class="rw-dot ${i===0?'active':''}></span>`).join('');setInterval(()=>{text.style.opacity='0';setTimeout(()=>{jokeIndex=(jokeIndex+1)%relationshipJokes.length;text.textContent=relationshipJokes[jokeIndex];[...dots.children].forEach((d,i)=>d.classList.toggle('active',i===jokeIndex));text.style.opacity='1'},280)},isMobile?6000:4500)}
@@ -2562,6 +2711,13 @@ async function loadNotes(){const {data,error}=await db.from('love_notes').select
 #messengerOverlay .chat-head .header-presence-row{display:flex!important;align-items:center!important;gap:5px!important;min-height:10px!important}
 
 .ai-who{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0 12px;padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08)}.ai-who-label{font-size:11px;color:#d9c5d0;margin-left:2px}.ai-who button{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:#fff;border-radius:12px;padding:7px 12px;cursor:pointer;font-family:inherit;font-size:11px;transition:.2s}.ai-who button.active{background:rgba(55,210,130,.16);border-color:rgba(55,210,130,.5);box-shadow:0 0 0 1px rgba(55,210,130,.12) inset}.ai-who button.active::before{content:'● ';color:#55e28b}.ai-who-current{font-size:10px;color:#9eeab8;margin-right:auto}
+
+/* ===== Truth Bomb 500 ===== */
+.truthbomb-panel{padding:clamp(16px,3vw,30px)!important;background:linear-gradient(145deg,rgba(30,10,42,.72),rgba(88,24,86,.42));border:1px solid rgba(255,255,255,.12);border-radius:28px;box-shadow:0 25px 70px rgba(0,0,0,.25)}
+.truthbomb-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:20px}.truthbomb-head h3{margin:7px 0 6px;font-size:clamp(20px,3vw,30px)}.truthbomb-head p{margin:0;color:rgba(255,255,255,.68);line-height:1.9}.truthbomb-count{min-width:92px;text-align:center;padding:12px;border-radius:18px;background:rgba(255,255,255,.08);font-weight:900;color:#ffd7ef}
+.truthbomb-card{min-height:250px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px 22px;border-radius:26px;background:radial-gradient(circle at 50% 0,rgba(255,104,187,.18),transparent 55%),rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.1);position:relative;overflow:hidden}.truthbomb-card:after{content:'?';position:absolute;font-size:180px;font-weight:900;color:rgba(255,255,255,.025);left:50%;top:50%;transform:translate(-50%,-45%);pointer-events:none}.truthbomb-number,.truthbomb-question{position:relative;z-index:1}.truthbomb-number{font-size:13px;color:#ffb5dd;margin-bottom:20px;font-weight:900;letter-spacing:.5px}.truthbomb-question{font-size:clamp(20px,3vw,31px);line-height:2;font-weight:800;max-width:900px;text-shadow:0 5px 25px rgba(0,0,0,.25)}.truthbomb-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px}.truthbomb-actions .btn{min-width:190px}.truthbomb-status{text-align:center;margin-top:12px;color:rgba(255,255,255,.62);font-size:13px}.truthbomb-pulse{animation:truthBombPulse .38s ease}.truthbomb-sent{animation:truthBombSent .55s ease}
+@keyframes truthBombPulse{0%{transform:scale(.97);opacity:.35}100%{transform:scale(1);opacity:1}}@keyframes truthBombSent{0%{transform:scale(1)}45%{transform:scale(1.025)}100%{transform:scale(1)}}
+@media(max-width:650px){.truthbomb-head{flex-direction:column}.truthbomb-count{width:100%}.truthbomb-card{min-height:300px;padding:25px 16px}.truthbomb-question{font-size:20px;line-height:1.95}.truthbomb-actions{display:grid;grid-template-columns:1fr}.truthbomb-actions .btn{width:100%;min-width:0}}
 </style>
 <script id="v17-remove-legacy-presence">
 (()=>{
