@@ -189,6 +189,7 @@ footer{text-align:center;padding:50px 20px;color:#b89baa;font-size:13px}.ripple{
 @media(max-width:700px){.chat-lock{display:none}.chat-messages{max-height:46vh!important}.chat-bubble{max-width:88%}.chat-head{padding:12px}.chat-avatar{width:44px;height:44px}}
 
 /* ===== PREMIUM PRESENCE + MESSENGER POLISH ===== */
+.shared-author.chat-author{display:none!important}
 .shared-author.chat-author{position:relative;overflow:hidden;padding:11px 12px;border-radius:20px;background:linear-gradient(135deg,rgba(255,255,255,.075),rgba(255,72,150,.055) 45%,rgba(117,75,255,.045));box-shadow:inset 0 1px rgba(255,255,255,.08),0 12px 35px rgba(0,0,0,.16)}
 .shared-author.chat-author:before{content:"";position:absolute;inset:-70%;background:conic-gradient(from 0deg,transparent,rgba(255,91,158,.12),transparent 30%,rgba(135,87,255,.1),transparent 60%);animation:presenceAura 9s linear infinite;pointer-events:none}
 @keyframes presenceAura{to{transform:rotate(360deg)}}
@@ -744,6 +745,32 @@ html.trading-section-active .relationship-widget{
   pointer-events:none !important;
 }
 </style>
+
+<style id="chat-mobile-performance">
+/* دفتر دوتایی: حالت کم‌مصرف برای موبایل */
+.chat-panel{contain:layout paint;isolation:isolate}
+.chat-messages{contain:strict;overscroll-behavior:contain}
+.header-who-picker{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.header-who-label{font-size:10px;opacity:.7;margin-left:3px}
+.header-who-btn{display:inline-flex;align-items:center;gap:5px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.055);color:#fff;border-radius:12px;padding:5px 8px;font-family:inherit;cursor:pointer}
+.header-who-btn.active{background:rgba(255,82,150,.16);border-color:rgba(255,100,170,.3)}
+.header-who-dot{width:7px;height:7px;border-radius:50%;background:#ff5065;box-shadow:0 0 7px rgba(255,80,100,.35)}
+.header-who-dot.online{background:#55ef98;box-shadow:0 0 9px rgba(85,239,152,.7)}
+.header-who-btn em{font-style:normal;font-size:8px;opacity:.72}
+@media(max-width:700px){
+  .chat-panel,.chat-head,.chat-messages,.chat-compose,.chat-reactions{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+  .chat-head:after,.shared-author.chat-author:before,.chat-toys{display:none!important}
+  .chat-panel{box-shadow:none!important}
+  .chat-bubble{animation:none!important;box-shadow:0 5px 16px rgba(0,0,0,.18)!important}
+  .header-who-picker{gap:4px;max-width:100%;}
+  .header-who-label{display:none}
+  .header-who-btn{padding:5px 7px;font-size:11px}
+  .chat-messages{will-change:scroll-position;transform:translateZ(0)}
+  .chat-bubble-row{contain:layout paint}
+  .chat-bubble-row *{animation:none!important}
+}
+@media(prefers-reduced-motion:reduce){.chat-panel *{animation:none!important;transition:none!important}}
+</style>
 </head>
 <body>
 <div aria-hidden="true" aria-label="دفتر دوتایی ما" id="messengerOverlay" role="dialog"><div class="messenger-shell" id="messengerShell"></div></div>
@@ -852,7 +879,7 @@ html.trading-section-active .relationship-widget{
 <div class="nook-panel active chat-panel" data-panel="notes"><div aria-hidden="true" class="chat-toys"><span class="chat-toy toy-a">🧸</span><span class="chat-toy toy-b">🐰</span><span class="chat-toy toy-c">🐱</span><span class="chat-toy toy-d">🐥</span></div>
 <div class="chat-head">
 <div class="chat-avatar-wrap"><div class="chat-avatar">❤️</div><span class="chat-online"></span></div>
-<div class="chat-head-copy"><h3>دفتر دوتایی ما</h3><div class="header-presence-stack" aria-label="وضعیت حضور"><span class="header-presence-row"><i class="header-presence-dot" data-header-presence="فاضل"></i><b>فاضل</b><em data-header-presence-label="فاضل">آفلاین</em></span><span class="header-presence-row"><i class="header-presence-dot" data-header-presence="الهام"></i><b>الهام</b><em data-header-presence-label="الهام">آفلاین</em></span></div></div>
+<div class="chat-head-copy"><h3>دفتر دوتایی ما</h3><div class="header-who-picker" id="headerWhoPicker"><span class="header-who-label">الان کیه؟</span><button class="header-who-btn" data-header-author="فاضل" type="button"><span class="header-who-dot" data-header-who-dot="فاضل"></span><b>فاضل</b><em data-header-who-status="فاضل">آفلاین</em></button><button class="header-who-btn" data-header-author="الهام" type="button"><span class="header-who-dot" data-header-who-dot="الهام"></span><b>الهام</b><em data-header-who-status="الهام">آفلاین</em></button></div></div>
 <div class="chat-head-actions"><button class="mobile-chat-back" id="mobileChatBack" title="بازگشت" type="button">‹</button><span class="chat-lock"><span aria-hidden="true" class="app-icon app-icon-lock"></span> خصوصی</span><button class="chat-mini-btn app-icon-btn" id="chatScrollBottom" title="آخرین پیام" type="button"><span aria-hidden="true" class="app-icon app-icon-down"></span></button><button class="chat-mini-btn chat-menu-btn" id="chatMenuBtn" title="بیشتر" type="button">⋮</button></div>
 </div>
 <div class="shared-author chat-author"><span>الان کیه؟</span><button class="author-btn" data-author="فاضل" type="button"><span class="presence-dot" data-presence="فاضل"></span><span class="author-avatar-mini">F</span><span>فاضل</span><span class="presence-label" data-presence-label="فاضل">آفلاین</span></button><button class="author-btn" data-author="الهام" type="button"><span class="presence-dot" data-presence="الهام"></span><span class="author-avatar-mini elham">E</span><span>الهام</span><span class="presence-label" data-presence-label="الهام">آفلاین</span></button></div>
@@ -1883,10 +1910,11 @@ body.messenger-fullscreen .chat-panel .chat-toy{z-index:2!important;opacity:.42!
   const status=document.getElementById('cloudStatus'), notesBox=document.getElementById('sharedNotes'), note=document.getElementById('nookNote'), saved=document.getElementById('noteSaved');
   const esc=v=>String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
   function setStatus(t,off=false){return;}
-  function setPresence(name,online){document.querySelectorAll('[data-presence="'+name+'"]').forEach(d=>d.classList.toggle('online',!!online));document.querySelectorAll('[data-presence-label="'+name+'"]').forEach(l=>l.textContent=online?'آنلاین':'آفلاین');document.querySelectorAll('[data-header-presence="'+name+'"]').forEach(d=>d.classList.toggle('online',!!online));document.querySelectorAll('[data-header-presence-label="'+name+'"]').forEach(l=>l.textContent=online?'آنلاین':'آفلاین')}
+  function setPresence(name,online){document.querySelectorAll('[data-presence="'+name+'"]').forEach(d=>d.classList.toggle('online',!!online));document.querySelectorAll('[data-presence-label="'+name+'"]').forEach(l=>l.textContent=online?'آنلاین':'آفلاین');document.querySelectorAll('[data-header-who-dot="'+name+'"]').forEach(d=>d.classList.toggle('online',!!online));document.querySelectorAll('[data-header-who-status="'+name+'"]').forEach(l=>l.textContent=online?'آنلاین':'آفلاین')}
   function renderPresence(state){const seen={فاضل:false,الهام:false};Object.values(state||{}).forEach(list=>{(list||[]).forEach(p=>{if(p?.author_name==='فاضل')seen.فاضل=true;if(p?.author_name==='الهام')seen.الهام=true})});setPresence('فاضل',seen.فاضل);setPresence('الهام',seen.الهام);const me=seen[author]?'آنلاین':'آفلاین';document.querySelectorAll('.author-btn').forEach(b=>b.classList.toggle('is-self',b.dataset.author===author));return me}
-  function setAuthor(v){author=v;localStorage.setItem('fazelElhamAuthor',v);document.querySelectorAll('.author-btn').forEach(b=>b.classList.toggle('active',b.dataset.author===v));}
+  function setAuthor(v){author=v;localStorage.setItem('fazelElhamAuthor',v);document.querySelectorAll('.author-btn').forEach(b=>b.classList.toggle('active',b.dataset.author===v));document.querySelectorAll('.header-who-btn').forEach(b=>b.classList.toggle('active',b.dataset.headerAuthor===v));}
   document.querySelectorAll('.author-btn').forEach(b=>b.addEventListener('click',()=>setAuthor(b.dataset.author)));
+  document.querySelectorAll('.header-who-btn').forEach(b=>b.addEventListener('click',()=>{setAuthor(b.dataset.headerAuthor)}));
   setAuthor(author);
   const reactionKey='fazelElhamChatReactions_v1';
   let reactions={}; try{reactions=JSON.parse(localStorage.getItem(reactionKey)||'{}')||{}}catch(e){}
